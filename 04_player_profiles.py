@@ -69,8 +69,8 @@ def flag_retired(profiles, retired_set):
     return profiles
 
 if __name__ == '__main__':
-    ipl = pd.read_csv('ipl_records.csv', parse_dates=['date'])
-    t20 = pd.read_csv('t20_records.csv', parse_dates=['date'])
+    ipl = pd.read_csv('output/ipl_records.csv', parse_dates=['date'])
+    t20 = pd.read_csv('output/t20_records.csv', parse_dates=['date'])
 
     ipl_last = ipl.groupby('player')['date'].max()
     ipl_retired = set(ipl_last[ipl_last < RETIRED_CUTOFF].index)
@@ -83,7 +83,7 @@ if __name__ == '__main__':
     t20_bowl_p = flag_retired(build_bowl_profile(t20, [5,10,20]), t20_retired)
 
     import pickle
-    with open('player_profiles.pkl', 'wb') as f:
+    with open('models/player_profiles.pkl', 'wb') as f:
         pickle.dump({
             'ipl_bat': ipl_bat_p,  'ipl_bowl': ipl_bowl_p,
             't20_bat': t20_bat_p,  't20_bowl': t20_bowl_p,

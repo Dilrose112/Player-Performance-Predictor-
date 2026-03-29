@@ -38,15 +38,15 @@ import numpy as np
 import pandas as pd
 
 # ─── LOAD MODELS & PROFILES ─────────────────────────────────────────────────
-with open('ipl_models.pkl', 'rb') as f:
+with open('models/ipl_models.pkl', 'rb') as f:
     IPL_M = pickle.load(f)
-with open('t20_models.pkl', 'rb') as f:
+with open('models/t20_models.pkl', 'rb') as f:
     T20_M = pickle.load(f)
-with open('player_profiles.pkl', 'rb') as f:
+with open('models/player_profiles.pkl', 'rb') as f:
     PROFILES = pickle.load(f)
 
 # ─── VENUE & TEAM LOOKUPS (from training data) ───────────────────────────────
-ipl_df = pd.read_csv('ipl_records.csv')
+ipl_df = pd.read_csv('output/ipl_records.csv')
 VENUE_BAT_AVG  = ipl_df.groupby('venue')['runs'].mean().to_dict()
 VENUE_BOWL_AVG = ipl_df.groupby('venue')['runs_conceded'].mean().to_dict()
 TEAM_CODES     = {t: i for i, t in enumerate(sorted(ipl_df['team'].unique()))}
