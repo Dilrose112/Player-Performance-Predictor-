@@ -45,75 +45,136 @@ with open('models/t20_models.pkl', 'rb') as f:
 with open('models/player_profiles.pkl', 'rb') as f:
     PROFILES = pickle.load(f)
 
-# ─── VENUE & TEAM LOOKUPS (from training data) ───────────────────────────────
-ipl_df = pd.read_csv('output/ipl_records.csv')
-VENUE_BAT_AVG  = ipl_df.groupby('venue')['runs'].mean().to_dict()
-VENUE_BOWL_AVG = ipl_df.groupby('venue')['runs_conceded'].mean().to_dict()
-TEAM_CODES     = {t: i for i, t in enumerate(sorted(ipl_df['team'].unique()))}
-GLOBAL_BAT_AVG = ipl_df['runs'].mean()
-GLOBAL_BOWL_AVG= ipl_df['runs_conceded'].mean()
+MIN_VENUE_MATCHES = 5
 
 # ─── PREDICTION FUNCTIONS ────────────────────────────────────────────────────
-def predict_ipl_bat(ps, venue, team):
-    va = VENUE_BAT_AVG.get(venue, GLOBAL_BAT_AVG)
-    tc = TEAM_CODES.get(team, 0)
-    X = np.array([[
-        ps.get('avg_runs_5',  ps['career_avg']),
-        ps.get('avg_runs_10', ps['career_avg']),
-        ps.get('avg_runs_15', ps['career_avg']),
-        ps.get('std_runs_5',  15.0),
-        ps.get('std_runs_10', 15.0),
-        ps['career_avg'], ps.get('avg_sr_5', ps['career_sr']),
-        ps.get('avg_sr_10', ps['career_sr']), ps['career_sr'],
-        ps['matches_played'], va, tc
-    ]])
+def get_venue_context(venue_contexts, venue):
+    return venue_contexts.get(venue, venue_contexts['_global'])
+
+
+def get_era_features(match_date, era_context):
+    match_year = pd.to_datetime(match_date).year
+    year_min = era_context['year_min']
+    year_max = era_context['year_max']
+
+    # Temporal features let the model learn how T20 scoring evolves by season
+    # instead of baking in manual run adjustments.
+    modern_era = int(match_year >= 2020)
+    if year_max == year_min:
+        era_weight = era_context.get('latest_era_weight', 1.0)
+    else:
+        clamped_year = min(max(match_year, year_min), year_max)
+        year_norm = (clamped_year - year_min) / (year_max - year_min)
+        era_weight = 0.5 + year_norm * 0.5
+    return {'modern_era': modern_era, 'era_weight': era_weight}
+
+
+def get_batting_feature_row(ps, venue, team_code, venue_context, era_features):
+    venue_stats = ps.get('venue_stats', {}).get(venue, {})
+    qualified_venue = venue_stats.get('matches', 0) >= MIN_VENUE_MATCHES
+    venue_matches = venue_stats.get('matches', 0)
+
+    feature_map = {
+        'avg_runs_5': ps.get('avg_runs_5', ps['career_avg']),
+        'avg_runs_10': ps.get('avg_runs_10', ps['career_avg']),
+        'avg_runs_15': ps.get('avg_runs_15', ps['career_avg']),
+        'avg_runs_20': ps.get('avg_runs_20', ps['career_avg']),
+        'std_runs_5': ps.get('std_runs_5', 15.0),
+        'std_runs_10': ps.get('std_runs_10', 15.0),
+        'career_avg': ps['career_avg'],
+        'avg_sr_5': ps.get('avg_sr_5', ps['career_sr']),
+        'avg_sr_10': ps.get('avg_sr_10', ps['career_sr']),
+        'career_sr': ps['career_sr'],
+        'matches_played': ps['matches_played'],
+        'modern_era': era_features['modern_era'],
+        'era_weight': era_features['era_weight'],
+        'venue_avg_runs': venue_context['venue_avg_runs'],
+        'venue_avg_wkts': venue_context['venue_avg_wkts'],
+        'pitch_type_encoded': venue_context.get('pitch_type_encoded', 1),
+        'dew_factor': venue_context.get('dew_factor', 0.5),
+        'chasing_advantage': venue_context.get('chasing_advantage', 0),
+        'player_venue_avg_runs': venue_stats.get('avg_runs', ps['career_avg']) if qualified_venue else ps['career_avg'],
+        'player_venue_avg_sr': venue_stats.get('avg_sr', ps['career_sr']) if qualified_venue else ps['career_sr'],
+        'player_venue_matches': venue_matches,
+        'venue_experience_weight': venue_stats.get('venue_experience_weight', venue_matches / (venue_matches + MIN_VENUE_MATCHES) if venue_matches or MIN_VENUE_MATCHES else 0.0),
+        'team_encoded': team_code,
+    }
+    return feature_map
+
+
+def get_bowling_feature_row(ps, venue, team_code, venue_context, era_features):
+    venue_stats = ps.get('venue_stats', {}).get(venue, {})
+    qualified_venue = venue_stats.get('matches', 0) >= MIN_VENUE_MATCHES
+    venue_matches = venue_stats.get('matches', 0)
+
+    feature_map = {
+        'avg_wkts_5': ps.get('avg_wkts_5', ps['career_wkt_avg']),
+        'avg_wkts_10': ps.get('avg_wkts_10', ps['career_wkt_avg']),
+        'avg_wkts_15': ps.get('avg_wkts_15', ps['career_wkt_avg']),
+        'avg_wkts_20': ps.get('avg_wkts_20', ps['career_wkt_avg']),
+        'std_wkts_5': ps.get('std_wkts_5', 0.8),
+        'career_wkt_avg': ps['career_wkt_avg'],
+        'career_econ': ps.get('career_econ', 8.0),
+        'avg_econ_5': ps.get('avg_econ_5', ps.get('career_econ', 8.0)),
+        'avg_econ_10': ps.get('avg_econ_10', ps.get('career_econ', 8.0)),
+        'bowling_matches': ps['bowling_matches'],
+        'modern_era': era_features['modern_era'],
+        'era_weight': era_features['era_weight'],
+        'venue_avg_runs': venue_context['venue_avg_runs'],
+        'venue_avg_wkts': venue_context['venue_avg_wkts'],
+        'pitch_type_encoded': venue_context.get('pitch_type_encoded', 1),
+        'dew_factor': venue_context.get('dew_factor', 0.5),
+        'chasing_advantage': venue_context.get('chasing_advantage', 0),
+        'player_venue_avg_wkts': venue_stats.get('avg_wkts', ps['career_wkt_avg']) if qualified_venue else ps['career_wkt_avg'],
+        'player_venue_avg_econ': venue_stats.get('avg_econ', ps.get('career_econ', 8.0)) if qualified_venue else ps.get('career_econ', 8.0),
+        'player_venue_matches': venue_matches,
+        'venue_experience_weight': venue_stats.get('venue_experience_weight', venue_matches / (venue_matches + MIN_VENUE_MATCHES) if venue_matches or MIN_VENUE_MATCHES else 0.0),
+        'team_encoded': team_code,
+    }
+    return feature_map
+
+
+def build_feature_array(feature_map, feature_names):
+    return pd.DataFrame([{name: feature_map.get(name, 0.0) for name in feature_names}])
+
+
+def predict_ipl_bat(ps, venue, team, match_date):
+    venue_context = get_venue_context(PROFILES['ipl_venue_context'], venue)
+    team_code = PROFILES['ipl_team_codes'].get(team, 0)
+    era_features = get_era_features(match_date, PROFILES['ipl_era_context'])
+    feature_map = get_batting_feature_row(ps, venue, team_code, venue_context, era_features)
+    X = build_feature_array(feature_map, IPL_M['bat_feats'])
     lo = max(0.0, float(IPL_M['bat'][0.25].predict(X)[0]))
     md = max(0.0, float(IPL_M['bat'][0.50].predict(X)[0]))
     hi = max(0.0, float(IPL_M['bat'][0.75].predict(X)[0]))
     return round(lo,1), round(md,1), round(hi,1)
 
-def predict_ipl_bowl(ps, venue, team):
-    va = VENUE_BOWL_AVG.get(venue, GLOBAL_BOWL_AVG)
-    tc = TEAM_CODES.get(team, 0)
-    X = np.array([[
-        ps.get('avg_wkts_5',  ps['career_wkt_avg']),
-        ps.get('avg_wkts_10', ps['career_wkt_avg']),
-        ps.get('avg_wkts_15', ps['career_wkt_avg']),
-        ps.get('std_wkts_5',  0.8),
-        ps['career_wkt_avg'],
-        ps.get('avg_econ_5',  8.0), ps.get('avg_econ_10', 8.0),
-        ps['bowling_matches'], va, tc
-    ]])
+def predict_ipl_bowl(ps, venue, team, match_date):
+    venue_context = get_venue_context(PROFILES['ipl_venue_context'], venue)
+    team_code = PROFILES['ipl_team_codes'].get(team, 0)
+    era_features = get_era_features(match_date, PROFILES['ipl_era_context'])
+    feature_map = get_bowling_feature_row(ps, venue, team_code, venue_context, era_features)
+    X = build_feature_array(feature_map, IPL_M['bowl_feats'])
     lo = max(0.0, float(IPL_M['bowl'][0.25].predict(X)[0]))
     md = max(0.0, float(IPL_M['bowl'][0.50].predict(X)[0]))
     hi = max(0.0, float(IPL_M['bowl'][0.75].predict(X)[0]))
     return round(lo,1), round(md,1), round(hi,1)
 
-def predict_t20_bat(ps):
-    X = np.array([[
-        ps.get('avg_runs_5',  ps['career_avg']),
-        ps.get('avg_runs_10', ps['career_avg']),
-        ps.get('avg_runs_20', ps['career_avg']),
-        ps.get('std_runs_5',  15.0), ps.get('std_runs_10', 15.0),
-        ps['career_avg'], ps.get('avg_sr_5', ps['career_sr']),
-        ps.get('avg_sr_10', ps['career_sr']), ps['career_sr'],
-        ps['matches_played']
-    ]])
+def predict_t20_bat(ps, venue, match_date):
+    venue_context = get_venue_context(PROFILES['t20_venue_context'], venue)
+    era_features = get_era_features(match_date, PROFILES['t20_era_context'])
+    feature_map = get_batting_feature_row(ps, venue, 0, venue_context, era_features)
+    X = build_feature_array(feature_map, T20_M['bat_feats'])
     lo = max(0.0, float(T20_M['bat'][0.25].predict(X)[0]))
     md = max(0.0, float(T20_M['bat'][0.50].predict(X)[0]))
     hi = max(0.0, float(T20_M['bat'][0.75].predict(X)[0]))
     return round(lo,1), round(md,1), round(hi,1)
 
-def predict_t20_bowl(ps):
-    X = np.array([[
-        ps.get('avg_wkts_5',  ps['career_wkt_avg']),
-        ps.get('avg_wkts_10', ps['career_wkt_avg']),
-        ps.get('avg_wkts_20', ps['career_wkt_avg']),
-        ps.get('std_wkts_5',  0.8),
-        ps['career_wkt_avg'],
-        ps.get('avg_econ_5',  8.0), ps.get('avg_econ_10', 8.0),
-        ps['bowling_matches']
-    ]])
+def predict_t20_bowl(ps, venue, match_date):
+    venue_context = get_venue_context(PROFILES['t20_venue_context'], venue)
+    era_features = get_era_features(match_date, PROFILES['t20_era_context'])
+    feature_map = get_bowling_feature_row(ps, venue, 0, venue_context, era_features)
+    X = build_feature_array(feature_map, T20_M['bowl_feats'])
     lo = max(0.0, float(T20_M['bowl'][0.25].predict(X)[0]))
     md = max(0.0, float(T20_M['bowl'][0.50].predict(X)[0]))
     hi = max(0.0, float(T20_M['bowl'][0.75].predict(X)[0]))
@@ -181,15 +242,20 @@ IPL_2026_SQUADS = {
 
 # ─── PREDICTION FOR ONE MATCH ─────────────────────────────────────────────────
 def predict_match(home, away, venue, match_no, date, ipl_bat_p, ipl_bowl_p, ipl_retired):
+    venue_context = get_venue_context(PROFILES['ipl_venue_context'], venue)
+    era_features = get_era_features(date, PROFILES['ipl_era_context'])
     result = {'match': match_no, 'date': date, 'home': home,
               'away': away, 'venue': venue,
+              'pitch_type': venue_context.get('pitch_type', 'balanced'),
+              'dew_factor': venue_context.get('dew_factor', 0.5),
+              'era_weight': era_features['era_weight'],
               'home_players': [], 'away_players': []}
 
     for team, side in [(home,'home_players'), (away,'away_players')]:
         sq = IPL_2026_SQUADS.get(team, {'batters':[],'bowlers':[]})
         for p in sq['batters']:
             if p in ipl_bat_p:
-                lo,md,hi = predict_ipl_bat(ipl_bat_p[p], venue, team)
+                lo,md,hi = predict_ipl_bat(ipl_bat_p[p], venue, team, date)
                 result[side].append({
                     'name':p,'role':'BAT','team':team,
                     'retired': p in ipl_retired,
@@ -199,7 +265,7 @@ def predict_match(home, away, venue, match_no, date, ipl_bat_p, ipl_bowl_p, ipl_
                 })
         for p in sq['bowlers']:
             if p in ipl_bowl_p:
-                lo,md,hi = predict_ipl_bowl(ipl_bowl_p[p], venue, team)
+                lo,md,hi = predict_ipl_bowl(ipl_bowl_p[p], venue, team, date)
                 result[side].append({
                     'name':p,'role':'BOWL','team':team,
                     'retired': p in ipl_retired,
@@ -218,6 +284,7 @@ if __name__ == '__main__':
     m = predict_match('RCB','SRH','M Chinnaswamy Stadium',1,'2026-03-28',
                       ipl_bat_p, ipl_bowl_p, ipl_retired)
     print(f"\n=== {m['home']} vs {m['away']} | {m['venue']} | {m['date']} ===")
+    print(f"Pitch: {m['pitch_type']} | Dew factor: {m['dew_factor']:.2f} | Era weight: {m['era_weight']:.2f}")
     for p in m['home_players']:
         tag = '[RETIRED]' if p['retired'] else '[active]'
         unit = 'runs' if p['role']=='BAT' else 'wkts'

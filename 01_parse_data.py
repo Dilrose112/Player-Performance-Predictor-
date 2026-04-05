@@ -1,15 +1,17 @@
 """
 01_parse_data.py
 ----------------
-Parses Cricsheet ball-by-ball JSON files for IPL and T20I matches
-into flat player-match records CSVs.
+Parses Cricsheet ball-by-ball JSON files into flat player-match records CSVs.
 
-Input:  ipl_json/   → 1,169 IPL match JSON files
-        t20s_json/  → 5,102 T20I match JSON files
-Output: ipl_records.csv, t20_records.csv
+Along with player stats, we persist match context needed for downstream
+environmental features such as pitch behavior and venue-level dew estimates.
 """
-import json, os, glob, pandas as pd
+import glob
+import json
+import os
 from collections import defaultdict
+
+import pandas as pd
 
 def parse_match(path, source):
     with open(path) as f:
@@ -20,13 +22,22 @@ def parse_match(path, source):
     season   = info.get('season', 'unknown')
     venue    = info.get('venue', 'unknown')
     teams    = info.get('teams', [])
+    toss = info.get('toss', {})
+    outcome = info.get('outcome', {})
+    toss_winner = toss.get('winner')
+    winner = outcome.get('winner')
+    innings = d.get('innings', [])
+    batting_order = [inning['team'] for inning in innings if inning.get('team')]
+    batting_first_team = batting_order[0] if batting_order else None
+    chasing_team = batting_order[1] if len(batting_order) > 1 else None
+    chasing_win = int(winner == chasing_team) if winner and chasing_team else None
 
     player_stats = defaultdict(lambda: {
         'runs': 0, 'balls_faced': 0,
         'wickets': 0, 'balls_bowled': 0, 'runs_conceded': 0, 'team': ''
     })
 
-    for inning in d.get('innings', []):
+    for inning_index, inning in enumerate(innings, start=1):
         batting_team = inning['team']
         bowling_team = [t for t in teams if t != batting_team]
         bowling_team = bowling_team[0] if bowling_team else ''
@@ -54,6 +65,9 @@ def parse_match(path, source):
         records.append({
             'match_id': match_id, 'source': source, 'date': date,
             'season': season, 'venue': venue, 'player': player,
+            'toss_winner': toss_winner, 'winner': winner,
+            'batting_first_team': batting_first_team, 'chasing_team': chasing_team,
+            'chasing_win': chasing_win,
             'team': stats['team'], 'runs': stats['runs'],
             'balls_faced': stats['balls_faced'], 'wickets': stats['wickets'],
             'balls_bowled': stats['balls_bowled'], 'runs_conceded': stats['runs_conceded'],

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CricIQ — Live Prediction Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="site-header">
+  <div class="header-brand">
+    <div class="brand-dot"></div>
+    <div>
+      <div class="brand-name">CricIQ</div>
+      <div class="brand-sub">LIVE API PREDICTIONS</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="hdr-badge">Quantile GBM · Q25/Q50/Q75</span>
+    <span class="hdr-badge">Leakage-Safe Features</span>
+  </div>
+</header>
+
+<!-- ── FORMAT TABS ── -->
+<div class="format-tabs">
+  <button class="format-tab active" id="tab-ipl" data-format="ipl"
+          onclick="switchFormat('ipl')">
+    IPL 2026 <span class="tab-count">—</span>
+  </button>
+  <button class="format-tab" id="tab-t20i" data-format="t20i"
+          onclick="switchFormat('t20i')">
+    T20 International <span class="tab-count">—</span>
+  </button>
+</div>
+
+<!-- ── MAIN ── -->
+<div class="main-layout">
+
+  <!-- Left: match list -->
+  <div class="match-list-panel">
+    <div class="panel-header">FIXTURES</div>
+    <div id="match-list">
+      <!-- Populated by renderMatchList() -->
+    </div>
+  </div>
+
+  <!-- Right: match detail + predictions -->
+  <div class="match-detail-panel" id="match-detail">
+    <div class="state-placeholder">
+      <div class="state-icon">🏏</div>
+      <div class="state-title">Select a match</div>
+      <div class="state-sub">Click any fixture on the left to load live predictions</div>
+    </div>
+  </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
