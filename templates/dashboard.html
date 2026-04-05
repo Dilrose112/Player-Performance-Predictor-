@@ -14,25 +14,28 @@
     <div class="brand-dot"></div>
     <div>
       <div class="brand-name">CricIQ</div>
-      <div class="brand-sub">LIVE API PREDICTIONS</div>
+      <div class="brand-sub">Live API Predictions</div>
     </div>
   </div>
   <div class="header-right">
-    <span class="hdr-badge">Quantile GBM · Q25/Q50/Q75</span>
+    <span class="hdr-badge">Quantile GBM · Q25 / Q50 / Q75</span>
     <span class="hdr-badge">Leakage-Safe Features</span>
   </div>
 </header>
 
 <!-- ── FORMAT TABS ── -->
 <div class="format-tabs">
-  <button class="format-tab active" id="tab-ipl" data-format="ipl"
-          onclick="switchFormat('ipl')">
+  <button class="format-tab active" id="tab-ipl"  data-format="ipl"  onclick="switchFormat('ipl')">
     IPL 2026 <span class="tab-count">—</span>
   </button>
-  <button class="format-tab" id="tab-t20i" data-format="t20i"
-          onclick="switchFormat('t20i')">
+  <button class="format-tab"        id="tab-t20i" data-format="t20i" onclick="switchFormat('t20i')">
     T20 International <span class="tab-count">—</span>
   </button>
+  <div class="tabs-right">
+    <button class="icon-btn" onclick="exportCSV()" title="Export current predictions to CSV">
+      ⬇ Export CSV
+    </button>
+  </div>
 </div>
 
 <!-- ── MAIN ── -->
@@ -40,22 +43,27 @@
 
   <!-- Left: match list -->
   <div class="match-list-panel">
-    <div class="panel-header">FIXTURES</div>
-    <div id="match-list">
-      <!-- Populated by renderMatchList() -->
+    <div class="panel-header">Fixtures</div>
+    <div class="panel-search">
+      <input type="text" id="match-search" placeholder="Search team or venue…"
+             oninput="filterMatchList(this.value)">
     </div>
+    <div id="match-list"><!-- populated by renderMatchList() --></div>
   </div>
 
-  <!-- Right: match detail + predictions -->
+  <!-- Right: match detail + live predictions -->
   <div class="match-detail-panel" id="match-detail">
     <div class="state-placeholder">
       <div class="state-icon">🏏</div>
       <div class="state-title">Select a match</div>
-      <div class="state-sub">Click any fixture on the left to load live predictions</div>
+      <div class="state-sub">Predictions load live from the Flask API.<br>Each player is fetched independently as you click.</div>
     </div>
   </div>
 
 </div>
+
+<!-- Toast notification -->
+<div class="toast" id="toast"></div>
 
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
