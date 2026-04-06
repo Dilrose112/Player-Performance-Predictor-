@@ -25,11 +25,20 @@
 
 <!-- ── FORMAT TABS ── -->
 <div class="format-tabs">
-  <button class="format-tab active" id="tab-ipl"  data-format="ipl"  onclick="switchFormat('ipl')">
+  <button class="format-tab active" id="tab-ipl"     data-format="ipl"     onclick="switchTab('ipl')">
     IPL 2026 <span class="tab-count">—</span>
   </button>
-  <button class="format-tab"        id="tab-t20i" data-format="t20i" onclick="switchFormat('t20i')">
+  <button class="format-tab"        id="tab-t20i"    data-format="t20i"    onclick="switchTab('t20i')">
     T20 International <span class="tab-count">—</span>
+  </button>
+  <button class="format-tab"        id="tab-insights"   data-format="insights"   onclick="switchTab('insights')">
+    Player Insights
+  </button>
+  <button class="format-tab"        id="tab-compare"    data-format="compare"    onclick="switchTab('compare')">
+    Player Comparison
+  </button>
+  <button class="format-tab"        id="tab-model"      data-format="model"      onclick="switchTab('model')">
+    Model Summary
   </button>
   <div class="tabs-right">
     <button class="icon-btn" onclick="exportCSV()" title="Export current predictions to CSV">
@@ -60,6 +69,67 @@
     </div>
   </div>
 
+</div>
+
+<!-- ── PLAYER INSIGHTS TAB ── -->
+<div id="panel-insights" class="tab-panel" style="display:none">
+
+  <!-- Filter bar -->
+  <div class="overview-filterbar">
+    <span class="overview-title">IPL 2026 · Player Overview</span>
+    <div class="overview-pills" id="ins-role-pills">
+      <button class="ov-pill active" onclick="insSetRole('ALL',  this)">All Players</button>
+      <button class="ov-pill"        onclick="insSetRole('BAT',  this)">Batters</button>
+      <button class="ov-pill"        onclick="insSetRole('BOWL', this)">Bowlers</button>
+    </div>
+    <div class="overview-pills" id="ins-arch-pills" style="margin-left:auto">
+      <button class="ov-pill active" onclick="insSetArch('ALL',             this)">All</button>
+      <button class="ov-pill"        onclick="insSetArch('Power Hitter',    this)">Power</button>
+      <button class="ov-pill"        onclick="insSetArch('Anchor',          this)">Anchor</button>
+      <button class="ov-pill"        onclick="insSetArch('Wicket Taker',    this)">Wicket Taker</button>
+      <button class="ov-pill"        onclick="insSetArch('Economy',         this)">Economy</button>
+    </div>
+  </div>
+
+  <div class="overview-grid" id="ins-grid">
+    <div class="state-placeholder" style="grid-column:1/-1">
+      <div class="spinner"></div>
+      <div class="state-sub">Loading player profiles…</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── PLAYER COMPARISON TAB ── -->
+<div id="panel-compare" class="tab-panel" style="display:none">
+
+  <div class="overview-filterbar">
+    <span class="overview-title">IPL 2026 · Head-to-Head Rivalries</span>
+    <div class="overview-pills" id="cmp-edge-pills" style="margin-left:auto">
+      <button class="ov-pill active" onclick="cmpSetEdge('ALL',  this)">All</button>
+      <button class="ov-pill"        onclick="cmpSetEdge('bat',  this)">Bat Edge</button>
+      <button class="ov-pill"        onclick="cmpSetEdge('bowl', this)">Bowl Edge</button>
+      <button class="ov-pill"        onclick="cmpSetEdge('even', this)">Even</button>
+    </div>
+  </div>
+
+  <div class="rivalry-list" id="cmp-list">
+    <div class="state-placeholder">
+      <div class="spinner"></div>
+      <div class="state-sub">Loading rivalries…</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── MODEL SUMMARY TAB ── -->
+<div id="panel-model" class="tab-panel" style="display:none">
+  <div class="model-panel" id="model-output">
+    <div class="state-placeholder">
+      <div class="spinner"></div>
+      <div class="state-sub">Loading model summary…</div>
+    </div>
+  </div>
 </div>
 
 <!-- Toast notification -->

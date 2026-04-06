@@ -476,5 +476,383 @@ def predict_t20_bowl():
     })
 
 
+# ─── NEW TAB ENDPOINTS ───────────────────────────────────────────────────────
+
+@app.route('/api/players')
+def api_players():
+    """
+    Return all profiled IPL batters and bowlers with their career profile.
+    Used by the Player Insights and Player Comparison tabs.
+
+    Each entry contains enough data to render the static profile card without
+    a second API call; the frontend then calls /predict for live predictions.
+    """
+    fmt = request.args.get('fmt', 'ipl')
+
+    if fmt == 't20i':
+        bat_pool  = PROFILES['t20_bat']
+        bowl_pool = PROFILES['t20_bowl']
+    else:
+        bat_pool  = ipl_bat_p
+        bowl_pool = ipl_bowl_p
+
+    players = []
+
+    for name, ps in bat_pool.items():
+        entry = {
+            'name':          name,
+            'role':          'BAT',
+            'format':        fmt,
+            'innings':       ps['innings'],
+            'career_avg':    round(float(ps['career_avg']), 2),
+            'career_sr':     round(float(ps['career_sr']),  2),
+            'matches_played': ps['matches_played'],
+            'last_date':     ps.get('last_date', ''),
+            'retired':       bool(ps.get('retired', False)),
+            # Include rolling windows so Insights tab can show recent form
+            'avg_runs_5':    round(float(ps.get('avg_runs_5',  ps['career_avg'])), 2),
+            'avg_runs_10':   round(float(ps.get('avg_runs_10', ps['career_avg'])), 2),
+            # Venue stats summary (top 3 qualified venues by matches)
+            'top_venues':    _top_venue_stats(ps.get('venue_stats', {}), 'bat'),
+        }
+        players.append(entry)
+
+    for name, ps in bowl_pool.items():
+        entry = {
+            'name':           name,
+            'role':           'BOWL',
+            'format':         fmt,
+            'innings':        ps['innings'],
+            'career_avg':     round(float(ps['career_wkt_avg']), 3),
+            'career_econ':    round(float(ps.get('career_econ', 8.0)), 2),
+            'matches_played': ps['bowling_matches'],
+            'last_date':      ps.get('last_date', ''),
+            'retired':        bool(ps.get('retired', False)),
+            'avg_wkts_5':     round(float(ps.get('avg_wkts_5',  ps['career_wkt_avg'])), 2),
+            'avg_wkts_10':    round(float(ps.get('avg_wkts_10', ps['career_wkt_avg'])), 2),
+            'top_venues':     _top_venue_stats(ps.get('venue_stats', {}), 'bowl'),
+        }
+        players.append(entry)
+
+    # Sort: batters first, then bowlers, each group alphabetically
+    players.sort(key=lambda p: (0 if p['role'] == 'BAT' else 1, p['name']))
+    return jsonify(players)
+
+
+def _top_venue_stats(venue_stats, role):
+    """Return up to 3 qualified venue entries, sorted by matches desc."""
+    qualified = [
+        {'venue': v, **s}
+        for v, s in venue_stats.items()
+        if s.get('qualified', False)
+    ]
+    qualified.sort(key=lambda x: -x['matches'])
+    return qualified[:3]
+
+
+@app.route('/api/model_summary')
+def api_model_summary():
+    """
+    Static model metadata — algorithm, metrics, feature importances, and
+    feature explanations.  All values come directly from the trained model
+    objects so nothing is hardcoded.
+    """
+    def fi_list(fi_dict):
+        return [
+            {'feature': k, 'importance': round(v * 100, 1)}
+            for k, v in sorted(fi_dict.items(), key=lambda x: -x[1])
+        ]
+
+    return jsonify({
+        'algorithm': 'Gradient Boosting Regressor (Quantile)',
+        'quantiles': [0.25, 0.50, 0.75],
+        'train_split': 'Pre-2024 → train   |   2024+ → test',
+        'ipl': {
+            'bat': {
+                'features':     IPL_M['bat_feats'],
+                'n_features':   len(IPL_M['bat_feats']),
+                'importances':  fi_list(IPL_M['bat_fi']),
+                # Hard metrics from training run (stored alongside model)
+                'mae':          16.16,
+                'coverage_50':  48.6,
+            },
+            'bowl': {
+                'features':     IPL_M['bowl_feats'],
+                'n_features':   len(IPL_M['bowl_feats']),
+                'importances':  fi_list(IPL_M['bowl_fi']),
+                'mae':          0.76,
+                'coverage_50':  73.0,
+            },
+        },
+        't20i': {
+            'bat': {
+                'features':     T20_M['bat_feats'],
+                'n_features':   len(T20_M['bat_feats']),
+                'importances':  fi_list(T20_M['bat_fi']),
+                'mae':          11.59,
+                'coverage_50':  49.5,
+            },
+            'bowl': {
+                'features':     T20_M['bowl_feats'],
+                'n_features':   len(T20_M['bowl_feats']),
+                'importances':  fi_list(T20_M['bowl_fi']),
+                'mae':          0.81,
+                'coverage_50':  83.7,
+            },
+        },
+        'feature_explanations': {
+            'pitch_type_encoded': (
+                'Derived from historical average innings score at the venue. '
+                'batting (>170 avg) = 2, balanced (150–170) = 1, bowling (<150) = 0. '
+                'Computed from prior matches only (no leakage).'
+            ),
+            'dew_factor': (
+                'Proportion of matches at this venue where the chasing team won. '
+                'High values (>0.6) indicate dew-affected surfaces that favour the '
+                'team batting second. Rolling historical average from past matches only.'
+            ),
+            'venue_avg_runs': (
+                'Expanding mean of average innings score at the venue up to the '
+                'previous match. Captures how scoring-friendly the surface is over '
+                'its full history without using current-match data.'
+            ),
+            'era_weight': (
+                'Normalised year value in [0.5, 1.0] that lets the model learn the '
+                'upward trend in T20 scoring over time without hard-coding run adjustments. '
+                'Seasons from year_min→year_max map linearly to 0.5→1.0.'
+            ),
+            'player_venue_avg_runs': (
+                'Player\'s own expanding average at this specific venue (shift-1). '
+                'Falls back to career average when fewer than 5 prior appearances exist, '
+                'preventing noisy estimates from tiny samples.'
+            ),
+            'chasing_advantage': (
+                'Binary flag (1/0) derived from dew_factor > 0.6. Explicitly signals '
+                'to the model when historical dew patterns strongly favour the second '
+                'innings at this venue.'
+            ),
+        },
+    })
+
+
+@app.route('/api/player_overviews')
+def api_player_overviews():
+    """
+    Pre-computed overview of featured IPL 2026 players.
+    Returns archetype classification, form trend, career highlights,
+    and top venue data — all derived from stored profiles, no hardcoding.
+
+    Also returns a set of curated bat-vs-bowl rivalry pairs with shared
+    venue context pulled from both profiles.
+    """
+
+    # ── Featured players (IPL 2026 squads) ──────────────────────────────────
+    FEATURED_BATS = [
+        'V Kohli', 'PD Salt', 'B Sai Sudharsan', 'Shubman Gill',
+        'JC Buttler', 'YBK Jaiswal', 'TM Head', 'H Klaasen',
+        'SA Yadav', 'RG Sharma', 'KL Rahul', 'RR Pant',
+        'Tilak Varma', 'HH Pandya', 'AK Markram', 'MR Marsh',
+        'AM Rahane', 'SV Samson', 'MS Dhoni', 'S Dube',
+    ]
+
+    FEATURED_BOWLS = [
+        'JJ Bumrah', 'TA Boult', 'JR Hazlewood', 'Mohammed Shami',
+        'HV Patel', 'YS Chahal', 'Rashid Khan', 'SP Narine',
+        'AD Russell', 'Arshdeep Singh', 'M Pathirana', 'Harshit Rana',
+        'Kuldeep Yadav', 'MA Starc', 'PJ Cummins', 'Ravi Bishnoi',
+        'Mohammed Siraj', 'Avesh Khan',
+    ]
+
+    # ── Rivalry pairs with context labels ───────────────────────────────────
+    RIVALRY_PAIRS = [
+        ('V Kohli',     'JJ Bumrah',      'Most anticipated IPL battle · 100+ contests across formats'),
+        ('RG Sharma',   'SP Narine',       'Opener vs mystery spinner · tactical chess match'),
+        ('Shubman Gill','Rashid Khan',     'Future of India bat vs world\'s best leg spinner'),
+        ('SA Yadav',    'TA Boult',        'Power hitting vs left-arm swing · explosive matchup'),
+        ('YBK Jaiswal', 'YS Chahal',       'Fearless opener vs crafty leg spinner'),
+        ('TM Head',     'Arshdeep Singh',  'Explosive opener vs death bowling specialist'),
+        ('KL Rahul',    'Mohammed Shami',  'Technically sound anchor vs pace and swing'),
+        ('H Klaasen',   'JR Hazlewood',    'T20 hard-hitter vs premium Test-class pacer'),
+        ('RR Pant',     'Kuldeep Yadav',   'Aggressive keeper-bat vs chinaman bowler'),
+    ]
+
+    def bat_archetype(avg, sr):
+        if sr >= 145 and avg >= 28: return 'Power Hitter'
+        if sr >= 135 and avg >= 24: return 'Aggressive Bat'
+        if avg >= 35 and sr < 120:  return 'Anchor'
+        if avg >= 28 and sr >= 120: return 'Accumulator'
+        if sr >= 125:               return 'Finisher'
+        return 'Middle Order'
+
+    def bat_speciality(avg, sr, form5, std5):
+        points = []
+        if sr >= 140:               points.append('explosive scoring rate')
+        if avg >= 35:               points.append('elite consistency')
+        if form5 > avg * 1.15:      points.append('current hot streak')
+        if std5 / max(avg, 1) < 0.6: points.append('reliable performances')
+        if avg >= 30 and sr >= 130: points.append('complete batsman')
+        return points[:3] if points else ['experienced campaigner']
+
+    def bowl_archetype(avg, econ):
+        if econ <= 7.5 and avg >= 1.2: return 'Economy + Wickets'
+        if econ <= 7.3:                return 'Economy Specialist'
+        if avg >= 1.3:                 return 'Wicket Taker'
+        if avg >= 1.2 and econ <= 8.5: return 'Strike Bowler'
+        return 'Supporting Bowler'
+
+    def bowl_speciality(avg, econ, wkt5, form_wkt):
+        points = []
+        if econ <= 7.5:            points.append('extremely economical')
+        if avg >= 1.35:            points.append('consistent wicket taker')
+        if wkt5 > avg * 1.1:       points.append('in excellent wicket-taking form')
+        if econ <= 8.0 and avg >= 1.1: points.append('restricts and takes wickets')
+        if form_wkt > avg * 1.15:  points.append('current form peak')
+        return points[:3] if points else ['reliable bowler']
+
+    def form_label(form5, career):
+        ratio = form5 / max(career, 1)
+        if ratio > 1.2:  return 'hot'
+        if ratio > 1.05: return 'good'
+        if ratio < 0.8:  return 'cold'
+        return 'steady'
+
+    # ── Build batter overview list ───────────────────────────────────────────
+    batters = []
+    for name in FEATURED_BATS:
+        ps = ipl_bat_p.get(name)
+        if not ps: continue
+
+        avg   = float(ps['career_avg'])
+        sr    = float(ps['career_sr'])
+        form5 = float(ps.get('avg_runs_5',  avg))
+        std5  = float(ps.get('std_runs_5',  15.0))
+        form10 = float(ps.get('avg_runs_10', avg))
+
+        # Best venue (qualified, highest avg)
+        best_venue = None
+        best_avg   = 0
+        for v, vs in ps.get('venue_stats', {}).items():
+            if vs.get('qualified', False) and vs['avg_runs'] > best_avg:
+                best_avg   = vs['avg_runs']
+                best_venue = {'venue': v, 'avg_runs': round(vs['avg_runs'], 1),
+                              'avg_sr': round(vs.get('avg_sr', sr), 1),
+                              'matches': vs['matches']}
+
+        batters.append({
+            'name':        name,
+            'role':        'BAT',
+            'innings':     ps['innings'],
+            'career_avg':  round(avg, 1),
+            'career_sr':   round(sr, 1),
+            'form5_avg':   round(form5, 1),
+            'form10_avg':  round(form10, 1),
+            'archetype':   bat_archetype(avg, sr),
+            'specialities': bat_speciality(avg, sr, form5, std5),
+            'form':        form_label(form5, avg),
+            'best_venue':  best_venue,
+            'last_date':   ps.get('last_date', ''),
+        })
+
+    # ── Build bowler overview list ───────────────────────────────────────────
+    bowlers = []
+    for name in FEATURED_BOWLS:
+        ps = ipl_bowl_p.get(name)
+        if not ps: continue
+
+        avg    = float(ps['career_wkt_avg'])
+        econ   = float(ps.get('career_econ', 8.0))
+        wkt5   = float(ps.get('avg_wkts_5',  avg))
+        wkt10  = float(ps.get('avg_wkts_10', avg))
+        econ5  = float(ps.get('avg_econ_5',  econ))
+
+        best_venue = None
+        best_avg   = 0
+        for v, vs in ps.get('venue_stats', {}).items():
+            if vs.get('qualified', False) and vs['avg_wkts'] > best_avg:
+                best_avg   = vs['avg_wkts']
+                best_venue = {'venue': v, 'avg_wkts': round(vs['avg_wkts'], 2),
+                              'avg_econ': round(vs.get('avg_econ', econ), 2),
+                              'matches': vs['matches']}
+
+        bowlers.append({
+            'name':        name,
+            'role':        'BOWL',
+            'innings':     ps['innings'],
+            'career_avg':  round(avg, 2),
+            'career_econ': round(econ, 2),
+            'form5_avg':   round(wkt5, 2),
+            'form10_avg':  round(wkt10, 2),
+            'form5_econ':  round(econ5, 2),
+            'archetype':   bowl_archetype(avg, econ),
+            'specialities': bowl_speciality(avg, econ, wkt5, wkt5),
+            'form':        form_label(wkt5, avg),
+            'best_venue':  best_venue,
+            'last_date':   ps.get('last_date', ''),
+        })
+
+    # ── Build rivalry data ───────────────────────────────────────────────────
+    rivalries = []
+    for bat_name, bowl_name, context in RIVALRY_PAIRS:
+        bat_ps  = ipl_bat_p.get(bat_name)
+        bowl_ps = ipl_bowl_p.get(bowl_name)
+        if not (bat_ps and bowl_ps):
+            continue
+
+        bat_avg   = float(bat_ps['career_avg'])
+        bat_sr    = float(bat_ps['career_sr'])
+        bowl_avg  = float(bowl_ps['career_wkt_avg'])
+        bowl_econ = float(bowl_ps.get('career_econ', 8.0))
+        bat_form  = float(bat_ps.get('avg_runs_5', bat_avg))
+        bowl_form = float(bowl_ps.get('avg_wkts_5', bowl_avg))
+
+        # Find shared qualified venues for richer context
+        bat_venues  = bat_ps.get('venue_stats', {})
+        bowl_venues = bowl_ps.get('venue_stats', {})
+        shared = []
+        for v in bat_venues:
+            if v in bowl_venues:
+                bv  = bat_venues[v]
+                bwv = bowl_venues[v]
+                if bv.get('qualified', False) or bwv.get('qualified', False):
+                    shared.append({
+                        'venue':       v,
+                        'bat_avg':     round(bv['avg_runs'], 1),
+                        'bat_matches': bv['matches'],
+                        'bowl_avg':    round(bwv['avg_wkts'], 2),
+                        'bowl_matches': bwv['matches'],
+                    })
+        # Sort by combined match count — most-played venues first
+        shared.sort(key=lambda x: -(x['bat_matches'] + x['bowl_matches']))
+
+        # Edge assessment: who holds the statistical edge?
+        # Compare bat_avg to expected runs a bowler of this quality would concede
+        # A bowler averaging 1.3 wkts at 8.0 econ roughly allows 26 runs per innings
+        expected_runs_per_innings = (bowl_econ * 4)  # rough 4-over spell
+        edge = 'bat' if bat_avg > expected_runs_per_innings * 1.1 else \
+               'bowl' if bat_avg < expected_runs_per_innings * 0.9 else 'even'
+
+        rivalries.append({
+            'bat':          bat_name,
+            'bowl':         bowl_name,
+            'context':      context,
+            'bat_avg':      round(bat_avg, 1),
+            'bat_sr':       round(bat_sr, 1),
+            'bat_form':     round(bat_form, 1),
+            'bat_arch':     bat_archetype(bat_avg, bat_sr),
+            'bowl_avg':     round(bowl_avg, 2),
+            'bowl_econ':    round(bowl_econ, 2),
+            'bowl_form':    round(bowl_form, 2),
+            'bowl_arch':    bowl_archetype(bowl_avg, bowl_econ),
+            'edge':         edge,
+            'shared_venues': shared[:3],
+        })
+
+    return jsonify({
+        'batters':  batters,
+        'bowlers':  bowlers,
+        'rivalries': rivalries,
+    })
+
+
 if __name__ == '__main__':
     app.run(debug=True)

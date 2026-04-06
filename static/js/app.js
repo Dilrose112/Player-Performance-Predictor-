@@ -15,6 +15,26 @@
 
 'use strict';
 
+/**
+ * safeJson(res, label)
+ * --------------------
+ * Checks res.ok before calling .json() so a Flask HTML error page never
+ * triggers "Unexpected token '<'".  When the server returns a non-2xx
+ * status the function throws a readable Error instead of a JSON parse crash.
+ */
+async function safeJson(res, label = 'API') {
+  if (!res.ok) {
+    // Try to extract a message from the body, but never call .json() blindly
+    const text = await res.text().catch(() => '');
+    // If the body looks like HTML (Flask error page), give a clean message
+    const msg = text.startsWith('<')
+      ? `${label} returned HTTP ${res.status}. Is 06_app.py up to date?`
+      : (text.slice(0, 200) || `HTTP ${res.status}`);
+    throw new Error(msg);
+  }
+  return res.json();
+}
+
 // ── STATE ─────────────────────────────────────────────────────────────────────
 const state = {
   format:       'ipl',
@@ -37,7 +57,7 @@ async function loadSchedule() {
   showListLoading();
   try {
     const res  = await fetch('/api/schedule');
-    const data = await res.json();
+    const data = await safeJson(res, '/api/schedule');
     state.schedule = data;
     updateTabCounts();
     renderMatchList();
@@ -666,4 +686,591 @@ function capitalise(s) {
 function formatDate(d) {
   return new Date(d).toLocaleDateString('en-IN',
     { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   NEW TABS — Player Insights · Player Comparison · Model Summary
+   All predictions come from the Flask /predict* API.  No hardcoded values.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+// ── TAB STATE ─────────────────────────────────────────────────────────────────
+
+// Player lists loaded per format, keyed by fmt ('ipl' | 't20i')
+const playerLists = {};
+
+// Venue lists loaded per format
+const venueLists = {};
+
+// Track which tab is active so the match tabs keep their state
+let activeTab = 'ipl';
+
+// ── TAB SWITCHING ─────────────────────────────────────────────────────────────
+
+/**
+ * switchTab replaces the old switchFormat for the two match tabs and adds
+ * three new tab IDs: 'insights', 'compare', 'model'.
+ *
+ * For the match tabs (ipl / t20i) we keep calling switchFormat() internally
+ * so all existing match-tab logic is completely unchanged.
+ */
+function switchTab(tab) {
+  activeTab = tab;
+
+  // Update tab button styles
+  document.querySelectorAll('.format-tab').forEach(btn =>
+    btn.classList.toggle('active', btn.dataset.format === tab));
+
+  // Show/hide the match layout vs the new tab panels
+  const matchLayout = document.querySelector('.main-layout');
+  const insPanel    = document.getElementById('panel-insights');
+  const cmpPanel    = document.getElementById('panel-compare');
+  const modPanel    = document.getElementById('panel-model');
+
+  const isMatchTab  = tab === 'ipl' || tab === 't20i';
+
+  matchLayout.style.display = isMatchTab ? '' : 'none';
+  insPanel.style.display    = tab === 'insights' ? '' : 'none';
+  cmpPanel.style.display    = tab === 'compare'  ? '' : 'none';
+  modPanel.style.display    = tab === 'model'    ? '' : 'none';
+
+  if (isMatchTab) {
+    // Delegate to the existing match format handler
+    switchFormat(tab);
+    return;
+  }
+
+  if (tab === 'insights') {
+    insInit();
+    return;
+  }
+
+  if (tab === 'compare') {
+    cmpInit();
+    return;
+  }
+
+  if (tab === 'model') {
+    modelInit();
+    return;
+  }
+}
+
+// ── SHARED HELPERS ────────────────────────────────────────────────────────────
+
+/**
+ * Load /api/players for a given format, with caching.
+ * Returns the array; subsequent calls return from cache immediately.
+ */
+async function loadPlayerList(fmt) {
+  if (playerLists[fmt]) return playerLists[fmt];
+  const res = await fetch(`/api/players?fmt=${fmt}`);
+  playerLists[fmt] = await safeJson(res, '/api/players');
+  return playerLists[fmt];
+}
+
+/**
+ * Load /api/venues for a given format, with caching.
+ */
+async function loadVenueList(fmt) {
+  if (venueLists[fmt]) return venueLists[fmt];
+  const res  = await fetch('/api/venues');
+  const data = await safeJson(res, '/api/venues');
+  venueLists['ipl']  = data.ipl  || [];
+  venueLists['t20i'] = data.t20i || [];
+  return venueLists[fmt] || [];
+}
+
+/**
+ * Populate a <select> from an array of strings.
+ */
+function fillSelect(id, items, firstOption = null) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.innerHTML = '';
+  if (firstOption) {
+    const o = document.createElement('option');
+    o.value = ''; o.textContent = firstOption;
+    el.appendChild(o);
+  }
+  items.forEach(item => {
+    const o = document.createElement('option');
+    o.value = o.textContent = item;
+    el.appendChild(o);
+  });
+}
+
+/**
+ * Get IPL team names from the schedule (already loaded).
+ */
+function getTeamList() {
+  const teams = new Set();
+  for (const fmt of ['ipl', 't20i']) {
+    for (const m of (state.schedule[fmt] || [])) {
+      teams.add(m.home); teams.add(m.away);
+    }
+  }
+  return [...teams].sort();
+}
+
+/**
+ * Chip HTML for pitch/dew/chasing — shared across both new tabs.
+ */
+function contextChipHTML(data) {
+  const pitchClass = { batting:'pitch-bat', balanced:'pitch-bal', bowling:'pitch-bowl' }
+    [data.pitch] || 'pitch-bal';
+  return [
+    `<span class="pred-chip ${pitchClass}">⛏ ${data.pitch}</span>`,
+    `<span class="pred-chip dew">💧 ${(data.dew * 100).toFixed(0)}%</span>`,
+    data.chasing ? `<span class="pred-chip chase">🌊 chasing</span>` : '',
+  ].join('');
+}
+
+// ── PLAYER INSIGHTS ──────────────────────────────────────────────────────────
+// Loads once from /api/player_overviews, renders a grid of player cards.
+// Filters (role, archetype) operate on the cached data — no re-fetching.
+
+let insOverviewData  = null;   // cached API response
+let insRoleFilter    = 'ALL';
+let insArchFilter    = 'ALL';
+
+async function insInit() {
+  if (insOverviewData) { insRenderGrid(); return; }
+
+  document.getElementById('ins-grid').innerHTML = `
+    <div class="state-placeholder" style="grid-column:1/-1">
+      <div class="spinner"></div>
+      <div class="state-sub">Loading player profiles…</div>
+    </div>`;
+
+  try {
+    const res = await fetch('/api/player_overviews');
+    insOverviewData = await safeJson(res, '/api/player_overviews');
+    insRenderGrid();
+  } catch (err) {
+    document.getElementById('ins-grid').innerHTML = `
+      <div class="state-placeholder" style="grid-column:1/-1">
+        <div class="state-icon">⚠</div>
+        <div class="state-sub" style="color:var(--red)">${err.message}</div>
+      </div>`;
+  }
+}
+
+function insSetRole(role, btn) {
+  insRoleFilter = role;
+  btn.closest('.overview-pills').querySelectorAll('.ov-pill')
+     .forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  insRenderGrid();
+}
+
+function insSetArch(arch, btn) {
+  insArchFilter = arch;
+  btn.closest('.overview-pills').querySelectorAll('.ov-pill')
+     .forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  insRenderGrid();
+}
+
+function insRenderGrid() {
+  if (!insOverviewData) return;
+
+  // Merge batters + bowlers into one list
+  let all = [...insOverviewData.batters, ...insOverviewData.bowlers];
+
+  // Role filter
+  if (insRoleFilter !== 'ALL') all = all.filter(p => p.role === insRoleFilter);
+
+  // Archetype filter — partial match so "Economy" matches "Economy + Wickets" etc.
+  if (insArchFilter !== 'ALL') {
+    all = all.filter(p => p.archetype.toLowerCase().includes(insArchFilter.toLowerCase()));
+  }
+
+  const grid = document.getElementById('ins-grid');
+  if (!all.length) {
+    grid.innerHTML = `<div class="state-placeholder" style="grid-column:1/-1">
+      <div class="state-sub">No players match this filter.</div></div>`;
+    return;
+  }
+
+  grid.innerHTML = all.map(p => insPlayerCardHTML(p)).join('');
+
+  // Animate form bars after paint
+  requestAnimationFrame(() => {
+    grid.querySelectorAll('.ov-form-fill[data-w]').forEach(el => {
+      el.style.width = el.dataset.w + '%';
+    });
+  });
+}
+
+function insPlayerCardHTML(p) {
+  const isBat     = p.role === 'BAT';
+  const archClass = `arch-${p.archetype}`.replace(/ /g, '\ ');
+  const formClass = p.form; // 'hot' | 'good' | 'steady' | 'cold'
+
+  // Form bar width: compare form5 to career, capped at 120%
+  const formRatio  = p.form5_avg / Math.max(isBat ? p.career_avg : p.career_avg, 0.01);
+  const formWidth  = Math.min(formRatio * 70, 100).toFixed(0);  // 70% = career average baseline
+  const fillClass  = p.form === 'hot' ? 'hot' : (isBat ? 'bat' : 'bowl');
+
+  const mainStat   = isBat ? p.career_avg : p.career_avg;
+  const secondStat = isBat ? p.career_sr  : p.career_econ;
+  const mainLabel  = isBat ? 'AVG'  : 'AVG WKT';
+  const secLabel   = isBat ? 'SR'   : 'ECON';
+  const form5Label = isBat ? `${p.form5_avg} (last 5)` : `${p.form5_avg} (last 5)`;
+
+  const venueHTML = p.best_venue
+    ? `<div class="ov-venue">
+        <div style="color:var(--ink3);font-size:8px;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">
+          Best venue
+        </div>
+        <div class="ov-venue-name">${p.best_venue.venue}</div>
+        <div style="color:var(--ink3)">
+          ${isBat
+            ? `${p.best_venue.avg_runs} avg · ${p.best_venue.avg_sr} SR`
+            : `${p.best_venue.avg_wkts} avg · ${p.best_venue.avg_econ} econ`}
+          · ${p.best_venue.matches}m
+        </div>
+      </div>`
+    : '';
+
+  const specs = (p.specialities || []).map(s =>
+    `<span class="ov-spec-tag">${s}</span>`).join('');
+
+  return `
+  <div class="ov-card" data-role="${p.role}" data-arch="${p.archetype}">
+    <div class="ov-card-top">
+      <div class="ov-name">${p.name}</div>
+      <span class="ov-arch-badge ${archClass}">${p.archetype}</span>
+    </div>
+
+    <div class="ov-stats">
+      <div class="ov-stat">
+        <div class="ov-stat-label">${mainLabel}</div>
+        <div class="ov-stat-value accent">${mainStat}</div>
+      </div>
+      <div class="ov-stat">
+        <div class="ov-stat-label">${secLabel}</div>
+        <div class="ov-stat-value">${secondStat}</div>
+      </div>
+      <div class="ov-stat">
+        <div class="ov-stat-label">INN</div>
+        <div class="ov-stat-value">${p.innings}</div>
+      </div>
+    </div>
+
+    <div class="ov-form-row">
+      <span class="ov-form-label">FORM</span>
+      <div class="ov-form-track">
+        <div class="ov-form-fill ${fillClass}" style="width:0%" data-w="${formWidth}"></div>
+      </div>
+      <span class="ov-form-badge ${formClass}">${form5Label}</span>
+    </div>
+
+    ${specs ? `<div class="ov-specialities">${specs}</div>` : ''}
+    ${venueHTML}
+  </div>`;
+}
+
+// ── PLAYER COMPARISON / RIVALRIES ─────────────────────────────────────────────
+// Displays pre-defined bat-vs-bowl rivalries derived from shared IPL history.
+// No user inputs — the data speaks for itself.
+
+let cmpOverviewData = null;
+let cmpEdgeFilter   = 'ALL';
+
+async function cmpInit() {
+  if (cmpOverviewData) { cmpRenderList(); return; }
+
+  document.getElementById('cmp-list').innerHTML = `
+    <div class="state-placeholder">
+      <div class="spinner"></div>
+      <div class="state-sub">Loading rivalries…</div>
+    </div>`;
+
+  try {
+    // Re-use the same endpoint as Insights — both tabs share the same data
+    const res = await fetch('/api/player_overviews');
+    const data = await safeJson(res, '/api/player_overviews');
+    // Share cache with insights tab too
+    insOverviewData = insOverviewData || data;
+    cmpOverviewData = data;
+    cmpRenderList();
+  } catch (err) {
+    document.getElementById('cmp-list').innerHTML = `
+      <div class="state-placeholder">
+        <div class="state-icon">⚠</div>
+        <div class="state-sub" style="color:var(--red)">${err.message}</div>
+      </div>`;
+  }
+}
+
+function cmpSetEdge(edge, btn) {
+  cmpEdgeFilter = edge;
+  btn.closest('.overview-pills').querySelectorAll('.ov-pill')
+     .forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  cmpRenderList();
+}
+
+function cmpRenderList() {
+  if (!cmpOverviewData) return;
+
+  let rivalries = cmpOverviewData.rivalries || [];
+  if (cmpEdgeFilter !== 'ALL') rivalries = rivalries.filter(r => r.edge === cmpEdgeFilter);
+
+  const list = document.getElementById('cmp-list');
+  if (!rivalries.length) {
+    list.innerHTML = `<div class="state-placeholder">
+      <div class="state-sub">No rivalries match this filter.</div></div>`;
+    return;
+  }
+
+  list.innerHTML = rivalries.map(r => cmpRivalryCardHTML(r)).join('');
+
+  requestAnimationFrame(() => {
+    list.querySelectorAll('[data-bar-w]').forEach(el => {
+      el.style.width = el.dataset.barW + '%';
+    });
+  });
+}
+
+function cmpRivalryCardHTML(r) {
+  const edgeLabel = r.edge === 'bat'  ? 'Bat Edge'  :
+                    r.edge === 'bowl' ? 'Bowl Edge' : 'Even';
+
+  // Normalise bars: career avg vs a 100-run baseline for bat, 2 wickets for bowl
+  const batBar    = Math.min(r.bat_avg  / 50  * 100, 100).toFixed(0);
+  const batSrBar  = Math.min(r.bat_sr   / 180 * 100, 100).toFixed(0);
+  const batFBar   = Math.min(r.bat_form / 50  * 100, 100).toFixed(0);
+  const bwlBar    = Math.min(r.bowl_avg  / 2   * 100, 100).toFixed(0);
+  const econBar   = Math.min((12 - r.bowl_econ) / 6 * 100, 100).toFixed(0); // lower econ = taller bar
+  const bwlFBar   = Math.min(r.bowl_form / 2   * 100, 100).toFixed(0);
+
+  const sharedHTML = r.shared_venues && r.shared_venues.length
+    ? `<div style="margin-top:2px">
+        <div style="font-family:var(--mono);font-size:8px;letter-spacing:1px;
+             text-transform:uppercase;color:var(--ink3);margin-bottom:5px">
+          Shared IPL venues
+        </div>
+        <div class="rv-venues">
+          ${r.shared_venues.map(v => `
+            <div class="rv-venue-row">
+              <div class="rv-venue-name">${v.venue}</div>
+              <div class="rv-venue-bat">${v.bat_avg} avg</div>
+              <div class="rv-venue-bowl">${v.bowl_avg} wkt</div>
+            </div>`).join('')}
+        </div>
+      </div>`
+    : '';
+
+  return `
+  <div class="rivalry-card" data-edge="${r.edge}">
+    <div class="rv-header">
+      <div class="rv-player">
+        <div class="rv-name">${r.bat}</div>
+        <div class="rv-arch">${r.bat_arch} · ${r.bat_avg} avg · SR ${r.bat_sr}</div>
+      </div>
+      <div class="rv-vs">
+        <div class="rv-vs-text">vs</div>
+        <span class="rv-edge-badge ${r.edge}">${edgeLabel}</span>
+      </div>
+      <div class="rv-player right">
+        <div class="rv-name">${r.bowl}</div>
+        <div class="rv-arch">${r.bowl_arch} · ${r.bowl_avg} wkt · ${r.bowl_econ} econ</div>
+      </div>
+    </div>
+
+    <div class="rv-body">
+      <div class="rv-stats-row">
+
+        <!-- Batter stats -->
+        <div class="rv-stat-group">
+          <div class="rv-stat-title">🏏 ${r.bat} — Batting</div>
+          <div class="rv-bars">
+            <div class="rv-bar-row">
+              <div class="rv-bar-key">Career</div>
+              <div class="rv-bar-track"><div class="rv-bar-fill bat" style="width:0%" data-bar-w="${batBar}"></div></div>
+              <div class="rv-bar-val">${r.bat_avg}</div>
+            </div>
+            <div class="rv-bar-row">
+              <div class="rv-bar-key">Strike R</div>
+              <div class="rv-bar-track"><div class="rv-bar-fill bat" style="width:0%;opacity:.6" data-bar-w="${batSrBar}"></div></div>
+              <div class="rv-bar-val">${r.bat_sr}</div>
+            </div>
+            <div class="rv-bar-row">
+              <div class="rv-bar-key">Last 5</div>
+              <div class="rv-bar-track"><div class="rv-bar-fill ${r.bat_form > r.bat_avg * 1.1 ? 'hot ov-form-fill' : 'bat'}" style="width:0%" data-bar-w="${batFBar}"></div></div>
+              <div class="rv-bar-val">${r.bat_form}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bowler stats -->
+        <div class="rv-stat-group">
+          <div class="rv-stat-title">🎯 ${r.bowl} — Bowling</div>
+          <div class="rv-bars">
+            <div class="rv-bar-row">
+              <div class="rv-bar-key">Wkt Avg</div>
+              <div class="rv-bar-track"><div class="rv-bar-fill bowl" style="width:0%" data-bar-w="${bwlBar}"></div></div>
+              <div class="rv-bar-val">${r.bowl_avg}</div>
+            </div>
+            <div class="rv-bar-row">
+              <div class="rv-bar-key">Economy</div>
+              <div class="rv-bar-track"><div class="rv-bar-fill bowl" style="width:0%;opacity:.6" data-bar-w="${econBar}"></div></div>
+              <div class="rv-bar-val">${r.bowl_econ}</div>
+            </div>
+            <div class="rv-bar-row">
+              <div class="rv-bar-key">Last 5</div>
+              <div class="rv-bar-track"><div class="rv-bar-fill bowl" style="width:0%" data-bar-w="${bwlFBar}"></div></div>
+              <div class="rv-bar-val">${r.bowl_form}</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="rv-context">${r.context}</div>
+      ${sharedHTML}
+    </div>
+  </div>`;
+}
+
+// ── MODEL SUMMARY ─────────────────────────────────────────────────────────────
+
+let modelSummaryLoaded = false;
+
+async function modelInit() {
+  if (modelSummaryLoaded) return;  // already rendered, no need to refetch
+
+  const out = document.getElementById('model-output');
+  out.innerHTML = `<div class="state-placeholder" style="min-height:160px">
+    <div class="spinner"></div><div class="state-sub">Loading model summary…</div></div>`;
+
+  try {
+    const res  = await fetch('/api/model_summary');
+    const ms   = await safeJson(res, '/api/model_summary');
+    renderModelSummary(ms);
+    modelSummaryLoaded = true;
+  } catch (err) {
+    out.innerHTML = `<div style="color:var(--red);font-family:var(--mono);font-size:12px;padding:20px">
+      Error: ${err.message}</div>`;
+  }
+}
+
+function renderModelSummary(ms) {
+  const out = document.getElementById('model-output');
+
+  // Feature importance rows HTML
+  function fiRows(items, cls) {
+    const maxPct = items[0]?.importance || 1;
+    return items.map(f => `
+      <div class="fi-row">
+        <div class="fi-name">${f.feature}</div>
+        <div class="fi-track">
+          <div class="fi-fill ${cls}" style="width:0%" data-target="${(f.importance/maxPct*100).toFixed(1)}"></div>
+        </div>
+        <div class="fi-pct">${f.importance}%</div>
+      </div>`).join('');
+  }
+
+  // Feature explanation cards
+  const expCards = Object.entries(ms.feature_explanations).map(([key, text]) => `
+    <div class="feat-exp-card">
+      <div class="feat-exp-name">${key}</div>
+      <div class="feat-exp-text">${text}</div>
+    </div>`).join('');
+
+  out.innerHTML = `
+    <!-- Overview -->
+    <div class="model-section">
+      <div class="model-section-title"><div class="dot"></div>Algorithm Overview</div>
+      <div class="model-section-body">
+        <div class="model-metrics-row">
+          <div class="model-metric">
+            <div class="mm-label">Algorithm</div>
+            <div class="mm-value" style="font-size:13px;letter-spacing:0">${ms.algorithm}</div>
+          </div>
+          <div class="model-metric green">
+            <div class="mm-label">Quantiles</div>
+            <div class="mm-value" style="font-size:13px">${ms.quantiles.join(' · ')}</div>
+          </div>
+          <div class="model-metric amber">
+            <div class="mm-label">Train / Test Split</div>
+            <div class="mm-value" style="font-size:13px;letter-spacing:0">${ms.train_split}</div>
+          </div>
+        </div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--ink3);margin-top:12px;line-height:1.7">
+          Three quantile models (Q25, Q50, Q75) are trained independently per format.
+          The Q50 model provides the median prediction; Q25 and Q75 form the 50% confidence interval.
+          Interval coverage target is 50% — a well-calibrated model has half of actuals fall within the range.
+        </div>
+      </div>
+    </div>
+
+    <!-- IPL Batting -->
+    <div class="model-section">
+      <div class="model-section-title"><div class="dot" style="background:var(--blue)"></div>IPL Batting Model</div>
+      <div class="model-section-body">
+        <div class="model-metrics-row" style="margin-bottom:18px">
+          <div class="model-metric"><div class="mm-label">MAE</div><div class="mm-value">${ms.ipl.bat.mae}</div><div class="mm-sub">runs (median)</div></div>
+          <div class="model-metric green"><div class="mm-label">50% Coverage</div><div class="mm-value">${ms.ipl.bat.coverage_50}%</div><div class="mm-sub">target ~50%</div></div>
+          <div class="model-metric amber"><div class="mm-label">Features</div><div class="mm-value">${ms.ipl.bat.n_features}</div><div class="mm-sub">input columns</div></div>
+        </div>
+        <div class="fi-list" id="fi-ipl-bat">${fiRows(ms.ipl.bat.importances, '')}</div>
+      </div>
+    </div>
+
+    <!-- IPL Bowling -->
+    <div class="model-section">
+      <div class="model-section-title"><div class="dot" style="background:var(--red)"></div>IPL Bowling Model</div>
+      <div class="model-section-body">
+        <div class="model-metrics-row" style="margin-bottom:18px">
+          <div class="model-metric"><div class="mm-label">MAE</div><div class="mm-value">${ms.ipl.bowl.mae}</div><div class="mm-sub">wickets (median)</div></div>
+          <div class="model-metric green"><div class="mm-label">50% Coverage</div><div class="mm-value">${ms.ipl.bowl.coverage_50}%</div><div class="mm-sub">over-covers (discrete target)</div></div>
+          <div class="model-metric amber"><div class="mm-label">Features</div><div class="mm-value">${ms.ipl.bowl.n_features}</div><div class="mm-sub">input columns</div></div>
+        </div>
+        <div class="fi-list">${fiRows(ms.ipl.bowl.importances, 'bowl')}</div>
+      </div>
+    </div>
+
+    <!-- T20I Batting -->
+    <div class="model-section">
+      <div class="model-section-title"><div class="dot" style="background:var(--purple)"></div>T20I Batting Model</div>
+      <div class="model-section-body">
+        <div class="model-metrics-row" style="margin-bottom:18px">
+          <div class="model-metric"><div class="mm-label">MAE</div><div class="mm-value">${ms.t20i.bat.mae}</div><div class="mm-sub">runs (median)</div></div>
+          <div class="model-metric green"><div class="mm-label">50% Coverage</div><div class="mm-value">${ms.t20i.bat.coverage_50}%</div><div class="mm-sub">target ~50%</div></div>
+          <div class="model-metric amber"><div class="mm-label">Features</div><div class="mm-value">${ms.t20i.bat.n_features}</div><div class="mm-sub">input columns</div></div>
+        </div>
+        <div class="fi-list">${fiRows(ms.t20i.bat.importances, '')}</div>
+      </div>
+    </div>
+
+    <!-- T20I Bowling -->
+    <div class="model-section">
+      <div class="model-section-title"><div class="dot" style="background:var(--amber)"></div>T20I Bowling Model</div>
+      <div class="model-section-body">
+        <div class="model-metrics-row" style="margin-bottom:18px">
+          <div class="model-metric"><div class="mm-label">MAE</div><div class="mm-value">${ms.t20i.bowl.mae}</div><div class="mm-sub">wickets (median)</div></div>
+          <div class="model-metric green"><div class="mm-label">50% Coverage</div><div class="mm-value">${ms.t20i.bowl.coverage_50}%</div><div class="mm-sub">over-covers (discrete target)</div></div>
+          <div class="model-metric amber"><div class="mm-label">Features</div><div class="mm-value">${ms.t20i.bowl.n_features}</div><div class="mm-sub">input columns</div></div>
+        </div>
+        <div class="fi-list">${fiRows(ms.t20i.bowl.importances, 'bowl')}</div>
+      </div>
+    </div>
+
+    <!-- Feature explanations -->
+    <div class="model-section">
+      <div class="model-section-title"><div class="dot" style="background:var(--green)"></div>Contextual Feature Explanations</div>
+      <div class="model-section-body">
+        <div class="feat-exp-grid">${expCards}</div>
+      </div>
+    </div>`;
+
+  // Animate feature importance bars after paint
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.fi-fill[data-target]').forEach(bar => {
+      bar.style.width = bar.dataset.target + '%';
+    });
+  });
 }
