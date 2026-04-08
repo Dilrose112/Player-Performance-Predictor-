@@ -1579,3 +1579,196 @@ button { cursor: pointer; }
   .overview-filterbar { padding: 10px 14px; }
   .rivalry-list, .overview-grid { height: auto; }
 }
+
+/* ══════════════════════════════════════════════════════
+   SYNC — button, badge, status
+   ══════════════════════════════════════════════════════ */
+
+.sync-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 10px;
+}
+.sync-badge {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--ink3);
+  letter-spacing: .5px;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sync-btn {
+  background: var(--surface3);
+  border: 1px solid var(--border);
+  color: var(--ink2);
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 4px 10px;
+  border-radius: var(--radius);
+  transition: background .15s, color .15s, border-color .15s;
+  white-space: nowrap;
+}
+.sync-btn:hover { background: var(--surface2); color: var(--ink); border-color: var(--blue); }
+.sync-btn:disabled { opacity: .45; cursor: not-allowed; }
+
+/* ══════════════════════════════════════════════════════
+   MATCH LIST — result row for completed matches
+   ══════════════════════════════════════════════════════ */
+
+.mi-badge.past { background: var(--surface3); color: var(--ink3); border: 1px solid var(--border); }
+
+.mi-result {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--border);
+}
+.mi-result-summary {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink2);
+  line-height: 1.4;
+}
+.mi-result-winner {
+  color: var(--green);
+  font-weight: 500;
+}
+.mi-scores {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 4px;
+}
+.mi-score {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--ink3);
+  letter-spacing: .3px;
+}
+
+/* ══════════════════════════════════════════════════════
+   RESULT BANNER — detail panel for completed matches
+   ══════════════════════════════════════════════════════ */
+
+.result-banner {
+  background: linear-gradient(135deg, rgba(63,185,80,.07), rgba(63,185,80,.03));
+  border: 1px solid rgba(63,185,80,.22);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+  margin: 0 0 16px;
+}
+.result-banner.no-result {
+  background: var(--surface2);
+  border-color: var(--border);
+}
+.rb-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 6px;
+}
+.result-banner.no-result .rb-label { color: var(--ink3); }
+.rb-summary {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+.rb-winner {
+  color: var(--green);
+}
+.rb-scores {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.rb-score-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.rb-team {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--ink3);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.rb-score {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: .5px;
+}
+.rb-top-performers {
+  border-top: 1px solid rgba(63,185,80,.15);
+  padding-top: 12px;
+}
+.rb-tp-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 8px;
+}
+.rb-tp-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 6px;
+}
+.rb-tp-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--surface3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 5px 10px;
+}
+.rb-tp-name {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--ink2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 110px;
+}
+.rb-tp-stat {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  margin-left: 6px;
+}
+.rb-tp-stat.bat  { color: var(--blue); }
+.rb-tp-stat.bowl { color: var(--red);  }
+
+/* ══════════════════════════════════════════════════════
+   COMPLETED MATCH — prediction section label tweak
+   ══════════════════════════════════════════════════════ */
+
+.filter-row .filter-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-right: 6px;
+}
+
+/* Responsive additions */
+@media (max-width: 860px) {
+  .sync-group { display: none; }
+  .rb-tp-list { grid-template-columns: 1fr 1fr; }
+  .rb-scores  { gap: 14px; }
+}

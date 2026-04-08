@@ -1,0 +1,251 @@
+{
+  "ipl": [
+    {
+      "match": 1,
+      "date": "2026-04-05",
+      "format": "ipl",
+      "home": "CSK",
+      "away": "RCBW",
+      "venue": "M Chinnaswamy Stadium",
+      "espn_id": "69d5e465-e2e5-4616-aa22-8d069c2dc0fe",
+      "status": "completed",
+      "squads": {},
+      "result": {
+        "winner": "",
+        "margin": "",
+        "home_score": "Royal Challengers Bengaluru Inning 1",
+        "away_score": "Chennai Super Kings Inning 1",
+        "summary": "Royal Challengers Bengaluru won by 43 runs"
+      }
+    },
+    {
+      "match": 2,
+      "date": "2026-04-05",
+      "format": "ipl",
+      "home": "LSG",
+      "away": "SRH",
+      "venue": "Rajiv Gandhi International Stadium, Hyderabad",
+      "espn_id": "9186c79f-2121-4fc4-bb8d-3c411b417609",
+      "status": "completed",
+      "squads": {},
+      "result": {
+        "winner": "",
+        "margin": "",
+        "home_score": "Sunrisers Hyderabad Inning 1",
+        "away_score": "Lucknow Super Giants Inning 1",
+        "summary": "Lucknow Super Giants won by 5 wkts"
+      }
+    },
+    {
+      "match": 3,
+      "date": "2026-04-06",
+      "format": "ipl",
+      "home": "KKR",
+      "away": "PBKS",
+      "venue": "Eden Gardens",
+      "espn_id": "12b5d808-d9ab-468e-bd25-a2c347f64bdc",
+      "status": "completed",
+      "squads": {},
+      "result": {
+        "winner": "",
+        "margin": "",
+        "home_score": "kolkata knight riders Inning 1",
+        "away_score": "",
+        "summary": "No result (due to rain)"
+      }
+    },
+    {
+      "match": 4,
+      "date": "2026-04-07",
+      "format": "ipl",
+      "home": "MI",
+      "away": "RR",
+      "venue": "Barsapara Cricket Stadium, Guwahati",
+      "espn_id": "3dd82a3e-52e3-409b-bb9c-ef458942a7a2",
+      "status": "completed",
+      "squads": {},
+      "result": {
+        "winner": "",
+        "margin": "",
+        "home_score": "Rajasthan Royals Inning 1",
+        "away_score": "Mumbai Indians Inning 1",
+        "summary": "Rajasthan Royals won by 27 runs  -  11 overs game due to rain"
+      }
+    },
+    {
+      "match": 5,
+      "date": "2026-04-08",
+      "format": "ipl",
+      "home": "DC",
+      "away": "GT",
+      "venue": "Arun Jaitley Stadium, Delhi",
+      "espn_id": "5945bbf4-b6b5-45b6-abac-db03e8a39130",
+      "status": "completed",
+      "squads": {},
+      "result": {
+        "winner": "",
+        "margin": "",
+        "home_score": "Gujarat Titans Inning 1",
+        "away_score": "Delhi Capitals Inning 1",
+        "summary": "Gujarat Titans won by 1 run"
+      }
+    },
+    {
+      "match": 6,
+      "date": "2026-05-14",
+      "format": "ipl",
+      "home": "MI",
+      "away": "PBKS",
+      "venue": "Himachal Pradesh Cricket Association Stadium, Dharamsala",
+      "espn_id": "6666db12-b9cc-49f0-b3af-5628fc8c53fa",
+      "status": "upcoming",
+      "squads": {},
+      "result": null
+    },
+    {
+      "match": 7,
+      "date": "2026-05-15",
+      "format": "ipl",
+      "home": "CSK",
+      "away": "LSG",
+      "venue": "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium, Lucknow",
+      "espn_id": "68746b1f-d4b0-4f0a-a46a-46a1946aae32",
+      "status": "upcoming",
+      "squads": {},
+      "result": null
+    },
+    {
+      "match": 8,
+      "date": "2026-05-16",
+      "format": "ipl",
+      "home": "GT",
+      "away": "KKR",
+      "venue": "Eden Gardens",
+      "espn_id": "166633a2-cecb-4cf3-a984-78dc898b5345",
+      "status": "upcoming",
+      "squads": {},
+      "result": null
+    },
+    {
+      "match": 9,
+      "date": "2026-05-17",
+      "format": "ipl",
+      "home": "DC",
+      "away": "RR",
+      "venue": "Arun Jaitley Stadium, Delhi",
+      "espn_id": "990e89ea-3f6a-4196-ac73-7ad1a5f8c451",
+      "status": "upcoming",
+      "squads": {},
+      "result": null
+    },
+    {
+      "match": 10,
+      "date": "2026-05-17",
+      "format": "ipl",
+      "home": "PBKS",
+      "away": "RCBW",
+      "venue": "Himachal Pradesh Cricket Association Stadium, Dharamsala",
+      "espn_id": "288e3406-3692-400a-bc22-fb8cfa0db2ca",
+      "status": "upcoming",
+      "squads": {},
+      "result": null
+    },
+    {
+      "match": 11,
+      "date": "2026-05-18",
+      "format": "ipl",
+      "home": "CSK",
+      "away": "SRH",
+      "venue": "MA Chidambaram Stadium, Chennai",
+      "espn_id": "8416c2a9-4a74-4ac2-a6ae-5ad2538cbc56",
+      "status": "upcoming",
+      "squads": {},
+      "result": null
+    },
+    {
+      "match": 12,
+      "date": "2026-05-19",
+      "format": "ipl",
+      "home": "LSG",
+      "away": "RR",
+      "venue": "Sawai Mansingh Stadium",
+      "espn_id": "3b225f44-ddf2-41d4-8079-7a3f81876e35",
+      "status": "upcoming",
+      "squads": {},
+      "result": null
+    },
+    {
+      "match": 13,
+      "date": "2026-05-20",
+      "format": "ipl",
+      "home": "KKR",
+      "away": "MI",
+      "venue": "Eden Gardens",
+      "espn_id": "5b1d59f9-51fd-449d-8cf1-9fc15ef15675",
+      "status": "upcoming",
+      "squads": {},
+      "result": null
+    },
+    {
+      "match": 14,
+      "date": "2026-05-21",
+      "format": "ipl",
+      "home": "CSK",
+      "away": "GT",
+      "venue": "MA Chidambaram Stadium, Chennai",
+      "espn_id": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
+      "status": "upcoming",
+      "squads": {},
+      "result": null
+    },
+    {
+      "match": 15,
+      "date": "2026-05-22",
+      "format": "ipl",
+      "home": "RCBW",
+      "away": "SRH",
+      "venue": "Rajiv Gandhi International Stadium, Hyderabad",
+      "espn_id": "bf23431b-ba1c-4147-94d9-b8d361a3ce9e",
+      "status": "upcoming",
+      "squads": {},
+      "result": null
+    },
+    {
+      "match": 16,
+      "date": "2026-05-23",
+      "format": "ipl",
+      "home": "LSG",
+      "away": "PBKS",
+      "venue": "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium, Lucknow",
+      "espn_id": "7134216b-553c-4099-82a8-ee48bd9c46f3",
+      "status": "upcoming",
+      "squads": {},
+      "result": null
+    },
+    {
+      "match": 17,
+      "date": "2026-05-24",
+      "format": "ipl",
+      "home": "DC",
+      "away": "KKR",
+      "venue": "Eden Gardens",
+      "espn_id": "8f61d649-f53b-4e79-9bfb-661cfe69be3b",
+      "status": "upcoming",
+      "squads": {},
+      "result": null
+    },
+    {
+      "match": 18,
+      "date": "2026-05-24",
+      "format": "ipl",
+      "home": "MI",
+      "away": "RR",
+      "venue": "Wankhede Stadium",
+      "espn_id": "c0d94cec-8a67-4414-80af-81e7d4a9ee9a",
+      "status": "upcoming",
+      "squads": {},
+      "result": null
+    }
+  ],
+  "t20i": []
+}

@@ -46,10 +46,16 @@ const state = {
   cache:        {},
 };
 
-const TODAY = '2026-04-05';
+const TODAY = new Date().toISOString().slice(0, 10);
+
+// ── SYNC STATE ────────────────────────────────────────────────────────────────
+const syncState = { syncing: false };
 
 // ── BOOT ──────────────────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', loadSchedule);
+document.addEventListener('DOMContentLoaded', () => {
+  loadSchedule();
+  loadSyncStatus();
+});
 
 // ── SCHEDULE ──────────────────────────────────────────────────────────────────
 
@@ -106,21 +112,39 @@ function renderMatchList(query = '') {
   }
 
   panel.innerHTML = matches.map((m, idx) => {
-    const isToday = m.date === TODAY;
-    const isPast  = m.date <  TODAY;
-    const badge   = isToday ? 'today' : isPast ? 'past' : 'upcoming';
-    const label   = isToday ? 'TODAY' : isPast ? 'DONE' : 'UPCOMING';
-    const active  = state.activeMatch?.match === m.match &&
-                    state.activeMatch?.format === m.format ? 'active' : '';
-    const dateStr = new Date(m.date).toLocaleDateString('en-IN',
-                    { day: 'numeric', month: 'short' });
+    // Status comes from the sync module: 'completed' | 'live' | 'upcoming'
+    // Fall back to date-based heuristic if status not set
+    const status   = m.status || (m.date < TODAY ? 'completed' : m.date === TODAY ? 'live' : 'upcoming');
+    const isLive   = status === 'live';
+    const isDone   = status === 'completed';
+    const badge    = isLive ? 'today' : isDone ? 'past' : 'upcoming';
+    const label    = isLive ? 'LIVE'  : isDone ? 'FT'   : 'UPCOMING';
+    const active   = state.activeMatch?.match === m.match &&
+                     state.activeMatch?.format === m.format ? 'active' : '';
+    const dateStr  = new Date(m.date).toLocaleDateString('en-IN',
+                     { day: 'numeric', month: 'short' });
 
-    // Show cached run totals if this match was already loaded
-    const mKey   = matchKey(m);
-    const totals = buildCachedTotals(mKey, m);
-    const totalsHTML = totals
-      ? `<div class="mi-totals">${totals}</div>`
-      : '';
+    // Result row for completed matches (from sync)
+    let bottomHTML = '';
+    if (isDone && m.result) {
+      const r = m.result;
+      const winnerShort = r.winner ? `<span class="mi-result-winner">${r.winner}</span> won` : 'Result';
+      const margin = r.margin ? ` by ${r.margin}` : '';
+      bottomHTML = `
+        <div class="mi-result">
+          <div class="mi-result-summary">${winnerShort}${margin}</div>
+          ${r.home_score || r.away_score ? `
+          <div class="mi-scores">
+            ${r.home_score ? `<span class="mi-score">${m.home} ${r.home_score}</span>` : ''}
+            ${r.away_score ? `<span class="mi-score">${m.away} ${r.away_score}</span>` : ''}
+          </div>` : ''}
+        </div>`;
+    } else if (!isDone) {
+      // Show cached prediction totals for upcoming/live matches
+      const mKey   = matchKey(m);
+      const totals = buildCachedTotals(mKey, m);
+      if (totals) bottomHTML = `<div class="mi-totals">${totals}</div>`;
+    }
 
     return `<div class="match-item ${active}" onclick="selectMatch(${idx})" data-idx="${idx}">
       <div class="mi-header">
@@ -130,7 +154,7 @@ function renderMatchList(query = '') {
       <div class="mi-teams">${m.home}<span class="mi-vs">vs</span>${m.away}</div>
       <div class="mi-venue">${m.venue}</div>
       <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-top:2px">${dateStr}</div>
-      ${totalsHTML}
+      ${bottomHTML}
     </div>`;
   }).join('');
 }
@@ -178,30 +202,50 @@ function selectMatch(idx) {
 
 function renderMatchDetail(match) {
   const panel = document.getElementById('match-detail');
-
-  // Reset per-match mutable flags
   ctxChipsSet = false;
 
-  panel.innerHTML = `
-    ${matchHeaderHTML(match)}
-    <div class="filter-row">
-      <span class="filter-label">Show</span>
-      <button class="filter-pill active" onclick="setRoleFilter('all', this)">All</button>
-      <button class="filter-pill" onclick="setRoleFilter('bat', this)">Batters</button>
-      <button class="filter-pill bowl-active" onclick="setRoleFilter('bowl', this)"
-              style="--active-bg:var(--red-d);--active-border:var(--red);--active-color:var(--red)">
-        Bowlers</button>
-    </div>
-    <div class="projected-row" id="proj-row">
-      ${projCardHTML(match.home)}
-      ${projCardHTML(match.away)}
-    </div>
-    <div id="teams-container">
-      ${teamSectionHTML(match, match.home, match.teams[match.home])}
-      ${teamSectionHTML(match, match.away, match.teams[match.away])}
-    </div>`;
+  const status    = match.status || (match.date < TODAY ? 'completed' : 'upcoming');
+  const isCompleted = status === 'completed';
 
-  // Stagger-reveal all player rows
+  if (isCompleted) {
+    // ── COMPLETED: show result + top performers + predictions as context ──
+    panel.innerHTML = `
+      ${matchHeaderHTML(match)}
+      ${matchResultBannerHTML(match)}
+      <div class="filter-row">
+        <span class="filter-label">Pre-match predictions</span>
+        <button class="filter-pill active" onclick="setRoleFilter('all', this)">All</button>
+        <button class="filter-pill" onclick="setRoleFilter('bat', this)">Batters</button>
+        <button class="filter-pill bowl-active" onclick="setRoleFilter('bowl', this)"
+                style="--active-bg:var(--red-d);--active-border:var(--red);--active-color:var(--red)">
+          Bowlers</button>
+      </div>
+      <div id="teams-container">
+        ${teamSectionHTML(match, match.home, match.teams[match.home] || {bat:[],bowl:[]})}
+        ${teamSectionHTML(match, match.away, match.teams[match.away] || {bat:[],bowl:[]})}
+      </div>`;
+  } else {
+    // ── UPCOMING / LIVE: show projected totals + per-player predictions ──
+    panel.innerHTML = `
+      ${matchHeaderHTML(match)}
+      <div class="filter-row">
+        <span class="filter-label">Show</span>
+        <button class="filter-pill active" onclick="setRoleFilter('all', this)">All</button>
+        <button class="filter-pill" onclick="setRoleFilter('bat', this)">Batters</button>
+        <button class="filter-pill bowl-active" onclick="setRoleFilter('bowl', this)"
+                style="--active-bg:var(--red-d);--active-border:var(--red);--active-color:var(--red)">
+          Bowlers</button>
+      </div>
+      <div class="projected-row" id="proj-row">
+        ${projCardHTML(match.home)}
+        ${projCardHTML(match.away)}
+      </div>
+      <div id="teams-container">
+        ${teamSectionHTML(match, match.home, match.teams[match.home] || {bat:[],bowl:[]})}
+        ${teamSectionHTML(match, match.away, match.teams[match.away] || {bat:[],bowl:[]})}
+      </div>`;
+  }
+
   requestAnimationFrame(() => {
     document.querySelectorAll('.player-row').forEach((el, i) => {
       setTimeout(() => el.classList.add('visible'), i * 30);
@@ -255,6 +299,50 @@ function matchHeaderHTML(match) {
       <span class="ctx-chip loading dew-low">💧 loading…</span>
       <span class="ctx-chip loading chase-no">🏃 loading…</span>
     </div>
+  </div>`;
+}
+
+// ── RESULT BANNER (completed matches) ─────────────────────────────────────────
+
+function matchResultBannerHTML(match) {
+  const r = match.result;
+  if (!r) {
+    return `<div class="result-banner no-result">
+      <div class="rb-label">RESULT</div>
+      <div class="rb-summary">Result data not yet synced — run <code>python 07_sync_schedule.py</code> or POST /api/sync</div>
+    </div>`;
+  }
+
+  const winnerLine = r.winner
+    ? `<span class="rb-winner">${r.winner}</span> won${r.margin ? ` by ${r.margin}` : ''}`
+    : (r.summary || 'Match completed');
+
+  const scoresHTML = (r.home_score || r.away_score) ? `
+    <div class="rb-scores">
+      ${r.home_score ? `<div class="rb-score-item"><span class="rb-team">${match.home}</span><span class="rb-score">${r.home_score}</span></div>` : ''}
+      ${r.away_score ? `<div class="rb-score-item"><span class="rb-team">${match.away}</span><span class="rb-score">${r.away_score}</span></div>` : ''}
+    </div>` : '';
+
+  const topHTML = r.top_performers && r.top_performers.length ? `
+    <div class="rb-top-performers">
+      <div class="rb-tp-label">Top performers</div>
+      <div class="rb-tp-list">
+        ${r.top_performers.slice(0, 6).map(p => `
+          <div class="rb-tp-row">
+            <span class="rb-tp-name">${p.name}</span>
+            ${p.role === 'BAT'
+              ? `<span class="rb-tp-stat bat">${p.runs} (${p.balls})</span>`
+              : `<span class="rb-tp-stat bowl">${p.wickets}/${p.runs}</span>`}
+          </div>`).join('')}
+      </div>
+    </div>` : '';
+
+  return `
+  <div class="result-banner">
+    <div class="rb-label">FULL TIME</div>
+    <div class="rb-summary">${winnerLine}</div>
+    ${scoresHTML}
+    ${topHTML}
   </div>`;
 }
 
@@ -1273,4 +1361,74 @@ function renderModelSummary(ms) {
       bar.style.width = bar.dataset.target + '%';
     });
   });
+}
+
+// ── SYNC ──────────────────────────────────────────────────────────────────────
+
+async function loadSyncStatus() {
+  try {
+    const res  = await fetch('/api/sync/status');
+    if (!res.ok) return;
+    const data = await res.json();
+    renderSyncBadge(data);
+  } catch { /* sync endpoint optional */ }
+}
+
+function renderSyncBadge(data) {
+  const el = document.getElementById('sync-badge');
+  if (!el) return;
+  if (!data.cached) {
+    el.textContent = 'Not synced';
+    el.title = 'Run python 07_sync_schedule.py to sync';
+    return;
+  }
+  const ipl  = data.ipl  || {};
+  const t20i = data.t20i || {};
+  const done = (ipl.completed || 0) + (t20i.completed || 0);
+  const up   = (ipl.upcoming  || 0) + (t20i.upcoming  || 0);
+  el.textContent = `${data.age_human} · ${done} done · ${up} upcoming`;
+  el.title = `Last synced ${data.age_human}`;
+}
+
+async function triggerSync() {
+  if (syncState.syncing) return;
+  syncState.syncing = true;
+
+  const btn = document.getElementById('sync-btn');
+  if (btn) { btn.disabled = true; btn.textContent = '⟳ Syncing…'; }
+  showToast('Sync started — schedule will refresh shortly…');
+
+  try {
+    const res = await fetch('/api/sync', { method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ enrich: false }) });
+    const data = await res.json();
+    if (data.status === 'started') {
+      // Poll for completion: check sync/status every 3s for up to 30s
+      let attempts = 0;
+      const poll = setInterval(async () => {
+        attempts++;
+        const s = await fetch('/api/sync/status').then(r => r.json()).catch(() => null);
+        if (s && s.age_seconds < 15) {
+          clearInterval(poll);
+          syncState.syncing = false;
+          if (btn) { btn.disabled = false; btn.textContent = '⟳ Sync'; }
+          renderSyncBadge(s);
+          // Reload schedule to pick up new data
+          await loadSchedule();
+          showToast('Schedule updated ✓');
+        }
+        if (attempts >= 10) {
+          clearInterval(poll);
+          syncState.syncing = false;
+          if (btn) { btn.disabled = false; btn.textContent = '⟳ Sync'; }
+          showToast('Sync running in background — reload to see updates');
+        }
+      }, 3000);
+    }
+  } catch (err) {
+    syncState.syncing = false;
+    if (btn) { btn.disabled = false; btn.textContent = '⟳ Sync'; }
+    showToast('Sync unavailable — is Flask running?');
+  }
 }
