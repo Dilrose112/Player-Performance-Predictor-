@@ -204,28 +204,48 @@ function renderMatchDetail(match) {
   const panel = document.getElementById('match-detail');
   ctxChipsSet = false;
 
-  const status    = match.status || (match.date < TODAY ? 'completed' : 'upcoming');
+  const status      = match.status || (match.date < TODAY ? 'completed' : 'upcoming');
   const isCompleted = status === 'completed';
+  const hasActuals  = isCompleted && match.result?.player_scores &&
+                      Object.keys(match.result.player_scores).length > 0;
 
   if (isCompleted) {
-    // ── COMPLETED: show result + top performers + predictions as context ──
+    // ── COMPLETED: result banner + predicted vs actual comparison ──
     panel.innerHTML = `
       ${matchHeaderHTML(match)}
       ${matchResultBannerHTML(match)}
       <div class="filter-row">
-        <span class="filter-label">Pre-match predictions</span>
+        <span class="filter-label">${hasActuals ? 'Predicted vs Actual' : 'Pre-match predictions'}</span>
         <button class="filter-pill active" onclick="setRoleFilter('all', this)">All</button>
         <button class="filter-pill" onclick="setRoleFilter('bat', this)">Batters</button>
         <button class="filter-pill bowl-active" onclick="setRoleFilter('bowl', this)"
                 style="--active-bg:var(--red-d);--active-border:var(--red);--active-color:var(--red)">
           Bowlers</button>
       </div>
+      ${hasActuals
+        ? `<div class="cmp-summary-row" id="cmp-summary">
+             <div class="spinner" style="width:12px;height:12px;border-width:1.5px"></div>
+             <span style="color:var(--ink3);font-size:11px">Loading comparison…</span>
+           </div>`
+        : ''}
       <div id="teams-container">
         ${teamSectionHTML(match, match.home, match.teams[match.home] || {bat:[],bowl:[]})}
         ${teamSectionHTML(match, match.away, match.teams[match.away] || {bat:[],bowl:[]})}
       </div>`;
+
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.player-row').forEach((el, i) =>
+        setTimeout(() => el.classList.add('visible'), i * 30));
+    });
+
+    if (hasActuals) {
+      loadComparison(match);
+    } else {
+      loadAllPredictions(match);
+    }
+
   } else {
-    // ── UPCOMING / LIVE: show projected totals + per-player predictions ──
+    // ── UPCOMING / LIVE: projected totals + per-player predictions ──
     panel.innerHTML = `
       ${matchHeaderHTML(match)}
       <div class="filter-row">
@@ -244,15 +264,153 @@ function renderMatchDetail(match) {
         ${teamSectionHTML(match, match.home, match.teams[match.home] || {bat:[],bowl:[]})}
         ${teamSectionHTML(match, match.away, match.teams[match.away] || {bat:[],bowl:[]})}
       </div>`;
+
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.player-row').forEach((el, i) =>
+        setTimeout(() => el.classList.add('visible'), i * 30));
+    });
+
+    loadAllPredictions(match);
+  }
+}
+
+// ── PREDICTED VS ACTUAL COMPARISON ────────────────────────────────────────────
+
+async function loadComparison(match) {
+  const callId = Symbol(`cmp-${match.format}-${match.match}`);
+  state.pendingCalls.add(callId);
+
+  try {
+    const res = await fetch('/api/match_comparison', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({
+        format:        match.format,
+        home:          match.home,
+        away:          match.away,
+        venue:         match.venue,
+        date:          match.date,
+        player_scores: match.result.player_scores || {},
+        squads:        match.teams || {},
+      }),
+    });
+    if (!state.pendingCalls.has(callId)) return;
+
+    const data = await safeJson(res, '/api/match_comparison');
+    if (!state.pendingCalls.has(callId)) return;
+
+    // Render summary badge
+    const sumEl = document.getElementById('cmp-summary');
+    if (sumEl && data.hit_rate !== null) {
+      const hitClass = data.hit_rate >= 60 ? 'good' : data.hit_rate >= 40 ? 'ok' : 'low';
+      sumEl.innerHTML = `
+        <div class="cmp-accuracy-badge ${hitClass}">
+          <span class="cab-pct">${data.hit_rate}%</span>
+          <span class="cab-label">prediction accuracy</span>
+          <span class="cab-sub">${data.n_actual} of ${data.n_total} players had actual data</span>
+        </div>`;
+    }
+
+    // Render per-player rows
+    for (const [team, rows] of Object.entries(data.teams || {})) {
+      for (const row of rows) {
+        renderComparisonRow(row, match);
+      }
+    }
+
+    // Update context chips from first row's data (reuse existing mechanism)
+    updateContextChips({ pitch: 'balanced', dew: 0.5, chasing: false });
+
+  } catch (err) {
+    if (!state.pendingCalls.has(callId)) return;
+    console.warn('Comparison failed:', err.message);
+    // Fall back to regular predictions
+    loadAllPredictions(match);
+  }
+}
+
+function renderComparisonRow(row, match) {
+  const pid    = playerDomId(row.name, match);
+  const isBat  = row.role === 'BAT';
+  const unit   = isBat ? 'runs' : 'wkts';
+  const maxV   = isBat ? 80 : 4;
+
+  const lo   = row.pred_low;
+  const md   = row.pred_mid;
+  const hi   = row.pred_high;
+  const actual = row.actual;
+
+  const loFr = Math.min(lo / maxV * 100, 100).toFixed(1);
+  const hiFr = Math.min(hi / maxV * 100, 100).toFixed(1);
+  const wFr  = Math.max(0, hiFr - loFr).toFixed(1);
+
+  // Confidence
+  const conf   = computeConfidence(lo, hi, md, row.career_avg, isBat ? 'bat' : 'bowl');
+  const subEl  = document.getElementById(`sub-${pid}`);
+  if (subEl) {
+    const avgLabel = isBat ? `avg ${row.career_avg}` : `avg ${row.career_avg} wkt`;
+    subEl.innerHTML = `${avgLabel} · ${row.innings} inn &nbsp;<span class="conf-badge ${conf}">${conf}</span>`;
   }
 
-  requestAnimationFrame(() => {
-    document.querySelectorAll('.player-row').forEach((el, i) => {
-      setTimeout(() => el.classList.add('visible'), i * 30);
-    });
-  });
+  // Accumulate bat totals for upcoming (no-op for completed but harmless)
+  if (isBat && actual == null) accumulateBatTotal(match.home, lo, md, hi);
 
-  loadAllPredictions(match);
+  updateContextChips({ pitch: 'balanced', dew: 0.5, chasing: false });
+
+  const predEl = document.getElementById(`pred-${pid}`);
+  if (!predEl) return;
+
+  if (actual !== null && actual !== undefined) {
+    // ── COMPARISON VIEW ──
+    const deltaVal  = row.delta;
+    const deltaSign = deltaVal >= 0 ? '+' : '';
+    const deltaClass = row.hit ? 'delta-hit' : (deltaVal > 0 ? 'delta-over' : 'delta-under');
+    const hitLabel   = row.hit ? '✓ in range' : '✗ outside';
+    const hitClass   = row.hit ? 'hit-yes' : 'hit-no';
+
+    // Actual marker position on the bar
+    const actualFr = Math.min(actual / maxV * 100, 100).toFixed(1);
+
+    predEl.innerHTML = `
+      <div class="cmp-row-widget">
+        <div class="cmp-numbers">
+          <div class="cmp-pred-block">
+            <div class="cmp-block-label">PREDICTED</div>
+            <div class="cmp-pred-mid">${md} <span class="cmp-unit">${unit}</span></div>
+            <div class="cmp-range-text">${lo} – ${hi}</div>
+          </div>
+          <div class="cmp-actual-block">
+            <div class="cmp-block-label">ACTUAL</div>
+            <div class="cmp-actual-val ${hitClass}">
+              ${actual}${isBat && row.actual_balls ? `<span class="cmp-balls">(${row.actual_balls}b)</span>` : ''}
+              ${!isBat && row.actual_rc != null ? `<span class="cmp-balls">/${row.actual_rc}</span>` : ''}
+            </div>
+            <div class="cmp-delta ${deltaClass}">${deltaSign}${deltaVal} · <span class="${hitClass}">${hitLabel}</span></div>
+          </div>
+        </div>
+        <div class="cmp-bar-wrap">
+          <div class="cmp-bar-track">
+            <div class="cmp-bar-fill ${isBat ? 'bat' : 'bowl'}"
+                 style="left:${loFr}%;width:${wFr}%"></div>
+            <div class="cmp-actual-marker" style="left:${actualFr}%"
+                 title="Actual: ${actual}"></div>
+          </div>
+        </div>
+      </div>`;
+  } else {
+    // ── PREDICTION ONLY (no actual data for this player) ──
+    const pitchClass = 'pitch-balanced';
+    predEl.innerHTML = `
+      <div class="pred-numbers">
+        <span class="pred-mid">${md}</span>
+        <span class="pred-unit">${unit}</span>
+      </div>
+      <div class="pred-range-bar">
+        <div class="pred-range-fill ${isBat ? 'bat' : 'bowl'}"
+             style="left:${loFr}%;width:${wFr}%"></div>
+      </div>
+      <div class="pred-range-text">${lo} – ${hi}</div>`;
+  }
 }
 
 // ── ROLE FILTER ───────────────────────────────────────────────────────────────

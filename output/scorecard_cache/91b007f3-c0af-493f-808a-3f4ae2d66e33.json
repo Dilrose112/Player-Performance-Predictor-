@@ -1,0 +1,129 @@
+{
+  "winner": "SRH",
+  "margin": "44 runs",
+  "home_score": "286/6 (20)",
+  "away_score": "242/6 (20)",
+  "summary": "Sunrisers Hyderabad won by 44 runs",
+  "player_scores": {
+    "Abhishek Sharma": {
+      "wickets": 0,
+      "runs_conceded": 17,
+      "role": "BOWL"
+    },
+    "Travis Head": {
+      "runs": 67,
+      "balls": 31,
+      "role": "BAT"
+    },
+    "Ishan Kishan": {
+      "runs": 106,
+      "balls": 47,
+      "role": "BAT"
+    },
+    "Nitish Kumar Reddy": {
+      "runs": 30,
+      "balls": 15,
+      "role": "BAT"
+    },
+    "Heinrich Klaasen": {
+      "runs": 34,
+      "balls": 14,
+      "role": "BAT"
+    },
+    "Aniket Verma": {
+      "runs": 7,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Abhinav Manohar": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Pat Cummins": {
+      "wickets": 0,
+      "runs_conceded": 60,
+      "role": "BOWL"
+    },
+    "Fazalhaq Farooqi": {
+      "wickets": 0,
+      "runs_conceded": 49,
+      "role": "BOWL"
+    },
+    "Maheesh Theekshana": {
+      "wickets": 2,
+      "runs_conceded": 52,
+      "role": "BOWL"
+    },
+    "Jofra Archer": {
+      "runs": 1,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Sandeep Sharma": {
+      "wickets": 1,
+      "runs_conceded": 51,
+      "role": "BOWL"
+    },
+    "Nitish Rana": {
+      "runs": 11,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Tushar Deshpande": {
+      "wickets": 3,
+      "runs_conceded": 44,
+      "role": "BOWL"
+    },
+    "Yashasvi Jaiswal": {
+      "runs": 1,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Sanju Samson": {
+      "runs": 66,
+      "balls": 37,
+      "role": "BAT"
+    },
+    "Riyan Parag": {
+      "runs": 4,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Dhruv Jurel": {
+      "runs": 70,
+      "balls": 35,
+      "role": "BAT"
+    },
+    "Shimron Hetmyer": {
+      "runs": 42,
+      "balls": 23,
+      "role": "BAT"
+    },
+    "Shubham Dubey": {
+      "runs": 34,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Mohammed Shami": {
+      "wickets": 1,
+      "runs_conceded": 33,
+      "role": "BOWL"
+    },
+    "Simarjeet Singh": {
+      "wickets": 2,
+      "runs_conceded": 46,
+      "role": "BOWL"
+    },
+    "Adam Zampa": {
+      "wickets": 1,
+      "runs_conceded": 48,
+      "role": "BOWL"
+    },
+    "Harshal Patel": {
+      "wickets": 2,
+      "runs_conceded": 34,
+      "role": "BOWL"
+    }
+  }
+}

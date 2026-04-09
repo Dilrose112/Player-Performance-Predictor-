@@ -1,5 +1,5 @@
 """
-07_app.py
+06_app.py
 ---------
 Flask API + dashboard for the Cricket ML prediction system.
 
@@ -9,14 +9,14 @@ GET  /                    → serve dashboard.html
 GET  /api/schedule        → IPL + T20I match schedule with squad metadata,
                             result data (if completed), and status flags.
                             Reads from output/schedule.json (kept fresh by
-                            06_sync_schedule.py) with seed-list fallback.
+                            07_sync_schedule.py) with seed-list fallback.
 GET  /api/venues          → list of known venues
 GET  /api/players         → searchable player list (bat + bowl, IPL + T20)
 POST /predict             → IPL batter prediction
 POST /predict_bowl        → IPL bowler prediction
 POST /predict_t20_bat     → T20I batter prediction
 POST /predict_t20_bowl    → T20I bowler prediction
-POST /api/sync            → trigger background schedule sync
+POST /api/sync            → trigger background schedule sync from ESPNcricinfo
                             body (optional): { "enrich": true }
 GET  /api/sync/status     → age + match counts of cached schedule.json
 """
@@ -377,8 +377,8 @@ def schedule():
     Each match includes:
       - teams: squad lists with in_profile flags
       - status: 'upcoming' | 'completed' | 'live'
-      - result: { winner, margin, home_score, away_score, top_performers }
-                (only present for completed matches)
+      - result: fetched match result / score summary
+      - actuals: fetched team totals + player actual stats when available
     Data is served from output/schedule.json (synced by 06_sync_schedule.py)
     with a fallback to the hardcoded seed lists in this file.
     """
@@ -399,9 +399,9 @@ def schedule():
     def pair_key(home, away):
         return tuple(sorted((norm_team(home), norm_team(away))))
 
-    # Build lookups from the seed schedules for squad data. The live JSON may
-    # not carry squads and the provider names/dates can drift, so we keep:
-    # exact fixture lookup, team-pair fallback, and a team-roster fallback.
+    # Build lookups from the seed schedules for squad data. The synced JSON may
+    # not carry squads and provider names can drift, so we keep exact, pair,
+    # and per-team fallbacks.
     seed_squads = {}
     seed_squads_by_pair = {}
     team_rosters = {}
@@ -428,6 +428,7 @@ def schedule():
                 {}
             ) or seed_squads_by_pair.get(pair_key(mc.get('home',''), mc.get('away','')), {})
             if not squads:
+                squads = {}
                 for side in (mc.get('home', ''), mc.get('away', '')):
                     roster = team_rosters.get(side)
                     if roster:
@@ -455,7 +456,7 @@ def schedule():
 @app.route('/api/sync', methods=['POST'])
 def api_sync():
     """
-    Trigger a background schedule sync.
+    Trigger a background schedule sync from ESPNcricinfo.
 
     POST /api/sync
     Optional JSON body:  { "enrich": true }   (default true)
@@ -464,10 +465,10 @@ def api_sync():
     background thread; subsequent GET /api/schedule calls will pick up the
     updated output/schedule.json once it completes.
 
-    If 06_sync_schedule.py is not installed, returns 503.
+    If 07_sync_schedule.py is not installed, returns 503.
     """
     if not _SYNC_AVAILABLE:
-        return jsonify({'error': '06_sync_schedule.py not found — sync unavailable'}), 503
+        return jsonify({'error': '07_sync_schedule.py not found — sync unavailable'}), 503
 
     body   = request.get_json(silent=True) or {}
     enrich = body.get('enrich', True)
@@ -525,6 +526,163 @@ def _human_age(seconds: float) -> str:
     if seconds < 3600:  return f"{int(seconds/60)}m ago"
     if seconds < 86400: return f"{int(seconds/3600)}h ago"
     return f"{int(seconds/86400)}d ago"
+
+
+@app.route('/api/match_comparison', methods=['POST'])
+def api_match_comparison():
+    """
+    For a completed match, run the ML predictions for every profiled player
+    and return them side-by-side with the actual scores from the result.
+
+    POST body:
+      {
+        "format":  "ipl",
+        "home":    "RCB",
+        "away":    "SRH",
+        "venue":   "M Chinnaswamy Stadium",
+        "date":    "2026-03-28",
+        "player_scores": {          ← from result.player_scores in schedule.json
+          "V Kohli":   {"runs": 72, "balls": 48, "role": "BAT"},
+          "JJ Bumrah": {"wickets": 3, "runs_conceded": 22, "role": "BOWL"}
+        },
+        "squads": {                 ← optional, for ordering
+          "RCB": {"bat": [...], "bowl": [...]},
+          "SRH": {"bat": [...], "bowl": [...]}
+        }
+      }
+
+    Response:
+      {
+        "RCB": [
+          {
+            "name":       "V Kohli",
+            "role":       "BAT",
+            "pred_low":   18.4,
+            "pred_mid":   31.2,
+            "pred_high":  48.7,
+            "actual":     72,          ← null if not in player_scores
+            "actual_balls": 48,
+            "hit":        true,        ← actual fell within [pred_low, pred_high]
+            "delta":      40.8,        ← actual - pred_mid  (null if no actual)
+            "career_avg": 37.1,
+            "innings":    246
+          }, ...
+        ],
+        "SRH": [...]
+      }
+    """
+    body    = request.get_json(silent=True) or {}
+    fmt     = body.get('format', 'ipl')
+    home    = body.get('home', '')
+    away    = body.get('away', '')
+    venue   = body.get('venue', '')
+    mdate   = body.get('date', '2026-04-01')
+    ps_map  = body.get('player_scores', {})   # actual scores keyed by player name
+    squads  = body.get('squads', {})
+
+    bat_pool  = ipl_bat_p  if fmt == 'ipl' else t20_bat_p
+    bowl_pool = ipl_bowl_p if fmt == 'ipl' else t20_bowl_p
+
+    def _run_bat(player, team):
+        ps = bat_pool.get(player)
+        if not ps:
+            return None
+        fm = _bat_features(ps, venue, team, mdate, fmt)
+        M  = IPL_M if fmt == 'ipl' else T20_M
+        X  = _to_df(fm, M['bat_feats'])
+        lo = max(0.0, float(M['bat'][0.25].predict(X)[0]))
+        md = max(0.0, float(M['bat'][0.50].predict(X)[0]))
+        hi = max(0.0, float(M['bat'][0.75].predict(X)[0]))
+        return round(lo,1), round(md,1), round(hi,1), ps
+
+    def _run_bowl(player, team):
+        ps = bowl_pool.get(player)
+        if not ps:
+            return None
+        fm = _bowl_features(ps, venue, team, mdate, fmt)
+        M  = IPL_M if fmt == 'ipl' else T20_M
+        X  = _to_df(fm, M['bowl_feats'])
+        lo = max(0.0, float(M['bowl'][0.25].predict(X)[0]))
+        md = max(0.0, float(M['bowl'][0.50].predict(X)[0]))
+        hi = max(0.0, float(M['bowl'][0.75].predict(X)[0]))
+        return round(lo,1), round(md,1), round(hi,1), ps
+
+    # Build player lists per team from squads (or fall back to full bat/bowl pools)
+    result_out = {}
+    for team in (home, away):
+        sq      = squads.get(team, {})
+        batters = [p['name'] for p in sq.get('bat', []) if p.get('in_profile', True)]
+        bowlers = [p['name'] for p in sq.get('bowl', []) if p.get('in_profile', True)]
+
+        # If no squad data, scan both pools for any players we have
+        if not batters and not bowlers:
+            batters = list(bat_pool.keys())
+            bowlers = list(bowl_pool.keys())
+
+        rows = []
+
+        for name in batters:
+            r = _run_bat(name, team)
+            if not r:
+                continue
+            lo, md, hi, ps = r
+            actual_data = ps_map.get(name, {})
+            actual      = actual_data.get('runs')
+            actual_b    = actual_data.get('balls')
+            hit         = (actual is not None) and (lo <= actual <= hi)
+            delta       = round(actual - md, 1) if actual is not None else None
+            rows.append({
+                'name':        name,
+                'role':        'BAT',
+                'pred_low':    lo,
+                'pred_mid':    md,
+                'pred_high':   hi,
+                'actual':      actual,
+                'actual_balls': actual_b,
+                'hit':         hit,
+                'delta':       delta,
+                'career_avg':  round(float(ps['career_avg']), 1),
+                'innings':     ps['innings'],
+            })
+
+        for name in bowlers:
+            r = _run_bowl(name, team)
+            if not r:
+                continue
+            lo, md, hi, ps = r
+            actual_data   = ps_map.get(name, {})
+            actual        = actual_data.get('wickets')
+            actual_rc     = actual_data.get('runs_conceded')
+            hit           = (actual is not None) and (lo <= actual <= hi)
+            delta         = round(actual - md, 1) if actual is not None else None
+            rows.append({
+                'name':           name,
+                'role':           'BOWL',
+                'pred_low':       lo,
+                'pred_mid':       md,
+                'pred_high':      hi,
+                'actual':         actual,
+                'actual_rc':      actual_rc,
+                'hit':            hit,
+                'delta':          delta,
+                'career_avg':     round(float(ps['career_wkt_avg']), 2),
+                'innings':        ps['innings'],
+            })
+
+        result_out[team] = rows
+
+    # Summary stats
+    all_rows  = [r for rows in result_out.values() for r in rows]
+    with_data = [r for r in all_rows if r['actual'] is not None]
+    hit_rate  = round(sum(1 for r in with_data if r['hit']) / len(with_data) * 100, 1) \
+                if with_data else None
+
+    return jsonify({
+        'teams':    result_out,
+        'hit_rate': hit_rate,
+        'n_actual': len(with_data),
+        'n_total':  len(all_rows),
+    })
 
 
 @app.route('/api/venues')

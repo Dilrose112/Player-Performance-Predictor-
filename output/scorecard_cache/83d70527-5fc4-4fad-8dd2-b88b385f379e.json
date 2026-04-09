@@ -1,0 +1,124 @@
+{
+  "winner": "PBKS",
+  "margin": "11 runs",
+  "home_score": "243/5 (20)",
+  "away_score": "232/5 (20)",
+  "summary": "Punjab Kings won by 11 runs",
+  "player_scores": {
+    "Priyansh Arya": {
+      "runs": 47,
+      "balls": 23,
+      "role": "BAT"
+    },
+    "Prabhsimran Singh": {
+      "runs": 5,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Shreyas Iyer": {
+      "runs": 97,
+      "balls": 42,
+      "role": "BAT"
+    },
+    "Azmatullah Omarzai": {
+      "wickets": 0,
+      "runs_conceded": 29,
+      "role": "BOWL"
+    },
+    "Glenn Maxwell": {
+      "wickets": 1,
+      "runs_conceded": 26,
+      "role": "BOWL"
+    },
+    "Marcus Stoinis": {
+      "wickets": 0,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "Shashank Singh": {
+      "runs": 44,
+      "balls": 16,
+      "role": "BAT"
+    },
+    "Mohammed Siraj": {
+      "wickets": 0,
+      "runs_conceded": 54,
+      "role": "BOWL"
+    },
+    "Kagiso Rabada": {
+      "wickets": 1,
+      "runs_conceded": 41,
+      "role": "BOWL"
+    },
+    "Arshad Khan": {
+      "runs": 1,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Rashid Khan": {
+      "wickets": 1,
+      "runs_conceded": 48,
+      "role": "BOWL"
+    },
+    "Prasidh Krishna": {
+      "wickets": 0,
+      "runs_conceded": 41,
+      "role": "BOWL"
+    },
+    "Ravisrinivasan Sai Kishore": {
+      "wickets": 3,
+      "runs_conceded": 30,
+      "role": "BOWL"
+    },
+    "Sai Sudharsan": {
+      "runs": 74,
+      "balls": 41,
+      "role": "BAT"
+    },
+    "Shubman Gill": {
+      "runs": 33,
+      "balls": 14,
+      "role": "BAT"
+    },
+    "Jos Buttler": {
+      "runs": 54,
+      "balls": 33,
+      "role": "BAT"
+    },
+    "Sherfane Rutherford": {
+      "runs": 46,
+      "balls": 28,
+      "role": "BAT"
+    },
+    "Rahul Tewatia": {
+      "runs": 6,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Shahrukh Khan": {
+      "runs": 6,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Arshdeep Singh": {
+      "wickets": 2,
+      "runs_conceded": 36,
+      "role": "BOWL"
+    },
+    "Marco Jansen": {
+      "wickets": 1,
+      "runs_conceded": 44,
+      "role": "BOWL"
+    },
+    "Yuzvendra Chahal": {
+      "wickets": 0,
+      "runs_conceded": 34,
+      "role": "BOWL"
+    },
+    "Vijaykumar Vyshak": {
+      "wickets": 0,
+      "runs_conceded": 28,
+      "role": "BOWL"
+    }
+  }
+}

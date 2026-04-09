@@ -1,0 +1,119 @@
+{
+  "winner": "RCB",
+  "margin": "7 wkts",
+  "home_score": "174/8 (20)",
+  "away_score": "177/3 (16.2)",
+  "summary": "Royal Challengers Bengaluru won by 7 wkts",
+  "player_scores": {
+    "Quinton de Kock": {
+      "runs": 4,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Sunil Narine": {
+      "wickets": 1,
+      "runs_conceded": 27,
+      "role": "BOWL"
+    },
+    "Ajinkya Rahane": {
+      "runs": 56,
+      "balls": 31,
+      "role": "BAT"
+    },
+    "Venkatesh Iyer": {
+      "runs": 6,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "Angkrish Raghuvanshi": {
+      "runs": 30,
+      "balls": 22,
+      "role": "BAT"
+    },
+    "Rinku Singh": {
+      "runs": 12,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Andre Russell": {
+      "runs": 4,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Ramandeep Singh ": {
+      "runs": 6,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Harshit Rana": {
+      "wickets": 0,
+      "runs_conceded": 32,
+      "role": "BOWL"
+    },
+    "Spencer Johnson": {
+      "wickets": 0,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "Josh Hazlewood": {
+      "wickets": 2,
+      "runs_conceded": 22,
+      "role": "BOWL"
+    },
+    "Yash Dayal": {
+      "wickets": 1,
+      "runs_conceded": 25,
+      "role": "BOWL"
+    },
+    "Rasikh Dar Salam": {
+      "wickets": 1,
+      "runs_conceded": 35,
+      "role": "BOWL"
+    },
+    "Krunal Pandya": {
+      "wickets": 3,
+      "runs_conceded": 29,
+      "role": "BOWL"
+    },
+    "Suyash Sharma": {
+      "wickets": 1,
+      "runs_conceded": 47,
+      "role": "BOWL"
+    },
+    "Liam Livingstone": {
+      "runs": 15,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Philip Salt": {
+      "runs": 56,
+      "balls": 31,
+      "role": "BAT"
+    },
+    "Virat Kohli": {
+      "runs": 59,
+      "balls": 36,
+      "role": "BAT"
+    },
+    "Devdutt Padikkal": {
+      "runs": 10,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Rajat Patidar": {
+      "runs": 34,
+      "balls": 16,
+      "role": "BAT"
+    },
+    "Vaibhav Arora": {
+      "wickets": 1,
+      "runs_conceded": 42,
+      "role": "BOWL"
+    },
+    "Varun Chakaravarthy": {
+      "wickets": 1,
+      "runs_conceded": 43,
+      "role": "BOWL"
+    }
+  }
+}

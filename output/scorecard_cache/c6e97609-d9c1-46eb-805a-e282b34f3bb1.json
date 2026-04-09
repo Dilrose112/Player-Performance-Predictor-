@@ -1,0 +1,129 @@
+{
+  "winner": "DC",
+  "margin": "1 wkt",
+  "home_score": "209/8 (20)",
+  "away_score": "211/9 (19.3)",
+  "summary": "Delhi Capitals won by 1 wkt",
+  "player_scores": {
+    "Aiden Markram": {
+      "runs": 15,
+      "balls": 13,
+      "role": "BAT"
+    },
+    "Mitchell Marsh": {
+      "runs": 72,
+      "balls": 36,
+      "role": "BAT"
+    },
+    "Nicholas Pooran": {
+      "runs": 75,
+      "balls": 30,
+      "role": "BAT"
+    },
+    "Rishabh Pant": {
+      "runs": 0,
+      "balls": 6,
+      "role": "BAT"
+    },
+    "David Miller": {
+      "runs": 27,
+      "balls": 19,
+      "role": "BAT"
+    },
+    "Ayush Badoni": {
+      "runs": 4,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Shardul Thakur": {
+      "wickets": 2,
+      "runs_conceded": 19,
+      "role": "BOWL"
+    },
+    "Shahbaz Ahmed": {
+      "wickets": 0,
+      "runs_conceded": 22,
+      "role": "BOWL"
+    },
+    "Ravi Bishnoi": {
+      "wickets": 2,
+      "runs_conceded": 53,
+      "role": "BOWL"
+    },
+    "Digvesh Singh Rathi": {
+      "wickets": 2,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "Mitchell Starc": {
+      "runs": 2,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Axar Patel": {
+      "runs": 22,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Vipraj Nigam": {
+      "runs": 39,
+      "balls": 15,
+      "role": "BAT"
+    },
+    "Mukesh Kumar": {
+      "wickets": 1,
+      "runs_conceded": 22,
+      "role": "BOWL"
+    },
+    "Kuldeep Yadav": {
+      "runs": 5,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Mohit Sharma": {
+      "runs": 1,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Tristan Stubbs": {
+      "runs": 34,
+      "balls": 22,
+      "role": "BAT"
+    },
+    "Jake Fraser-McGurk": {
+      "runs": 1,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Faf du Plessis": {
+      "runs": 29,
+      "balls": 18,
+      "role": "BAT"
+    },
+    "Abishek Porel": {
+      "runs": 0,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Sameer Rizvi ": {
+      "runs": 4,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Ashutosh Sharma": {
+      "runs": 66,
+      "balls": 31,
+      "role": "BAT"
+    },
+    "Manimaran Siddharth": {
+      "wickets": 2,
+      "runs_conceded": 39,
+      "role": "BOWL"
+    },
+    "Prince Yadav": {
+      "wickets": 0,
+      "runs_conceded": 47,
+      "role": "BOWL"
+    }
+  }
+}
