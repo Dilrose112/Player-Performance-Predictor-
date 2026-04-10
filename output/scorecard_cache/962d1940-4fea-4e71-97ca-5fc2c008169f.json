@@ -1,0 +1,124 @@
+{
+  "winner": "DC",
+  "margin": "6 wkts",
+  "home_score": "141/10 (18.4)",
+  "away_score": "145/4 (17.1)",
+  "summary": "Delhi Capitals won by 6 wkts",
+  "player_scores": {
+    "Mitchell Marsh": {
+      "runs": 35,
+      "balls": 28,
+      "role": "BAT"
+    },
+    "Rishabh Pant": {
+      "runs": 7,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Aiden Markram": {
+      "wickets": 0,
+      "runs_conceded": 13,
+      "role": "BOWL"
+    },
+    "Ayush Badoni": {
+      "runs": 0,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Nicholas Pooran": {
+      "runs": 8,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Abdul Samad": {
+      "wickets": 0,
+      "runs_conceded": 6,
+      "role": "BOWL"
+    },
+    "Mukul Choudhary": {
+      "runs": 14,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Shahbaz Ahmed": {
+      "wickets": 0,
+      "runs_conceded": 16,
+      "role": "BOWL"
+    },
+    "Mohammed Shami": {
+      "wickets": 1,
+      "runs_conceded": 28,
+      "role": "BOWL"
+    },
+    "Anrich Nortje": {
+      "wickets": 0,
+      "runs_conceded": 39,
+      "role": "BOWL"
+    },
+    "Mohsin Khan": {
+      "wickets": 1,
+      "runs_conceded": 19,
+      "role": "BOWL"
+    },
+    "Mukesh Kumar": {
+      "wickets": 0,
+      "runs_conceded": 17,
+      "role": "BOWL"
+    },
+    "Lungi Ngidi": {
+      "wickets": 3,
+      "runs_conceded": 27,
+      "role": "BOWL"
+    },
+    "Axar Patel": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "T Natarajan": {
+      "wickets": 3,
+      "runs_conceded": 29,
+      "role": "BOWL"
+    },
+    "Kuldeep Yadav": {
+      "wickets": 2,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "Vipraj Nigam": {
+      "wickets": 0,
+      "runs_conceded": 8,
+      "role": "BOWL"
+    },
+    "KL Rahul": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Pathum Nissanka": {
+      "runs": 1,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Nitish Rana": {
+      "runs": 15,
+      "balls": 17,
+      "role": "BAT"
+    },
+    "Sameer Rizvi": {
+      "runs": 70,
+      "balls": 47,
+      "role": "BAT"
+    },
+    "Tristan Stubbs": {
+      "runs": 39,
+      "balls": 32,
+      "role": "BAT"
+    },
+    "Prince Yadav": {
+      "wickets": 2,
+      "runs_conceded": 20,
+      "role": "BOWL"
+    }
+  }
+}

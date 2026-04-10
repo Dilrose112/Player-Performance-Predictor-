@@ -1,0 +1,129 @@
+{
+  "winner": "LSG",
+  "margin": "5 wkts",
+  "home_score": "190/9 (20)",
+  "away_score": "193/5 (16.1)",
+  "summary": "Lucknow Super Giants won by 5 wkts",
+  "player_scores": {
+    "Travis Head": {
+      "runs": 47,
+      "balls": 28,
+      "role": "BAT"
+    },
+    "Abhishek Sharma": {
+      "wickets": 0,
+      "runs_conceded": 20,
+      "role": "BOWL"
+    },
+    "Ishan Kishan": {
+      "wickets": 0,
+      "runs_conceded": 4,
+      "role": "BOWL"
+    },
+    "Nitish Kumar Reddy": {
+      "runs": 32,
+      "balls": 28,
+      "role": "BAT"
+    },
+    "Heinrich Klaasen": {
+      "runs": 26,
+      "balls": 17,
+      "role": "BAT"
+    },
+    "Aniket Verma": {
+      "runs": 36,
+      "balls": 13,
+      "role": "BAT"
+    },
+    "Abhinav Manohar": {
+      "runs": 2,
+      "balls": 6,
+      "role": "BAT"
+    },
+    "Pat Cummins": {
+      "wickets": 2,
+      "runs_conceded": 29,
+      "role": "BOWL"
+    },
+    "Harshal Patel": {
+      "wickets": 1,
+      "runs_conceded": 28,
+      "role": "BOWL"
+    },
+    "Mohammed Shami": {
+      "wickets": 1,
+      "runs_conceded": 37,
+      "role": "BOWL"
+    },
+    "Simarjeet Singh": {
+      "wickets": 0,
+      "runs_conceded": 28,
+      "role": "BOWL"
+    },
+    "Shardul Thakur": {
+      "wickets": 4,
+      "runs_conceded": 34,
+      "role": "BOWL"
+    },
+    "Avesh Khan": {
+      "wickets": 1,
+      "runs_conceded": 45,
+      "role": "BOWL"
+    },
+    "Digvesh Singh Rathi": {
+      "wickets": 1,
+      "runs_conceded": 40,
+      "role": "BOWL"
+    },
+    "Ravi Bishnoi": {
+      "wickets": 1,
+      "runs_conceded": 42,
+      "role": "BOWL"
+    },
+    "Prince Yadav": {
+      "wickets": 1,
+      "runs_conceded": 29,
+      "role": "BOWL"
+    },
+    "Mitchell Marsh": {
+      "runs": 52,
+      "balls": 31,
+      "role": "BAT"
+    },
+    "Aiden Markram": {
+      "runs": 1,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Nicholas Pooran": {
+      "runs": 70,
+      "balls": 26,
+      "role": "BAT"
+    },
+    "Rishabh Pant": {
+      "runs": 15,
+      "balls": 15,
+      "role": "BAT"
+    },
+    "Ayush Badoni": {
+      "runs": 6,
+      "balls": 6,
+      "role": "BAT"
+    },
+    "David Miller": {
+      "runs": 13,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "Abdul Samad": {
+      "runs": 22,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Adam Zampa": {
+      "wickets": 1,
+      "runs_conceded": 46,
+      "role": "BOWL"
+    }
+  }
+}

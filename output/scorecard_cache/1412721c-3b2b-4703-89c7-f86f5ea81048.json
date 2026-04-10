@@ -1,0 +1,119 @@
+{
+  "winner": "RR",
+  "margin": "8 wkts",
+  "home_score": "127/10 (19.4)",
+  "away_score": "128/2 (12.1)",
+  "summary": "Rajasthan Royals won by 8 wkts",
+  "player_scores": {
+    "Sanju Samson": {
+      "runs": 6,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "Ruturaj Gaikwad": {
+      "runs": 6,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Ayush Mhatre": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Matthew Short": {
+      "wickets": 0,
+      "runs_conceded": 1,
+      "role": "BOWL"
+    },
+    "Sarfaraz Khan": {
+      "runs": 17,
+      "balls": 12,
+      "role": "BAT"
+    },
+    "Kartik Sharma": {
+      "runs": 18,
+      "balls": 15,
+      "role": "BAT"
+    },
+    "Shivam Dube": {
+      "runs": 6,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Jamie Overton": {
+      "wickets": 0,
+      "runs_conceded": 14,
+      "role": "BOWL"
+    },
+    "Noor Ahmad": {
+      "wickets": 0,
+      "runs_conceded": 24,
+      "role": "BOWL"
+    },
+    "Matt Henry": {
+      "wickets": 0,
+      "runs_conceded": 40,
+      "role": "BOWL"
+    },
+    "Anshul Kamboj": {
+      "wickets": 2,
+      "runs_conceded": 27,
+      "role": "BOWL"
+    },
+    "Jofra Archer": {
+      "wickets": 2,
+      "runs_conceded": 19,
+      "role": "BOWL"
+    },
+    "Nandre Burger": {
+      "wickets": 2,
+      "runs_conceded": 26,
+      "role": "BOWL"
+    },
+    "Brijesh Sharma": {
+      "wickets": 1,
+      "runs_conceded": 17,
+      "role": "BOWL"
+    },
+    "Sandeep Sharma": {
+      "wickets": 1,
+      "runs_conceded": 22,
+      "role": "BOWL"
+    },
+    "Ravi Bishnoi": {
+      "wickets": 1,
+      "runs_conceded": 16,
+      "role": "BOWL"
+    },
+    "Ravindra Jadeja": {
+      "wickets": 2,
+      "runs_conceded": 18,
+      "role": "BOWL"
+    },
+    "Yashasvi Jaiswal": {
+      "runs": 38,
+      "balls": 36,
+      "role": "BAT"
+    },
+    "Vaibhav Sooryavanshi": {
+      "runs": 52,
+      "balls": 17,
+      "role": "BAT"
+    },
+    "Dhruv Jurel": {
+      "runs": 18,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Riyan Parag": {
+      "runs": 14,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Khaleel Ahmed": {
+      "wickets": 0,
+      "runs_conceded": 17,
+      "role": "BOWL"
+    }
+  }
+}

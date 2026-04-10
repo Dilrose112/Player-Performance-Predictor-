@@ -1,0 +1,129 @@
+{
+  "winner": "GT",
+  "margin": "36 runs",
+  "home_score": "196/8 (20)",
+  "away_score": "160/6 (20)",
+  "summary": "Gujarat Titans won by 36 runs",
+  "player_scores": {
+    "Sai Sudharsan": {
+      "runs": 63,
+      "balls": 41,
+      "role": "BAT"
+    },
+    "Shubman Gill": {
+      "runs": 38,
+      "balls": 27,
+      "role": "BAT"
+    },
+    "Jos Buttler": {
+      "runs": 39,
+      "balls": 24,
+      "role": "BAT"
+    },
+    "Shahrukh Khan": {
+      "runs": 9,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "Sherfane Rutherford": {
+      "runs": 18,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Rahul Tewatia": {
+      "runs": 0,
+      "balls": 0,
+      "role": "BAT"
+    },
+    "Rashid Khan": {
+      "wickets": 0,
+      "runs_conceded": 10,
+      "role": "BOWL"
+    },
+    "Kagiso Rabada": {
+      "wickets": 1,
+      "runs_conceded": 42,
+      "role": "BOWL"
+    },
+    "Ravisrinivasan Sai Kishore": {
+      "wickets": 1,
+      "runs_conceded": 37,
+      "role": "BOWL"
+    },
+    "Trent Boult": {
+      "wickets": 1,
+      "runs_conceded": 34,
+      "role": "BOWL"
+    },
+    "Deepak Chahar": {
+      "wickets": 1,
+      "runs_conceded": 39,
+      "role": "BOWL"
+    },
+    "Mujeeb Ur Rahman": {
+      "wickets": 1,
+      "runs_conceded": 28,
+      "role": "BOWL"
+    },
+    "Hardik Pandya": {
+      "runs": 11,
+      "balls": 17,
+      "role": "BAT"
+    },
+    "Mitchell Santner": {
+      "runs": 18,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Satyanarayana Raju": {
+      "wickets": 1,
+      "runs_conceded": 40,
+      "role": "BOWL"
+    },
+    "Rohit Sharma": {
+      "runs": 8,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Ryan Rickelton": {
+      "runs": 6,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Tilak Varma": {
+      "runs": 39,
+      "balls": 36,
+      "role": "BAT"
+    },
+    "Suryakumar Yadav": {
+      "runs": 48,
+      "balls": 28,
+      "role": "BAT"
+    },
+    "Robin Minz": {
+      "runs": 3,
+      "balls": 6,
+      "role": "BAT"
+    },
+    "Naman Dhir": {
+      "runs": 18,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Mohammed Siraj": {
+      "wickets": 2,
+      "runs_conceded": 34,
+      "role": "BOWL"
+    },
+    "Ishant Sharma": {
+      "wickets": 0,
+      "runs_conceded": 17,
+      "role": "BOWL"
+    },
+    "Prasidh Krishna": {
+      "wickets": 2,
+      "runs_conceded": 18,
+      "role": "BOWL"
+    }
+  }
+}

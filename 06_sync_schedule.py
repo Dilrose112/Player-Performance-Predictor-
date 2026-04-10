@@ -59,8 +59,10 @@ META_CACHE_TTL  = 24     # hours before re-fetching series id / T20I list
 SCHED_CACHE_TTL = 6      # hours before load_schedule() considers schedule.json stale
 DEFAULT_SC_LIMIT = 5     # max new scorecard calls per run (CLI: --scorecard-limit)
 
-# Known fallback — updated if search succeeds
-IPL_SERIES_ID   = "d5a498c8-7596-4b93-8ab0-e0efc3345312"
+# Known fallback series IDs for IPL 2026
+# Primary: cricapi.com series ID (try to discover dynamically)
+# Fallback: use /v1/currentMatches to find live IPL matches
+IPL_SERIES_ID   = "d5a498c8-7596-4b93-8ab0-e0efc3345312"  # may be stale, dynamic search preferred
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s  %(message)s")
 log = logging.getLogger(__name__)
@@ -241,41 +243,99 @@ def _infer_status(m: dict) -> str:
 
 def fetch_ipl_series() -> list[dict]:
     """
-    Returns flat match list.  Uses meta cache to avoid repeating the
-    series-search + series_info calls on every run.
+    Returns IPL 2026 match list using a 3-strategy waterfall:
+      1. /v1/series  paginated search for 'IPL 2026' → get series id → /v1/series_info
+      2. /v1/currentMatches → look for live IPL match → extract series_id → /v1/series_info
+      3. /v1/matches (offset 0,25,50) → filter by name containing 'IPL' and date >= 2026
+    Uses meta cache (24h) so this costs 0 calls on warm runs.
     """
     meta = _load_meta_cache()
 
-    # Try to use cached series matches
-    if meta.get("ipl_matches"):
+    # Use cache if present and correctly versioned
+    if meta.get("ipl_matches") and meta.get("ipl_matches_version") == "2026-only":
         log.info("IPL series loaded from meta cache (%d matches)", len(meta["ipl_matches"]))
         return meta["ipl_matches"]
 
-    # Call 1: find series id
-    series_id = IPL_SERIES_ID
-    log.info("Searching for IPL 2026 series id…")
-    data = _api("series", {"search": "IPL 2026"})
-    if data:
+    IPL_2026_START = "2026-01-01"
+    series_id      = None
+
+    # ── Strategy 1: search /v1/series ────────────────────────────────────────
+    log.info("Strategy 1: searching /v1/series for IPL 2026…")
+    for offset in (0, 25, 50):
+        data = _api("series", {"offset": offset})
+        if not data:
+            break
         for s in data.get("data", []):
             name = s.get("name", "").lower()
-            if "ipl" in name and "2026" in name:
-                series_id = s["id"]
-                log.info("Found IPL 2026: %s (%s)", series_id, s["name"])
+            sid  = s.get("id", "")
+            # Match "ipl 2026" or "indian premier league 2026"
+            if sid and (("ipl" in name or "indian premier" in name) and "2026" in name):
+                series_id = sid
+                log.info("Strategy 1 found: %s → %s", s["name"], sid)
                 break
+        if series_id:
+            break
+        if len(data.get("data", [])) < 25:
+            break
 
-    # Call 2: fetch match list
-    log.info("Fetching IPL series_info…")
-    data2 = _api("series_info", {"id": series_id})
-    matches_raw = (data2.get("data") or {}).get("matchList", []) if data2 else []
+    # ── Strategy 2: scan currentMatches for a live IPL game ──────────────────
+    if not series_id:
+        log.info("Strategy 2: scanning /v1/currentMatches for live IPL…")
+        data = _api("currentMatches")
+        if data:
+            for m in data.get("data", []):
+                mname = m.get("name", "").lower()
+                if "ipl" in mname or "indian premier" in mname:
+                    sid = m.get("series_id") or m.get("seriesId", "")
+                    if sid:
+                        series_id = sid
+                        log.info("Strategy 2 found series_id=%s from live match: %s",
+                                 sid, m.get("name"))
+                        break
 
+    # ── Try series_info with whatever ID we have ──────────────────────────────
+    matches_raw = []
+    if series_id:
+        log.info("Fetching series_info for id=%s", series_id)
+        data2 = _api("series_info", {"id": series_id})
+        if data2:
+            matches_raw = (data2.get("data") or {}).get("matchList", [])
+            log.info("series_info returned %d matches", len(matches_raw))
+
+    # ── Strategy 3: scan /v1/matches for IPL 2026 entries ────────────────────
+    if not matches_raw:
+        log.info("Strategy 3: scanning /v1/matches for IPL 2026 entries…")
+        for offset in (0, 25, 50):
+            data = _api("matches", {"offset": offset})
+            if not data:
+                break
+            for m in data.get("data", []):
+                mname = m.get("name", "").lower()
+                mdate = _parse_date(m.get("dateTimeGMT", m.get("date", "")))
+                teams = m.get("teams", [])
+                if len(teams) < 2:
+                    continue
+                # Must be IPL by name AND 2026
+                if ("ipl" in mname or "indian premier" in mname) and mdate >= IPL_2026_START:
+                    matches_raw.append(m)
+            if len(data.get("data", [])) < 25:
+                break
+        log.info("Strategy 3 found %d raw IPL matches", len(matches_raw))
+
+    # ── Build output list filtered to 2026 ───────────────────────────────────
     out = []
+    skipped = 0
     for i, m in enumerate(matches_raw, start=1):
         teams = m.get("teams", [])
         if len(teams) < 2:
             continue
+        mdate = _parse_date(m.get("dateTimeGMT", m.get("date", "")))
+        if mdate < IPL_2026_START:
+            skipped += 1
+            continue
         out.append({
             "match":      i,
-            "date":       _parse_date(m.get("dateTimeGMT", m.get("date", ""))),
+            "date":       mdate,
             "format":     "ipl",
             "home":       _norm_team(teams[0]),
             "away":       _norm_team(teams[1]),
@@ -285,12 +345,16 @@ def fetch_ipl_series() -> list[dict]:
             "result":     None,
         })
 
+    if skipped:
+        log.info("Skipped %d pre-2026 matches", skipped)
+
     if out:
-        meta["ipl_matches"] = out
+        meta["ipl_matches"]         = out
+        meta["ipl_matches_version"] = "2026-only"
         _save_meta_cache(meta)
-        log.info("Cached %d IPL matches in meta_cache.json", len(out))
+        log.info("Cached %d IPL 2026 matches", len(out))
     else:
-        log.warning("series_info returned no matches — schedule stays as seed")
+        log.warning("No IPL 2026 matches found via any strategy — using seed schedule")
 
     return out
 
@@ -302,25 +366,50 @@ def fetch_t20i_upcoming() -> list[dict]:
     meta  = _load_meta_cache()
     today = date.today().isoformat()
 
-    # Use cache if fresh enough (same TTL as meta cache)
-    cached_date = meta.get("t20i_fetched_on", "")
-    if meta.get("t20i_upcoming") and cached_date == today:
-        log.info("T20I upcoming loaded from meta cache (%d)", len(meta["t20i_upcoming"]))
-        return meta["t20i_upcoming"]
+    # IPL franchise codes — bust cache if it contains these
+    _IPL_CODES = {"RCB","CSK","MI","KKR","SRH","RR","GT","PBKS","DC","LSG"}
 
-    # Call 3: one page of matches, filter by type
-    log.info("Fetching upcoming T20I fixtures…")
+    cached = meta.get("t20i_upcoming", [])
+    cache_clean = all(
+        m.get("home","") not in _IPL_CODES and m.get("away","") not in _IPL_CODES
+        for m in cached
+    )
+    cached_date = meta.get("t20i_fetched_on", "")
+
+    if cached and cached_date == today and cache_clean:
+        log.info("T20I upcoming loaded from meta cache (%d)", len(cached))
+        return cached
+
+    if not cache_clean:
+        log.warning("Busting T20I cache — contained IPL franchise teams")
+
+    _FRANCHISE_KW = {
+        "rcb","csk","mumbai indians","kolkata knight","sunrisers","rajasthan royals",
+        "gujarat titans","punjab kings","delhi capitals","lucknow super","royal challengers",
+    }
+
+    def _is_franchise(name: str) -> bool:
+        nl = name.strip().lower()
+        return nl in {c.lower() for c in _IPL_CODES} or any(k in nl for k in _FRANCHISE_KW)
+
+    log.info("Fetching upcoming T20I fixtures (international only)…")
     data = _api("matches", {"offset": 0})
     out  = []
     if data:
         for m in data.get("data", []):
-            if m.get("matchType", "").lower() not in ("t20", "t20i"):
+            # ONLY accept matchType == "t20i" — never accept plain "t20" (catches IPL)
+            if m.get("matchType", "").lower() != "t20i":
                 continue
             mdate = _parse_date(m.get("dateTimeGMT", m.get("date", "")))
             if not mdate or mdate < today:
                 continue
             teams = m.get("teams", [])
             if len(teams) < 2:
+                continue
+            if _is_franchise(teams[0]) or _is_franchise(teams[1]):
+                continue
+            mname = m.get("name", "").lower()
+            if "ipl" in mname or "indian premier" in mname:
                 continue
             out.append({
                 "match":      0,
@@ -338,7 +427,7 @@ def fetch_t20i_upcoming() -> list[dict]:
     meta["t20i_upcoming"]   = out
     meta["t20i_fetched_on"] = today
     _save_meta_cache(meta)
-    log.info("Found %d upcoming T20I fixtures", len(out))
+    log.info("Found %d upcoming international T20I fixtures", len(out))
     return out
 
 # ─────────────────────────────────────────────────────────────────────────────

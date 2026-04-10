@@ -1,0 +1,129 @@
+{
+  "winner": "PBKS",
+  "margin": "5 wkts",
+  "home_score": "209/5 (20)",
+  "away_score": "210/5 (18.4)",
+  "summary": "Punjab Kings won by 5 wkts",
+  "player_scores": {
+    "Sanju Samson": {
+      "runs": 7,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "Ruturaj Gaikwad": {
+      "runs": 28,
+      "balls": 22,
+      "role": "BAT"
+    },
+    "Ayush Mhatre": {
+      "runs": 73,
+      "balls": 43,
+      "role": "BAT"
+    },
+    "Shivam Dube": {
+      "runs": 45,
+      "balls": 27,
+      "role": "BAT"
+    },
+    "Kartik Sharma": {
+      "runs": 1,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Sarfaraz Khan": {
+      "runs": 32,
+      "balls": 12,
+      "role": "BAT"
+    },
+    "Prashant Veer": {
+      "runs": 6,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "Arshdeep Singh": {
+      "wickets": 0,
+      "runs_conceded": 41,
+      "role": "BOWL"
+    },
+    "Xavier Bartlett": {
+      "wickets": 1,
+      "runs_conceded": 48,
+      "role": "BOWL"
+    },
+    "Marco Jansen": {
+      "wickets": 1,
+      "runs_conceded": 43,
+      "role": "BOWL"
+    },
+    "Vijaykumar Vyshak": {
+      "wickets": 2,
+      "runs_conceded": 38,
+      "role": "BOWL"
+    },
+    "Yuzvendra Chahal": {
+      "wickets": 1,
+      "runs_conceded": 21,
+      "role": "BOWL"
+    },
+    "Marcus Stoinis": {
+      "runs": 9,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Priyansh Arya": {
+      "runs": 39,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Prabhsimran Singh": {
+      "runs": 43,
+      "balls": 34,
+      "role": "BAT"
+    },
+    "Cooper Connolly": {
+      "runs": 36,
+      "balls": 22,
+      "role": "BAT"
+    },
+    "Shreyas Iyer": {
+      "runs": 50,
+      "balls": 29,
+      "role": "BAT"
+    },
+    "Nehal Wadhera": {
+      "runs": 10,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Shashank Singh": {
+      "runs": 14,
+      "balls": 6,
+      "role": "BAT"
+    },
+    "Khaleel Ahmed": {
+      "wickets": 0,
+      "runs_conceded": 28,
+      "role": "BOWL"
+    },
+    "Matt Henry": {
+      "wickets": 2,
+      "runs_conceded": 54,
+      "role": "BOWL"
+    },
+    "Anshul Kamboj": {
+      "wickets": 2,
+      "runs_conceded": 43,
+      "role": "BOWL"
+    },
+    "Noor Ahmad": {
+      "wickets": 0,
+      "runs_conceded": 38,
+      "role": "BOWL"
+    },
+    "Rahul Chahar": {
+      "wickets": 0,
+      "runs_conceded": 46,
+      "role": "BOWL"
+    }
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "winner": "MI",
+  "margin": "6 wkts",
+  "home_score": "220/4 (20)",
+  "away_score": "224/4 (19.1)",
+  "summary": "Mumbai Indians won by 6 wkts",
+  "player_scores": {
+    "Ajinkya Rahane": {
+      "runs": 67,
+      "balls": 40,
+      "role": "BAT"
+    },
+    "Finn Allen": {
+      "runs": 37,
+      "balls": 17,
+      "role": "BAT"
+    },
+    "Cameron Green": {
+      "runs": 18,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Angkrish Raghuvanshi": {
+      "runs": 51,
+      "balls": 29,
+      "role": "BAT"
+    },
+    "Rinku Singh": {
+      "runs": 33,
+      "balls": 21,
+      "role": "BAT"
+    },
+    "Ramandeep Singh": {
+      "runs": 4,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Trent Boult": {
+      "wickets": 0,
+      "runs_conceded": 38,
+      "role": "BOWL"
+    },
+    "Hardik Pandya": {
+      "runs": 18,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "AM Ghazanfar": {
+      "wickets": 0,
+      "runs_conceded": 51,
+      "role": "BOWL"
+    },
+    "Jasprit Bumrah": {
+      "wickets": 0,
+      "runs_conceded": 35,
+      "role": "BOWL"
+    },
+    "Shardul Thakur": {
+      "wickets": 3,
+      "runs_conceded": 39,
+      "role": "BOWL"
+    },
+    "Mayank Markande": {
+      "wickets": 0,
+      "runs_conceded": 16,
+      "role": "BOWL"
+    },
+    "Ryan Rickelton": {
+      "runs": 81,
+      "balls": 43,
+      "role": "BAT"
+    },
+    "Rohit Sharma": {
+      "runs": 78,
+      "balls": 38,
+      "role": "BAT"
+    },
+    "Suryakumar Yadav": {
+      "runs": 16,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Tilak Varma": {
+      "runs": 20,
+      "balls": 14,
+      "role": "BAT"
+    },
+    "Naman Dhir": {
+      "runs": 5,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Vaibhav Arora": {
+      "wickets": 1,
+      "runs_conceded": 52,
+      "role": "BOWL"
+    },
+    "Blessing Muzarabani": {
+      "wickets": 0,
+      "runs_conceded": 34,
+      "role": "BOWL"
+    },
+    "Varun Chakaravarthy": {
+      "wickets": 0,
+      "runs_conceded": 48,
+      "role": "BOWL"
+    },
+    "Kartik Tyagi": {
+      "wickets": 1,
+      "runs_conceded": 43,
+      "role": "BOWL"
+    },
+    "Sunil Narine": {
+      "wickets": 1,
+      "runs_conceded": 30,
+      "role": "BOWL"
+    },
+    "Anukul Roy": {
+      "wickets": 0,
+      "runs_conceded": 15,
+      "role": "BOWL"
+    }
+  }
+}

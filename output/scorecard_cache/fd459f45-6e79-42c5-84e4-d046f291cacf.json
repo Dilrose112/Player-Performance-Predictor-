@@ -1,0 +1,109 @@
+{
+  "winner": "KKR",
+  "margin": "8 wkts",
+  "home_score": "151/9 (20)",
+  "away_score": "153/2 (17.3)",
+  "summary": "Kolkata Knight Riders won by 8 wkts",
+  "player_scores": {
+    "Yashasvi Jaiswal": {
+      "runs": 29,
+      "balls": 24,
+      "role": "BAT"
+    },
+    "Sanju Samson": {
+      "runs": 13,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Riyan Parag": {
+      "wickets": 0,
+      "runs_conceded": 25,
+      "role": "BOWL"
+    },
+    "Nitish Rana": {
+      "wickets": 0,
+      "runs_conceded": 9,
+      "role": "BOWL"
+    },
+    "Wanindu Hasaranga": {
+      "wickets": 1,
+      "runs_conceded": 34,
+      "role": "BOWL"
+    },
+    "Dhruv Jurel": {
+      "runs": 33,
+      "balls": 28,
+      "role": "BAT"
+    },
+    "Shubham Dubey": {
+      "runs": 9,
+      "balls": 12,
+      "role": "BAT"
+    },
+    "Shimron Hetmyer": {
+      "runs": 7,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Jofra Archer": {
+      "wickets": 0,
+      "runs_conceded": 33,
+      "role": "BOWL"
+    },
+    "Maheesh Theekshana": {
+      "wickets": 0,
+      "runs_conceded": 32,
+      "role": "BOWL"
+    },
+    "Tushar Deshpande": {
+      "wickets": 0,
+      "runs_conceded": 7,
+      "role": "BOWL"
+    },
+    "Spencer Johnson": {
+      "wickets": 1,
+      "runs_conceded": 42,
+      "role": "BOWL"
+    },
+    "Vaibhav Arora": {
+      "wickets": 2,
+      "runs_conceded": 33,
+      "role": "BOWL"
+    },
+    "Harshit Rana": {
+      "wickets": 2,
+      "runs_conceded": 36,
+      "role": "BOWL"
+    },
+    "Moeen Ali": {
+      "runs": 5,
+      "balls": 12,
+      "role": "BAT"
+    },
+    "Varun Chakaravarthy": {
+      "wickets": 2,
+      "runs_conceded": 17,
+      "role": "BOWL"
+    },
+    "Quinton de Kock": {
+      "runs": 97,
+      "balls": 61,
+      "role": "BAT"
+    },
+    "Ajinkya Rahane": {
+      "runs": 18,
+      "balls": 15,
+      "role": "BAT"
+    },
+    "Angkrish Raghuvanshi": {
+      "runs": 22,
+      "balls": 17,
+      "role": "BAT"
+    },
+    "Sandeep Sharma": {
+      "wickets": 0,
+      "runs_conceded": 11,
+      "role": "BOWL"
+    }
+  }
+}

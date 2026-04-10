@@ -1,0 +1,129 @@
+{
+  "winner": "RCB",
+  "margin": "50 runs",
+  "home_score": "196/7 (20)",
+  "away_score": "146/8 (20)",
+  "summary": "Royal Challengers Bengaluru won by 50 runs",
+  "player_scores": {
+    "Philip Salt": {
+      "runs": 32,
+      "balls": 16,
+      "role": "BAT"
+    },
+    "Virat Kohli": {
+      "runs": 31,
+      "balls": 30,
+      "role": "BAT"
+    },
+    "Devdutt Padikkal": {
+      "runs": 27,
+      "balls": 14,
+      "role": "BAT"
+    },
+    "Rajat Patidar": {
+      "runs": 51,
+      "balls": 32,
+      "role": "BAT"
+    },
+    "Liam Livingstone": {
+      "wickets": 2,
+      "runs_conceded": 28,
+      "role": "BOWL"
+    },
+    "Jitesh Sharma": {
+      "runs": 12,
+      "balls": 6,
+      "role": "BAT"
+    },
+    "Tim David": {
+      "runs": 22,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Krunal Pandya": {
+      "wickets": 0,
+      "runs_conceded": 26,
+      "role": "BOWL"
+    },
+    "Bhuvneshwar Kumar": {
+      "wickets": 1,
+      "runs_conceded": 20,
+      "role": "BOWL"
+    },
+    "Khaleel Ahmed": {
+      "wickets": 1,
+      "runs_conceded": 28,
+      "role": "BOWL"
+    },
+    "Ravichandran Ashwin": {
+      "runs": 11,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Sam Curran": {
+      "runs": 8,
+      "balls": 13,
+      "role": "BAT"
+    },
+    "Noor Ahmad": {
+      "runs": 0,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Ravindra Jadeja": {
+      "runs": 25,
+      "balls": 19,
+      "role": "BAT"
+    },
+    "Matheesha Pathirana": {
+      "wickets": 2,
+      "runs_conceded": 36,
+      "role": "BOWL"
+    },
+    "Rachin Ravindra": {
+      "runs": 41,
+      "balls": 31,
+      "role": "BAT"
+    },
+    "Rahul Tripathi": {
+      "runs": 5,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Ruturaj Gaikwad": {
+      "runs": 0,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Deepak Hooda": {
+      "runs": 4,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Shivam Dube": {
+      "runs": 19,
+      "balls": 15,
+      "role": "BAT"
+    },
+    "MS Dhoni": {
+      "runs": 30,
+      "balls": 16,
+      "role": "BAT"
+    },
+    "Josh Hazlewood": {
+      "wickets": 3,
+      "runs_conceded": 21,
+      "role": "BOWL"
+    },
+    "Yash Dayal": {
+      "wickets": 2,
+      "runs_conceded": 18,
+      "role": "BOWL"
+    },
+    "Suyash Sharma": {
+      "wickets": 0,
+      "runs_conceded": 32,
+      "role": "BOWL"
+    }
+  }
+}

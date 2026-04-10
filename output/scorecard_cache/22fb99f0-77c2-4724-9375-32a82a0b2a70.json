@@ -1,0 +1,129 @@
+{
+  "winner": "SRH",
+  "margin": "65 runs",
+  "home_score": "226/8 (20)",
+  "away_score": "161/10 (16)",
+  "summary": "Sunrisers Hyderabad won by 65 runs",
+  "player_scores": {
+    "Travis Head": {
+      "runs": 46,
+      "balls": 21,
+      "role": "BAT"
+    },
+    "Abhishek Sharma": {
+      "wickets": 0,
+      "runs_conceded": 15,
+      "role": "BOWL"
+    },
+    "Ishan Kishan": {
+      "runs": 14,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Heinrich Klaasen": {
+      "runs": 52,
+      "balls": 35,
+      "role": "BAT"
+    },
+    "Aniket Verma": {
+      "runs": 1,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Nitish Kumar Reddy": {
+      "wickets": 2,
+      "runs_conceded": 17,
+      "role": "BOWL"
+    },
+    "Salil Arora": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Harsh Dubey": {
+      "wickets": 1,
+      "runs_conceded": 17,
+      "role": "BOWL"
+    },
+    "Shivang Kumar": {
+      "wickets": 0,
+      "runs_conceded": 41,
+      "role": "BOWL"
+    },
+    "Vaibhav Arora": {
+      "runs": 1,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Blessing Muzarabani": {
+      "wickets": 4,
+      "runs_conceded": 41,
+      "role": "BOWL"
+    },
+    "Sunil Narine": {
+      "runs": 12,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Varun Chakaravarthy": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Kartik Tyagi": {
+      "runs": 5,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Anukul Roy": {
+      "runs": 0,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Ajinkya Rahane": {
+      "runs": 8,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Finn Allen": {
+      "runs": 28,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "Angkrish Raghuvanshi": {
+      "runs": 52,
+      "balls": 29,
+      "role": "BAT"
+    },
+    "Cameron Green": {
+      "runs": 2,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Rinku Singh": {
+      "runs": 35,
+      "balls": 25,
+      "role": "BAT"
+    },
+    "Ramandeep Singh": {
+      "runs": 10,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "David Payne": {
+      "wickets": 0,
+      "runs_conceded": 35,
+      "role": "BOWL"
+    },
+    "Jaydev Unadkat": {
+      "wickets": 3,
+      "runs_conceded": 21,
+      "role": "BOWL"
+    },
+    "Eshan Malinga": {
+      "wickets": 2,
+      "runs_conceded": 14,
+      "role": "BOWL"
+    }
+  }
+}

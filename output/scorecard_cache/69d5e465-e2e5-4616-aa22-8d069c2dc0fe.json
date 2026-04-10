@@ -1,0 +1,124 @@
+{
+  "winner": "RCB",
+  "margin": "43 runs",
+  "home_score": "250/3 (20)",
+  "away_score": "207/10 (19.4)",
+  "summary": "Royal Challengers Bengaluru won by 43 runs",
+  "player_scores": {
+    "Philip Salt": {
+      "runs": 46,
+      "balls": 30,
+      "role": "BAT"
+    },
+    "Virat Kohli": {
+      "runs": 28,
+      "balls": 18,
+      "role": "BAT"
+    },
+    "Devdutt Padikkal": {
+      "runs": 50,
+      "balls": 29,
+      "role": "BAT"
+    },
+    "Rajat Patidar": {
+      "runs": 48,
+      "balls": 19,
+      "role": "BAT"
+    },
+    "Tim David": {
+      "runs": 70,
+      "balls": 25,
+      "role": "BAT"
+    },
+    "Khaleel Ahmed": {
+      "wickets": 0,
+      "runs_conceded": 37,
+      "role": "BOWL"
+    },
+    "Matt Henry": {
+      "runs": 2,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Anshul Kamboj": {
+      "runs": 19,
+      "balls": 12,
+      "role": "BAT"
+    },
+    "Noor Ahmad": {
+      "runs": 8,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Jamie Overton": {
+      "runs": 37,
+      "balls": 16,
+      "role": "BAT"
+    },
+    "Shivam Dube": {
+      "runs": 18,
+      "balls": 13,
+      "role": "BAT"
+    },
+    "Sanju Samson": {
+      "runs": 9,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Ruturaj Gaikwad": {
+      "runs": 7,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Ayush Mhatre": {
+      "runs": 1,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Sarfaraz Khan": {
+      "runs": 50,
+      "balls": 25,
+      "role": "BAT"
+    },
+    "Kartik Sharma": {
+      "runs": 6,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Prashant Veer": {
+      "runs": 43,
+      "balls": 29,
+      "role": "BAT"
+    },
+    "Jacob Duffy": {
+      "wickets": 2,
+      "runs_conceded": 58,
+      "role": "BOWL"
+    },
+    "Bhuvneshwar Kumar": {
+      "wickets": 3,
+      "runs_conceded": 41,
+      "role": "BOWL"
+    },
+    "Abhinandan Singh": {
+      "wickets": 2,
+      "runs_conceded": 30,
+      "role": "BOWL"
+    },
+    "Krunal Pandya": {
+      "wickets": 2,
+      "runs_conceded": 36,
+      "role": "BOWL"
+    },
+    "Suyash Sharma": {
+      "wickets": 1,
+      "runs_conceded": 21,
+      "role": "BOWL"
+    },
+    "Romario Shepherd": {
+      "wickets": 0,
+      "runs_conceded": 19,
+      "role": "BOWL"
+    }
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "winner": "DC",
+  "margin": "6 wkts",
+  "home_score": "162/6 (20)",
+  "away_score": "164/4 (18.1)",
+  "summary": "Delhi Capitals won by 6 wkts",
+  "player_scores": {
+    "Ryan Rickelton": {
+      "runs": 9,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Rohit Sharma": {
+      "runs": 35,
+      "balls": 26,
+      "role": "BAT"
+    },
+    "Tilak Varma": {
+      "runs": 0,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Suryakumar Yadav": {
+      "runs": 51,
+      "balls": 36,
+      "role": "BAT"
+    },
+    "Sherfane Rutherford": {
+      "runs": 5,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "Naman Dhir": {
+      "runs": 28,
+      "balls": 21,
+      "role": "BAT"
+    },
+    "Mitchell Santner": {
+      "wickets": 1,
+      "runs_conceded": 22,
+      "role": "BOWL"
+    },
+    "Corbin Bosch": {
+      "wickets": 1,
+      "runs_conceded": 39,
+      "role": "BOWL"
+    },
+    "Mukesh Kumar": {
+      "wickets": 2,
+      "runs_conceded": 26,
+      "role": "BOWL"
+    },
+    "Lungi Ngidi": {
+      "wickets": 1,
+      "runs_conceded": 34,
+      "role": "BOWL"
+    },
+    "Axar Patel": {
+      "wickets": 1,
+      "runs_conceded": 22,
+      "role": "BOWL"
+    },
+    "Vipraj Nigam": {
+      "wickets": 1,
+      "runs_conceded": 24,
+      "role": "BOWL"
+    },
+    "Kuldeep Yadav": {
+      "wickets": 0,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "T Natarajan": {
+      "wickets": 1,
+      "runs_conceded": 24,
+      "role": "BOWL"
+    },
+    "KL Rahul": {
+      "runs": 1,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Pathum Nissanka": {
+      "runs": 44,
+      "balls": 30,
+      "role": "BAT"
+    },
+    "Nitish Rana": {
+      "runs": 0,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Sameer Rizvi": {
+      "runs": 90,
+      "balls": 51,
+      "role": "BAT"
+    },
+    "David Miller": {
+      "runs": 21,
+      "balls": 18,
+      "role": "BAT"
+    },
+    "Tristan Stubbs": {
+      "runs": 3,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Deepak Chahar": {
+      "wickets": 1,
+      "runs_conceded": 20,
+      "role": "BOWL"
+    },
+    "Jasprit Bumrah": {
+      "wickets": 0,
+      "runs_conceded": 21,
+      "role": "BOWL"
+    },
+    "Shardul Thakur": {
+      "wickets": 0,
+      "runs_conceded": 41,
+      "role": "BOWL"
+    },
+    "Mayank Markande": {
+      "wickets": 0,
+      "runs_conceded": 20,
+      "role": "BOWL"
+    }
+  }
+}

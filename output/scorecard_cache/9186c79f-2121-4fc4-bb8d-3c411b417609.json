@@ -1,0 +1,129 @@
+{
+  "winner": "LSG",
+  "margin": "5 wkts",
+  "home_score": "156/9 (20)",
+  "away_score": "160/5 (19.5)",
+  "summary": "Lucknow Super Giants won by 5 wkts",
+  "player_scores": {
+    "Travis Head": {
+      "runs": 7,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Abhishek Sharma": {
+      "runs": 0,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Ishan Kishan": {
+      "runs": 1,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Liam Livingstone": {
+      "runs": 14,
+      "balls": 20,
+      "role": "BAT"
+    },
+    "Heinrich Klaasen": {
+      "runs": 62,
+      "balls": 41,
+      "role": "BAT"
+    },
+    "Nitish Kumar Reddy": {
+      "wickets": 0,
+      "runs_conceded": 14,
+      "role": "BOWL"
+    },
+    "Aniket Verma": {
+      "runs": 2,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Harsh Dubey": {
+      "wickets": 2,
+      "runs_conceded": 18,
+      "role": "BOWL"
+    },
+    "Shivang Kumar": {
+      "wickets": 1,
+      "runs_conceded": 30,
+      "role": "BOWL"
+    },
+    "Harshal Patel": {
+      "wickets": 0,
+      "runs_conceded": 16,
+      "role": "BOWL"
+    },
+    "Mohammed Shami": {
+      "wickets": 2,
+      "runs_conceded": 9,
+      "role": "BOWL"
+    },
+    "Digvesh Singh Rathi": {
+      "wickets": 1,
+      "runs_conceded": 46,
+      "role": "BOWL"
+    },
+    "Prince Yadav": {
+      "wickets": 2,
+      "runs_conceded": 34,
+      "role": "BOWL"
+    },
+    "Manimaran Siddharth": {
+      "wickets": 1,
+      "runs_conceded": 29,
+      "role": "BOWL"
+    },
+    "Avesh Khan": {
+      "wickets": 2,
+      "runs_conceded": 36,
+      "role": "BOWL"
+    },
+    "Aiden Markram": {
+      "runs": 45,
+      "balls": 27,
+      "role": "BAT"
+    },
+    "Mitchell Marsh": {
+      "runs": 14,
+      "balls": 12,
+      "role": "BAT"
+    },
+    "Rishabh Pant": {
+      "runs": 68,
+      "balls": 50,
+      "role": "BAT"
+    },
+    "Ayush Badoni": {
+      "runs": 12,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Nicholas Pooran": {
+      "runs": 1,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Abdul Samad": {
+      "runs": 16,
+      "balls": 12,
+      "role": "BAT"
+    },
+    "Mukul Choudhary": {
+      "runs": 2,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Jaydev Unadkat": {
+      "wickets": 0,
+      "runs_conceded": 50,
+      "role": "BOWL"
+    },
+    "Eshan Malinga": {
+      "wickets": 1,
+      "runs_conceded": 30,
+      "role": "BOWL"
+    }
+  }
+}

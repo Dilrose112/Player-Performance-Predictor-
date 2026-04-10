@@ -1,0 +1,129 @@
+{
+  "winner": "RR",
+  "margin": "6 runs",
+  "home_score": "182/9 (20)",
+  "away_score": "176/6 (20)",
+  "summary": "Rajasthan Royals won by 6 runs",
+  "player_scores": {
+    "Yashasvi Jaiswal": {
+      "runs": 4,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Sanju Samson": {
+      "runs": 20,
+      "balls": 16,
+      "role": "BAT"
+    },
+    "Nitish Rana": {
+      "runs": 81,
+      "balls": 36,
+      "role": "BAT"
+    },
+    "Riyan Parag": {
+      "runs": 37,
+      "balls": 28,
+      "role": "BAT"
+    },
+    "Dhruv Jurel": {
+      "runs": 3,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "Wanindu Hasaranga": {
+      "wickets": 4,
+      "runs_conceded": 35,
+      "role": "BOWL"
+    },
+    "Shimron Hetmyer": {
+      "runs": 19,
+      "balls": 16,
+      "role": "BAT"
+    },
+    "Jofra Archer": {
+      "wickets": 1,
+      "runs_conceded": 13,
+      "role": "BOWL"
+    },
+    "Kumar Kartikeya": {
+      "wickets": 0,
+      "runs_conceded": 10,
+      "role": "BOWL"
+    },
+    "Maheesh Theekshana": {
+      "wickets": 0,
+      "runs_conceded": 30,
+      "role": "BOWL"
+    },
+    "Tushar Deshpande": {
+      "wickets": 0,
+      "runs_conceded": 45,
+      "role": "BOWL"
+    },
+    "Khaleel Ahmed": {
+      "wickets": 2,
+      "runs_conceded": 38,
+      "role": "BOWL"
+    },
+    "Jamie Overton": {
+      "runs": 11,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Ravichandran Ashwin": {
+      "wickets": 1,
+      "runs_conceded": 46,
+      "role": "BOWL"
+    },
+    "Noor Ahmad": {
+      "wickets": 2,
+      "runs_conceded": 28,
+      "role": "BOWL"
+    },
+    "Matheesha Pathirana": {
+      "wickets": 2,
+      "runs_conceded": 28,
+      "role": "BOWL"
+    },
+    "Ravindra Jadeja": {
+      "runs": 32,
+      "balls": 22,
+      "role": "BAT"
+    },
+    "Rachin Ravindra": {
+      "runs": 0,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Rahul Tripathi": {
+      "runs": 23,
+      "balls": 19,
+      "role": "BAT"
+    },
+    "Ruturaj Gaikwad": {
+      "runs": 63,
+      "balls": 44,
+      "role": "BAT"
+    },
+    "Shivam Dube": {
+      "runs": 18,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Vijay Shankar": {
+      "runs": 9,
+      "balls": 6,
+      "role": "BAT"
+    },
+    "MS Dhoni": {
+      "runs": 16,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Sandeep Sharma": {
+      "wickets": 1,
+      "runs_conceded": 42,
+      "role": "BOWL"
+    }
+  }
+}

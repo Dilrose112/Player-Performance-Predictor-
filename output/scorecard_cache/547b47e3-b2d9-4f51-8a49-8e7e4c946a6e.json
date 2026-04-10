@@ -1,0 +1,129 @@
+{
+  "winner": "RCB",
+  "margin": "6 wkts",
+  "home_score": "201/9 (20)",
+  "away_score": "203/4 (15.4)",
+  "summary": "Royal Challengers Bengaluru won by 6 wkts",
+  "player_scores": {
+    "Travis Head": {
+      "runs": 11,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Abhishek Sharma": {
+      "runs": 7,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Ishan Kishan": {
+      "runs": 80,
+      "balls": 38,
+      "role": "BAT"
+    },
+    "Nitish Kumar Reddy": {
+      "wickets": 0,
+      "runs_conceded": 19,
+      "role": "BOWL"
+    },
+    "Heinrich Klaasen": {
+      "runs": 31,
+      "balls": 22,
+      "role": "BAT"
+    },
+    "Salil Arora": {
+      "runs": 9,
+      "balls": 6,
+      "role": "BAT"
+    },
+    "Aniket Verma": {
+      "runs": 43,
+      "balls": 18,
+      "role": "BAT"
+    },
+    "Harsh Dubey": {
+      "wickets": 1,
+      "runs_conceded": 35,
+      "role": "BOWL"
+    },
+    "Harshal Patel": {
+      "wickets": 0,
+      "runs_conceded": 39,
+      "role": "BOWL"
+    },
+    "David Payne": {
+      "wickets": 2,
+      "runs_conceded": 35,
+      "role": "BOWL"
+    },
+    "Jaydev Unadkat": {
+      "wickets": 1,
+      "runs_conceded": 29,
+      "role": "BOWL"
+    },
+    "Jacob Duffy": {
+      "wickets": 3,
+      "runs_conceded": 22,
+      "role": "BOWL"
+    },
+    "Bhuvneshwar Kumar": {
+      "wickets": 1,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "Abhinandan Singh": {
+      "wickets": 1,
+      "runs_conceded": 38,
+      "role": "BOWL"
+    },
+    "Romario Shepherd": {
+      "wickets": 3,
+      "runs_conceded": 54,
+      "role": "BOWL"
+    },
+    "Suyash Sharma": {
+      "wickets": 1,
+      "runs_conceded": 28,
+      "role": "BOWL"
+    },
+    "Krunal Pandya": {
+      "wickets": 0,
+      "runs_conceded": 26,
+      "role": "BOWL"
+    },
+    "Philip Salt": {
+      "runs": 8,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "Virat Kohli": {
+      "runs": 69,
+      "balls": 38,
+      "role": "BAT"
+    },
+    "Devdutt Padikkal": {
+      "runs": 61,
+      "balls": 26,
+      "role": "BAT"
+    },
+    "Rajat Patidar": {
+      "runs": 31,
+      "balls": 12,
+      "role": "BAT"
+    },
+    "Jitesh Sharma": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Tim David": {
+      "runs": 16,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Eshan Malinga": {
+      "wickets": 0,
+      "runs_conceded": 35,
+      "role": "BOWL"
+    }
+  }
+}
