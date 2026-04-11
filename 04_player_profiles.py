@@ -7,10 +7,10 @@ Profiles store career form, rolling windows, and per-venue splits so prediction
 can mirror the same 5-match venue threshold used during training.
 """
 import pickle
-
+import numpy as np
 import pandas as pd
 
-RETIRED_CUTOFF = '2024-01-01'
+RETIRED_CUTOFF = '2026-01-01'
 EXTRA_RETIRED_T20 = {'V Kohli', 'RG Sharma'}
 MIN_VENUE_MATCHES = 5
 PITCH_TYPE_MAP = {'bowling': 0, 'balanced': 1, 'batting': 2}
@@ -85,30 +85,54 @@ def build_bat_profile(df, windows, min_innings=5):
     bat['sr'] = bat['runs'] / bat['balls_faced'] * 100
 
     profiles = {}
+    DECAY_HL = 30   # innings half-life for exponential decay
+
     for player, grp in bat.groupby('player'):
         if len(grp) < min_innings:
             continue
+
+        runs_arr = grp['runs'].values.astype(float)
+        n = len(runs_arr)
+
+        # Exponential-decay weighted career average (recent innings count more)
+        if n >= 2:
+            ages   = np.arange(n)[::-1].astype(float)    # 0 = most recent
+            w      = np.exp(-np.log(2) / DECAY_HL * ages)
+            w      = w / w.sum()
+            career_avg_decay = float(np.dot(w, runs_arr))
+        else:
+            career_avg_decay = float(runs_arr.mean())
+
+        career_avg = float(grp['runs'].mean())
+        short_win  = windows[0]
+        avg_runs_short = float(grp['runs'].tail(short_win).mean())
+        form_vs_career = float(avg_runs_short / career_avg) if career_avg > 0 else 1.0
+        form_vs_career = max(0.1, min(5.0, form_vs_career))
+
         profile = {
-            'player': player,
-            'innings': len(grp),
-            'career_avg': round(grp['runs'].mean(), 3),
-            'career_sr': round(grp['sr'].mean(), 3),
-            'last_date': grp['date'].max().strftime('%Y-%m-%d'),
-            'matches_played': len(grp),
-            'venue_stats': {},
+            'player':            player,
+            'innings':           len(grp),
+            'career_avg':        round(career_avg, 3),
+            'career_avg_decay':  round(career_avg_decay, 3),   # NEW
+            'form_vs_career':    round(form_vs_career, 3),     # NEW
+            'career_sr':         round(grp['sr'].mean(), 3),
+            'last_date':         grp['date'].max().strftime('%Y-%m-%d'),
+            'matches_played':    len(grp),
+            'venue_stats':       {},
         }
         for window in windows:
             profile[f'avg_runs_{window}'] = round(grp['runs'].tail(window).mean(), 3)
             profile[f'std_runs_{window}'] = round(grp['runs'].tail(window).std(), 3)
-            profile[f'avg_sr_{window}'] = round(grp['sr'].tail(window).mean(), 3)
+            profile[f'avg_sr_{window}']   = round(grp['sr'].tail(window).mean(), 3)
 
         for venue, venue_grp in grp.groupby('venue'):
             profile['venue_stats'][venue] = {
-                'matches': len(venue_grp),
-                'avg_runs': round(venue_grp['runs'].mean(), 3),
-                'avg_sr': round(venue_grp['sr'].mean(), 3),
+                'matches':   len(venue_grp),
+                'avg_runs':  round(venue_grp['runs'].mean(), 3),
+                'avg_sr':    round(venue_grp['sr'].mean(), 3),
                 'qualified': len(venue_grp) >= MIN_VENUE_MATCHES,
-                'venue_experience_weight': round(len(venue_grp) / (len(venue_grp) + MIN_VENUE_MATCHES), 3),
+                'venue_experience_weight': round(
+                    len(venue_grp) / (len(venue_grp) + MIN_VENUE_MATCHES), 3),
             }
         profiles[player] = profile
     return profiles
@@ -120,30 +144,56 @@ def build_bowl_profile(df, windows, min_innings=5):
     bowl['economy'] = (bowl['runs_conceded'] / (bowl['balls_bowled'] / 6)).clip(0, 15)
 
     profiles = {}
+    DECAY_HL = 30
+
     for player, grp in bowl.groupby('player'):
         if len(grp) < min_innings:
             continue
+
+        wkts_arr = grp['wickets'].values.astype(float)
+        n        = len(wkts_arr)
+
+        if n >= 2:
+            ages = np.arange(n)[::-1].astype(float)
+            w    = np.exp(-np.log(2) / DECAY_HL * ages)
+            w    = w / w.sum()
+            career_wkt_decay = float(np.dot(w, wkts_arr))
+        else:
+            career_wkt_decay = float(wkts_arr.mean())
+
+        career_wkt_avg = float(grp['wickets'].mean())
+        short_win      = windows[0]
+        avg_wkts_short = float(grp['wickets'].tail(short_win).mean())
+        form_vs_career = float(avg_wkts_short / career_wkt_avg) if career_wkt_avg > 0 else 1.0
+        form_vs_career = max(0.1, min(5.0, form_vs_career))
+
         profile = {
-            'player': player,
-            'innings': len(grp),
-            'career_wkt_avg': round(grp['wickets'].mean(), 3),
-            'career_econ': round(grp['economy'].mean(), 3),
-            'last_date': grp['date'].max().strftime('%Y-%m-%d'),
-            'bowling_matches': len(grp),
-            'venue_stats': {},
+            'player':            player,
+            'innings':           len(grp),
+            'career_wkt_avg':    round(career_wkt_avg, 3),
+            'career_wkt_decay':  round(career_wkt_decay, 3),   # NEW
+            'form_vs_career':    round(form_vs_career, 3),     # NEW
+            'career_econ':       round(grp['economy'].mean(), 3),
+            'last_date':         grp['date'].max().strftime('%Y-%m-%d'),
+            'bowling_matches':   len(grp),
+            'venue_stats':       {},
         }
         for window in windows:
             profile[f'avg_wkts_{window}'] = round(grp['wickets'].tail(window).mean(), 3)
             profile[f'std_wkts_{window}'] = round(grp['wickets'].tail(window).std(), 3)
             profile[f'avg_econ_{window}'] = round(grp['economy'].tail(window).mean(), 3)
 
+        # NEW: economy consistency
+        profile['std_econ_5'] = round(grp['economy'].tail(5).std(), 3)
+
         for venue, venue_grp in grp.groupby('venue'):
             profile['venue_stats'][venue] = {
-                'matches': len(venue_grp),
+                'matches':  len(venue_grp),
                 'avg_wkts': round(venue_grp['wickets'].mean(), 3),
                 'avg_econ': round(venue_grp['economy'].mean(), 3),
                 'qualified': len(venue_grp) >= MIN_VENUE_MATCHES,
-                'venue_experience_weight': round(len(venue_grp) / (len(venue_grp) + MIN_VENUE_MATCHES), 3),
+                'venue_experience_weight': round(
+                    len(venue_grp) / (len(venue_grp) + MIN_VENUE_MATCHES), 3),
             }
         profiles[player] = profile
     return profiles

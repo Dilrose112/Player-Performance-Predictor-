@@ -4,6 +4,22 @@ load_squads.py
 Loads squad data from squads/ipl_2026_squads.json and patches the IPL_SCHEDULE
 in 07_app.py so every match has the correct player lists.
 
+How to get accurate squad data
+-------------------------------
+Best free source: cricsheet.org
+
+  1. Download: https://cricsheet.org/downloads/ipl_json.zip
+  2. Extract any IPL 2026 match JSON file
+  3. Look at:  data["info"]["players"]  — this gives { "TeamName": ["Player1", ...] }
+  4. Player names in cricsheet match ESPNcricinfo format which is close to our
+     player_profiles.pkl keys.  Verify with:
+       python3 -c "import pickle; p=pickle.load(open('models/player_profiles.pkl','rb')); print(sorted(p['ipl_bat'].keys()))"
+
+Alternative sources (all free):
+  - https://www.iplt20.com/teams  — official IPL squads page
+  - https://www.espncricinfo.com/series/ipl-2026-XXXXXX/squads — ESPNcricinfo squads tab
+  - cricapi.com /v1/match_squad?id=<match_id>  — 1 API call per match
+
 Editing squads
 --------------
   1. Open squads/ipl_2026_squads.json
@@ -33,7 +49,7 @@ def load_ipl_squads() -> dict:
     or empty dict if file not found.
     """
     if not SQUADS_FILE.exists():
-        log.warning("ipl_2026_squads.json not found — using hardcoded squads")
+        log.warning("squads/ipl_2026_squads.json not found — using hardcoded squads")
         return {}
     try:
         with open(SQUADS_FILE, encoding="utf-8") as fh:

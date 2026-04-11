@@ -113,194 +113,11 @@ MIN_VENUE_MATCHES = 5
 # ─── IPL 2026 SCHEDULE ───────────────────────────────────────────────────────
 # Player names match exactly the keys in player_profiles.pkl
 
-IPL_SCHEDULE = [
-    {
-        'match': 1, 'date': '2026-03-28', 'format': 'ipl',
-        'home': 'RCB', 'away': 'SRH',
-        'venue': 'M Chinnaswamy Stadium',
-        'squads': {
-            'RCB':  {
-                'bat':  ['V Kohli', 'PD Salt', 'RM Patidar', 'VR Iyer', 'TH David'],
-                'bowl': ['JR Hazlewood', 'Yash Dayal', 'Suyash Sharma'],
-            },
-            'SRH': {
-                'bat':  ['TM Head', 'Abhishek Sharma', 'H Klaasen', 'Nithish Kumar Reddy', 'Ishan Kishan'],
-                'bowl': ['PJ Cummins', 'Mohammed Shami', 'HV Patel', 'JD Unadkat'],
-            },
-        },
-    },
-    {
-        'match': 2, 'date': '2026-03-29', 'format': 'ipl',
-        'home': 'MI', 'away': 'KKR',
-        'venue': 'Wankhede Stadium',
-        'squads': {
-            'MI':  {
-                'bat':  ['RG Sharma', 'SA Yadav', 'Tilak Varma', 'HH Pandya'],
-                'bowl': ['JJ Bumrah', 'TA Boult'],
-            },
-            'KKR': {
-                'bat':  ['AM Rahane', 'VR Iyer', 'R Parag'],
-                'bowl': ['AD Russell', 'SP Narine', 'Harshit Rana', 'M Pathirana'],
-            },
-        },
-    },
-    {
-        'match': 3, 'date': '2026-03-30', 'format': 'ipl',
-        'home': 'RR', 'away': 'CSK',
-        'venue': 'Sawai Mansingh Stadium',
-        'squads': {
-            'RR':  {
-                'bat':  ['YBK Jaiswal', 'R Parag', 'Shimron Hetmyer', 'Dhruv Jurel'],
-                'bowl': ['M Theekshana', 'Sandeep Sharma', 'Wanindu Hasaranga'],
-            },
-            'CSK': {
-                'bat':  ['SV Samson', 'MS Dhoni', 'S Dube', 'D Brevis'],
-                'bowl': ['MJ Henry', 'Noor Ahmad', 'Khaleel Ahmed', 'R Chahar'],
-            },
-        },
-    },
-    {
-        'match': 4, 'date': '2026-03-31', 'format': 'ipl',
-        'home': 'PBKS', 'away': 'GT',
-        'venue': 'Punjab Cricket Association Stadium',
-        'squads': {
-            'PBKS': {
-                'bat':  ['Priyansh Arya', 'MP Stoinis', 'SS Iyer'],
-                'bowl': ['Arshdeep Singh', 'YS Chahal', 'Harpreet Brar'],
-            },
-            'GT':   {
-                'bat':  ['Shubman Gill', 'JC Buttler', 'B Sai Sudharsan'],
-                'bowl': ['Rashid Khan', 'KA Rabada', 'Mohammed Siraj'],
-            },
-        },
-    },
-    {
-        'match': 5, 'date': '2026-04-01', 'format': 'ipl',
-        'home': 'LSG', 'away': 'DC',
-        'venue': 'Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium, Lucknow',
-        'squads': {
-            'LSG': {
-                'bat':  ['RR Pant', 'AK Markram', 'N Pooran', 'MR Marsh'],
-                'bowl': ['Mohammed Shami', 'Mayank Yadav', 'Avesh Khan', 'Ravi Bishnoi'],
-            },
-            'DC':  {
-                'bat':  ['KL Rahul', 'J Fraser-McGurk', 'T Stubbs'],
-                'bowl': ['Kuldeep Yadav', 'MA Starc', 'Mukesh Kumar'],
-            },
-        },
-    },
-    {
-        'match': 6, 'date': '2026-04-03', 'format': 'ipl',
-        'home': 'SRH', 'away': 'KKR',
-        'venue': 'Rajiv Gandhi International Stadium',
-        'squads': {
-            'SRH': {
-                'bat':  ['TM Head', 'Abhishek Sharma', 'H Klaasen', 'Ishan Kishan'],
-                'bowl': ['PJ Cummins', 'Mohammed Shami', 'HV Patel'],
-            },
-            'KKR': {
-                'bat':  ['AM Rahane', 'VR Iyer', 'R Parag'],
-                'bowl': ['AD Russell', 'SP Narine', 'Harshit Rana'],
-            },
-        },
-    },
-    {
-        'match': 7, 'date': '2026-04-05', 'format': 'ipl',
-        'home': 'MI', 'away': 'RCB',
-        'venue': 'Wankhede Stadium',
-        'squads': {
-            'MI':  {
-                'bat':  ['RG Sharma', 'SA Yadav', 'Tilak Varma', 'HH Pandya'],
-                'bowl': ['JJ Bumrah', 'TA Boult'],
-            },
-            'RCB': {
-                'bat':  ['V Kohli', 'PD Salt', 'RM Patidar'],
-                'bowl': ['JR Hazlewood', 'Yash Dayal', 'Suyash Sharma'],
-            },
-        },
-    },
-    {
-        'match': 8, 'date': '2026-04-06', 'format': 'ipl',
-        'home': 'RR', 'away': 'GT',
-        'venue': 'Sawai Mansingh Stadium',
-        'squads': {
-            'RR': {
-                'bat':  ['YBK Jaiswal', 'R Parag', 'Shimron Hetmyer'],
-                'bowl': ['M Theekshana', 'Wanindu Hasaranga', 'Sandeep Sharma'],
-            },
-            'GT': {
-                'bat':  ['Shubman Gill', 'JC Buttler', 'B Sai Sudharsan'],
-                'bowl': ['Rashid Khan', 'KA Rabada', 'Mohammed Siraj'],
-            },
-        },
-    },
-]
+IPL_SCHEDULE = []
 
 # ─── T20I 2026 SCHEDULE ──────────────────────────────────────────────────────
 
-T20I_SCHEDULE = [
-    {
-        'match': 1, 'date': '2026-04-10', 'format': 't20i',
-        'home': 'India', 'away': 'Australia',
-        'venue': 'Wankhede Stadium',
-        'squads': {
-            'India': {
-                'bat':  ['V Kohli', 'RG Sharma', 'KL Rahul', 'Shubman Gill', 'YBK Jaiswal', 'RR Pant', 'Tilak Varma'],
-                'bowl': ['JJ Bumrah', 'Mohammed Shami', 'YS Chahal', 'Arshdeep Singh', 'Kuldeep Yadav'],
-            },
-            'Australia': {
-                'bat':  ['DA Warner', 'TM Head', 'MS Wade', 'GJ Maxwell', 'MP Stoinis', 'MR Marsh'],
-                'bowl': ['PJ Cummins', 'A Zampa', 'JR Hazlewood', 'NT Ellis'],
-            },
-        },
-    },
-    {
-        'match': 2, 'date': '2026-04-13', 'format': 't20i',
-        'home': 'India', 'away': 'England',
-        'venue': 'Eden Gardens',
-        'squads': {
-            'India': {
-                'bat':  ['V Kohli', 'RG Sharma', 'Shubman Gill', 'YBK Jaiswal', 'RR Pant', 'Abhishek Sharma'],
-                'bowl': ['JJ Bumrah', 'Arshdeep Singh', 'YS Chahal', 'Kuldeep Yadav'],
-            },
-            'England': {
-                'bat':  ['JC Buttler', 'PD Salt', 'DJ Malan', 'JM Bairstow', 'MM Ali'],
-                'bowl': ['MA Wood', 'CR Woakes', 'AU Rashid', 'JC Archer'],
-            },
-        },
-    },
-    {
-        'match': 3, 'date': '2026-04-16', 'format': 't20i',
-        'home': 'India', 'away': 'Pakistan',
-        'venue': 'Narendra Modi Stadium',
-        'squads': {
-            'India': {
-                'bat':  ['V Kohli', 'RG Sharma', 'KL Rahul', 'Shubman Gill', 'YBK Jaiswal', 'RR Pant'],
-                'bowl': ['JJ Bumrah', 'Mohammed Shami', 'YS Chahal', 'Arshdeep Singh', 'Kuldeep Yadav'],
-            },
-            'Pakistan': {
-                'bat':  ['Babar Azam', 'Mohammad Rizwan', 'Fakhar Zaman'],
-                'bowl': ['Shaheen Shah Afridi', 'Haris Rauf', 'Shadab Khan', 'Imad Wasim'],
-            },
-        },
-    },
-    {
-        'match': 4, 'date': '2026-04-20', 'format': 't20i',
-        'home': 'Australia', 'away': 'England',
-        'venue': 'Melbourne Cricket Ground',
-        'squads': {
-            'Australia': {
-                'bat':  ['DA Warner', 'TM Head', 'GJ Maxwell', 'MP Stoinis', 'MR Marsh'],
-                'bowl': ['PJ Cummins', 'A Zampa', 'JR Hazlewood', 'NT Ellis'],
-            },
-            'England': {
-                'bat':  ['JC Buttler', 'PD Salt', 'DJ Malan', 'JM Bairstow'],
-                'bowl': ['MA Wood', 'CR Woakes', 'AU Rashid', 'JC Archer'],
-            },
-        },
-    },
-]
-
+T20I_SCHEDULE = []
 
 # ─── HELPERS ─────────────────────────────────────────────────────────────────
 
@@ -543,7 +360,7 @@ def api_sync():
     if not _SYNC_AVAILABLE:
         return jsonify({
             'error': 'Sync module not found',
-            'detail': 'Ensure 07_sync_schedule.py is in the same directory as 07_app.py'
+            'detail': 'Ensure 06_sync_schedule.py is in the same directory as 07_app.py'
         }), 503
 
     body        = request.get_json(silent=True) or {}
@@ -586,7 +403,7 @@ def api_sync_status():
     }
 
     if not _SYNC_AVAILABLE:
-        status['error'] = '07_sync_schedule.py not found next to 07_app.py'
+        status['error'] = '06_sync_schedule.py not found next to 07_app.py'
         return jsonify(status)
 
     # Use path relative to this file so it works regardless of cwd

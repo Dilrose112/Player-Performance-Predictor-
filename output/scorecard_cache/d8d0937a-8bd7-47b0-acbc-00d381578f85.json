@@ -1,0 +1,119 @@
+{
+  "winner": "CSK",
+  "margin": "23 runs",
+  "home_score": "212/2 (20)",
+  "away_score": "189/10 (20)",
+  "summary": "Chennai Super Kings won by 23 runs",
+  "player_scores": {
+    "Sanju Samson": {
+      "runs": 115,
+      "balls": 56,
+      "role": "BAT"
+    },
+    "Ruturaj Gaikwad": {
+      "runs": 15,
+      "balls": 18,
+      "role": "BAT"
+    },
+    "Ayush Mhatre": {
+      "runs": 59,
+      "balls": 36,
+      "role": "BAT"
+    },
+    "Shivam Dube": {
+      "runs": 20,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Auqib Nabi Dar": {
+      "runs": 4,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Mukesh Kumar": {
+      "wickets": 0,
+      "runs_conceded": 37,
+      "role": "BOWL"
+    },
+    "Axar Patel": {
+      "runs": 1,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "T Natarajan": {
+      "runs": 1,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Lungi Ngidi": {
+      "runs": 3,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Kuldeep Yadav": {
+      "runs": 4,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "Pathum Nissanka": {
+      "runs": 41,
+      "balls": 24,
+      "role": "BAT"
+    },
+    "KL Rahul": {
+      "runs": 18,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Sameer Rizvi": {
+      "runs": 6,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "David Miller": {
+      "runs": 17,
+      "balls": 14,
+      "role": "BAT"
+    },
+    "Tristan Stubbs": {
+      "runs": 60,
+      "balls": 38,
+      "role": "BAT"
+    },
+    "Ashutosh Sharma": {
+      "runs": 19,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Akeal Hosein": {
+      "wickets": 0,
+      "runs_conceded": 20,
+      "role": "BOWL"
+    },
+    "Khaleel Ahmed": {
+      "wickets": 1,
+      "runs_conceded": 40,
+      "role": "BOWL"
+    },
+    "Anshul Kamboj": {
+      "wickets": 3,
+      "runs_conceded": 35,
+      "role": "BOWL"
+    },
+    "Gurjapneet Singh": {
+      "wickets": 1,
+      "runs_conceded": 39,
+      "role": "BOWL"
+    },
+    "Jamie Overton": {
+      "wickets": 4,
+      "runs_conceded": 18,
+      "role": "BOWL"
+    },
+    "Noor Ahmad": {
+      "wickets": 1,
+      "runs_conceded": 36,
+      "role": "BOWL"
+    }
+  }
+}

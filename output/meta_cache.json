@@ -8,7 +8,7 @@
       "away": "DC",
       "venue": "MA Chidambaram Stadium",
       "cricapi_id": "d8d0937a-8bd7-47b0-acbc-00d381578f85",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -657,7 +657,7 @@
       "away": "SRH",
       "venue": "Maharaja Yadavindra Singh International Cricket Stadium, Mullanpur, New Chandigarh",
       "cricapi_id": "8f0a09ba-2a87-4b94-9a61-d729ef8c0c14",
-      "status": "live",
+      "status": "completed",
       "result": null
     },
     {
@@ -773,5 +773,5 @@
   ],
   "ipl_matches_version": "2026-only",
   "t20i_upcoming": [],
-  "t20i_fetched_on": "2026-04-11"
+  "t20i_fetched_on": "2026-04-12"
 }

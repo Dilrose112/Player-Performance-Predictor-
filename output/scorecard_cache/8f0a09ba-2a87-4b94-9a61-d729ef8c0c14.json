@@ -1,0 +1,124 @@
+{
+  "winner": "PBKS",
+  "margin": "6 wkts",
+  "home_score": "219/6 (20)",
+  "away_score": "223/4 (18.5)",
+  "summary": "Punjab Kings won by 6 wkts",
+  "player_scores": {
+    "Abhishek Sharma": {
+      "wickets": 0,
+      "runs_conceded": 7,
+      "role": "BOWL"
+    },
+    "Travis Head": {
+      "runs": 38,
+      "balls": 23,
+      "role": "BAT"
+    },
+    "Ishan Kishan": {
+      "runs": 27,
+      "balls": 17,
+      "role": "BAT"
+    },
+    "Heinrich Klaasen": {
+      "runs": 39,
+      "balls": 33,
+      "role": "BAT"
+    },
+    "Aniket Verma": {
+      "runs": 18,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Salil Arora": {
+      "runs": 9,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Nitish Kumar Reddy": {
+      "wickets": 0,
+      "runs_conceded": 20,
+      "role": "BOWL"
+    },
+    "Harsh Dubey": {
+      "wickets": 1,
+      "runs_conceded": 38,
+      "role": "BOWL"
+    },
+    "Arshdeep Singh": {
+      "wickets": 2,
+      "runs_conceded": 50,
+      "role": "BOWL"
+    },
+    "Xavier Bartlett": {
+      "wickets": 1,
+      "runs_conceded": 42,
+      "role": "BOWL"
+    },
+    "Marco Jansen": {
+      "wickets": 0,
+      "runs_conceded": 40,
+      "role": "BOWL"
+    },
+    "Vijaykumar Vyshak": {
+      "wickets": 0,
+      "runs_conceded": 33,
+      "role": "BOWL"
+    },
+    "Shashank Singh": {
+      "runs": 16,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Yuzvendra Chahal": {
+      "wickets": 0,
+      "runs_conceded": 33,
+      "role": "BOWL"
+    },
+    "Priyansh Arya": {
+      "runs": 57,
+      "balls": 20,
+      "role": "BAT"
+    },
+    "Prabhsimran Singh": {
+      "runs": 51,
+      "balls": 25,
+      "role": "BAT"
+    },
+    "Cooper Connolly": {
+      "runs": 11,
+      "balls": 12,
+      "role": "BAT"
+    },
+    "Shreyas Iyer": {
+      "runs": 69,
+      "balls": 33,
+      "role": "BAT"
+    },
+    "Nehal Wadhera": {
+      "runs": 14,
+      "balls": 14,
+      "role": "BAT"
+    },
+    "Jaydev Unadkat": {
+      "wickets": 0,
+      "runs_conceded": 40,
+      "role": "BOWL"
+    },
+    "Eshan Malinga": {
+      "wickets": 0,
+      "runs_conceded": 46,
+      "role": "BOWL"
+    },
+    "Harshal Patel": {
+      "wickets": 0,
+      "runs_conceded": 39,
+      "role": "BOWL"
+    },
+    "Shivang Kumar": {
+      "wickets": 3,
+      "runs_conceded": 33,
+      "role": "BOWL"
+    }
+  }
+}
