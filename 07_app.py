@@ -465,10 +465,10 @@ def api_sync():
     background thread; subsequent GET /api/schedule calls will pick up the
     updated output/schedule.json once it completes.
 
-    If 07_sync_schedule.py is not installed, returns 503.
+    If 06_sync_schedule.py is not installed, returns 503.
     """
     if not _SYNC_AVAILABLE:
-        return jsonify({'error': '07_sync_schedule.py not found — sync unavailable'}), 503
+        return jsonify({'error': '06_sync_schedule.py not found — sync unavailable'}), 503
 
     body   = request.get_json(silent=True) or {}
     enrich = body.get('enrich', True)

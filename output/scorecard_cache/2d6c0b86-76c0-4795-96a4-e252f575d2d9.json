@@ -1,0 +1,124 @@
+{
+  "winner": "LSG",
+  "margin": "3 wkts",
+  "home_score": "181/4 (20)",
+  "away_score": "182/7 (20)",
+  "summary": "Lucknow Super Giants won by 3 wkts",
+  "player_scores": {
+    "Ajinkya Rahane": {
+      "runs": 41,
+      "balls": 24,
+      "role": "BAT"
+    },
+    "Finn Allen": {
+      "runs": 9,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Angkrish Raghuvanshi": {
+      "runs": 45,
+      "balls": 33,
+      "role": "BAT"
+    },
+    "Cameron Green": {
+      "wickets": 1,
+      "runs_conceded": 28,
+      "role": "BOWL"
+    },
+    "Rinku Singh": {
+      "runs": 4,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "Rovman Powell": {
+      "runs": 39,
+      "balls": 24,
+      "role": "BAT"
+    },
+    "Mohammed Shami": {
+      "runs": 1,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Prince Yadav": {
+      "wickets": 1,
+      "runs_conceded": 47,
+      "role": "BOWL"
+    },
+    "Manimaran Siddharth": {
+      "wickets": 1,
+      "runs_conceded": 34,
+      "role": "BOWL"
+    },
+    "Digvesh Singh Rathi": {
+      "wickets": 1,
+      "runs_conceded": 25,
+      "role": "BOWL"
+    },
+    "Avesh Khan": {
+      "runs": 1,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Mitchell Marsh": {
+      "runs": 15,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Aiden Markram": {
+      "runs": 22,
+      "balls": 15,
+      "role": "BAT"
+    },
+    "Rishabh Pant": {
+      "runs": 10,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Ayush Badoni": {
+      "runs": 54,
+      "balls": 34,
+      "role": "BAT"
+    },
+    "Nicholas Pooran": {
+      "runs": 13,
+      "balls": 15,
+      "role": "BAT"
+    },
+    "Abdul Samad": {
+      "runs": 2,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Mukul Choudhary": {
+      "runs": 54,
+      "balls": 27,
+      "role": "BAT"
+    },
+    "Vaibhav Arora": {
+      "wickets": 2,
+      "runs_conceded": 38,
+      "role": "BOWL"
+    },
+    "Anukul Roy": {
+      "wickets": 2,
+      "runs_conceded": 32,
+      "role": "BOWL"
+    },
+    "Navdeep Saini": {
+      "wickets": 0,
+      "runs_conceded": 37,
+      "role": "BOWL"
+    },
+    "Sunil Narine": {
+      "wickets": 1,
+      "runs_conceded": 13,
+      "role": "BOWL"
+    },
+    "Kartik Tyagi": {
+      "wickets": 1,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    }
+  }
+}

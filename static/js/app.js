@@ -59,7 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ── SCHEDULE ──────────────────────────────────────────────────────────────────
 
-async function loadSchedule() {
+async function loadSchedule(restoreActive = false) {
+  // Remember which match was open before reload
+  const prev = restoreActive && state.activeMatch
+    ? { match: state.activeMatch.match, format: state.activeMatch.format }
+    : null;
+
   showListLoading();
   try {
     const res  = await fetch('/api/schedule');
@@ -67,6 +72,22 @@ async function loadSchedule() {
     state.schedule = data;
     updateTabCounts();
     renderMatchList();
+
+    // After a sync-triggered reload, re-open the same match if it's still there
+    if (prev) {
+      const matches = state.schedule[prev.format] || [];
+      const idx = matches.findIndex(
+        m => m.match === prev.match && m.format === prev.format
+      );
+      if (idx !== -1) {
+        // Update state.activeMatch to the freshly-fetched version (has result now)
+        state.activeMatch = matches[idx];
+        renderMatchDetail(matches[idx]);
+        // Re-highlight in list
+        document.querySelectorAll('.match-item').forEach((el, i) =>
+          el.classList.toggle('active', i === idx));
+      }
+    }
   } catch (err) {
     showListError('Could not reach /api/schedule — is Flask running?');
     console.error(err);
@@ -121,8 +142,10 @@ function renderMatchList(query = '') {
     const label    = isLive ? 'LIVE'  : isDone ? 'FT'   : 'UPCOMING';
     const active   = state.activeMatch?.match === m.match &&
                      state.activeMatch?.format === m.format ? 'active' : '';
-    const dateStr  = new Date(m.date).toLocaleDateString('en-IN',
-                     { day: 'numeric', month: 'short' });
+    const dateStr  = new Date(m.date + 'T00:00:00').toLocaleDateString('en-IN',
+                     { day: 'numeric', month: 'short', year: 'numeric' });
+    const dayStr   = new Date(m.date + 'T00:00:00').toLocaleDateString('en-IN',
+                     { weekday: 'short' });
 
     // Result row for completed matches (from sync)
     let bottomHTML = '';
@@ -152,8 +175,10 @@ function renderMatchList(query = '') {
         <span class="mi-badge ${badge}">${label}</span>
       </div>
       <div class="mi-teams">${m.home}<span class="mi-vs">vs</span>${m.away}</div>
-      <div class="mi-venue">${m.venue}</div>
-      <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-top:2px">${dateStr}</div>
+      <div class="mi-date-row">
+        <span class="mi-date-chip">📅 ${dayStr}, ${dateStr}</span>
+      </div>
+      <div class="mi-venue">📍 ${m.venue}</div>
       ${bottomHTML}
     </div>`;
   }).join('');
@@ -1533,19 +1558,24 @@ async function loadSyncStatus() {
 }
 
 function renderSyncBadge(data) {
-  const el = document.getElementById('sync-badge');
+  const el  = document.getElementById('sync-badge');
+  const btn = document.getElementById('sync-btn');
   if (!el) return;
+
   if (!data.cached) {
-    el.textContent = 'Not synced';
-    el.title = 'Run python 07_sync_schedule.py to sync';
-    return;
-  }
+  el.textContent = 'Not synced yet';
+  el.title = 'Click Sync to load schedule';
+  if (btn) btn.disabled = false;
+  return;
+}
   const ipl  = data.ipl  || {};
   const t20i = data.t20i || {};
-  const done = (ipl.completed || 0) + (t20i.completed || 0);
-  const up   = (ipl.upcoming  || 0) + (t20i.upcoming  || 0);
-  el.textContent = `${data.age_human} · ${done} done · ${up} upcoming`;
-  el.title = `Last synced ${data.age_human}`;
+  const iplDone  = ipl.completed  || 0;
+  const iplUp    = ipl.upcoming   || 0;
+  const t20Done  = t20i.completed || 0;
+  const t20Up    = t20i.upcoming  || 0;
+  el.textContent = `${data.age_human} · IPL ${iplDone}✓ ${iplUp}↑ · T20I ${t20Done}✓ ${t20Up}↑`;
+  el.title = `Last synced ${data.age_human}. IPL: ${iplDone} done, ${iplUp} upcoming. T20I: ${t20Done} done, ${t20Up} upcoming.`;
 }
 
 async function triggerSync() {
@@ -1554,39 +1584,52 @@ async function triggerSync() {
 
   const btn = document.getElementById('sync-btn');
   if (btn) { btn.disabled = true; btn.textContent = '⟳ Syncing…'; }
-  showToast('Sync started — schedule will refresh shortly…');
+  showToast('Syncing from cricapi.com — this takes ~20s…');
 
   try {
-    const res = await fetch('/api/sync', { method: 'POST',
+    const res = await fetch('/api/sync', {
+      method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ enrich: false }) });
+      // clear_cache: true forces stale meta_cache + schedule.json to be deleted first
+      body: JSON.stringify({ enrich: true, clear_cache: true }),
+    });
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.detail || err.error || `HTTP ${res.status}`);
+    }
+
     const data = await res.json();
-    if (data.status === 'started') {
-      // Poll for completion: check sync/status every 3s for up to 30s
-      let attempts = 0;
-      const poll = setInterval(async () => {
-        attempts++;
-        const s = await fetch('/api/sync/status').then(r => r.json()).catch(() => null);
-        if (s && s.age_seconds < 15) {
+    if (data.status !== 'started') throw new Error('Unexpected response: ' + JSON.stringify(data));
+
+    // Poll every 4s — sync takes ~15-30s including API delays
+    let attempts = 0;
+    const poll = setInterval(async () => {
+      attempts++;
+      try {
+        const s = await fetch('/api/sync/status').then(r => r.json());
+        // Consider complete when schedule.json is fresher than 60s
+        if (s && s.cached && s.age_seconds < 60) {
           clearInterval(poll);
           syncState.syncing = false;
           if (btn) { btn.disabled = false; btn.textContent = '⟳ Sync'; }
           renderSyncBadge(s);
-          // Reload schedule to pick up new data
-          await loadSchedule();
+          await loadSchedule(true);   // restoreActive — re-opens the same match
           showToast('Schedule updated ✓');
         }
-        if (attempts >= 10) {
-          clearInterval(poll);
-          syncState.syncing = false;
-          if (btn) { btn.disabled = false; btn.textContent = '⟳ Sync'; }
-          showToast('Sync running in background — reload to see updates');
-        }
-      }, 3000);
-    }
+      } catch { /* keep polling */ }
+
+      if (attempts >= 15) {   // give up after 60s
+        clearInterval(poll);
+        syncState.syncing = false;
+        if (btn) { btn.disabled = false; btn.textContent = '⟳ Sync'; }
+        showToast('Sync still running — reload page in a minute to see updates');
+      }
+    }, 4000);
+
   } catch (err) {
     syncState.syncing = false;
     if (btn) { btn.disabled = false; btn.textContent = '⟳ Sync'; }
-    showToast('Sync unavailable — is Flask running?');
+    showToast(`Sync failed: ${err.message}`);
   }
 }

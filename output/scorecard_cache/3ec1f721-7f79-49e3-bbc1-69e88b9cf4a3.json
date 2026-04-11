@@ -1,0 +1,124 @@
+{
+  "winner": "RR",
+  "margin": "6 wkts",
+  "home_score": "201/8 (20)",
+  "away_score": "202/4 (18)",
+  "summary": "Rajasthan Royals won by 6 wkts",
+  "player_scores": {
+    "Philip Salt": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Virat Kohli": {
+      "runs": 32,
+      "balls": 16,
+      "role": "BAT"
+    },
+    "Devdutt Padikkal": {
+      "runs": 14,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "Rajat Patidar": {
+      "runs": 63,
+      "balls": 40,
+      "role": "BAT"
+    },
+    "Krunal Pandya": {
+      "wickets": 2,
+      "runs_conceded": 30,
+      "role": "BOWL"
+    },
+    "Jitesh Sharma": {
+      "runs": 5,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Tim David": {
+      "wickets": 0,
+      "runs_conceded": 18,
+      "role": "BOWL"
+    },
+    "Romario Shepherd": {
+      "wickets": 0,
+      "runs_conceded": 18,
+      "role": "BOWL"
+    },
+    "Venkatesh Iyer": {
+      "runs": 29,
+      "balls": 15,
+      "role": "BAT"
+    },
+    "Bhuvneshwar Kumar": {
+      "wickets": 0,
+      "runs_conceded": 37,
+      "role": "BOWL"
+    },
+    "Jofra Archer": {
+      "wickets": 2,
+      "runs_conceded": 33,
+      "role": "BOWL"
+    },
+    "Nandre Burger": {
+      "wickets": 0,
+      "runs_conceded": 32,
+      "role": "BOWL"
+    },
+    "Sandeep Sharma": {
+      "wickets": 1,
+      "runs_conceded": 47,
+      "role": "BOWL"
+    },
+    "Ravi Bishnoi": {
+      "wickets": 2,
+      "runs_conceded": 32,
+      "role": "BOWL"
+    },
+    "Ravindra Jadeja": {
+      "runs": 24,
+      "balls": 25,
+      "role": "BAT"
+    },
+    "Brijesh Sharma": {
+      "wickets": 2,
+      "runs_conceded": 37,
+      "role": "BOWL"
+    },
+    "Yashasvi Jaiswal": {
+      "runs": 13,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Vaibhav Sooryavanshi": {
+      "runs": 78,
+      "balls": 26,
+      "role": "BAT"
+    },
+    "Dhruv Jurel": {
+      "runs": 81,
+      "balls": 43,
+      "role": "BAT"
+    },
+    "Shimron Hetmyer": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Riyan Parag": {
+      "runs": 3,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Josh Hazlewood": {
+      "wickets": 2,
+      "runs_conceded": 44,
+      "role": "BOWL"
+    },
+    "Abhinandan Singh": {
+      "wickets": 0,
+      "runs_conceded": 54,
+      "role": "BOWL"
+    }
+  }
+}

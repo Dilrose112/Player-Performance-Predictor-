@@ -51,7 +51,7 @@ SCHEDULE_FILE   = OUTPUT_DIR / "schedule.json"
 for d in (OUTPUT_DIR, SC_CACHE_DIR):
     d.mkdir(exist_ok=True)
 
-API_KEY         = "af880336-99e8-46a0-8f8d-c3293a43cc79"
+API_KEY         = "83130e0e-f545-4b7b-8f76-d34c6f4715bc"
 BASE_URL        = "https://api.cricapi.com/v1"
 
 MIN_DELAY       = 1.5    # seconds between every API call
@@ -565,6 +565,21 @@ def _key(m: dict) -> tuple:
     return (m.get("date", ""), m.get("home", ""), m.get("away", ""))
 
 
+def _best_status(current: str, incoming: str, match_date: str) -> str:
+    """
+    Pick the most accurate status between what we already have and what the
+    API just returned.  Never allow a past-dated match to be marked 'upcoming'
+    due to cricapi lag — date is the ground truth for completed vs upcoming.
+    """
+    today = date.today().isoformat()
+    # If the date is in the past, it must be completed regardless of API response
+    if match_date and match_date < today:
+        return "completed"
+    # live > completed > upcoming
+    rank = {"live": 2, "completed": 1, "upcoming": 0}
+    return max((current, incoming), key=lambda s: rank.get(s, 0))
+
+
 def merge(seed: list[dict], fetched: list[dict]) -> list[dict]:
     idx    = {_key(m): i for i, m in enumerate(seed)}
     merged = [dict(m) for m in seed]
@@ -574,7 +589,11 @@ def merge(seed: list[dict], fetched: list[dict]) -> list[dict]:
         if k in idx:
             i = idx[k]
             merged[i].setdefault("cricapi_id", fm.get("cricapi_id", ""))
-            merged[i]["status"] = fm.get("status", merged[i].get("status", "upcoming"))
+            merged[i]["status"] = _best_status(
+                merged[i].get("status", "upcoming"),
+                fm.get("status", "upcoming"),
+                merged[i].get("date", ""),
+            )
             if fm.get("result") and not merged[i].get("result"):
                 merged[i]["result"] = fm["result"]
         else:
@@ -582,6 +601,9 @@ def merge(seed: list[dict], fetched: list[dict]) -> list[dict]:
             if not h or not a or h == h.lower() or a == a.lower():
                 continue
             fm = dict(fm, match=len(merged) + 1)
+            # Apply date-based status fix to new entries too
+            if fm.get("date", "9999") < date.today().isoformat():
+                fm["status"] = "completed"
             merged.append(fm)
             idx[k] = len(merged) - 1
 
@@ -605,6 +627,11 @@ def sync_all(enrich: bool = True, scorecard_limit: int = DEFAULT_SC_LIMIT) -> di
     # Phases 1+2: IPL series  (~2 calls, cached)
     fetched_ipl = fetch_ipl_series()
     merged_ipl  = merge(list(IPL_SCHEDULE), fetched_ipl)
+
+    # Guarantee: any match with a past date is 'completed', regardless of API lag
+    for m in merged_ipl:
+        if m.get("date", "9999") < today and m.get("status") != "live":
+            m["status"] = "completed"
 
     # Phase 3: T20I upcoming  (1 call, cached daily)
     fetched_t20i = fetch_t20i_upcoming()
