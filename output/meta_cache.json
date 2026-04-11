@@ -1,6 +1,4 @@
 {
-  "t20i_upcoming": [],
-  "t20i_fetched_on": "2026-04-11",
   "ipl_matches": [
     {
       "match": 1,
@@ -263,7 +261,7 @@
       "away": "RCB",
       "venue": "Barsapara Cricket Stadium, Guwahati",
       "cricapi_id": "3ec1f721-7f79-49e3-bbc1-69e88b9cf4a3",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -659,7 +657,7 @@
       "away": "SRH",
       "venue": "Maharaja Yadavindra Singh International Cricket Stadium, Mullanpur, New Chandigarh",
       "cricapi_id": "8f0a09ba-2a87-4b94-9a61-d729ef8c0c14",
-      "status": "upcoming",
+      "status": "live",
       "result": null
     },
     {
@@ -773,5 +771,7 @@
       "result": null
     }
   ],
-  "ipl_matches_version": "2026-only"
+  "ipl_matches_version": "2026-only",
+  "t20i_upcoming": [],
+  "t20i_fetched_on": "2026-04-11"
 }

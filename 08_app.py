@@ -28,21 +28,33 @@ from flask import Flask, jsonify, render_template, request
 app = Flask(__name__)
 
 # ─── SCHEDULE SYNC ───────────────────────────────────────────────────────────
-# Import the sync helper lazily so the app still boots if 06_sync_schedule.py
-# is absent (e.g. on first run before the file is present).
+# Try to import the sync module. Handles both naming conventions:
+#   07_sync_schedule.py  (canonical)
+#   06_sync_schedule.py  (legacy name some users may still have)
 try:
     import importlib.util as _ilu, sys as _sys
-    _spec = _ilu.spec_from_file_location(
-        "sync_schedule",
-        __import__("pathlib").Path(__file__).parent / "06_sync_schedule.py"
-    )
+    from pathlib import Path as _Path
+
+    _base = _Path(__file__).parent
+    _sync_file = None
+    for _candidate in ("07_sync_schedule.py", "06_sync_schedule.py"):
+        if (_base / _candidate).exists():
+            _sync_file = _base / _candidate
+            break
+
+    if _sync_file is None:
+        raise FileNotFoundError("Neither 07_sync_schedule.py nor 06_sync_schedule.py found")
+
+    _spec = _ilu.spec_from_file_location("sync_schedule", _sync_file)
     _sync_mod = _ilu.module_from_spec(_spec)
     _sys.modules["sync_schedule"] = _sync_mod
     _spec.loader.exec_module(_sync_mod)
     load_schedule = _sync_mod.load_schedule
     _sync_all     = _sync_mod.sync_all
     _SYNC_AVAILABLE = True
-except Exception:
+except Exception as _e:
+    import logging as _log
+    _log.getLogger(__name__).warning("Sync module unavailable: %s", _e)
     _SYNC_AVAILABLE = False
 
 def _get_live_schedule() -> dict:
@@ -81,6 +93,20 @@ t20_venue_ctx  = PROFILES['t20_venue_context']
 ipl_team_codes = PROFILES['ipl_team_codes']
 ipl_era_ctx    = PROFILES['ipl_era_context']
 t20_era_ctx    = PROFILES['t20_era_context']
+
+# Team abbreviation to full name mapping for team_encoded
+TEAM_ABBR_TO_FULL = {
+    'CSK': 'Chennai Super Kings',
+    'DC': 'Delhi Capitals',
+    'GT': 'Gujarat Titans',
+    'KKR': 'Kolkata Knight Riders',
+    'LSG': 'Lucknow Super Giants',
+    'MI': 'Mumbai Indians',
+    'PBKS': 'Punjab Kings',
+    'RCB': 'Royal Challengers Bengaluru',
+    'RR': 'Rajasthan Royals',
+    'SRH': 'Sunrisers Hyderabad',
+}
 
 MIN_VENUE_MATCHES = 5
 
@@ -295,7 +321,8 @@ def _get_era(date, fmt):
 def _bat_features(ps, venue, team, date, fmt):
     vc  = _get_venue_ctx(venue, fmt)
     era = _get_era(date, fmt)
-    tc  = ipl_team_codes.get(team, 0) if fmt == 'ipl' else 0
+    full_team = TEAM_ABBR_TO_FULL.get(team, team) if fmt == 'ipl' else team
+    tc  = ipl_team_codes.get(full_team, 0) if fmt == 'ipl' else 0
     vs  = ps.get('venue_stats', {}).get(venue, {})
     vm  = vs.get('matches', 0)
     q   = vm >= MIN_VENUE_MATCHES
@@ -329,7 +356,8 @@ def _bat_features(ps, venue, team, date, fmt):
 def _bowl_features(ps, venue, team, date, fmt):
     vc  = _get_venue_ctx(venue, fmt)
     era = _get_era(date, fmt)
-    tc  = ipl_team_codes.get(team, 0) if fmt == 'ipl' else 0
+    full_team = TEAM_ABBR_TO_FULL.get(team, team) if fmt == 'ipl' else team
+    tc  = ipl_team_codes.get(full_team, 0) if fmt == 'ipl' else 0
     vs  = ps.get('venue_stats', {}).get(venue, {})
     vm  = vs.get('matches', 0)
     q   = vm >= MIN_VENUE_MATCHES
@@ -363,11 +391,87 @@ def _to_df(fm, cols):
     return pd.DataFrame([{c: fm.get(c, 0.0) for c in cols}])
 
 
+# ─── SQUAD LOADER ─────────────────────────────────────────────────────────────
+# Loads squads/ipl_2026_squads.json so you can fix team rosters without
+# editing the hardcoded IPL_SCHEDULE lists above.
+
+try:
+    import importlib.util as _ilu2
+    from pathlib import Path as _Path
+
+    _sq_file = None
+    for _candidate in ("load_squads.py", "07_load_squads.py", "06_load_squads.py"):
+        candidate_path = _Path(__file__).parent / _candidate
+        if candidate_path.exists():
+            _sq_file = candidate_path
+            break
+
+    if _sq_file is None:
+        raise FileNotFoundError("No squad loader found: expected load_squads.py or 07_load_squads.py")
+
+    _sq_spec = _ilu2.spec_from_file_location("load_squads", _sq_file)
+    _sq_mod = _ilu2.module_from_spec(_sq_spec)
+    _sq_spec.loader.exec_module(_sq_mod)
+
+    _SQUAD_DATA = _sq_mod.load_ipl_squads()
+
+    # Validate and log any mismatched names at startup
+    _squad_issues = _sq_mod.validate_squads(_SQUAD_DATA, ipl_bat_p, ipl_bowl_p)
+    if _squad_issues:
+        import logging as _lg
+        for team, issues in _squad_issues.items():
+            for role, names in issues.items():
+                _lg.getLogger(__name__).warning(
+                    "Squad JSON — %s %s not in model: %s", team, role, names
+                )
+except Exception as _e:
+    import logging as _lg
+    _lg.getLogger(__name__).warning("Squad loader unavailable: %s", _e)
+    _SQUAD_DATA = {}
+
+
+def _get_squads_for_match(home: str, away: str, date: str, seed_squads: dict) -> dict:
+    """
+    Return squad dict for a match, preferring JSON file data over hardcoded seed.
+    Falls back to seed_squads (from IPL_SCHEDULE) if JSON has no entry.
+    """
+    squads = {}
+    for team in (home, away):
+        if team in _SQUAD_DATA:
+            squads[team] = _SQUAD_DATA[team]
+        else:
+            # fall back to seed
+            seed = seed_squads.get((date, home, away), {})
+            if team in seed:
+                squads[team] = seed[team]
+    return squads
+
+
 # ─── API ROUTES ──────────────────────────────────────────────────────────────
 
 @app.route('/')
 def home():
     return render_template('dashboard.html')
+
+
+@app.route('/api/reload_squads', methods=['POST'])
+def api_reload_squads():
+    """
+    Reload squads/ipl_2026_squads.json without restarting Flask.
+    Call after editing the JSON file.
+    """
+    global _SQUAD_DATA
+    try:
+        _sq_spec.loader.exec_module(_sq_mod)
+        _SQUAD_DATA = _sq_mod.load_ipl_squads()
+        issues = _sq_mod.validate_squads(_SQUAD_DATA, ipl_bat_p, ipl_bowl_p)
+        return jsonify({
+            'status':  'ok',
+            'teams':   len(_SQUAD_DATA),
+            'warnings': issues,
+        })
+    except Exception as exc:
+        return jsonify({'status': 'error', 'error': str(exc)}), 500
 
 
 @app.route('/api/schedule')
@@ -377,126 +481,118 @@ def schedule():
     Each match includes:
       - teams: squad lists with in_profile flags
       - status: 'upcoming' | 'completed' | 'live'
-      - result: fetched match result / score summary
-      - actuals: fetched team totals + player actual stats when available
-    Data is served from output/schedule.json (synced by 06_sync_schedule.py)
+      - result: { winner, margin, home_score, away_score, top_performers }
+                (only present for completed matches)
+    Data is served from output/schedule.json (synced by 07_sync_schedule.py)
     with a fallback to the hardcoded seed lists in this file.
     """
     live = _get_live_schedule()
 
-    def norm_team(name):
-        mapping = {
-            'Royal Challengers Bengaluru': 'RCB',
-            'Royal Challengers Bangalore': 'RCB',
-            'Royal Challengers Bengaluru Women': 'RCB',
-            'Royal Challengers Bangalore Women': 'RCB',
-            'RCBW': 'RCB',
-            'Mumbai Indians Women': 'MI',
-            'Delhi Capitals Women': 'DC',
-        }
-        return mapping.get(name, name)
-
-    def pair_key(home, away):
-        return tuple(sorted((norm_team(home), norm_team(away))))
-
-    # Build lookups from the seed schedules for squad data. The synced JSON may
-    # not carry squads and provider names can drift, so we keep exact, pair,
-    # and per-team fallbacks.
+    # Seed squad lookup (date, home, away) → squads dict — used as fallback only
     seed_squads = {}
-    seed_squads_by_pair = {}
-    team_rosters = {}
     for m in IPL_SCHEDULE + T20I_SCHEDULE:
-        exact_key = (m.get('date',''), norm_team(m.get('home','')), norm_team(m.get('away','')))
-        seed_squads[exact_key] = m.get('squads', {})
-        seed_squads_by_pair[pair_key(m.get('home',''), m.get('away',''))] = m.get('squads', {})
-        for team, sq in (m.get('squads') or {}).items():
-            team_key = norm_team(team)
-            roster = team_rosters.setdefault(team_key, {'bat': set(), 'bowl': set()})
-            roster['bat'].update(sq.get('bat', []))
-            roster['bowl'].update(sq.get('bowl', []))
+        key = (m.get('date',''), m.get('home',''), m.get('away',''))
+        seed_squads[key] = m.get('squads', {})
 
-    def annotate(matches, bat_pool, bowl_pool):
+    def annotate(matches, bat_pool, bowl_pool, use_json_squads=False):
         out = []
         for m in matches:
             mc = {k: v for k, v in m.items() if k != 'squads'}
-            mc['home'] = norm_team(mc.get('home', ''))
-            mc['away'] = norm_team(mc.get('away', ''))
             mc['teams'] = {}
-            # Prefer squad data from the match itself; fall back to seed lookup
-            squads = m.get('squads') or seed_squads.get(
-                (m.get('date',''), mc.get('home',''), mc.get('away','')),
-                {}
-            ) or seed_squads_by_pair.get(pair_key(mc.get('home',''), mc.get('away','')), {})
-            if not squads:
-                squads = {}
-                for side in (mc.get('home', ''), mc.get('away', '')):
-                    roster = team_rosters.get(side)
-                    if roster:
-                        squads[side] = {
-                            'bat': sorted(roster['bat']),
-                            'bowl': sorted(roster['bowl']),
-                        }
+
+            # Squad priority: JSON file > match's own squads > seed lookup
+            if use_json_squads:
+                squads = _get_squads_for_match(
+                    m.get('home',''), m.get('away',''), m.get('date',''), seed_squads
+                )
+            else:
+                squads = m.get('squads') or \
+                         seed_squads.get((m.get('date',''), m.get('home',''), m.get('away','')), {})
+
             for team, sq in squads.items():
-                team_key = norm_team(team)
-                mc['teams'][team_key] = {
+                mc['teams'][team] = {
                     'bat':  [{'name': p, 'in_profile': p in bat_pool}  for p in sq.get('bat', [])],
                     'bowl': [{'name': p, 'in_profile': p in bowl_pool} for p in sq.get('bowl', [])],
                 }
-            # Pass through result & status set by sync module
             mc.setdefault('status', 'upcoming')
+            mc.setdefault('result', None)
             out.append(mc)
         return out
 
     return jsonify({
-        'ipl':  annotate(live.get('ipl',  []), ipl_bat_p, ipl_bowl_p),
-        't20i': annotate(live.get('t20i', []), t20_bat_p, t20_bowl_p),
+        'ipl':  annotate(live.get('ipl',  []), ipl_bat_p, ipl_bowl_p, use_json_squads=True),
+        't20i': annotate(live.get('t20i', []), t20_bat_p, t20_bowl_p, use_json_squads=False),
     })
 
 
 @app.route('/api/sync', methods=['POST'])
 def api_sync():
     """
-    Trigger a background schedule sync from ESPNcricinfo.
+    Trigger a full schedule sync from cricapi.com.
 
     POST /api/sync
-    Optional JSON body:  { "enrich": true }   (default true)
+    Optional body:  { "enrich": true, "clear_cache": true }
+      enrich      – fetch scorecards for completed matches (default true)
+      clear_cache – delete meta_cache.json + schedule.json before syncing
+                    (default true — always start clean to fix stale data)
 
-    Returns immediately with { "status": "started" }. The sync runs in a
-    background thread; subsequent GET /api/schedule calls will pick up the
-    updated output/schedule.json once it completes.
-
-    If 06_sync_schedule.py is not installed, returns 503.
+    Returns immediately with { "status": "started" }.
+    The sync runs in a background thread; /api/sync/status will reflect
+    the new file once it completes (~10-30s depending on how many scorecards).
     """
     if not _SYNC_AVAILABLE:
-        return jsonify({'error': '06_sync_schedule.py not found — sync unavailable'}), 503
+        return jsonify({
+            'error': 'Sync module not found',
+            'detail': 'Ensure 07_sync_schedule.py is in the same directory as 07_app.py'
+        }), 503
 
-    body   = request.get_json(silent=True) or {}
-    enrich = body.get('enrich', True)
+    body        = request.get_json(silent=True) or {}
+    enrich      = body.get('enrich', True)
+    clear_cache = body.get('clear_cache', True)   # default ON to fix stale caches
 
     def _run():
+        import logging
+        log = logging.getLogger(__name__)
         try:
+            if clear_cache:
+                from pathlib import Path
+                base = Path(__file__).parent / 'output'
+                for fname in ('meta_cache.json', 'schedule.json'):
+                    p = base / fname
+                    if p.exists():
+                        p.unlink()
+                        log.info("Cleared %s before sync", fname)
             _sync_all(enrich=enrich)
         except Exception as exc:
-            import logging
-            logging.getLogger(__name__).error("Background sync failed: %s", exc)
+            log.error("Background sync failed: %s", exc, exc_info=True)
 
-    thread = threading.Thread(target=_run, daemon=True)
+    thread = threading.Thread(target=_run, daemon=True, name="cricapi-sync")
     thread.start()
 
-    return jsonify({'status': 'started', 'enrich': enrich})
+    return jsonify({'status': 'started', 'enrich': enrich, 'clear_cache': clear_cache})
 
 
 @app.route('/api/sync/status', methods=['GET'])
 def api_sync_status():
     """
-    Return the age and match counts of the currently cached schedule.json.
-    Useful for the dashboard to show a 'Last synced X minutes ago' badge.
+    Return sync availability + age and match counts of cached schedule.json.
     """
-    from pathlib import Path
     import time as _time
-    spath = Path('output/schedule.json')
+    from pathlib import Path
+
+    status = {
+        'sync_available': _SYNC_AVAILABLE,
+        'cached': False,
+    }
+
+    if not _SYNC_AVAILABLE:
+        status['error'] = '07_sync_schedule.py not found next to 07_app.py'
+        return jsonify(status)
+
+    # Use path relative to this file so it works regardless of cwd
+    spath = Path(__file__).parent / 'output' / 'schedule.json'
     if not spath.exists():
-        return jsonify({'cached': False})
+        return jsonify(status)
 
     age_s = _time.time() - spath.stat().st_mtime
     try:
@@ -505,6 +601,7 @@ def api_sync_status():
         ipl_counts  = _count_statuses(data.get('ipl',  []))
         t20i_counts = _count_statuses(data.get('t20i', []))
         return jsonify({
+            'sync_available': True,
             'cached':        True,
             'age_seconds':   int(age_s),
             'age_human':     _human_age(age_s),
@@ -512,7 +609,8 @@ def api_sync_status():
             't20i':          t20i_counts,
         })
     except Exception as exc:
-        return jsonify({'cached': True, 'age_seconds': int(age_s), 'error': str(exc)})
+        return jsonify({'sync_available': True, 'cached': True,
+                        'age_seconds': int(age_s), 'error': str(exc)})
 
 
 def _count_statuses(matches: list) -> dict:
@@ -532,7 +630,7 @@ def _human_age(seconds: float) -> str:
 def api_match_comparison():
     """
     For a completed match, run the ML predictions for every profiled player
-    and return them side-by-side with the actual scores from the result.
+    and return them side-by-side with the actual scores from fetched results.
 
     POST body:
       {
@@ -541,7 +639,16 @@ def api_match_comparison():
         "away":    "SRH",
         "venue":   "M Chinnaswamy Stadium",
         "date":    "2026-03-28",
-        "player_scores": {          ← from result.player_scores in schedule.json
+        "actuals": {
+          "teams": {
+            "RCB": {"runs": 180, "wickets": 4, "overs": 20.0}
+          },
+          "players": {
+            "V Kohli":   {"runs": 72, "balls": 48, "role": "BAT"},
+            "JJ Bumrah": {"wickets": 3, "runs_conceded": 22, "role": "BOWL"}
+          }
+        },
+        "player_scores": {          ← legacy fallback
           "V Kohli":   {"runs": 72, "balls": 48, "role": "BAT"},
           "JJ Bumrah": {"wickets": 3, "runs_conceded": 22, "role": "BOWL"}
         },
@@ -577,8 +684,10 @@ def api_match_comparison():
     away    = body.get('away', '')
     venue   = body.get('venue', '')
     mdate   = body.get('date', '2026-04-01')
-    ps_map  = body.get('player_scores', {})   # actual scores keyed by player name
+    actuals = body.get('actuals', {}) or {}
+    ps_map  = actuals.get('players') or body.get('player_scores', {}) or {}
     squads  = body.get('squads', {})
+    team_actuals = actuals.get('teams', {}) or {}
 
     bat_pool  = ipl_bat_p  if fmt == 'ipl' else t20_bat_p
     bowl_pool = ipl_bowl_p if fmt == 'ipl' else t20_bowl_p
@@ -679,6 +788,7 @@ def api_match_comparison():
 
     return jsonify({
         'teams':    result_out,
+        'team_actuals': team_actuals,
         'hit_rate': hit_rate,
         'n_actual': len(with_data),
         'n_total':  len(all_rows),
