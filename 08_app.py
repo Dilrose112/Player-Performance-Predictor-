@@ -903,34 +903,12 @@ def api_player_overviews():
     """
 
     # ── Featured players (IPL 2026 squads) ──────────────────────────────────
-    FEATURED_BATS = [
-        'V Kohli', 'PD Salt', 'B Sai Sudharsan', 'Shubman Gill',
-        'JC Buttler', 'YBK Jaiswal', 'TM Head', 'H Klaasen',
-        'SA Yadav', 'RG Sharma', 'KL Rahul', 'RR Pant',
-        'Tilak Varma', 'HH Pandya', 'AK Markram', 'MR Marsh',
-        'AM Rahane', 'SV Samson', 'MS Dhoni', 'S Dube',
-    ]
+    FEATURED_BATS = []
 
-    FEATURED_BOWLS = [
-        'JJ Bumrah', 'TA Boult', 'JR Hazlewood', 'Mohammed Shami',
-        'HV Patel', 'YS Chahal', 'Rashid Khan', 'SP Narine',
-        'AD Russell', 'Arshdeep Singh', 'M Pathirana', 'Harshit Rana',
-        'Kuldeep Yadav', 'MA Starc', 'PJ Cummins', 'Ravi Bishnoi',
-        'Mohammed Siraj', 'Avesh Khan',
-    ]
+    FEATURED_BOWLS = []
 
     # ── Rivalry pairs with context labels ───────────────────────────────────
-    RIVALRY_PAIRS = [
-        ('V Kohli',     'JJ Bumrah',      'Most anticipated IPL battle · 100+ contests across formats'),
-        ('RG Sharma',   'SP Narine',       'Opener vs mystery spinner · tactical chess match'),
-        ('Shubman Gill','Rashid Khan',     'Future of India bat vs world\'s best leg spinner'),
-        ('SA Yadav',    'TA Boult',        'Power hitting vs left-arm swing · explosive matchup'),
-        ('YBK Jaiswal', 'YS Chahal',       'Fearless opener vs crafty leg spinner'),
-        ('TM Head',     'Arshdeep Singh',  'Explosive opener vs death bowling specialist'),
-        ('KL Rahul',    'Mohammed Shami',  'Technically sound anchor vs pace and swing'),
-        ('H Klaasen',   'JR Hazlewood',    'T20 hard-hitter vs premium Test-class pacer'),
-        ('RR Pant',     'Kuldeep Yadav',   'Aggressive keeper-bat vs chinaman bowler'),
-    ]
+    RIVALRY_PAIRS = []
 
     def bat_archetype(avg, sr):
         if sr >= 145 and avg >= 28: return 'Power Hitter'

@@ -1,55 +1,54 @@
 {
-  "_source": "iplt20.com Season 2026 — cross-referenced with player_profiles.pkl keys",
-  "_last_updated": "2026-04-11",
-  "_note": "Run: python3 -c \"import pickle; p=pickle.load(open('models/player_profiles.pkl','rb')); print(sorted(p['ipl_bat'].keys()))\" to verify names",
+  "_source": "iplt20.com Season 2026 — transcribed from screenshots, cross-referenced with player_profiles.pkl",
+  "_last_updated": "2026-04-12",
 
   "RCB": {
-    "bat":  ["RM Patidar", "D Padikkal", "V Kohli", "PD Salt", "Jitesh Sharma", "TH David", "VR Iyer", "R Shepherd", "WG Jacks"],
-    "bowl": ["JR Hazlewood", "Yash Dayal", "Suyash Sharma", "VR Iyer", "R Shepherd", "Rasikh Salam"]
+    "bat":  ["RM Patidar", "D Padikkal", "V Kohli", "PD Salt", "TH David", "VR Iyer", "R Shepherd"],
+    "bowl": ["JR Hazlewood", "Rasikh Salam", "Suyash Sharma", "B Kumar", "N Thushara", "Yash Dayal"]
   },
 
   "CSK": {
-    "bat":  ["RD Gaikwad", "MS Dhoni", "SV Samson", "D Brevis", "A Mhatre", "S Dube", "Sameer Rizvi"],
-    "bowl": ["MJ Henry", "Noor Ahmad", "KK Ahmed", "RD Chahar", "S Dube", "SH Johnson"]
-  },
-
-  "MI": {
-    "bat":  ["RG Sharma", "SA Yadav", "Q de Kock", "Tilak Varma", "HH Pandya", "RD Rickelton", "WG Jacks", "MP Stoinis"],
-    "bowl": ["JJ Bumrah", "TA Boult", "N Thushara", "HH Pandya", "MP Stoinis", "MJ Santner"]
-  },
-
-  "KKR": {
-    "bat":  ["AM Rahane", "Rinku Singh", "A Raghuvanshi", "Mandeep Singh", "RA Tripathi", "R Powell", "C Green"],
-    "bowl": ["AD Russell", "SP Narine", "Harshit Rana", "M Pathirana", "Kartik Tyagi"]
-  },
-
-  "SRH": {
-    "bat":  ["TM Head", "Abhishek Sharma", "H Klaasen", "Ishan Kishan", "Aniket Verma", "Nithish Kumar Reddy", "LS Livingstone"],
-    "bowl": ["PJ Cummins", "Mohammed Shami", "HV Patel", "JD Unadkat", "Zeeshan Ansari"]
-  },
-
-  "RR": {
-    "bat":  ["YBK Jaiswal", "R Parag", "SO Hetmyer", "Dhruv Jurel", "Anuj Rawat"],
-    "bowl": ["M Theekshana", "Sandeep Sharma", "Ravi Bishnoi", "RA Jadeja", "Kuldeep Yadav"]
-  },
-
-  "GT": {
-    "bat":  ["Shubman Gill", "JC Buttler", "B Sai Sudharsan", "M Shahrukh Khan", "Washington Sundar", "Anuj Rawat"],
-    "bowl": ["Rashid Khan", "K Rabada", "Mohammed Siraj", "Washington Sundar", "M Prasidh Krishna"]
-  },
-
-  "PBKS": {
-    "bat":  ["SS Iyer", "N Wadhera", "P Simran Singh", "Priyansh Arya", "MP Stoinis", "Shashank Singh", "Vishnu Vinod"],
-    "bowl": ["Arshdeep Singh", "YS Chahal", "M Jansen", "Harpreet Brar", "LH Ferguson"]
+    "bat":  ["RD Gaikwad", "MS Dhoni", "SV Samson", "D Brevis", "A Mhatre", "S Dube", "DJM Short"],
+    "bowl": ["KK Ahmed", "Noor Ahmad", "A Kamboj", "Mukesh Choudhary", "MJ Henry", "RD Chahar", "SH Johnson"]
   },
 
   "DC": {
-    "bat":  ["KL Rahul", "J Fraser-McGurk", "T Stubbs", "AR Patel", "Abishek Porel", "Sameer Rizvi"],
-    "bowl": ["Kuldeep Yadav", "MA Starc", "Mukesh Kumar", "Rasikh Salam", "PVD Chameera", "T Natarajan"]
+    "bat":  ["KL Rahul", "J Fraser-McGurk", "T Stubbs", "AR Patel", "Abishek Porel", "PP Shaw", "Sameer Rizvi"],
+    "bowl": ["MA Starc", "T Natarajan", "Mukesh Kumar", "PVD Chameera", "Kuldeep Yadav"]
+  },
+
+  "GT": {
+    "bat":  ["Shubman Gill", "JC Buttler", "B Sai Sudharsan", "M Shahrukh Khan", "Washington Sundar", "R Tewatia", "Anuj Rawat"],
+    "bowl": ["K Rabada", "Mohammed Siraj", "M Prasidh Krishna", "Rashid Khan", "Washington Sundar"]
+  },
+
+  "KKR": {
+    "bat":  ["AM Rahane", "A Raghuvanshi", "Mandeep Singh", "R Powell", "SP Narine", "C Green", "RA Tripathi"],
+    "bowl": ["AD Russell", "Harshit Rana", "M Pathirana", "Kartik Tyagi", "Umran Malik", "CV Varun"]
   },
 
   "LSG": {
     "bat":  ["RR Pant", "AK Markram", "N Pooran", "MR Marsh", "Abdul Samad", "A Badoni"],
-    "bowl": ["Mohammed Shami", "MP Yadav", "Avesh Khan", "Ravi Bishnoi", "Shahbaz Ahmed", "Azmatullah Omarzai"]
+    "bowl": ["Mohammed Shami", "MP Yadav", "Avesh Khan", "Ravi Bishnoi", "Shahbaz Ahmed"]
+  },
+
+  "MI": {
+    "bat":  ["RG Sharma", "SA Yadav", "Q de Kock", "Tilak Varma", "HH Pandya", "RD Rickelton", "WG Jacks"],
+    "bowl": ["JJ Bumrah", "TA Boult", "MJ Santner", "DL Chahar", "N Thushara"]
+  },
+
+  "PBKS": {
+    "bat":  ["SS Iyer", "N Wadhera", "P Simran Singh", "Priyansh Arya", "MP Stoinis", "Shashank Singh", "Vishnu Vinod"],
+    "bowl": ["Arshdeep Singh", "YS Chahal", "M Jansen", "Azmatullah Omarzai", "LH Ferguson"]
+  },
+
+  "RR": {
+    "bat":  ["YBK Jaiswal", "R Parag", "SO Hetmyer", "Dhruv Jurel", "RA Jadeja"],
+    "bowl": ["M Theekshana", "Sandeep Sharma", "Ravi Bishnoi", "Kuldeep Yadav", "TU Deshpande"]
+  },
+
+  "SRH": {
+    "bat":  ["TM Head", "H Klaasen", "Ishan Kishan", "Abhishek Sharma", "Nithish Kumar Reddy", "HV Patel", "LS Livingstone"],
+    "bowl": ["PJ Cummins", "JD Unadkat", "Zeeshan Ansari", "Shivam Mavi", "Mohammed Shami"]
   }
 }
