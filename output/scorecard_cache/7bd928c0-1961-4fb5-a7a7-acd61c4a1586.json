@@ -1,0 +1,119 @@
+{
+  "winner": "PBKS",
+  "margin": "6 wkts",
+  "home_score": "264/2 (20)",
+  "away_score": "265/4 (18.5)",
+  "summary": "Punjab Kings won by 6 wkts",
+  "player_scores": {
+    "Pathum Nissanka": {
+      "runs": 11,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "KL Rahul": {
+      "runs": 152,
+      "balls": 67,
+      "role": "BAT"
+    },
+    "Nitish Rana": {
+      "runs": 91,
+      "balls": 44,
+      "role": "BAT"
+    },
+    "David Miller": {
+      "runs": 3,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Arshdeep Singh": {
+      "wickets": 1,
+      "runs_conceded": 49,
+      "role": "BOWL"
+    },
+    "Xavier Bartlett": {
+      "wickets": 1,
+      "runs_conceded": 69,
+      "role": "BOWL"
+    },
+    "Marco Jansen": {
+      "wickets": 0,
+      "runs_conceded": 45,
+      "role": "BOWL"
+    },
+    "Vijaykumar Vyshak": {
+      "wickets": 0,
+      "runs_conceded": 48,
+      "role": "BOWL"
+    },
+    "Yuzvendra Chahal": {
+      "wickets": 0,
+      "runs_conceded": 42,
+      "role": "BOWL"
+    },
+    "Marcus Stoinis": {
+      "wickets": 0,
+      "runs_conceded": 11,
+      "role": "BOWL"
+    },
+    "Priyansh Arya": {
+      "runs": 43,
+      "balls": 17,
+      "role": "BAT"
+    },
+    "Prabhsimran Singh": {
+      "runs": 76,
+      "balls": 26,
+      "role": "BAT"
+    },
+    "Cooper Connolly": {
+      "runs": 17,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Shreyas Iyer": {
+      "runs": 71,
+      "balls": 36,
+      "role": "BAT"
+    },
+    "Nehal Wadhera": {
+      "runs": 25,
+      "balls": 15,
+      "role": "BAT"
+    },
+    "Shashank Singh": {
+      "runs": 19,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Auqib Nabi Dar": {
+      "wickets": 0,
+      "runs_conceded": 41,
+      "role": "BOWL"
+    },
+    "Mukesh Kumar": {
+      "wickets": 0,
+      "runs_conceded": 55,
+      "role": "BOWL"
+    },
+    "Axar Patel": {
+      "wickets": 1,
+      "runs_conceded": 44,
+      "role": "BOWL"
+    },
+    "T Natarajan": {
+      "wickets": 0,
+      "runs_conceded": 54,
+      "role": "BOWL"
+    },
+    "Kuldeep Yadav": {
+      "wickets": 2,
+      "runs_conceded": 46,
+      "role": "BOWL"
+    },
+    "Vipraj Nigam": {
+      "wickets": 1,
+      "runs_conceded": 24,
+      "role": "BOWL"
+    }
+  }
+}

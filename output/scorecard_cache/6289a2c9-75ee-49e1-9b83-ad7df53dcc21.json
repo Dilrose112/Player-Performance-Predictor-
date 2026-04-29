@@ -1,0 +1,124 @@
+{
+  "winner": "PBKS",
+  "margin": "7 wkts",
+  "home_score": "195/6 (20)",
+  "away_score": "198/3 (16.3)",
+  "summary": "Punjab Kings won by 7 wkts",
+  "player_scores": {
+    "Ryan Rickelton": {
+      "runs": 2,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Quinton de Kock": {
+      "runs": 112,
+      "balls": 60,
+      "role": "BAT"
+    },
+    "Suryakumar Yadav": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Naman Dhir": {
+      "runs": 50,
+      "balls": 31,
+      "role": "BAT"
+    },
+    "Hardik Pandya": {
+      "wickets": 0,
+      "runs_conceded": 39,
+      "role": "BOWL"
+    },
+    "Sherfane Rutherford": {
+      "runs": 1,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Tilak Varma": {
+      "runs": 8,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Mayank Rawat": {
+      "runs": 0,
+      "balls": 0,
+      "role": "BAT"
+    },
+    "Arshdeep Singh": {
+      "wickets": 3,
+      "runs_conceded": 22,
+      "role": "BOWL"
+    },
+    "Marco Jansen": {
+      "wickets": 1,
+      "runs_conceded": 30,
+      "role": "BOWL"
+    },
+    "Xavier Bartlett": {
+      "wickets": 0,
+      "runs_conceded": 39,
+      "role": "BOWL"
+    },
+    "Vijaykumar Vyshak": {
+      "wickets": 0,
+      "runs_conceded": 36,
+      "role": "BOWL"
+    },
+    "Yuzvendra Chahal": {
+      "wickets": 0,
+      "runs_conceded": 45,
+      "role": "BOWL"
+    },
+    "Shashank Singh": {
+      "wickets": 1,
+      "runs_conceded": 19,
+      "role": "BOWL"
+    },
+    "Priyansh Arya": {
+      "runs": 15,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Prabhsimran Singh": {
+      "runs": 80,
+      "balls": 39,
+      "role": "BAT"
+    },
+    "Cooper Connolly": {
+      "runs": 17,
+      "balls": 12,
+      "role": "BAT"
+    },
+    "Shreyas Iyer": {
+      "runs": 66,
+      "balls": 35,
+      "role": "BAT"
+    },
+    "Marcus Stoinis": {
+      "runs": 10,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Deepak Chahar": {
+      "wickets": 0,
+      "runs_conceded": 45,
+      "role": "BOWL"
+    },
+    "Jasprit Bumrah": {
+      "wickets": 0,
+      "runs_conceded": 41,
+      "role": "BOWL"
+    },
+    "AM Ghazanfar": {
+      "wickets": 2,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "Shardul Thakur": {
+      "wickets": 1,
+      "runs_conceded": 42,
+      "role": "BOWL"
+    }
+  }
+}

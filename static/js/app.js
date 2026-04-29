@@ -59,6 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ── SCHEDULE ──────────────────────────────────────────────────────────────────
 
+let _autoPollTimer = null;
+
 async function loadSchedule(restoreActive = false) {
   // Remember which match was open before reload
   const prev = restoreActive && state.activeMatch
@@ -70,6 +72,37 @@ async function loadSchedule(restoreActive = false) {
     const res  = await fetch('/api/schedule');
     const data = await safeJson(res, '/api/schedule');
     state.schedule = data;
+
+    const totalMatches = (data.ipl || []).length + (data.t20i || []).length;
+
+    if (totalMatches === 0) {
+      // Schedule is empty — server is auto-syncing in background
+      // Show a friendly message and keep polling every 5s
+      showListSyncing();
+      if (!_autoPollTimer) {
+        _autoPollTimer = setInterval(async () => {
+          try {
+            const r2   = await fetch('/api/schedule');
+            const d2   = await r2.json();
+            const total = (d2.ipl || []).length + (d2.t20i || []).length;
+            if (total > 0) {
+              clearInterval(_autoPollTimer);
+              _autoPollTimer = null;
+              state.schedule = d2;
+              updateTabCounts();
+              renderMatchList();
+              loadSyncStatus();
+              showToast(`Schedule loaded — ${total} matches`);
+            }
+          } catch { /* keep polling */ }
+        }, 5000);
+      }
+      return;
+    }
+
+    // We have data — clear any pending poll
+    if (_autoPollTimer) { clearInterval(_autoPollTimer); _autoPollTimer = null; }
+
     updateTabCounts();
     renderMatchList();
 
@@ -80,10 +113,8 @@ async function loadSchedule(restoreActive = false) {
         m => m.match === prev.match && m.format === prev.format
       );
       if (idx !== -1) {
-        // Update state.activeMatch to the freshly-fetched version (has result now)
         state.activeMatch = matches[idx];
         renderMatchDetail(matches[idx]);
-        // Re-highlight in list
         document.querySelectorAll('.match-item').forEach((el, i) =>
           el.classList.toggle('active', i === idx));
       }
@@ -925,6 +956,17 @@ function showListLoading() {
     <div class="state-placeholder" style="min-height:200px">
       <div class="spinner"></div>
       <div class="state-sub">LOADING SCHEDULE</div>
+    </div>`;
+}
+
+function showListSyncing() {
+  document.getElementById('match-list').innerHTML = `
+    <div class="state-placeholder" style="min-height:200px">
+      <div class="spinner"></div>
+      <div class="state-sub" style="color:var(--blue)">SYNCING FIXTURES…</div>
+      <div class="state-sub" style="margin-top:8px;font-size:10px">
+        Fetching schedule from cricapi.com<br>This takes ~20s on first run
+      </div>
     </div>`;
 }
 

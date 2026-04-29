@@ -1,0 +1,134 @@
+{
+  "winner": "CSK",
+  "margin": "103 runs",
+  "home_score": "207/6 (20)",
+  "away_score": "104/10 (19)",
+  "summary": "Chennai Super Kings won by 103 runs",
+  "player_scores": {
+    "Sanju Samson": {
+      "runs": 101,
+      "balls": 54,
+      "role": "BAT"
+    },
+    "Ruturaj Gaikwad": {
+      "runs": 22,
+      "balls": 14,
+      "role": "BAT"
+    },
+    "Sarfaraz Khan": {
+      "runs": 14,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Shivam Dube": {
+      "runs": 5,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Dewald Brevis": {
+      "runs": 21,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Kartik Sharma": {
+      "runs": 18,
+      "balls": 19,
+      "role": "BAT"
+    },
+    "Jamie Overton": {
+      "wickets": 1,
+      "runs_conceded": 14,
+      "role": "BOWL"
+    },
+    "Akeal Hosein": {
+      "wickets": 4,
+      "runs_conceded": 17,
+      "role": "BOWL"
+    },
+    "Jasprit Bumrah": {
+      "runs": 2,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Hardik Pandya": {
+      "runs": 1,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "AM Ghazanfar": {
+      "wickets": 2,
+      "runs_conceded": 25,
+      "role": "BOWL"
+    },
+    "Mitchell Santner": {
+      "wickets": 1,
+      "runs_conceded": 44,
+      "role": "BOWL"
+    },
+    "Ashwani Kumar": {
+      "runs": 1,
+      "balls": 6,
+      "role": "BAT"
+    },
+    "Krish Bhagat": {
+      "runs": 7,
+      "balls": 15,
+      "role": "BAT"
+    },
+    "Quinton de Kock": {
+      "runs": 7,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Danish Malewar": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Naman Dhir": {
+      "runs": 0,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Suryakumar Yadav": {
+      "runs": 36,
+      "balls": 30,
+      "role": "BAT"
+    },
+    "Tilak Varma": {
+      "runs": 37,
+      "balls": 29,
+      "role": "BAT"
+    },
+    "Sherfane Rutherford": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Shardul Thakur": {
+      "runs": 6,
+      "balls": 12,
+      "role": "BAT"
+    },
+    "Mukesh Choudhary": {
+      "wickets": 1,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "Anshul Kamboj": {
+      "wickets": 1,
+      "runs_conceded": 10,
+      "role": "BOWL"
+    },
+    "Noor Ahmad": {
+      "wickets": 2,
+      "runs_conceded": 24,
+      "role": "BOWL"
+    },
+    "Gurjapneet Singh": {
+      "wickets": 1,
+      "runs_conceded": 7,
+      "role": "BOWL"
+    }
+  }
+}

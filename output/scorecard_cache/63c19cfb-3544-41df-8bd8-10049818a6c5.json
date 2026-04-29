@@ -1,0 +1,114 @@
+{
+  "winner": "RCB",
+  "margin": "9 wkts",
+  "home_score": "75/10 (16.3)",
+  "away_score": "77/1 (6.3)",
+  "summary": "Royal Challengers Bengaluru won by 9 wkts",
+  "player_scores": {
+    "Sahil Parakh": {
+      "runs": 0,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "KL Rahul": {
+      "runs": 1,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Nitish Rana": {
+      "runs": 1,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Sameer Rizvi": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Tristan Stubbs": {
+      "runs": 5,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Axar Patel": {
+      "wickets": 0,
+      "runs_conceded": 5,
+      "role": "BOWL"
+    },
+    "Abishek Porel": {
+      "runs": 30,
+      "balls": 33,
+      "role": "BAT"
+    },
+    "David Miller": {
+      "runs": 19,
+      "balls": 18,
+      "role": "BAT"
+    },
+    "Kyle Jamieson": {
+      "wickets": 1,
+      "runs_conceded": 42,
+      "role": "BOWL"
+    },
+    "Kuldeep Yadav": {
+      "runs": 3,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Dushmantha Chameera": {
+      "wickets": 0,
+      "runs_conceded": 18,
+      "role": "BOWL"
+    },
+    "Bhuvneshwar Kumar": {
+      "wickets": 3,
+      "runs_conceded": 5,
+      "role": "BOWL"
+    },
+    "Josh Hazlewood": {
+      "wickets": 4,
+      "runs_conceded": 12,
+      "role": "BOWL"
+    },
+    "Rasikh Salam Dar": {
+      "wickets": 1,
+      "runs_conceded": 21,
+      "role": "BOWL"
+    },
+    "Romario Shepherd": {
+      "wickets": 0,
+      "runs_conceded": 21,
+      "role": "BOWL"
+    },
+    "Suyash Sharma": {
+      "wickets": 1,
+      "runs_conceded": 7,
+      "role": "BOWL"
+    },
+    "Krunal Pandya": {
+      "wickets": 1,
+      "runs_conceded": 9,
+      "role": "BOWL"
+    },
+    "Jacob Bethell": {
+      "runs": 20,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Virat Kohli": {
+      "runs": 23,
+      "balls": 15,
+      "role": "BAT"
+    },
+    "Devdutt Padikkal": {
+      "runs": 34,
+      "balls": 13,
+      "role": "BAT"
+    },
+    "T Natarajan": {
+      "wickets": 0,
+      "runs_conceded": 12,
+      "role": "BOWL"
+    }
+  }
+}

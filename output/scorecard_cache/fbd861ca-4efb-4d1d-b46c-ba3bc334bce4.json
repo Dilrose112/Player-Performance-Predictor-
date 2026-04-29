@@ -1,0 +1,129 @@
+{
+  "winner": "",
+  "margin": "",
+  "home_score": "155/7 (20)",
+  "away_score": "155/8 (20)",
+  "summary": "Match tied (KKR won the Super Over)",
+  "player_scores": {
+    "Ajinkya Rahane": {
+      "runs": 10,
+      "balls": 15,
+      "role": "BAT"
+    },
+    "Tim Seifert": {
+      "runs": 0,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Angkrish Raghuvanshi": {
+      "runs": 9,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Cameron Green": {
+      "wickets": 1,
+      "runs_conceded": 12,
+      "role": "BOWL"
+    },
+    "Rovman Powell": {
+      "runs": 1,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Rinku Singh": {
+      "runs": 83,
+      "balls": 51,
+      "role": "BAT"
+    },
+    "Anukul Roy": {
+      "wickets": 1,
+      "runs_conceded": 19,
+      "role": "BOWL"
+    },
+    "Ramandeep Singh": {
+      "runs": 6,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Sunil Narine": {
+      "wickets": 1,
+      "runs_conceded": 23,
+      "role": "BOWL"
+    },
+    "Mohammed Shami": {
+      "runs": 11,
+      "balls": 6,
+      "role": "BAT"
+    },
+    "Mohsin Khan": {
+      "wickets": 5,
+      "runs_conceded": 23,
+      "role": "BOWL"
+    },
+    "Prince Yadav": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Digvesh Singh Rathi": {
+      "wickets": 0,
+      "runs_conceded": 46,
+      "role": "BOWL"
+    },
+    "George Linde": {
+      "runs": 8,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Aiden Markram": {
+      "runs": 31,
+      "balls": 27,
+      "role": "BAT"
+    },
+    "Mitchell Marsh": {
+      "runs": 2,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Rishabh Pant": {
+      "runs": 42,
+      "balls": 38,
+      "role": "BAT"
+    },
+    "Nicholas Pooran": {
+      "runs": 9,
+      "balls": 12,
+      "role": "BAT"
+    },
+    "Ayush Badoni": {
+      "runs": 24,
+      "balls": 19,
+      "role": "BAT"
+    },
+    "Mukul Choudhary": {
+      "runs": 1,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Himmat Singh": {
+      "runs": 19,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Vaibhav Arora": {
+      "wickets": 2,
+      "runs_conceded": 24,
+      "role": "BOWL"
+    },
+    "Varun Chakaravarthy": {
+      "wickets": 2,
+      "runs_conceded": 33,
+      "role": "BOWL"
+    },
+    "Kartik Tyagi": {
+      "wickets": 1,
+      "runs_conceded": 41,
+      "role": "BOWL"
+    }
+  }
+}

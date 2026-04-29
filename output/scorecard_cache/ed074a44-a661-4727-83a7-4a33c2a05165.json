@@ -1,0 +1,119 @@
+{
+  "winner": "RCB",
+  "margin": "5 wkts",
+  "home_score": "205/3 (20)",
+  "away_score": "206/5 (18.5)",
+  "summary": "Royal Challengers Bengaluru won by 5 wkts",
+  "player_scores": {
+    "Sai Sudharsan": {
+      "runs": 100,
+      "balls": 58,
+      "role": "BAT"
+    },
+    "Shubman Gill": {
+      "runs": 32,
+      "balls": 24,
+      "role": "BAT"
+    },
+    "Jos Buttler": {
+      "runs": 25,
+      "balls": 16,
+      "role": "BAT"
+    },
+    "Washington Sundar": {
+      "runs": 19,
+      "balls": 12,
+      "role": "BAT"
+    },
+    "Jason Holder": {
+      "wickets": 1,
+      "runs_conceded": 35,
+      "role": "BOWL"
+    },
+    "Bhuvneshwar Kumar": {
+      "wickets": 1,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "Josh Hazlewood": {
+      "wickets": 1,
+      "runs_conceded": 40,
+      "role": "BOWL"
+    },
+    "Rasikh Salam Dar": {
+      "wickets": 0,
+      "runs_conceded": 28,
+      "role": "BOWL"
+    },
+    "Krunal Pandya": {
+      "runs": 23,
+      "balls": 12,
+      "role": "BAT"
+    },
+    "Romario Shepherd": {
+      "wickets": 0,
+      "runs_conceded": 17,
+      "role": "BOWL"
+    },
+    "Suyash Sharma": {
+      "wickets": 1,
+      "runs_conceded": 36,
+      "role": "BOWL"
+    },
+    "Jacob Bethell": {
+      "runs": 14,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Virat Kohli": {
+      "runs": 81,
+      "balls": 44,
+      "role": "BAT"
+    },
+    "Devdutt Padikkal": {
+      "runs": 55,
+      "balls": 27,
+      "role": "BAT"
+    },
+    "Rajat Patidar": {
+      "runs": 8,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Jitesh Sharma": {
+      "runs": 10,
+      "balls": 6,
+      "role": "BAT"
+    },
+    "Tim David": {
+      "runs": 10,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Mohammed Siraj": {
+      "wickets": 1,
+      "runs_conceded": 25,
+      "role": "BOWL"
+    },
+    "Kagiso Rabada": {
+      "wickets": 0,
+      "runs_conceded": 45,
+      "role": "BOWL"
+    },
+    "Prasidh Krishna": {
+      "wickets": 0,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "Rashid Khan": {
+      "wickets": 2,
+      "runs_conceded": 49,
+      "role": "BOWL"
+    },
+    "Manav Suthar": {
+      "wickets": 1,
+      "runs_conceded": 19,
+      "role": "BOWL"
+    }
+  }
+}

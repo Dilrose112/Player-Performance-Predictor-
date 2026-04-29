@@ -20,12 +20,20 @@ POST /api/sync            → trigger background schedule sync from ESPNcricinfo
                             body (optional): { "enrich": true }
 GET  /api/sync/status     → age + match counts of cached schedule.json
 """
+import json
+import logging
 import pickle
 import threading
+from pathlib import Path
 import pandas as pd
 from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
+log = logging.getLogger(__name__)
+BASE_DIR = Path(__file__).resolve().parent
+SCHEDULE_FILE = BASE_DIR / 'output' / 'schedule.json'
+_SCHEDULE_CACHE = {"ipl": [], "t20i": []}
+_SCHEDULE_CACHE_MTIME = None
 
 # ─── SCHEDULE SYNC ───────────────────────────────────────────────────────────
 # Try to import the sync module. Handles both naming conventions:
@@ -57,20 +65,88 @@ except Exception as _e:
     _log.getLogger(__name__).warning("Sync module unavailable: %s", _e)
     _SYNC_AVAILABLE = False
 
+def _load_stored_schedule(force: bool = False) -> bool:
+    """
+    Load the persisted schedule/match data from output/schedule.json.
+
+    This intentionally bypasses the sync module's freshness TTL so an already
+    stored schedule is available as soon as Flask starts, even when offline.
+    """
+    global _SCHEDULE_CACHE, _SCHEDULE_CACHE_MTIME
+
+    if not SCHEDULE_FILE.exists():
+        return False
+
+    mtime = SCHEDULE_FILE.stat().st_mtime
+    if not force and _SCHEDULE_CACHE_MTIME == mtime:
+        return True
+
+    try:
+        with open(SCHEDULE_FILE, encoding='utf-8') as fh:
+            data = json.load(fh)
+
+        if not isinstance(data, dict):
+            raise ValueError("schedule.json must contain a JSON object")
+
+        _SCHEDULE_CACHE = {
+            "ipl": data.get("ipl", []) or [],
+            "t20i": data.get("t20i", []) or [],
+        }
+        _SCHEDULE_CACHE_MTIME = mtime
+        log.info(
+            "Loaded stored schedule: %d IPL matches, %d T20I matches",
+            len(_SCHEDULE_CACHE["ipl"]),
+            len(_SCHEDULE_CACHE["t20i"]),
+        )
+        return True
+    except Exception as exc:
+        log.warning("Could not load stored schedule from %s: %s", SCHEDULE_FILE, exc)
+        return False
+
 def _get_live_schedule() -> dict:
     """
     Return the best available schedule.
-    Priority: cached JSON file → seed hardcoded lists.
+    Priority: stored JSON file → sync-module fallback → auto-trigger sync.
+
+    On first run (no schedule.json), fires a background sync automatically
+    so matches appear after ~20-30s without the user needing to click Sync.
     """
+    if _load_stored_schedule():
+        return _SCHEDULE_CACHE
+
     if _SYNC_AVAILABLE:
-        return load_schedule()
-    # Fallback: use the hardcoded lists as-is
-    from datetime import date
-    today = date.today().isoformat()
-    def _stamp(lst):
-        return [dict(m, status="completed" if m["date"] < today else "upcoming")
-                for m in lst]
-    return {"ipl": _stamp(IPL_SCHEDULE), "t20i": _stamp(T20I_SCHEDULE)}
+        sched = load_schedule()
+        # If both lists are empty, schedule.json doesn't exist yet —
+        # kick off a background sync automatically
+        if not sched.get('ipl') and not sched.get('t20i'):
+            _auto_sync_once()
+        return sched
+    return {"ipl": [], "t20i": []}
+
+
+_auto_synced = False   # only trigger once per server lifetime
+
+def _auto_sync_once():
+    """Fire a one-time background sync on startup if schedule.json is missing."""
+    global _auto_synced
+    if _auto_synced or not _SYNC_AVAILABLE:
+        return
+    _auto_synced = True
+    import threading, logging
+    log = logging.getLogger(__name__)
+    log.info("schedule.json not found — auto-triggering background sync…")
+
+    def _run():
+        try:
+            _sync_all(enrich=False)   # no-enrich: fast, just gets fixtures
+            _load_stored_schedule(force=True)
+            log.info("Auto-sync complete — schedule.json created")
+        except Exception as exc:
+            log.error("Auto-sync failed: %s", exc)
+
+    threading.Thread(target=_run, daemon=True, name="auto-sync").start()
+
+_load_stored_schedule(force=True)
 
 # ─── LOAD ARTIFACTS ──────────────────────────────────────────────────────────
 
@@ -380,6 +456,7 @@ def api_sync():
                         p.unlink()
                         log.info("Cleared %s before sync", fname)
             _sync_all(enrich=enrich)
+            _load_stored_schedule(force=True)
         except Exception as exc:
             log.error("Background sync failed: %s", exc, exc_info=True)
 
@@ -903,12 +980,34 @@ def api_player_overviews():
     """
 
     # ── Featured players (IPL 2026 squads) ──────────────────────────────────
-    FEATURED_BATS = []
+    FEATURED_BATS = [
+        'V Kohli', 'PD Salt', 'B Sai Sudharsan', 'Shubman Gill',
+        'JC Buttler', 'YBK Jaiswal', 'TM Head', 'H Klaasen',
+        'SA Yadav', 'RG Sharma', 'KL Rahul', 'RR Pant',
+        'Tilak Varma', 'HH Pandya', 'AK Markram', 'MR Marsh',
+        'AM Rahane', 'SV Samson', 'MS Dhoni', 'S Dube',
+    ]
 
-    FEATURED_BOWLS = []
+    FEATURED_BOWLS = [
+        'JJ Bumrah', 'TA Boult', 'JR Hazlewood', 'Mohammed Shami',
+        'HV Patel', 'YS Chahal', 'Rashid Khan', 'SP Narine',
+        'AD Russell', 'Arshdeep Singh', 'M Pathirana', 'Harshit Rana',
+        'Kuldeep Yadav', 'MA Starc', 'PJ Cummins', 'Ravi Bishnoi',
+        'Mohammed Siraj', 'Avesh Khan',
+    ]
 
     # ── Rivalry pairs with context labels ───────────────────────────────────
-    RIVALRY_PAIRS = []
+    RIVALRY_PAIRS = [
+        ('V Kohli',     'JJ Bumrah',      'Most anticipated IPL battle · 100+ contests across formats'),
+        ('RG Sharma',   'SP Narine',       'Opener vs mystery spinner · tactical chess match'),
+        ('Shubman Gill','Rashid Khan',     'Future of India bat vs world\'s best leg spinner'),
+        ('SA Yadav',    'TA Boult',        'Power hitting vs left-arm swing · explosive matchup'),
+        ('YBK Jaiswal', 'YS Chahal',       'Fearless opener vs crafty leg spinner'),
+        ('TM Head',     'Arshdeep Singh',  'Explosive opener vs death bowling specialist'),
+        ('KL Rahul',    'Mohammed Shami',  'Technically sound anchor vs pace and swing'),
+        ('H Klaasen',   'JR Hazlewood',    'T20 hard-hitter vs premium Test-class pacer'),
+        ('RR Pant',     'Kuldeep Yadav',   'Aggressive keeper-bat vs chinaman bowler'),
+    ]
 
     def bat_archetype(avg, sr):
         if sr >= 145 and avg >= 28: return 'Power Hitter'

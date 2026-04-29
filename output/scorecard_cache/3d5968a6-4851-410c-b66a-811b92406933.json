@@ -1,0 +1,129 @@
+{
+  "winner": "SRH",
+  "margin": "5 wkts",
+  "home_score": "228/6 (20)",
+  "away_score": "229/5 (18.3)",
+  "summary": "Sunrisers Hyderabad won by 5 wkts",
+  "player_scores": {
+    "Yashasvi Jaiswal": {
+      "runs": 10,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Vaibhav Sooryavanshi": {
+      "runs": 103,
+      "balls": 37,
+      "role": "BAT"
+    },
+    "Dhruv Jurel": {
+      "runs": 51,
+      "balls": 35,
+      "role": "BAT"
+    },
+    "Riyan Parag": {
+      "wickets": 0,
+      "runs_conceded": 12,
+      "role": "BOWL"
+    },
+    "Donovan Ferreira": {
+      "wickets": 1,
+      "runs_conceded": 14,
+      "role": "BOWL"
+    },
+    "Shimron Hetmyer": {
+      "runs": 11,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Ravindra Jadeja": {
+      "wickets": 0,
+      "runs_conceded": 11,
+      "role": "BOWL"
+    },
+    "Jofra Archer": {
+      "wickets": 2,
+      "runs_conceded": 34,
+      "role": "BOWL"
+    },
+    "Praful Hinge": {
+      "wickets": 1,
+      "runs_conceded": 49,
+      "role": "BOWL"
+    },
+    "Pat Cummins": {
+      "wickets": 1,
+      "runs_conceded": 27,
+      "role": "BOWL"
+    },
+    "Eshan Malinga": {
+      "wickets": 2,
+      "runs_conceded": 38,
+      "role": "BOWL"
+    },
+    "Sakib Hussain": {
+      "wickets": 1,
+      "runs_conceded": 62,
+      "role": "BOWL"
+    },
+    "Shivang Kumar": {
+      "wickets": 0,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "Nitish Kumar Reddy": {
+      "runs": 36,
+      "balls": 18,
+      "role": "BAT"
+    },
+    "Travis Head": {
+      "runs": 6,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Abhishek Sharma": {
+      "runs": 57,
+      "balls": 29,
+      "role": "BAT"
+    },
+    "Ishan Kishan": {
+      "runs": 74,
+      "balls": 31,
+      "role": "BAT"
+    },
+    "Heinrich Klaasen": {
+      "runs": 29,
+      "balls": 24,
+      "role": "BAT"
+    },
+    "Salil Arora": {
+      "runs": 8,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Aniket Verma": {
+      "runs": 1,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Nandre Burger": {
+      "wickets": 0,
+      "runs_conceded": 50,
+      "role": "BOWL"
+    },
+    "Tushar Deshpande": {
+      "wickets": 0,
+      "runs_conceded": 43,
+      "role": "BOWL"
+    },
+    "Brijesh Sharma": {
+      "wickets": 2,
+      "runs_conceded": 44,
+      "role": "BOWL"
+    },
+    "Ravi Bishnoi": {
+      "wickets": 0,
+      "runs_conceded": 16,
+      "role": "BOWL"
+    }
+  }
+}

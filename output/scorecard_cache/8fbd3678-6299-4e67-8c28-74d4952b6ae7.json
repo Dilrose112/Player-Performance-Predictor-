@@ -1,0 +1,119 @@
+{
+  "winner": "RR",
+  "margin": "6 wkts",
+  "home_score": "222/4 (20)",
+  "away_score": "228/4 (19.2)",
+  "summary": "Rajasthan Royals won by 6 wkts",
+  "player_scores": {
+    "Prabhsimran Singh": {
+      "runs": 59,
+      "balls": 44,
+      "role": "BAT"
+    },
+    "Priyansh Arya": {
+      "runs": 29,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Cooper Connolly": {
+      "runs": 30,
+      "balls": 14,
+      "role": "BAT"
+    },
+    "Shreyas Iyer": {
+      "runs": 30,
+      "balls": 27,
+      "role": "BAT"
+    },
+    "Marcus Stoinis": {
+      "runs": 62,
+      "balls": 22,
+      "role": "BAT"
+    },
+    "Suryansh Shedge": {
+      "runs": 3,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Jofra Archer": {
+      "wickets": 1,
+      "runs_conceded": 40,
+      "role": "BOWL"
+    },
+    "Nandre Burger": {
+      "wickets": 1,
+      "runs_conceded": 59,
+      "role": "BOWL"
+    },
+    "Brijesh Sharma": {
+      "wickets": 0,
+      "runs_conceded": 42,
+      "role": "BOWL"
+    },
+    "Yash Raj Punja": {
+      "wickets": 2,
+      "runs_conceded": 41,
+      "role": "BOWL"
+    },
+    "Ravindra Jadeja": {
+      "wickets": 0,
+      "runs_conceded": 32,
+      "role": "BOWL"
+    },
+    "Yashasvi Jaiswal": {
+      "runs": 51,
+      "balls": 27,
+      "role": "BAT"
+    },
+    "Vaibhav Sooryavanshi": {
+      "runs": 43,
+      "balls": 16,
+      "role": "BAT"
+    },
+    "Dhruv Jurel": {
+      "runs": 16,
+      "balls": 20,
+      "role": "BAT"
+    },
+    "Riyan Parag": {
+      "runs": 29,
+      "balls": 16,
+      "role": "BAT"
+    },
+    "Donovan Ferreira": {
+      "runs": 52,
+      "balls": 26,
+      "role": "BAT"
+    },
+    "Shubham Dubey": {
+      "runs": 31,
+      "balls": 12,
+      "role": "BAT"
+    },
+    "Arshdeep Singh": {
+      "wickets": 1,
+      "runs_conceded": 68,
+      "role": "BOWL"
+    },
+    "Lockie Ferguson": {
+      "wickets": 0,
+      "runs_conceded": 57,
+      "role": "BOWL"
+    },
+    "Marco Jansen": {
+      "wickets": 0,
+      "runs_conceded": 41,
+      "role": "BOWL"
+    },
+    "Harpreet Brar": {
+      "wickets": 0,
+      "runs_conceded": 25,
+      "role": "BOWL"
+    },
+    "Yuzvendra Chahal": {
+      "wickets": 3,
+      "runs_conceded": 36,
+      "role": "BOWL"
+    }
+  }
+}

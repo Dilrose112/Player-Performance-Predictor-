@@ -1,0 +1,129 @@
+{
+  "winner": "DC",
+  "margin": "6 wkts",
+  "home_score": "175/8 (20)",
+  "away_score": "179/4 (19.5)",
+  "summary": "Delhi Capitals won by 6 wkts",
+  "player_scores": {
+    "Philip Salt": {
+      "runs": 63,
+      "balls": 38,
+      "role": "BAT"
+    },
+    "Virat Kohli": {
+      "runs": 19,
+      "balls": 13,
+      "role": "BAT"
+    },
+    "Devdutt Padikkal": {
+      "runs": 18,
+      "balls": 13,
+      "role": "BAT"
+    },
+    "Rajat Patidar": {
+      "runs": 8,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Tim David": {
+      "runs": 26,
+      "balls": 17,
+      "role": "BAT"
+    },
+    "Jitesh Sharma": {
+      "runs": 14,
+      "balls": 20,
+      "role": "BAT"
+    },
+    "Romario Shepherd": {
+      "wickets": 0,
+      "runs_conceded": 17,
+      "role": "BOWL"
+    },
+    "Krunal Pandya": {
+      "wickets": 1,
+      "runs_conceded": 24,
+      "role": "BOWL"
+    },
+    "Rasikh Salam Dar": {
+      "wickets": 0,
+      "runs_conceded": 40,
+      "role": "BOWL"
+    },
+    "Bhuvneshwar Kumar": {
+      "wickets": 3,
+      "runs_conceded": 26,
+      "role": "BOWL"
+    },
+    "Auqib Nabi Dar": {
+      "wickets": 0,
+      "runs_conceded": 36,
+      "role": "BOWL"
+    },
+    "Mukesh Kumar": {
+      "wickets": 1,
+      "runs_conceded": 32,
+      "role": "BOWL"
+    },
+    "Lungi Ngidi": {
+      "wickets": 2,
+      "runs_conceded": 39,
+      "role": "BOWL"
+    },
+    "Kuldeep Yadav": {
+      "wickets": 2,
+      "runs_conceded": 32,
+      "role": "BOWL"
+    },
+    "T Natarajan": {
+      "wickets": 0,
+      "runs_conceded": 16,
+      "role": "BOWL"
+    },
+    "Axar Patel": {
+      "runs": 26,
+      "balls": 19,
+      "role": "BAT"
+    },
+    "Pathum Nissanka": {
+      "runs": 1,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "KL Rahul": {
+      "runs": 57,
+      "balls": 34,
+      "role": "BAT"
+    },
+    "Karun Nair": {
+      "runs": 5,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Sameer Rizvi": {
+      "runs": 2,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Tristan Stubbs": {
+      "runs": 60,
+      "balls": 47,
+      "role": "BAT"
+    },
+    "David Miller": {
+      "runs": 22,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Josh Hazlewood": {
+      "wickets": 0,
+      "runs_conceded": 38,
+      "role": "BOWL"
+    },
+    "Suyash Sharma": {
+      "wickets": 0,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    }
+  }
+}

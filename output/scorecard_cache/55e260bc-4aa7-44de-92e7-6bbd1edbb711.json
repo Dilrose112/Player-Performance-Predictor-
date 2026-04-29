@@ -1,0 +1,129 @@
+{
+  "winner": "RCB",
+  "margin": "5 wkts",
+  "home_score": "146/10 (20)",
+  "away_score": "149/5 (15.1)",
+  "summary": "Royal Challengers Bengaluru won by 5 wkts",
+  "player_scores": {
+    "Mitchell Marsh": {
+      "runs": 40,
+      "balls": 32,
+      "role": "BAT"
+    },
+    "Aiden Markram": {
+      "runs": 12,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Rishabh Pant": {
+      "runs": 1,
+      "balls": 6,
+      "role": "BAT"
+    },
+    "Nicholas Pooran": {
+      "runs": 1,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "Ayush Badoni": {
+      "runs": 38,
+      "balls": 24,
+      "role": "BAT"
+    },
+    "Abdul Samad": {
+      "runs": 0,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Mukul Choudhary": {
+      "runs": 39,
+      "balls": 28,
+      "role": "BAT"
+    },
+    "George Linde": {
+      "wickets": 0,
+      "runs_conceded": 9,
+      "role": "BOWL"
+    },
+    "Mohammed Shami": {
+      "wickets": 0,
+      "runs_conceded": 30,
+      "role": "BOWL"
+    },
+    "Avesh Khan": {
+      "wickets": 2,
+      "runs_conceded": 23,
+      "role": "BOWL"
+    },
+    "Digvesh Singh Rathi": {
+      "wickets": 0,
+      "runs_conceded": 51,
+      "role": "BOWL"
+    },
+    "Bhuvneshwar Kumar": {
+      "wickets": 3,
+      "runs_conceded": 27,
+      "role": "BOWL"
+    },
+    "Josh Hazlewood": {
+      "wickets": 1,
+      "runs_conceded": 20,
+      "role": "BOWL"
+    },
+    "Rasikh Salam Dar": {
+      "wickets": 4,
+      "runs_conceded": 24,
+      "role": "BOWL"
+    },
+    "Krunal Pandya": {
+      "wickets": 2,
+      "runs_conceded": 38,
+      "role": "BOWL"
+    },
+    "Suyash Sharma": {
+      "wickets": 0,
+      "runs_conceded": 34,
+      "role": "BOWL"
+    },
+    "Philip Salt": {
+      "runs": 7,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Virat Kohli": {
+      "runs": 49,
+      "balls": 34,
+      "role": "BAT"
+    },
+    "Devdutt Padikkal": {
+      "runs": 10,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Rajat Patidar": {
+      "runs": 27,
+      "balls": 13,
+      "role": "BAT"
+    },
+    "Jitesh Sharma": {
+      "runs": 23,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Tim David": {
+      "runs": 14,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Romario Shepherd": {
+      "runs": 14,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Prince Yadav": {
+      "wickets": 3,
+      "runs_conceded": 32,
+      "role": "BOWL"
+    }
+  }
+}

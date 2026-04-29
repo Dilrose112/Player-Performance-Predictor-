@@ -1,0 +1,129 @@
+{
+  "winner": "CSK",
+  "margin": "32 runs",
+  "home_score": "192/5 (20)",
+  "away_score": "160/7 (20)",
+  "summary": "Chennai Super Kings won by 32 runs",
+  "player_scores": {
+    "Sanju Samson": {
+      "runs": 48,
+      "balls": 32,
+      "role": "BAT"
+    },
+    "Ruturaj Gaikwad": {
+      "runs": 7,
+      "balls": 6,
+      "role": "BAT"
+    },
+    "Ayush Mhatre": {
+      "runs": 38,
+      "balls": 17,
+      "role": "BAT"
+    },
+    "Dewald Brevis": {
+      "runs": 41,
+      "balls": 29,
+      "role": "BAT"
+    },
+    "Sarfaraz Khan": {
+      "runs": 23,
+      "balls": 18,
+      "role": "BAT"
+    },
+    "Shivam Dube": {
+      "runs": 13,
+      "balls": 12,
+      "role": "BAT"
+    },
+    "Jamie Overton": {
+      "wickets": 0,
+      "runs_conceded": 32,
+      "role": "BOWL"
+    },
+    "Vaibhav Arora": {
+      "wickets": 1,
+      "runs_conceded": 55,
+      "role": "BOWL"
+    },
+    "Cameron Green": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Anukul Roy": {
+      "runs": 1,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Sunil Narine": {
+      "runs": 24,
+      "balls": 17,
+      "role": "BAT"
+    },
+    "Varun Chakaravarthy": {
+      "wickets": 0,
+      "runs_conceded": 26,
+      "role": "BOWL"
+    },
+    "Kartik Tyagi": {
+      "wickets": 2,
+      "runs_conceded": 35,
+      "role": "BOWL"
+    },
+    "Finn Allen": {
+      "runs": 1,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Ajinkya Rahane": {
+      "runs": 28,
+      "balls": 22,
+      "role": "BAT"
+    },
+    "Angkrish Raghuvanshi": {
+      "runs": 27,
+      "balls": 19,
+      "role": "BAT"
+    },
+    "Rinku Singh": {
+      "runs": 6,
+      "balls": 12,
+      "role": "BAT"
+    },
+    "Rovman Powell": {
+      "runs": 31,
+      "balls": 22,
+      "role": "BAT"
+    },
+    "Ramandeep Singh": {
+      "runs": 35,
+      "balls": 23,
+      "role": "BAT"
+    },
+    "Khaleel Ahmed": {
+      "wickets": 1,
+      "runs_conceded": 24,
+      "role": "BOWL"
+    },
+    "Anshul Kamboj": {
+      "wickets": 2,
+      "runs_conceded": 32,
+      "role": "BOWL"
+    },
+    "Akeal Hosein": {
+      "wickets": 1,
+      "runs_conceded": 26,
+      "role": "BOWL"
+    },
+    "Noor Ahmad": {
+      "wickets": 3,
+      "runs_conceded": 21,
+      "role": "BOWL"
+    },
+    "Gurjapneet Singh": {
+      "wickets": 0,
+      "runs_conceded": 23,
+      "role": "BOWL"
+    }
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "winner": "RCB",
+  "margin": "18 runs",
+  "home_score": "240/4 (20)",
+  "away_score": "222/5 (20)",
+  "summary": "Royal Challengers Bengaluru won by 18 runs",
+  "player_scores": {
+    "Philip Salt": {
+      "runs": 78,
+      "balls": 36,
+      "role": "BAT"
+    },
+    "Virat Kohli": {
+      "runs": 50,
+      "balls": 38,
+      "role": "BAT"
+    },
+    "Rajat Patidar": {
+      "runs": 53,
+      "balls": 20,
+      "role": "BAT"
+    },
+    "Tim David": {
+      "runs": 34,
+      "balls": 16,
+      "role": "BAT"
+    },
+    "Jitesh Sharma": {
+      "runs": 10,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Romario Shepherd": {
+      "wickets": 0,
+      "runs_conceded": 28,
+      "role": "BOWL"
+    },
+    "Trent Boult": {
+      "wickets": 1,
+      "runs_conceded": 50,
+      "role": "BOWL"
+    },
+    "Hardik Pandya": {
+      "runs": 40,
+      "balls": 22,
+      "role": "BAT"
+    },
+    "Jasprit Bumrah": {
+      "wickets": 0,
+      "runs_conceded": 35,
+      "role": "BOWL"
+    },
+    "Mitchell Santner": {
+      "runs": 8,
+      "balls": 6,
+      "role": "BAT"
+    },
+    "Mayank Markande": {
+      "wickets": 0,
+      "runs_conceded": 40,
+      "role": "BOWL"
+    },
+    "Shardul Thakur": {
+      "wickets": 1,
+      "runs_conceded": 32,
+      "role": "BOWL"
+    },
+    "Ryan Rickelton": {
+      "runs": 37,
+      "balls": 22,
+      "role": "BAT"
+    },
+    "Rohit Sharma": {
+      "runs": 19,
+      "balls": 13,
+      "role": "BAT"
+    },
+    "Suryakumar Yadav": {
+      "runs": 33,
+      "balls": 22,
+      "role": "BAT"
+    },
+    "Tilak Varma": {
+      "runs": 1,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Sherfane Rutherford": {
+      "runs": 71,
+      "balls": 31,
+      "role": "BAT"
+    },
+    "Naman Dhir": {
+      "runs": 1,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Jacob Duffy": {
+      "wickets": 1,
+      "runs_conceded": 58,
+      "role": "BOWL"
+    },
+    "Bhuvneshwar Kumar": {
+      "wickets": 0,
+      "runs_conceded": 38,
+      "role": "BOWL"
+    },
+    "Rasikh Salam Dar": {
+      "wickets": 1,
+      "runs_conceded": 23,
+      "role": "BOWL"
+    },
+    "Krunal Pandya": {
+      "wickets": 1,
+      "runs_conceded": 26,
+      "role": "BOWL"
+    },
+    "Suyash Sharma": {
+      "wickets": 2,
+      "runs_conceded": 47,
+      "role": "BOWL"
+    }
+  }
+}

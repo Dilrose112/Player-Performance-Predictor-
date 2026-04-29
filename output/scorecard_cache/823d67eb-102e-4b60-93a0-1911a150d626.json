@@ -1,0 +1,119 @@
+{
+  "winner": "GT",
+  "margin": "7 wkts",
+  "home_score": "164/8 (20)",
+  "away_score": "165/3 (18.4)",
+  "summary": "Gujarat Titans won by 7 wkts",
+  "player_scores": {
+    "Aiden Markram": {
+      "wickets": 0,
+      "runs_conceded": 15,
+      "role": "BOWL"
+    },
+    "Mitchell Marsh": {
+      "runs": 11,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Rishabh Pant": {
+      "runs": 18,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Ayush Badoni": {
+      "runs": 9,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Nicholas Pooran": {
+      "runs": 19,
+      "balls": 21,
+      "role": "BAT"
+    },
+    "Abdul Samad": {
+      "runs": 18,
+      "balls": 22,
+      "role": "BAT"
+    },
+    "Mukul Choudhary": {
+      "runs": 18,
+      "balls": 14,
+      "role": "BAT"
+    },
+    "George Linde": {
+      "wickets": 0,
+      "runs_conceded": 28,
+      "role": "BOWL"
+    },
+    "Mohammed Shami": {
+      "wickets": 1,
+      "runs_conceded": 36,
+      "role": "BOWL"
+    },
+    "Avesh Khan": {
+      "wickets": 0,
+      "runs_conceded": 24,
+      "role": "BOWL"
+    },
+    "Mohammed Siraj": {
+      "wickets": 1,
+      "runs_conceded": 19,
+      "role": "BOWL"
+    },
+    "Kagiso Rabada": {
+      "wickets": 1,
+      "runs_conceded": 54,
+      "role": "BOWL"
+    },
+    "Ashok Sharma": {
+      "wickets": 2,
+      "runs_conceded": 32,
+      "role": "BOWL"
+    },
+    "Prasidh Krishna": {
+      "wickets": 4,
+      "runs_conceded": 28,
+      "role": "BOWL"
+    },
+    "Rashid Khan": {
+      "wickets": 0,
+      "runs_conceded": 25,
+      "role": "BOWL"
+    },
+    "Sai Sudharsan": {
+      "runs": 15,
+      "balls": 14,
+      "role": "BAT"
+    },
+    "Shubman Gill": {
+      "runs": 56,
+      "balls": 40,
+      "role": "BAT"
+    },
+    "Jos Buttler": {
+      "runs": 60,
+      "balls": 37,
+      "role": "BAT"
+    },
+    "Washington Sundar": {
+      "runs": 21,
+      "balls": 13,
+      "role": "BAT"
+    },
+    "Rahul Tewatia": {
+      "runs": 10,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Prince Yadav": {
+      "wickets": 1,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "Digvesh Singh Rathi": {
+      "wickets": 1,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    }
+  }
+}

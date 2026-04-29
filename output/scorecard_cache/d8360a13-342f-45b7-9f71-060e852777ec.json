@@ -1,0 +1,129 @@
+{
+  "winner": "SRH",
+  "margin": "57 runs",
+  "home_score": "216/6 (20)",
+  "away_score": "159/10 (19)",
+  "summary": "Sunrisers Hyderabad won by 57 runs",
+  "player_scores": {
+    "Abhishek Sharma": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Travis Head": {
+      "runs": 18,
+      "balls": 18,
+      "role": "BAT"
+    },
+    "Ishan Kishan": {
+      "runs": 91,
+      "balls": 44,
+      "role": "BAT"
+    },
+    "Heinrich Klaasen": {
+      "runs": 40,
+      "balls": 26,
+      "role": "BAT"
+    },
+    "Nitish Kumar Reddy": {
+      "wickets": 0,
+      "runs_conceded": 19,
+      "role": "BOWL"
+    },
+    "Salil Arora": {
+      "runs": 24,
+      "balls": 13,
+      "role": "BAT"
+    },
+    "Aniket Verma": {
+      "runs": 6,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Harsh Dubey": {
+      "wickets": 0,
+      "runs_conceded": 22,
+      "role": "BOWL"
+    },
+    "Jofra Archer": {
+      "runs": 2,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Nandre Burger": {
+      "runs": 3,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Sandeep Sharma": {
+      "wickets": 1,
+      "runs_conceded": 52,
+      "role": "BOWL"
+    },
+    "Tushar Deshpande": {
+      "runs": 25,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Riyan Parag": {
+      "runs": 4,
+      "balls": 6,
+      "role": "BAT"
+    },
+    "Ravi Bishnoi": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Yashasvi Jaiswal": {
+      "runs": 1,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Vaibhav Sooryavanshi": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Dhruv Jurel": {
+      "runs": 0,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Lhuan-dre Pretorius": {
+      "runs": 0,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Ravindra Jadeja": {
+      "runs": 45,
+      "balls": 32,
+      "role": "BAT"
+    },
+    "Donovan Ferreira": {
+      "runs": 69,
+      "balls": 44,
+      "role": "BAT"
+    },
+    "Praful Hinge": {
+      "wickets": 4,
+      "runs_conceded": 34,
+      "role": "BOWL"
+    },
+    "Sakib Hussain": {
+      "wickets": 4,
+      "runs_conceded": 24,
+      "role": "BOWL"
+    },
+    "Eshan Malinga": {
+      "wickets": 2,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "Shivang Kumar": {
+      "wickets": 0,
+      "runs_conceded": 28,
+      "role": "BOWL"
+    }
+  }
+}

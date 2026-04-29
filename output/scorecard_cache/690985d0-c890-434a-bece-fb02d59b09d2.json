@@ -1,0 +1,119 @@
+{
+  "winner": "GT",
+  "margin": "8 wkts",
+  "home_score": "158/7 (20)",
+  "away_score": "162/2 (16.4)",
+  "summary": "Gujarat Titans won by 8 wkts",
+  "player_scores": {
+    "Sanju Samson": {
+      "runs": 11,
+      "balls": 15,
+      "role": "BAT"
+    },
+    "Ruturaj Gaikwad": {
+      "runs": 74,
+      "balls": 60,
+      "role": "BAT"
+    },
+    "Urvil Patel": {
+      "runs": 4,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Sarfaraz Khan": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Dewald Brevis": {
+      "runs": 2,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Shivam Dube": {
+      "wickets": 0,
+      "runs_conceded": 7,
+      "role": "BOWL"
+    },
+    "Kartik Sharma": {
+      "runs": 15,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Jamie Overton": {
+      "wickets": 0,
+      "runs_conceded": 28,
+      "role": "BOWL"
+    },
+    "Akeal Hosein": {
+      "wickets": 1,
+      "runs_conceded": 46,
+      "role": "BOWL"
+    },
+    "Mohammed Siraj": {
+      "wickets": 1,
+      "runs_conceded": 23,
+      "role": "BOWL"
+    },
+    "Kagiso Rabada": {
+      "wickets": 3,
+      "runs_conceded": 25,
+      "role": "BOWL"
+    },
+    "Manav Suthar": {
+      "wickets": 1,
+      "runs_conceded": 22,
+      "role": "BOWL"
+    },
+    "Jason Holder": {
+      "wickets": 0,
+      "runs_conceded": 22,
+      "role": "BOWL"
+    },
+    "Arshad Khan": {
+      "wickets": 2,
+      "runs_conceded": 43,
+      "role": "BOWL"
+    },
+    "Rashid Khan": {
+      "wickets": 0,
+      "runs_conceded": 21,
+      "role": "BOWL"
+    },
+    "Sai Sudharsan": {
+      "runs": 87,
+      "balls": 46,
+      "role": "BAT"
+    },
+    "Shubman Gill": {
+      "runs": 33,
+      "balls": 23,
+      "role": "BAT"
+    },
+    "Jos Buttler": {
+      "runs": 39,
+      "balls": 30,
+      "role": "BAT"
+    },
+    "Washington Sundar": {
+      "runs": 1,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Anshul Kamboj": {
+      "wickets": 0,
+      "runs_conceded": 16,
+      "role": "BOWL"
+    },
+    "Gurjapneet Singh": {
+      "wickets": 0,
+      "runs_conceded": 36,
+      "role": "BOWL"
+    },
+    "Noor Ahmad": {
+      "wickets": 1,
+      "runs_conceded": 29,
+      "role": "BOWL"
+    }
+  }
+}

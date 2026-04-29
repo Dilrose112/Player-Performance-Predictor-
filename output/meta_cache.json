@@ -30,7 +30,7 @@
       "away": "RR",
       "venue": "Rajiv Gandhi International Stadium",
       "cricapi_id": "d8360a13-342f-45b7-9f71-060e852777ec",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -52,7 +52,7 @@
       "away": "RCB",
       "venue": "Arun Jaitley Stadium",
       "cricapi_id": "63c19cfb-3544-41df-8bd8-10049818a6c5",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -74,7 +74,7 @@
       "away": "RCB",
       "venue": "Wankhede Stadium",
       "cricapi_id": "b85f1b39-5766-46c7-9cea-14a64e0750b3",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -85,7 +85,7 @@
       "away": "KKR",
       "venue": "Narendra Modi Stadium",
       "cricapi_id": "b481f31f-5ad7-4218-8a6e-16fc34d38048",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -96,7 +96,7 @@
       "away": "GT",
       "venue": "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium, Lucknow",
       "cricapi_id": "823d67eb-102e-4b60-93a0-1911a150d626",
-      "status": "live",
+      "status": "completed",
       "result": null
     },
     {
@@ -129,7 +129,7 @@
       "away": "MI",
       "venue": "Narendra Modi Stadium",
       "cricapi_id": "97adf747-1086-489e-b892-3823ebffa555",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -151,7 +151,7 @@
       "away": "DC",
       "venue": "Rajiv Gandhi International Stadium",
       "cricapi_id": "e4f4995f-036e-451d-861e-42567c82d87f",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -195,7 +195,7 @@
       "away": "GT",
       "venue": "M Chinnaswamy Stadium",
       "cricapi_id": "ed074a44-a661-4727-83a7-4a33c2a05165",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -217,7 +217,7 @@
       "away": "KKR",
       "venue": "MA Chidambaram Stadium",
       "cricapi_id": "8b691738-66b3-4774-a7fd-5a2113a54ca5",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -272,7 +272,7 @@
       "away": "LSG",
       "venue": "M Chinnaswamy Stadium",
       "cricapi_id": "55e260bc-4aa7-44de-92e7-6bbd1edbb711",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -290,9 +290,9 @@
       "match": 27,
       "date": "2026-05-21",
       "format": "ipl",
-      "home": "CSK",
-      "away": "GT",
-      "venue": "MA Chidambaram Stadium",
+      "home": "GT",
+      "away": "CSK",
+      "venue": "Narendra Modi Stadium",
       "cricapi_id": "fd660ab1-c4bf-4c0f-b1b9-7232361cd1e8",
       "status": "upcoming",
       "result": null
@@ -305,7 +305,7 @@
       "away": "RR",
       "venue": "Maharaja Yadavindra Singh International Cricket Stadium, Mullanpur, New Chandigarh",
       "cricapi_id": "8fbd3678-6299-4e67-8c28-74d4952b6ae7",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -360,7 +360,7 @@
       "away": "SRH",
       "venue": "Sawai Mansingh Stadium",
       "cricapi_id": "3d5968a6-4851-410c-b66a-811b92406933",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -382,7 +382,7 @@
       "away": "CSK",
       "venue": "Wankhede Stadium",
       "cricapi_id": "50520170-15b4-49e3-8180-835202e8f623",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -459,7 +459,7 @@
       "away": "CSK",
       "venue": "Rajiv Gandhi International Stadium",
       "cricapi_id": "c5bf2a95-1855-463d-accf-9c1db88418cd",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -481,7 +481,7 @@
       "away": "DC",
       "venue": "M Chinnaswamy Stadium",
       "cricapi_id": "549ba395-31e9-477b-ba2c-a2a0dd1cbec9",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -514,7 +514,7 @@
       "away": "RR",
       "venue": "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium, Lucknow",
       "cricapi_id": "b8ec0cee-4d2f-456d-a815-a987e806f99a",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -525,7 +525,7 @@
       "away": "PBKS",
       "venue": "Arun Jaitley Stadium",
       "cricapi_id": "7bd928c0-1961-4fb5-a7a7-acd61c4a1586",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -536,7 +536,7 @@
       "away": "PBKS",
       "venue": "Wankhede Stadium",
       "cricapi_id": "6289a2c9-75ee-49e1-9b83-ad7df53dcc21",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -580,7 +580,7 @@
       "away": "KKR",
       "venue": "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium, Lucknow",
       "cricapi_id": "fbd861ca-4efb-4d1d-b46c-ba3bc334bce4",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -602,7 +602,7 @@
       "away": "LSG",
       "venue": "Maharaja Yadavindra Singh International Cricket Stadium, Mullanpur, New Chandigarh",
       "cricapi_id": "ca8f24c0-6eef-4f8e-b50f-c63fc2b1ca98",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -646,7 +646,7 @@
       "away": "RR",
       "venue": "Eden Gardens",
       "cricapi_id": "fb4d7e4a-c420-45f2-9f2f-d45ce094efbc",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -752,11 +752,11 @@
       "match": 69,
       "date": "2026-04-26",
       "format": "ipl",
-      "home": "GT",
-      "away": "CSK",
-      "venue": "Narendra Modi Stadium",
+      "home": "CSK",
+      "away": "GT",
+      "venue": "MA Chidambaram Stadium",
       "cricapi_id": "690985d0-c890-434a-bece-fb02d59b09d2",
-      "status": "upcoming",
+      "status": "completed",
       "result": null
     },
     {
@@ -773,5 +773,5 @@
   ],
   "ipl_matches_version": "2026-only",
   "t20i_upcoming": [],
-  "t20i_fetched_on": "2026-04-12"
+  "t20i_fetched_on": "2026-04-29"
 }
