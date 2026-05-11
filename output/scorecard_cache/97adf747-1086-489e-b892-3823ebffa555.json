@@ -1,8 +1,8 @@
 {
   "winner": "MI",
   "margin": "99 runs",
-  "home_score": "199/5 (20)",
-  "away_score": "100/10 (15.5)",
+  "home_score": "100/10 (15.5)",
+  "away_score": "199/5 (20)",
   "summary": "Mumbai Indians won by 99 runs",
   "player_scores": {
     "Quinton de Kock": {
@@ -125,5 +125,6 @@
       "runs_conceded": 16,
       "role": "BOWL"
     }
-  }
+  },
+  "score_order": "team"
 }

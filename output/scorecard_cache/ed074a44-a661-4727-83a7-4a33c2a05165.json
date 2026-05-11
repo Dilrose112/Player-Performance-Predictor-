@@ -1,8 +1,8 @@
 {
   "winner": "RCB",
   "margin": "5 wkts",
-  "home_score": "205/3 (20)",
-  "away_score": "206/5 (18.5)",
+  "home_score": "206/5 (18.5)",
+  "away_score": "205/3 (20)",
   "summary": "Royal Challengers Bengaluru won by 5 wkts",
   "player_scores": {
     "Sai Sudharsan": {
@@ -115,5 +115,6 @@
       "runs_conceded": 19,
       "role": "BOWL"
     }
-  }
+  },
+  "score_order": "team"
 }

@@ -1,8 +1,8 @@
 {
   "winner": "RCB",
   "margin": "18 runs",
-  "home_score": "240/4 (20)",
-  "away_score": "222/5 (20)",
+  "home_score": "222/5 (20)",
+  "away_score": "240/4 (20)",
   "summary": "Royal Challengers Bengaluru won by 18 runs",
   "player_scores": {
     "Philip Salt": {
@@ -120,5 +120,6 @@
       "runs_conceded": 47,
       "role": "BOWL"
     }
-  }
+  },
+  "score_order": "team"
 }

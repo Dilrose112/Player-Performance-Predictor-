@@ -1,8 +1,8 @@
 {
   "winner": "RR",
   "margin": "6 wkts",
-  "home_score": "201/8 (20)",
-  "away_score": "202/4 (18)",
+  "home_score": "202/4 (18)",
+  "away_score": "201/8 (20)",
   "summary": "Rajasthan Royals won by 6 wkts",
   "player_scores": {
     "Philip Salt": {
@@ -120,5 +120,6 @@
       "runs_conceded": 54,
       "role": "BOWL"
     }
-  }
+  },
+  "score_order": "team"
 }

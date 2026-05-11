@@ -1,0 +1,130 @@
+{
+  "winner": "GT",
+  "margin": "4 wkts",
+  "home_score": "167/6 (19.5)",
+  "away_score": "163/9 (20)",
+  "summary": "Gujarat Titans won by 4 wkts",
+  "player_scores": {
+    "Priyansh Arya": {
+      "runs": 2,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Prabhsimran Singh": {
+      "runs": 15,
+      "balls": 14,
+      "role": "BAT"
+    },
+    "Cooper Connolly": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Shreyas Iyer": {
+      "runs": 19,
+      "balls": 21,
+      "role": "BAT"
+    },
+    "Nehal Wadhera": {
+      "runs": 0,
+      "balls": 6,
+      "role": "BAT"
+    },
+    "Suryansh Shedge": {
+      "runs": 57,
+      "balls": 29,
+      "role": "BAT"
+    },
+    "Marcus Stoinis": {
+      "wickets": 1,
+      "runs_conceded": 26,
+      "role": "BOWL"
+    },
+    "Marco Jansen": {
+      "wickets": 1,
+      "runs_conceded": 33,
+      "role": "BOWL"
+    },
+    "Xavier Bartlett": {
+      "wickets": 0,
+      "runs_conceded": 38,
+      "role": "BOWL"
+    },
+    "Vijaykumar Vyshak": {
+      "wickets": 2,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "Arshdeep Singh": {
+      "wickets": 2,
+      "runs_conceded": 24,
+      "role": "BOWL"
+    },
+    "Mohammed Siraj": {
+      "wickets": 2,
+      "runs_conceded": 28,
+      "role": "BOWL"
+    },
+    "Kagiso Rabada": {
+      "wickets": 2,
+      "runs_conceded": 22,
+      "role": "BOWL"
+    },
+    "Jason Holder": {
+      "runs": 5,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "Arshad Khan": {
+      "runs": 8,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Rashid Khan": {
+      "wickets": 1,
+      "runs_conceded": 32,
+      "role": "BOWL"
+    },
+    "Manav Suthar": {
+      "wickets": 0,
+      "runs_conceded": 27,
+      "role": "BOWL"
+    },
+    "Sai Sudharsan": {
+      "runs": 57,
+      "balls": 41,
+      "role": "BAT"
+    },
+    "Shubman Gill": {
+      "runs": 5,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Jos Buttler": {
+      "runs": 26,
+      "balls": 22,
+      "role": "BAT"
+    },
+    "Nishant Sindhu": {
+      "runs": 15,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Washington Sundar": {
+      "runs": 40,
+      "balls": 23,
+      "role": "BAT"
+    },
+    "Rahul Tewatia": {
+      "runs": 2,
+      "balls": 6,
+      "role": "BAT"
+    },
+    "Yuzvendra Chahal": {
+      "wickets": 0,
+      "runs_conceded": 13,
+      "role": "BOWL"
+    }
+  },
+  "score_order": "team"
+}

@@ -1,8 +1,8 @@
 {
   "winner": "MI",
   "margin": "6 wkts",
-  "home_score": "220/4 (20)",
-  "away_score": "224/4 (19.1)",
+  "home_score": "224/4 (19.1)",
+  "away_score": "220/4 (20)",
   "summary": "Mumbai Indians won by 6 wkts",
   "player_scores": {
     "Ajinkya Rahane": {
@@ -120,5 +120,6 @@
       "runs_conceded": 15,
       "role": "BOWL"
     }
-  }
+  },
+  "score_order": "team"
 }

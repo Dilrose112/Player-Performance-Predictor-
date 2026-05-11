@@ -1,0 +1,120 @@
+{
+  "winner": "SRH",
+  "margin": "33 runs",
+  "home_score": "235/4 (20)",
+  "away_score": "202/7 (20)",
+  "summary": "Sunrisers Hyderabad won by 33 runs",
+  "player_scores": {
+    "Abhishek Sharma": {
+      "runs": 35,
+      "balls": 13,
+      "role": "BAT"
+    },
+    "Travis Head": {
+      "runs": 38,
+      "balls": 19,
+      "role": "BAT"
+    },
+    "Ishan Kishan": {
+      "runs": 55,
+      "balls": 32,
+      "role": "BAT"
+    },
+    "Heinrich Klaasen": {
+      "runs": 69,
+      "balls": 43,
+      "role": "BAT"
+    },
+    "Nitish Kumar Reddy": {
+      "wickets": 1,
+      "runs_conceded": 11,
+      "role": "BOWL"
+    },
+    "Arshdeep Singh": {
+      "wickets": 1,
+      "runs_conceded": 43,
+      "role": "BOWL"
+    },
+    "Marco Jansen": {
+      "runs": 19,
+      "balls": 16,
+      "role": "BAT"
+    },
+    "Lockie Ferguson": {
+      "wickets": 1,
+      "runs_conceded": 41,
+      "role": "BOWL"
+    },
+    "Yuzvendra Chahal": {
+      "wickets": 1,
+      "runs_conceded": 32,
+      "role": "BOWL"
+    },
+    "Vijaykumar Vyshak": {
+      "runs": 1,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Priyansh Arya": {
+      "runs": 1,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Prabhsimran Singh": {
+      "runs": 3,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Cooper Connolly": {
+      "runs": 107,
+      "balls": 59,
+      "role": "BAT"
+    },
+    "Shreyas Iyer": {
+      "runs": 5,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Marcus Stoinis": {
+      "runs": 28,
+      "balls": 14,
+      "role": "BAT"
+    },
+    "Suryansh Shedge": {
+      "runs": 25,
+      "balls": 17,
+      "role": "BAT"
+    },
+    "Shashank Singh": {
+      "runs": 4,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Pat Cummins": {
+      "wickets": 2,
+      "runs_conceded": 34,
+      "role": "BOWL"
+    },
+    "Eshan Malinga": {
+      "wickets": 1,
+      "runs_conceded": 36,
+      "role": "BOWL"
+    },
+    "Sakib Hussain": {
+      "wickets": 1,
+      "runs_conceded": 40,
+      "role": "BOWL"
+    },
+    "Shivang Kumar": {
+      "wickets": 2,
+      "runs_conceded": 45,
+      "role": "BOWL"
+    },
+    "Harsh Dubey": {
+      "wickets": 0,
+      "runs_conceded": 36,
+      "role": "BOWL"
+    }
+  },
+  "score_order": "team"
+}

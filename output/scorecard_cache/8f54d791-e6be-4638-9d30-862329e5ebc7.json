@@ -1,8 +1,8 @@
 {
   "winner": "RR",
   "margin": "6 runs",
-  "home_score": "210/6 (20)",
-  "away_score": "204/8 (20)",
+  "home_score": "204/8 (20)",
+  "away_score": "210/6 (20)",
   "summary": "Rajasthan Royals won by 6 runs",
   "player_scores": {
     "Yashasvi Jaiswal": {
@@ -125,5 +125,6 @@
       "runs_conceded": 41,
       "role": "BOWL"
     }
-  }
+  },
+  "score_order": "team"
 }

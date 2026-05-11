@@ -1,0 +1,120 @@
+{
+  "winner": "KKR",
+  "margin": "7 wkts",
+  "home_score": "165/10 (19)",
+  "away_score": "169/3 (18.2)",
+  "summary": "Kolkata Knight Riders won by 7 wkts",
+  "player_scores": {
+    "Abhishek Sharma": {
+      "wickets": 0,
+      "runs_conceded": 14,
+      "role": "BOWL"
+    },
+    "Travis Head": {
+      "runs": 61,
+      "balls": 28,
+      "role": "BAT"
+    },
+    "Ishan Kishan": {
+      "runs": 42,
+      "balls": 29,
+      "role": "BAT"
+    },
+    "Heinrich Klaasen": {
+      "runs": 11,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Smaran Ravichandran": {
+      "runs": 4,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Aniket Verma": {
+      "runs": 6,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Salil Arora": {
+      "runs": 2,
+      "balls": 6,
+      "role": "BAT"
+    },
+    "Pat Cummins": {
+      "wickets": 1,
+      "runs_conceded": 47,
+      "role": "BOWL"
+    },
+    "Shivang Kumar": {
+      "wickets": 1,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "Harshal Patel": {
+      "wickets": 0,
+      "runs_conceded": 17,
+      "role": "BOWL"
+    },
+    "Eshan Malinga": {
+      "wickets": 0,
+      "runs_conceded": 42,
+      "role": "BOWL"
+    },
+    "Sunil Narine": {
+      "wickets": 2,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "Vaibhav Arora": {
+      "wickets": 1,
+      "runs_conceded": 25,
+      "role": "BOWL"
+    },
+    "Kartik Tyagi": {
+      "wickets": 2,
+      "runs_conceded": 30,
+      "role": "BOWL"
+    },
+    "Cameron Green": {
+      "runs": 3,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Varun Chakaravarthy": {
+      "wickets": 3,
+      "runs_conceded": 36,
+      "role": "BOWL"
+    },
+    "Anukul Roy": {
+      "wickets": 1,
+      "runs_conceded": 8,
+      "role": "BOWL"
+    },
+    "Ajinkya Rahane": {
+      "runs": 43,
+      "balls": 36,
+      "role": "BAT"
+    },
+    "Finn Allen": {
+      "runs": 29,
+      "balls": 13,
+      "role": "BAT"
+    },
+    "Angkrish Raghuvanshi": {
+      "runs": 59,
+      "balls": 47,
+      "role": "BAT"
+    },
+    "Rinku Singh": {
+      "runs": 22,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Sakib Hussain": {
+      "wickets": 1,
+      "runs_conceded": 17,
+      "role": "BOWL"
+    }
+  },
+  "score_order": "team"
+}

@@ -51,13 +51,14 @@ SCHEDULE_FILE   = OUTPUT_DIR / "schedule.json"
 for d in (OUTPUT_DIR, SC_CACHE_DIR):
     d.mkdir(exist_ok=True)
 
-API_KEY         = "83130e0e-f545-4b7b-8f76-d34c6f4715bc"
+API_KEY         = "af880336-99e8-46a0-8f8d-c3293a43cc79"
 BASE_URL        = "https://api.cricapi.com/v1"
 
 MIN_DELAY       = 1.5    # seconds between every API call
 META_CACHE_TTL  = 24     # hours before re-fetching series id / T20I list
 SCHED_CACHE_TTL = 6      # hours before load_schedule() considers schedule.json stale
 DEFAULT_SC_LIMIT = 5     # max new scorecard calls per run (CLI: --scorecard-limit)
+IPL_MATCHES_CACHE_VERSION = "2026-known-teams-v2"
 
 # Known fallback series IDs for IPL 2026
 # Primary: cricapi.com series ID (try to discover dynamically)
@@ -174,6 +175,22 @@ def _sc_save(cricapi_id: str, data: dict):
     with open(path, "w", encoding="utf-8") as fh:
         json.dump(data, fh, indent=2)
 
+
+def _load_existing_schedule() -> dict:
+    """
+    Load the current persisted schedule so sync can preserve completed match
+    results even when the API returns bare fixtures or unresolved playoff rows.
+    """
+    if not SCHEDULE_FILE.exists():
+        return {}
+    try:
+        with open(SCHEDULE_FILE, encoding="utf-8") as fh:
+            data = json.load(fh)
+        return data if isinstance(data, dict) else {}
+    except (OSError, json.JSONDecodeError) as exc:
+        log.warning("Could not load existing schedule for preservation: %s", exc)
+        return {}
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Normalisation
 # ─────────────────────────────────────────────────────────────────────────────
@@ -190,6 +207,19 @@ _TEAM_MAP = {
     "punjab kings":                "PBKS",
     "delhi capitals":              "DC",
     "lucknow super giants":        "LSG",
+}
+
+_IPL_CODES = {"RCB", "CSK", "MI", "KKR", "SRH", "RR", "GT", "PBKS", "DC", "LSG"}
+_PLACEHOLDER_TEAMS = {
+    "",
+    "tbd",
+    "tbc",
+    "to be decided",
+    "to be confirmed",
+    "winner of qualifier 1",
+    "winner of qualifier 2",
+    "loser of qualifier 1",
+    "winner of eliminator",
 }
 
 _VENUE_MAP = {
@@ -209,6 +239,17 @@ _VENUE_MAP = {
 
 def _norm_team(raw: str) -> str:
     return _TEAM_MAP.get(raw.strip().lower(), raw.strip())
+
+def _is_placeholder_team(raw: str) -> bool:
+    name = (raw or "").strip().lower()
+    return (
+        name in _PLACEHOLDER_TEAMS
+        or "to be decided" in name
+        or name.startswith(("winner of ", "loser of "))
+    )
+
+def _is_known_ipl_team(raw: str) -> bool:
+    return _norm_team(raw) in _IPL_CODES
 
 def _norm_venue(raw: str) -> str:
     low = raw.strip().lower()
@@ -237,6 +278,56 @@ def _infer_status(m: dict) -> str:
         return "live"
     return "upcoming"
 
+
+def _fmt_score(s: dict) -> str:
+    r, w, o = s.get("r", ""), s.get("w", ""), s.get("o", "")
+    return f"{r}/{w} ({o})" if r != "" else ""
+
+
+def _score_team(score: dict, teams: list[str]) -> str:
+    label = " ".join(
+        str(score.get(k, "") or "")
+        for k in ("team", "inning", "innings", "name")
+    ).lower()
+    for team in teams:
+        raw = (team or "").strip()
+        norm = _norm_team(raw)
+        if raw and raw.lower() in label:
+            return norm
+        if norm and norm.lower() in label.split():
+            return norm
+    return ""
+
+
+def _repair_score_order(result: dict | None, home: str, away: str) -> bool:
+    """
+    Older cached scorecards stored score[0] as home_score and score[1] as
+    away_score, but CricAPI score order is innings order. Use the result
+    margin to swap those old rows when the card order and batting order differ.
+    """
+    if not isinstance(result, dict):
+        return False
+    if result.get("score_order") == "team":
+        return False
+    home_score = result.get("home_score")
+    away_score = result.get("away_score")
+    winner = result.get("winner", "")
+    margin = (result.get("margin") or result.get("summary") or "").lower()
+    if not home_score or not away_score or not winner:
+        return False
+
+    winner = _norm_team(winner)
+    home = _norm_team(home)
+    away = _norm_team(away)
+    won_by_wickets = "wkt" in margin or "wicket" in margin
+    won_by_runs = "run" in margin and not won_by_wickets
+
+    should_swap = (winner == home and won_by_wickets) or (winner == away and won_by_runs)
+    if should_swap:
+        result["home_score"], result["away_score"] = away_score, home_score
+        result["score_order"] = "team"
+    return should_swap
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Phase 1 + 2 — IPL series  (2 API calls total, cached 24h)
 # ─────────────────────────────────────────────────────────────────────────────
@@ -252,7 +343,7 @@ def fetch_ipl_series() -> list[dict]:
     meta = _load_meta_cache()
 
     # Use cache if present and correctly versioned
-    if meta.get("ipl_matches") and meta.get("ipl_matches_version") == "2026-only":
+    if meta.get("ipl_matches") and meta.get("ipl_matches_version") == IPL_MATCHES_CACHE_VERSION:
         log.info("IPL series loaded from meta cache (%d matches)", len(meta["ipl_matches"]))
         return meta["ipl_matches"]
 
@@ -329,6 +420,14 @@ def fetch_ipl_series() -> list[dict]:
         teams = m.get("teams", [])
         if len(teams) < 2:
             continue
+        if (
+            _is_placeholder_team(teams[0])
+            or _is_placeholder_team(teams[1])
+            or not _is_known_ipl_team(teams[0])
+            or not _is_known_ipl_team(teams[1])
+        ):
+            log.info("Skipping unresolved/non-IPL fixture: %s vs %s", teams[0], teams[1])
+            continue
         mdate = _parse_date(m.get("dateTimeGMT", m.get("date", "")))
         if mdate < IPL_2026_START:
             skipped += 1
@@ -350,7 +449,7 @@ def fetch_ipl_series() -> list[dict]:
 
     if out:
         meta["ipl_matches"]         = out
-        meta["ipl_matches_version"] = "2026-only"
+        meta["ipl_matches_version"] = IPL_MATCHES_CACHE_VERSION
         _save_meta_cache(meta)
         log.info("Cached %d IPL 2026 matches", len(out))
     else:
@@ -434,7 +533,7 @@ def fetch_t20i_upcoming() -> list[dict]:
 # Phase 4 — Scorecard enrichment  (at most `limit` new API calls per run)
 # ─────────────────────────────────────────────────────────────────────────────
 
-def fetch_scorecard(cricapi_id: str) -> dict | None:
+def fetch_scorecard(cricapi_id: str, home: str = "", away: str = "") -> dict | None:
     """
     Fetches scorecard for one match.  Checks disk cache first — if found,
     returns immediately with zero API calls.
@@ -442,6 +541,8 @@ def fetch_scorecard(cricapi_id: str) -> dict | None:
     cached = _sc_cached(cricapi_id)
     if cached:
         log.info("Scorecard for %s loaded from disk cache", cricapi_id)
+        if home and away and _repair_score_order(cached, home, away):
+            _sc_save(cricapi_id, cached)
         return cached
 
     log.info("Fetching scorecard for %s…", cricapi_id)
@@ -475,11 +576,25 @@ def fetch_scorecard(cricapi_id: str) -> dict | None:
     # Innings scores
     scores = d.get("score", [])
     if isinstance(scores, list):
-        def _fmt(s):
-            r, w, o = s.get("r", ""), s.get("w", ""), s.get("o", "")
-            return f"{r}/{w} ({o})" if r else ""
-        result["home_score"] = _fmt(scores[0]) if len(scores) > 0 else ""
-        result["away_score"] = _fmt(scores[1]) if len(scores) > 1 else ""
+        teams = d.get("teams") or []
+        by_team = {}
+        for s in scores:
+            team = _score_team(s, teams)
+            if team:
+                by_team[team] = _fmt_score(s)
+
+        home_code = _norm_team(home)
+        away_code = _norm_team(away)
+        result["home_score"] = by_team.get(home_code, "")
+        result["away_score"] = by_team.get(away_code, "")
+        if result["home_score"] and result["away_score"]:
+            result["score_order"] = "team"
+
+        if not result["home_score"] or not result["away_score"]:
+            result["home_score"] = _fmt_score(scores[0]) if len(scores) > 0 else ""
+            result["away_score"] = _fmt_score(scores[1]) if len(scores) > 1 else ""
+            if not _repair_score_order(result, home, away):
+                result["score_order"] = "innings"
 
     # Per-player actuals
     ps: dict = {}
@@ -531,6 +646,10 @@ def enrich_completed(schedule: list[dict], limit: int = DEFAULT_SC_LIMIT) -> lis
         if not cid or match.get("date", "9999") > today:
             continue
 
+        if _repair_score_order(match.get("result"), match.get("home", ""), match.get("away", "")):
+            log.info("M%d %s vs %s — repaired score order",
+                     match["match"], match["home"], match["away"])
+
         # Already fully enriched in schedule.json
         if (match.get("result") or {}).get("player_scores"):
             continue
@@ -538,6 +657,8 @@ def enrich_completed(schedule: list[dict], limit: int = DEFAULT_SC_LIMIT) -> lis
         # Check disk cache first — zero API calls
         cached = _sc_cached(cid)
         if cached:
+            if _repair_score_order(cached, match.get("home", ""), match.get("away", "")):
+                _sc_save(cid, cached)
             match["result"] = cached
             log.info("M%d %s vs %s — scorecard from cache",
                      match["match"], match["home"], match["away"])
@@ -548,7 +669,7 @@ def enrich_completed(schedule: list[dict], limit: int = DEFAULT_SC_LIMIT) -> lis
             log.info("Scorecard limit (%d) reached — remaining matches queued for next run", limit)
             break
 
-        sc = fetch_scorecard(cid)   # _api call is inside, delay is enforced there
+        sc = fetch_scorecard(cid, match.get("home", ""), match.get("away", ""))   # _api call is inside, delay is enforced there
         if sc:
             match["result"] = sc
             new_calls += 1
@@ -563,6 +684,11 @@ def enrich_completed(schedule: list[dict], limit: int = DEFAULT_SC_LIMIT) -> lis
 
 def _key(m: dict) -> tuple:
     return (m.get("date", ""), m.get("home", ""), m.get("away", ""))
+
+
+def _has_result(m: dict) -> bool:
+    result = m.get("result")
+    return isinstance(result, dict) and bool(result)
 
 
 def _best_status(current: str, incoming: str, match_date: str) -> str:
@@ -582,22 +708,31 @@ def _best_status(current: str, incoming: str, match_date: str) -> str:
 
 def merge(seed: list[dict], fetched: list[dict]) -> list[dict]:
     idx    = {_key(m): i for i, m in enumerate(seed)}
+    id_idx = {m.get("cricapi_id", ""): i for i, m in enumerate(seed) if m.get("cricapi_id")}
     merged = [dict(m) for m in seed]
 
     for fm in fetched:
+        h, a = fm.get("home", ""), fm.get("away", "")
+        if _is_placeholder_team(h) or _is_placeholder_team(a):
+            continue
+
         k = _key(fm)
-        if k in idx:
-            i = idx[k]
-            merged[i].setdefault("cricapi_id", fm.get("cricapi_id", ""))
+        cid = fm.get("cricapi_id", "")
+        i = idx.get(k)
+        if i is None and cid:
+            i = id_idx.get(cid)
+
+        if i is not None:
+            if fm.get("cricapi_id") and not merged[i].get("cricapi_id"):
+                merged[i]["cricapi_id"] = fm["cricapi_id"]
             merged[i]["status"] = _best_status(
                 merged[i].get("status", "upcoming"),
                 fm.get("status", "upcoming"),
                 merged[i].get("date", ""),
             )
-            if fm.get("result") and not merged[i].get("result"):
+            if fm.get("result") and not _has_result(merged[i]):
                 merged[i]["result"] = fm["result"]
         else:
-            h, a = fm.get("home", ""), fm.get("away", "")
             if not h or not a or h == h.lower() or a == a.lower():
                 continue
             fm = dict(fm, match=len(merged) + 1)
@@ -606,6 +741,8 @@ def merge(seed: list[dict], fetched: list[dict]) -> list[dict]:
                 fm["status"] = "completed"
             merged.append(fm)
             idx[k] = len(merged) - 1
+            if cid:
+                id_idx[cid] = len(merged) - 1
 
     merged.sort(key=lambda m: m.get("date", "9999"))
     for i, m in enumerate(merged, start=1):
@@ -623,10 +760,12 @@ def sync_all(enrich: bool = True, scorecard_limit: int = DEFAULT_SC_LIMIT) -> di
     """
     log.info("=== cricapi sync  (limit=%d scorecards) ===", scorecard_limit)
     today = date.today().isoformat()
+    existing = _load_existing_schedule()
 
     # Phases 1+2: IPL series  (~2 calls, cached)
     fetched_ipl = fetch_ipl_series()
-    merged_ipl  = merge(list(IPL_SCHEDULE), fetched_ipl)
+    seed_ipl = existing.get("ipl") or IPL_SCHEDULE
+    merged_ipl  = merge(list(seed_ipl), fetched_ipl)
 
     # Guarantee: any match with a past date is 'completed', regardless of API lag
     for m in merged_ipl:
@@ -635,8 +774,11 @@ def sync_all(enrich: bool = True, scorecard_limit: int = DEFAULT_SC_LIMIT) -> di
 
     # Phase 3: T20I upcoming  (1 call, cached daily)
     fetched_t20i = fetch_t20i_upcoming()
-    seed_t20i    = [dict(m, status="completed" if m["date"] < today else "upcoming")
-                    for m in T20I_SCHEDULE]
+    seed_t20i_src = existing.get("t20i") or T20I_SCHEDULE
+    seed_t20i    = [
+        dict(m, status="completed" if m["date"] < today else m.get("status", "upcoming"))
+        for m in seed_t20i_src
+    ]
     merged_t20i  = merge(seed_t20i, fetched_t20i)
 
     # Phase 4: Scorecard enrichment  (≤ scorecard_limit NEW calls)

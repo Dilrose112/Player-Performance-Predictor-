@@ -1,8 +1,8 @@
 {
   "winner": "RCB",
   "margin": "5 wkts",
-  "home_score": "146/10 (20)",
-  "away_score": "149/5 (15.1)",
+  "home_score": "149/5 (15.1)",
+  "away_score": "146/10 (20)",
   "summary": "Royal Challengers Bengaluru won by 5 wkts",
   "player_scores": {
     "Mitchell Marsh": {
@@ -125,5 +125,6 @@
       "runs_conceded": 32,
       "role": "BOWL"
     }
-  }
+  },
+  "score_order": "team"
 }

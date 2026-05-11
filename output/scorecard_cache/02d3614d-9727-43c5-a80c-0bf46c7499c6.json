@@ -1,0 +1,125 @@
+{
+  "winner": "RCB",
+  "margin": "2 wkts",
+  "home_score": "167/8 (20)",
+  "away_score": "166/7 (20)",
+  "summary": "Royal Challengers Bengaluru won by 2 wkts",
+  "player_scores": {
+    "Ryan Rickelton": {
+      "runs": 2,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Rohit Sharma": {
+      "runs": 22,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Naman Dhir": {
+      "runs": 47,
+      "balls": 32,
+      "role": "BAT"
+    },
+    "Suryakumar Yadav": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Tilak Varma": {
+      "runs": 57,
+      "balls": 42,
+      "role": "BAT"
+    },
+    "Will Jacks": {
+      "wickets": 0,
+      "runs_conceded": 13,
+      "role": "BOWL"
+    },
+    "Raj Bawa": {
+      "wickets": 1,
+      "runs_conceded": 39,
+      "role": "BOWL"
+    },
+    "Corbin Bosch": {
+      "wickets": 4,
+      "runs_conceded": 26,
+      "role": "BOWL"
+    },
+    "Deepak Chahar": {
+      "wickets": 2,
+      "runs_conceded": 33,
+      "role": "BOWL"
+    },
+    "Bhuvneshwar Kumar": {
+      "runs": 7,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Josh Hazlewood": {
+      "wickets": 1,
+      "runs_conceded": 33,
+      "role": "BOWL"
+    },
+    "Rasikh Salam Dar": {
+      "runs": 3,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Romario Shepherd": {
+      "runs": 4,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Krunal Pandya": {
+      "runs": 73,
+      "balls": 46,
+      "role": "BAT"
+    },
+    "Suyash Sharma": {
+      "wickets": 0,
+      "runs_conceded": 21,
+      "role": "BOWL"
+    },
+    "Jacob Bethell": {
+      "runs": 27,
+      "balls": 27,
+      "role": "BAT"
+    },
+    "Virat Kohli": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Devdutt Padikkal": {
+      "runs": 12,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Rajat Patidar": {
+      "runs": 8,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Jitesh Sharma": {
+      "runs": 18,
+      "balls": 12,
+      "role": "BAT"
+    },
+    "Tim David": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Jasprit Bumrah": {
+      "wickets": 0,
+      "runs_conceded": 20,
+      "role": "BOWL"
+    },
+    "AM Ghazanfar": {
+      "wickets": 1,
+      "runs_conceded": 33,
+      "role": "BOWL"
+    }
+  },
+  "score_order": "team"
+}

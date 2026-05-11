@@ -1,8 +1,8 @@
 {
   "winner": "KKR",
   "margin": "4 wkts",
-  "home_score": "155/9 (20)",
-  "away_score": "161/6 (19.4)",
+  "home_score": "161/6 (19.4)",
+  "away_score": "155/9 (20)",
   "summary": "Kolkata Knight Riders won by 4 wkts",
   "player_scores": {
     "Yashasvi Jaiswal": {
@@ -125,5 +125,6 @@
       "runs_conceded": 25,
       "role": "BOWL"
     }
-  }
+  },
+  "score_order": "team"
 }

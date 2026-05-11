@@ -1,8 +1,8 @@
 {
   "winner": "DC",
   "margin": "6 wkts",
-  "home_score": "162/6 (20)",
-  "away_score": "164/4 (18.1)",
+  "home_score": "164/4 (18.1)",
+  "away_score": "162/6 (20)",
   "summary": "Delhi Capitals won by 6 wkts",
   "player_scores": {
     "Ryan Rickelton": {
@@ -125,5 +125,6 @@
       "runs_conceded": 20,
       "role": "BOWL"
     }
-  }
+  },
+  "score_order": "team"
 }

@@ -1,8 +1,8 @@
 {
   "winner": "CSK",
   "margin": "103 runs",
-  "home_score": "207/6 (20)",
-  "away_score": "104/10 (19)",
+  "home_score": "104/10 (19)",
+  "away_score": "207/6 (20)",
   "summary": "Chennai Super Kings won by 103 runs",
   "player_scores": {
     "Sanju Samson": {
@@ -130,5 +130,6 @@
       "runs_conceded": 7,
       "role": "BOWL"
     }
-  }
+  },
+  "score_order": "team"
 }

@@ -1,8 +1,8 @@
 {
   "winner": "GT",
   "margin": "5 wkts",
-  "home_score": "180/10 (20)",
-  "away_score": "181/5 (19.4)",
+  "home_score": "181/5 (19.4)",
+  "away_score": "180/10 (20)",
   "summary": "Gujarat Titans won by 5 wkts",
   "player_scores": {
     "Tim Seifert": {
@@ -125,5 +125,6 @@
       "runs_conceded": 34,
       "role": "BOWL"
     }
-  }
+  },
+  "score_order": "team"
 }

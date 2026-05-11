@@ -1,8 +1,8 @@
 {
   "winner": "PBKS",
   "margin": "3 wkts",
-  "home_score": "162/6 (20)",
-  "away_score": "165/7 (19.1)",
+  "home_score": "165/7 (19.1)",
+  "away_score": "162/6 (20)",
   "summary": "Punjab Kings won by 3 wkts",
   "player_scores": {
     "Sai Sudharsan": {
@@ -125,5 +125,6 @@
       "runs_conceded": 29,
       "role": "BOWL"
     }
-  }
+  },
+  "score_order": "team"
 }

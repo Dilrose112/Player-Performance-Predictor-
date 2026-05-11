@@ -1,8 +1,8 @@
 {
   "winner": "SRH",
   "margin": "65 runs",
-  "home_score": "226/8 (20)",
-  "away_score": "161/10 (16)",
+  "home_score": "161/10 (16)",
+  "away_score": "226/8 (20)",
   "summary": "Sunrisers Hyderabad won by 65 runs",
   "player_scores": {
     "Travis Head": {
@@ -125,5 +125,6 @@
       "runs_conceded": 14,
       "role": "BOWL"
     }
-  }
+  },
+  "score_order": "team"
 }

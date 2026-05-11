@@ -1,0 +1,120 @@
+{
+  "winner": "CSK",
+  "margin": "8 wkts",
+  "home_score": "155/7 (20)",
+  "away_score": "159/2 (17.3)",
+  "summary": "Chennai Super Kings won by 8 wkts",
+  "player_scores": {
+    "Pathum Nissanka": {
+      "runs": 19,
+      "balls": 15,
+      "role": "BAT"
+    },
+    "KL Rahul": {
+      "runs": 12,
+      "balls": 13,
+      "role": "BAT"
+    },
+    "Nitish Rana": {
+      "runs": 15,
+      "balls": 13,
+      "role": "BAT"
+    },
+    "Karun Nair": {
+      "runs": 13,
+      "balls": 13,
+      "role": "BAT"
+    },
+    "Axar Patel": {
+      "wickets": 1,
+      "runs_conceded": 25,
+      "role": "BOWL"
+    },
+    "Tristan Stubbs": {
+      "runs": 38,
+      "balls": 31,
+      "role": "BAT"
+    },
+    "Sameer Rizvi": {
+      "runs": 40,
+      "balls": 24,
+      "role": "BAT"
+    },
+    "Ashutosh Sharma": {
+      "runs": 14,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Mitchell Starc": {
+      "wickets": 0,
+      "runs_conceded": 30,
+      "role": "BOWL"
+    },
+    "Akeal Hosein": {
+      "wickets": 1,
+      "runs_conceded": 19,
+      "role": "BOWL"
+    },
+    "Mukesh Choudhary": {
+      "wickets": 1,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "Anshul Kamboj": {
+      "wickets": 0,
+      "runs_conceded": 49,
+      "role": "BOWL"
+    },
+    "Noor Ahmad": {
+      "wickets": 2,
+      "runs_conceded": 22,
+      "role": "BOWL"
+    },
+    "Gurjapneet Singh": {
+      "wickets": 1,
+      "runs_conceded": 29,
+      "role": "BOWL"
+    },
+    "Jamie Overton": {
+      "wickets": 1,
+      "runs_conceded": 5,
+      "role": "BOWL"
+    },
+    "Sanju Samson": {
+      "runs": 87,
+      "balls": 52,
+      "role": "BAT"
+    },
+    "Ruturaj Gaikwad": {
+      "runs": 6,
+      "balls": 13,
+      "role": "BAT"
+    },
+    "Urvil Patel": {
+      "runs": 17,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Kartik Sharma": {
+      "runs": 41,
+      "balls": 31,
+      "role": "BAT"
+    },
+    "Lungi Ngidi": {
+      "wickets": 1,
+      "runs_conceded": 30,
+      "role": "BOWL"
+    },
+    "Kuldeep Yadav": {
+      "wickets": 0,
+      "runs_conceded": 34,
+      "role": "BOWL"
+    },
+    "T Natarajan": {
+      "wickets": 0,
+      "runs_conceded": 39,
+      "role": "BOWL"
+    }
+  },
+  "score_order": "team"
+}

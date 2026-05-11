@@ -1,8 +1,8 @@
 {
   "winner": "PBKS",
   "margin": "6 wkts",
-  "home_score": "219/6 (20)",
-  "away_score": "223/4 (18.5)",
+  "home_score": "223/4 (18.5)",
+  "away_score": "219/6 (20)",
   "summary": "Punjab Kings won by 6 wkts",
   "player_scores": {
     "Abhishek Sharma": {
@@ -120,5 +120,6 @@
       "runs_conceded": 33,
       "role": "BOWL"
     }
-  }
+  },
+  "score_order": "team"
 }

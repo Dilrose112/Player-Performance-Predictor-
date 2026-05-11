@@ -12,8 +12,8 @@
       "result": {
         "winner": "RCB",
         "margin": "6 wkts",
-        "home_score": "201/9 (20)",
-        "away_score": "203/4 (15.4)",
+        "home_score": "203/4 (15.4)",
+        "away_score": "201/9 (20)",
         "summary": "Royal Challengers Bengaluru won by 6 wkts",
         "player_scores": {
           "Travis Head": {
@@ -136,7 +136,8 @@
             "runs_conceded": 35,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -151,8 +152,8 @@
       "result": {
         "winner": "MI",
         "margin": "6 wkts",
-        "home_score": "220/4 (20)",
-        "away_score": "224/4 (19.1)",
+        "home_score": "224/4 (19.1)",
+        "away_score": "220/4 (20)",
         "summary": "Mumbai Indians won by 6 wkts",
         "player_scores": {
           "Ajinkya Rahane": {
@@ -270,7 +271,8 @@
             "runs_conceded": 15,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -285,8 +287,8 @@
       "result": {
         "winner": "RR",
         "margin": "8 wkts",
-        "home_score": "127/10 (19.4)",
-        "away_score": "128/2 (12.1)",
+        "home_score": "128/2 (12.1)",
+        "away_score": "127/10 (19.4)",
         "summary": "Rajasthan Royals won by 8 wkts",
         "player_scores": {
           "Sanju Samson": {
@@ -399,7 +401,8 @@
             "runs_conceded": 17,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -414,8 +417,8 @@
       "result": {
         "winner": "PBKS",
         "margin": "3 wkts",
-        "home_score": "162/6 (20)",
-        "away_score": "165/7 (19.1)",
+        "home_score": "165/7 (19.1)",
+        "away_score": "162/6 (20)",
         "summary": "Punjab Kings won by 3 wkts",
         "player_scores": {
           "Sai Sudharsan": {
@@ -538,7 +541,8 @@
             "runs_conceded": 29,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -672,7 +676,8 @@
             "runs_conceded": 20,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -687,8 +692,8 @@
       "result": {
         "winner": "SRH",
         "margin": "65 runs",
-        "home_score": "226/8 (20)",
-        "away_score": "161/10 (16)",
+        "home_score": "161/10 (16)",
+        "away_score": "226/8 (20)",
         "summary": "Sunrisers Hyderabad won by 65 runs",
         "player_scores": {
           "Travis Head": {
@@ -811,7 +816,8 @@
             "runs_conceded": 14,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -950,7 +956,8 @@
             "runs_conceded": 46,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -965,8 +972,8 @@
       "result": {
         "winner": "RR",
         "margin": "6 runs",
-        "home_score": "210/6 (20)",
-        "away_score": "204/8 (20)",
+        "home_score": "204/8 (20)",
+        "away_score": "210/6 (20)",
         "summary": "Rajasthan Royals won by 6 runs",
         "player_scores": {
           "Yashasvi Jaiswal": {
@@ -1089,7 +1096,8 @@
             "runs_conceded": 41,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -1104,8 +1112,8 @@
       "result": {
         "winner": "DC",
         "margin": "6 wkts",
-        "home_score": "162/6 (20)",
-        "away_score": "164/4 (18.1)",
+        "home_score": "164/4 (18.1)",
+        "away_score": "162/6 (20)",
         "summary": "Delhi Capitals won by 6 wkts",
         "player_scores": {
           "Ryan Rickelton": {
@@ -1228,7 +1236,8 @@
             "runs_conceded": 20,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -1367,7 +1376,8 @@
             "runs_conceded": 30,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -1501,7 +1511,8 @@
             "runs_conceded": 19,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -1679,7 +1690,8 @@
             "runs_conceded": 25,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -1694,8 +1706,8 @@
       "result": {
         "winner": "GT",
         "margin": "1 run",
-        "home_score": "210/4 (20)",
-        "away_score": "209/8 (20)",
+        "home_score": "209/8 (20)",
+        "away_score": "210/4 (20)",
         "summary": "Gujarat Titans won by 1 run",
         "player_scores": {
           "Sai Sudharsan": {
@@ -1813,7 +1825,8 @@
             "runs_conceded": 52,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -1947,7 +1960,8 @@
             "runs_conceded": 31,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -1962,8 +1976,8 @@
       "result": {
         "winner": "RR",
         "margin": "6 wkts",
-        "home_score": "201/8 (20)",
-        "away_score": "202/4 (18)",
+        "home_score": "202/4 (18)",
+        "away_score": "201/8 (20)",
         "summary": "Rajasthan Royals won by 6 wkts",
         "player_scores": {
           "Philip Salt": {
@@ -2081,7 +2095,8 @@
             "runs_conceded": 54,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -2210,7 +2225,8 @@
             "runs_conceded": 36,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -2225,8 +2241,8 @@
       "result": {
         "winner": "PBKS",
         "margin": "6 wkts",
-        "home_score": "219/6 (20)",
-        "away_score": "223/4 (18.5)",
+        "home_score": "223/4 (18.5)",
+        "away_score": "219/6 (20)",
         "summary": "Punjab Kings won by 6 wkts",
         "player_scores": {
           "Abhishek Sharma": {
@@ -2344,7 +2360,8 @@
             "runs_conceded": 33,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -2359,8 +2376,8 @@
       "result": {
         "winner": "RCB",
         "margin": "18 runs",
-        "home_score": "240/4 (20)",
-        "away_score": "222/5 (20)",
+        "home_score": "222/5 (20)",
+        "away_score": "240/4 (20)",
         "summary": "Royal Challengers Bengaluru won by 18 runs",
         "player_scores": {
           "Philip Salt": {
@@ -2478,7 +2495,8 @@
             "runs_conceded": 47,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -2607,7 +2625,8 @@
             "runs_conceded": 31,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -2746,7 +2765,8 @@
             "runs_conceded": 28,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -2885,7 +2905,8 @@
             "runs_conceded": 23,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -2900,8 +2921,8 @@
       "result": {
         "winner": "RCB",
         "margin": "5 wkts",
-        "home_score": "146/10 (20)",
-        "away_score": "149/5 (15.1)",
+        "home_score": "149/5 (15.1)",
+        "away_score": "146/10 (20)",
         "summary": "Royal Challengers Bengaluru won by 5 wkts",
         "player_scores": {
           "Mitchell Marsh": {
@@ -3024,7 +3045,8 @@
             "runs_conceded": 32,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -3158,7 +3180,8 @@
             "runs_conceded": 42,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -3173,8 +3196,8 @@
       "result": {
         "winner": "GT",
         "margin": "5 wkts",
-        "home_score": "180/10 (20)",
-        "away_score": "181/5 (19.4)",
+        "home_score": "181/5 (19.4)",
+        "away_score": "180/10 (20)",
         "summary": "Gujarat Titans won by 5 wkts",
         "player_scores": {
           "Tim Seifert": {
@@ -3297,7 +3320,8 @@
             "runs_conceded": 34,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -3436,7 +3460,8 @@
             "runs_conceded": 29,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -3575,7 +3600,8 @@
             "runs_conceded": 31,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -3714,7 +3740,8 @@
             "runs_conceded": 36,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -3729,8 +3756,8 @@
       "result": {
         "winner": "KKR",
         "margin": "4 wkts",
-        "home_score": "155/9 (20)",
-        "away_score": "161/6 (19.4)",
+        "home_score": "161/6 (19.4)",
+        "away_score": "155/9 (20)",
         "summary": "Kolkata Knight Riders won by 4 wkts",
         "player_scores": {
           "Yashasvi Jaiswal": {
@@ -3853,7 +3880,8 @@
             "runs_conceded": 25,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -3868,8 +3896,8 @@
       "result": {
         "winner": "MI",
         "margin": "99 runs",
-        "home_score": "199/5 (20)",
-        "away_score": "100/10 (15.5)",
+        "home_score": "100/10 (15.5)",
+        "away_score": "199/5 (20)",
         "summary": "Mumbai Indians won by 99 runs",
         "player_scores": {
           "Quinton de Kock": {
@@ -3992,7 +4020,8 @@
             "runs_conceded": 16,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -4121,7 +4150,8 @@
             "runs_conceded": 12,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -4136,8 +4166,8 @@
       "result": {
         "winner": "RR",
         "margin": "40 runs",
-        "home_score": "159/6 (20)",
-        "away_score": "119/10 (18)",
+        "home_score": "119/10 (18)",
+        "away_score": "159/6 (20)",
         "summary": "Rajasthan Royals won by 40 runs",
         "player_scores": {
           "Yashasvi Jaiswal": {
@@ -4260,7 +4290,8 @@
             "runs_conceded": 23,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -4275,8 +4306,8 @@
       "result": {
         "winner": "CSK",
         "margin": "103 runs",
-        "home_score": "207/6 (20)",
-        "away_score": "104/10 (19)",
+        "home_score": "104/10 (19)",
+        "away_score": "207/6 (20)",
         "summary": "Chennai Super Kings won by 103 runs",
         "player_scores": {
           "Sanju Samson": {
@@ -4404,7 +4435,8 @@
             "runs_conceded": 7,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -4419,8 +4451,8 @@
       "result": {
         "winner": "RCB",
         "margin": "5 wkts",
-        "home_score": "205/3 (20)",
-        "away_score": "206/5 (18.5)",
+        "home_score": "206/5 (18.5)",
+        "away_score": "205/3 (20)",
         "summary": "Royal Challengers Bengaluru won by 5 wkts",
         "player_scores": {
           "Sai Sudharsan": {
@@ -4533,7 +4565,8 @@
             "runs_conceded": 19,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -4672,7 +4705,8 @@
             "runs_conceded": 16,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -4801,7 +4835,8 @@
             "runs_conceded": 24,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -4940,7 +4975,8 @@
             "runs_conceded": 41,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -5069,7 +5105,8 @@
             "runs_conceded": 29,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -5193,7 +5230,8 @@
             "runs_conceded": 12,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -5322,7 +5360,8 @@
             "runs_conceded": 36,
             "role": "BOWL"
           }
-        }
+        },
+        "score_order": "team"
       }
     },
     {
@@ -5333,8 +5372,127 @@
       "away": "SRH",
       "venue": "Wankhede Stadium",
       "cricapi_id": "05d33d50-3efe-42f9-98f7-1f363a2f153a",
-      "status": "upcoming",
-      "result": null
+      "status": "completed",
+      "result": {
+        "winner": "SRH",
+        "margin": "6 wkts",
+        "home_score": "243/5 (20)",
+        "away_score": "249/4 (18.4)",
+        "summary": "Sunrisers Hyderabad won by 6 wkts",
+        "player_scores": {
+          "Will Jacks": {
+            "wickets": 0,
+            "runs_conceded": 19,
+            "role": "BOWL"
+          },
+          "Ryan Rickelton": {
+            "runs": 123,
+            "balls": 55,
+            "role": "BAT"
+          },
+          "Suryakumar Yadav": {
+            "runs": 5,
+            "balls": 5,
+            "role": "BAT"
+          },
+          "Naman Dhir": {
+            "runs": 22,
+            "balls": 17,
+            "role": "BAT"
+          },
+          "Hardik Pandya": {
+            "wickets": 1,
+            "runs_conceded": 39,
+            "role": "BOWL"
+          },
+          "Tilak Varma": {
+            "runs": 7,
+            "balls": 5,
+            "role": "BAT"
+          },
+          "Robin Minz": {
+            "runs": 1,
+            "balls": 1,
+            "role": "BAT"
+          },
+          "Pat Cummins": {
+            "wickets": 0,
+            "runs_conceded": 39,
+            "role": "BOWL"
+          },
+          "Praful Hinge": {
+            "wickets": 2,
+            "runs_conceded": 54,
+            "role": "BOWL"
+          },
+          "Eshan Malinga": {
+            "wickets": 1,
+            "runs_conceded": 29,
+            "role": "BOWL"
+          },
+          "Harsh Dubey": {
+            "wickets": 0,
+            "runs_conceded": 50,
+            "role": "BOWL"
+          },
+          "Sakib Hussain": {
+            "wickets": 1,
+            "runs_conceded": 39,
+            "role": "BOWL"
+          },
+          "Nitish Kumar Reddy": {
+            "runs": 21,
+            "balls": 17,
+            "role": "BAT"
+          },
+          "Abhishek Sharma": {
+            "runs": 45,
+            "balls": 24,
+            "role": "BAT"
+          },
+          "Travis Head": {
+            "runs": 76,
+            "balls": 30,
+            "role": "BAT"
+          },
+          "Ishan Kishan": {
+            "runs": 0,
+            "balls": 1,
+            "role": "BAT"
+          },
+          "Heinrich Klaasen": {
+            "runs": 65,
+            "balls": 30,
+            "role": "BAT"
+          },
+          "Salil Arora": {
+            "runs": 30,
+            "balls": 10,
+            "role": "BAT"
+          },
+          "Trent Boult": {
+            "wickets": 1,
+            "runs_conceded": 41,
+            "role": "BOWL"
+          },
+          "Jasprit Bumrah": {
+            "wickets": 0,
+            "runs_conceded": 54,
+            "role": "BOWL"
+          },
+          "AM Ghazanfar": {
+            "wickets": 2,
+            "runs_conceded": 51,
+            "role": "BOWL"
+          },
+          "Ashwani Kumar": {
+            "wickets": 0,
+            "runs_conceded": 41,
+            "role": "BOWL"
+          }
+        },
+        "score_order": "team"
+      }
     },
     {
       "match": 42,
@@ -5344,8 +5502,132 @@
       "away": "RCB",
       "venue": "Narendra Modi Stadium",
       "cricapi_id": "7e0789c4-6bdc-48da-a67f-49213f6d731e",
-      "status": "upcoming",
-      "result": null
+      "status": "completed",
+      "result": {
+        "winner": "GT",
+        "margin": "4 wkts",
+        "home_score": "158/6 (15.5)",
+        "away_score": "155/10 (19.2)",
+        "summary": "Gujarat Titans won by 4 wkts",
+        "player_scores": {
+          "Jacob Bethell": {
+            "runs": 5,
+            "balls": 5,
+            "role": "BAT"
+          },
+          "Virat Kohli": {
+            "runs": 28,
+            "balls": 13,
+            "role": "BAT"
+          },
+          "Devdutt Padikkal": {
+            "runs": 40,
+            "balls": 24,
+            "role": "BAT"
+          },
+          "Rajat Patidar": {
+            "runs": 19,
+            "balls": 15,
+            "role": "BAT"
+          },
+          "Jitesh Sharma": {
+            "runs": 1,
+            "balls": 3,
+            "role": "BAT"
+          },
+          "Tim David": {
+            "runs": 9,
+            "balls": 6,
+            "role": "BAT"
+          },
+          "Krunal Pandya": {
+            "runs": 4,
+            "balls": 4,
+            "role": "BAT"
+          },
+          "Romario Shepherd": {
+            "wickets": 2,
+            "runs_conceded": 30,
+            "role": "BOWL"
+          },
+          "Venkatesh Iyer": {
+            "runs": 12,
+            "balls": 15,
+            "role": "BAT"
+          },
+          "Bhuvneshwar Kumar": {
+            "wickets": 3,
+            "runs_conceded": 28,
+            "role": "BOWL"
+          },
+          "Josh Hazlewood": {
+            "wickets": 0,
+            "runs_conceded": 56,
+            "role": "BOWL"
+          },
+          "Mohammed Siraj": {
+            "wickets": 1,
+            "runs_conceded": 38,
+            "role": "BOWL"
+          },
+          "Kagiso Rabada": {
+            "wickets": 1,
+            "runs_conceded": 44,
+            "role": "BOWL"
+          },
+          "Jason Holder": {
+            "runs": 12,
+            "balls": 10,
+            "role": "BAT"
+          },
+          "Arshad Khan": {
+            "wickets": 3,
+            "runs_conceded": 22,
+            "role": "BOWL"
+          },
+          "Rashid Khan": {
+            "runs": 7,
+            "balls": 6,
+            "role": "BAT"
+          },
+          "Sai Sudharsan": {
+            "runs": 6,
+            "balls": 5,
+            "role": "BAT"
+          },
+          "Shubman Gill": {
+            "runs": 43,
+            "balls": 18,
+            "role": "BAT"
+          },
+          "Jos Buttler": {
+            "runs": 39,
+            "balls": 19,
+            "role": "BAT"
+          },
+          "Washington Sundar": {
+            "runs": 12,
+            "balls": 12,
+            "role": "BAT"
+          },
+          "Shahrukh Khan": {
+            "runs": 8,
+            "balls": 8,
+            "role": "BAT"
+          },
+          "Rahul Tewatia": {
+            "runs": 27,
+            "balls": 17,
+            "role": "BAT"
+          },
+          "Suyash Sharma": {
+            "wickets": 1,
+            "runs_conceded": 44,
+            "role": "BOWL"
+          }
+        },
+        "score_order": "team"
+      }
     },
     {
       "match": 43,
@@ -5355,8 +5637,127 @@
       "away": "DC",
       "venue": "Sawai Mansingh Stadium",
       "cricapi_id": "3093f73b-639c-464c-8497-b6b238b5b9af",
-      "status": "upcoming",
-      "result": null
+      "status": "completed",
+      "result": {
+        "winner": "DC",
+        "margin": "7 wkts",
+        "home_score": "225/6 (20)",
+        "away_score": "226/3 (19.1)",
+        "summary": "Delhi Capitals won by 7 wkts",
+        "player_scores": {
+          "Yashasvi Jaiswal": {
+            "runs": 6,
+            "balls": 3,
+            "role": "BAT"
+          },
+          "Vaibhav Sooryavanshi": {
+            "runs": 4,
+            "balls": 2,
+            "role": "BAT"
+          },
+          "Dhruv Jurel": {
+            "runs": 42,
+            "balls": 30,
+            "role": "BAT"
+          },
+          "Riyan Parag": {
+            "runs": 90,
+            "balls": 50,
+            "role": "BAT"
+          },
+          "Ravindra Jadeja": {
+            "wickets": 1,
+            "runs_conceded": 33,
+            "role": "BOWL"
+          },
+          "Donovan Ferreira": {
+            "runs": 47,
+            "balls": 14,
+            "role": "BAT"
+          },
+          "Shubham Dubey": {
+            "runs": 6,
+            "balls": 6,
+            "role": "BAT"
+          },
+          "Jofra Archer": {
+            "wickets": 1,
+            "runs_conceded": 46,
+            "role": "BOWL"
+          },
+          "Mitchell Starc": {
+            "wickets": 3,
+            "runs_conceded": 40,
+            "role": "BOWL"
+          },
+          "Kyle Jamieson": {
+            "wickets": 1,
+            "runs_conceded": 48,
+            "role": "BOWL"
+          },
+          "Axar Patel": {
+            "wickets": 1,
+            "runs_conceded": 39,
+            "role": "BOWL"
+          },
+          "Kuldeep Yadav": {
+            "wickets": 0,
+            "runs_conceded": 41,
+            "role": "BOWL"
+          },
+          "T Natarajan": {
+            "wickets": 1,
+            "runs_conceded": 54,
+            "role": "BOWL"
+          },
+          "Pathum Nissanka": {
+            "runs": 62,
+            "balls": 33,
+            "role": "BAT"
+          },
+          "KL Rahul": {
+            "runs": 75,
+            "balls": 40,
+            "role": "BAT"
+          },
+          "Nitish Rana": {
+            "runs": 33,
+            "balls": 17,
+            "role": "BAT"
+          },
+          "Tristan Stubbs": {
+            "runs": 18,
+            "balls": 11,
+            "role": "BAT"
+          },
+          "Ashutosh Sharma": {
+            "runs": 25,
+            "balls": 15,
+            "role": "BAT"
+          },
+          "Nandre Burger": {
+            "wickets": 0,
+            "runs_conceded": 41,
+            "role": "BOWL"
+          },
+          "Tushar Deshpande": {
+            "wickets": 1,
+            "runs_conceded": 38,
+            "role": "BOWL"
+          },
+          "Brijesh Sharma": {
+            "wickets": 0,
+            "runs_conceded": 35,
+            "role": "BOWL"
+          },
+          "Ravi Bishnoi": {
+            "wickets": 0,
+            "runs_conceded": 28,
+            "role": "BOWL"
+          }
+        },
+        "score_order": "team"
+      }
     },
     {
       "match": 44,
@@ -5366,8 +5767,127 @@
       "away": "MI",
       "venue": "MA Chidambaram Stadium",
       "cricapi_id": "d2cceca7-65d7-441e-8483-4505fd7cd073",
-      "status": "upcoming",
-      "result": null
+      "status": "completed",
+      "result": {
+        "winner": "CSK",
+        "margin": "8 wkts",
+        "home_score": "160/2 (18.1)",
+        "away_score": "159/7 (20)",
+        "summary": "Chennai Super Kings won by 8 wkts",
+        "player_scores": {
+          "Will Jacks": {
+            "runs": 1,
+            "balls": 5,
+            "role": "BAT"
+          },
+          "Ryan Rickelton": {
+            "runs": 37,
+            "balls": 24,
+            "role": "BAT"
+          },
+          "Naman Dhir": {
+            "runs": 57,
+            "balls": 37,
+            "role": "BAT"
+          },
+          "Suryakumar Yadav": {
+            "runs": 21,
+            "balls": 12,
+            "role": "BAT"
+          },
+          "Tilak Varma": {
+            "runs": 5,
+            "balls": 8,
+            "role": "BAT"
+          },
+          "Hardik Pandya": {
+            "wickets": 0,
+            "runs_conceded": 17,
+            "role": "BOWL"
+          },
+          "Robin Minz": {
+            "runs": 5,
+            "balls": 3,
+            "role": "BAT"
+          },
+          "Krish Bhagat": {
+            "wickets": 0,
+            "runs_conceded": 22,
+            "role": "BOWL"
+          },
+          "Trent Boult": {
+            "wickets": 0,
+            "runs_conceded": 37,
+            "role": "BOWL"
+          },
+          "Mukesh Choudhary": {
+            "wickets": 0,
+            "runs_conceded": 25,
+            "role": "BOWL"
+          },
+          "Anshul Kamboj": {
+            "wickets": 3,
+            "runs_conceded": 32,
+            "role": "BOWL"
+          },
+          "Prashant Veer": {
+            "wickets": 0,
+            "runs_conceded": 25,
+            "role": "BOWL"
+          },
+          "Noor Ahmad": {
+            "wickets": 2,
+            "runs_conceded": 26,
+            "role": "BOWL"
+          },
+          "Ramakrishna Ghosh": {
+            "wickets": 1,
+            "runs_conceded": 24,
+            "role": "BOWL"
+          },
+          "Jamie Overton": {
+            "wickets": 1,
+            "runs_conceded": 23,
+            "role": "BOWL"
+          },
+          "Sanju Samson": {
+            "runs": 11,
+            "balls": 9,
+            "role": "BAT"
+          },
+          "Ruturaj Gaikwad": {
+            "runs": 67,
+            "balls": 48,
+            "role": "BAT"
+          },
+          "Urvil Patel": {
+            "runs": 24,
+            "balls": 12,
+            "role": "BAT"
+          },
+          "Kartik Sharma": {
+            "runs": 54,
+            "balls": 40,
+            "role": "BAT"
+          },
+          "Jasprit Bumrah": {
+            "wickets": 1,
+            "runs_conceded": 20,
+            "role": "BOWL"
+          },
+          "AM Ghazanfar": {
+            "wickets": 1,
+            "runs_conceded": 40,
+            "role": "BOWL"
+          },
+          "Raghu Sharma": {
+            "wickets": 0,
+            "runs_conceded": 24,
+            "role": "BOWL"
+          }
+        },
+        "score_order": "team"
+      }
     },
     {
       "match": 45,
@@ -5377,8 +5897,127 @@
       "away": "KKR",
       "venue": "Rajiv Gandhi International Stadium",
       "cricapi_id": "1153edf6-3ae1-4722-be1e-0256495b49cb",
-      "status": "upcoming",
-      "result": null
+      "status": "completed",
+      "result": {
+        "winner": "KKR",
+        "margin": "7 wkts",
+        "home_score": "165/10 (19)",
+        "away_score": "169/3 (18.2)",
+        "summary": "Kolkata Knight Riders won by 7 wkts",
+        "player_scores": {
+          "Abhishek Sharma": {
+            "wickets": 0,
+            "runs_conceded": 14,
+            "role": "BOWL"
+          },
+          "Travis Head": {
+            "runs": 61,
+            "balls": 28,
+            "role": "BAT"
+          },
+          "Ishan Kishan": {
+            "runs": 42,
+            "balls": 29,
+            "role": "BAT"
+          },
+          "Heinrich Klaasen": {
+            "runs": 11,
+            "balls": 8,
+            "role": "BAT"
+          },
+          "Smaran Ravichandran": {
+            "runs": 4,
+            "balls": 4,
+            "role": "BAT"
+          },
+          "Aniket Verma": {
+            "runs": 6,
+            "balls": 8,
+            "role": "BAT"
+          },
+          "Salil Arora": {
+            "runs": 2,
+            "balls": 6,
+            "role": "BAT"
+          },
+          "Pat Cummins": {
+            "wickets": 1,
+            "runs_conceded": 47,
+            "role": "BOWL"
+          },
+          "Shivang Kumar": {
+            "wickets": 1,
+            "runs_conceded": 31,
+            "role": "BOWL"
+          },
+          "Harshal Patel": {
+            "wickets": 0,
+            "runs_conceded": 17,
+            "role": "BOWL"
+          },
+          "Eshan Malinga": {
+            "wickets": 0,
+            "runs_conceded": 42,
+            "role": "BOWL"
+          },
+          "Sunil Narine": {
+            "wickets": 2,
+            "runs_conceded": 31,
+            "role": "BOWL"
+          },
+          "Vaibhav Arora": {
+            "wickets": 1,
+            "runs_conceded": 25,
+            "role": "BOWL"
+          },
+          "Kartik Tyagi": {
+            "wickets": 2,
+            "runs_conceded": 30,
+            "role": "BOWL"
+          },
+          "Cameron Green": {
+            "runs": 3,
+            "balls": 3,
+            "role": "BAT"
+          },
+          "Varun Chakaravarthy": {
+            "wickets": 3,
+            "runs_conceded": 36,
+            "role": "BOWL"
+          },
+          "Anukul Roy": {
+            "wickets": 1,
+            "runs_conceded": 8,
+            "role": "BOWL"
+          },
+          "Ajinkya Rahane": {
+            "runs": 43,
+            "balls": 36,
+            "role": "BAT"
+          },
+          "Finn Allen": {
+            "runs": 29,
+            "balls": 13,
+            "role": "BAT"
+          },
+          "Angkrish Raghuvanshi": {
+            "runs": 59,
+            "balls": 47,
+            "role": "BAT"
+          },
+          "Rinku Singh": {
+            "runs": 22,
+            "balls": 11,
+            "role": "BAT"
+          },
+          "Sakib Hussain": {
+            "wickets": 1,
+            "runs_conceded": 17,
+            "role": "BOWL"
+          }
+        },
+        "score_order": "team"
+      }
     },
     {
       "match": 46,
@@ -5388,8 +6027,137 @@
       "away": "PBKS",
       "venue": "Narendra Modi Stadium",
       "cricapi_id": "f039998e-28b0-4445-b431-8bbccbbc6f1f",
-      "status": "upcoming",
-      "result": null
+      "status": "completed",
+      "result": {
+        "winner": "GT",
+        "margin": "4 wkts",
+        "home_score": "167/6 (19.5)",
+        "away_score": "163/9 (20)",
+        "summary": "Gujarat Titans won by 4 wkts",
+        "player_scores": {
+          "Priyansh Arya": {
+            "runs": 2,
+            "balls": 2,
+            "role": "BAT"
+          },
+          "Prabhsimran Singh": {
+            "runs": 15,
+            "balls": 14,
+            "role": "BAT"
+          },
+          "Cooper Connolly": {
+            "runs": 0,
+            "balls": 1,
+            "role": "BAT"
+          },
+          "Shreyas Iyer": {
+            "runs": 19,
+            "balls": 21,
+            "role": "BAT"
+          },
+          "Nehal Wadhera": {
+            "runs": 0,
+            "balls": 6,
+            "role": "BAT"
+          },
+          "Suryansh Shedge": {
+            "runs": 57,
+            "balls": 29,
+            "role": "BAT"
+          },
+          "Marcus Stoinis": {
+            "wickets": 1,
+            "runs_conceded": 26,
+            "role": "BOWL"
+          },
+          "Marco Jansen": {
+            "wickets": 1,
+            "runs_conceded": 33,
+            "role": "BOWL"
+          },
+          "Xavier Bartlett": {
+            "wickets": 0,
+            "runs_conceded": 38,
+            "role": "BOWL"
+          },
+          "Vijaykumar Vyshak": {
+            "wickets": 2,
+            "runs_conceded": 31,
+            "role": "BOWL"
+          },
+          "Arshdeep Singh": {
+            "wickets": 2,
+            "runs_conceded": 24,
+            "role": "BOWL"
+          },
+          "Mohammed Siraj": {
+            "wickets": 2,
+            "runs_conceded": 28,
+            "role": "BOWL"
+          },
+          "Kagiso Rabada": {
+            "wickets": 2,
+            "runs_conceded": 22,
+            "role": "BOWL"
+          },
+          "Jason Holder": {
+            "runs": 5,
+            "balls": 7,
+            "role": "BAT"
+          },
+          "Arshad Khan": {
+            "runs": 8,
+            "balls": 5,
+            "role": "BAT"
+          },
+          "Rashid Khan": {
+            "wickets": 1,
+            "runs_conceded": 32,
+            "role": "BOWL"
+          },
+          "Manav Suthar": {
+            "wickets": 0,
+            "runs_conceded": 27,
+            "role": "BOWL"
+          },
+          "Sai Sudharsan": {
+            "runs": 57,
+            "balls": 41,
+            "role": "BAT"
+          },
+          "Shubman Gill": {
+            "runs": 5,
+            "balls": 4,
+            "role": "BAT"
+          },
+          "Jos Buttler": {
+            "runs": 26,
+            "balls": 22,
+            "role": "BAT"
+          },
+          "Nishant Sindhu": {
+            "runs": 15,
+            "balls": 11,
+            "role": "BAT"
+          },
+          "Washington Sundar": {
+            "runs": 40,
+            "balls": 23,
+            "role": "BAT"
+          },
+          "Rahul Tewatia": {
+            "runs": 2,
+            "balls": 6,
+            "role": "BAT"
+          },
+          "Yuzvendra Chahal": {
+            "wickets": 0,
+            "runs_conceded": 13,
+            "role": "BOWL"
+          }
+        },
+        "score_order": "team"
+      }
     },
     {
       "match": 47,
@@ -5399,8 +6167,132 @@
       "away": "LSG",
       "venue": "Wankhede Stadium",
       "cricapi_id": "ed18f7e9-d348-4ace-bfcd-9639096c6808",
-      "status": "upcoming",
-      "result": null
+      "status": "completed",
+      "result": {
+        "winner": "MI",
+        "margin": "6 wkts",
+        "home_score": "229/4 (18.4)",
+        "away_score": "228/5 (20)",
+        "summary": "Mumbai Indians won by 6 wkts",
+        "player_scores": {
+          "Mitchell Marsh": {
+            "runs": 44,
+            "balls": 25,
+            "role": "BAT"
+          },
+          "Josh Inglis": {
+            "runs": 13,
+            "balls": 5,
+            "role": "BAT"
+          },
+          "Nicholas Pooran": {
+            "runs": 63,
+            "balls": 21,
+            "role": "BAT"
+          },
+          "Rishabh Pant": {
+            "runs": 15,
+            "balls": 10,
+            "role": "BAT"
+          },
+          "Aiden Markram": {
+            "runs": 31,
+            "balls": 25,
+            "role": "BAT"
+          },
+          "Akshat Raghuwanshi": {
+            "runs": 11,
+            "balls": 7,
+            "role": "BAT"
+          },
+          "Himmat Singh": {
+            "runs": 40,
+            "balls": 31,
+            "role": "BAT"
+          },
+          "Deepak Chahar": {
+            "wickets": 0,
+            "runs_conceded": 43,
+            "role": "BOWL"
+          },
+          "Jasprit Bumrah": {
+            "wickets": 0,
+            "runs_conceded": 45,
+            "role": "BOWL"
+          },
+          "AM Ghazanfar": {
+            "wickets": 1,
+            "runs_conceded": 50,
+            "role": "BOWL"
+          },
+          "Will Jacks": {
+            "runs": 10,
+            "balls": 4,
+            "role": "BAT"
+          },
+          "Corbin Bosch": {
+            "wickets": 2,
+            "runs_conceded": 20,
+            "role": "BOWL"
+          },
+          "Raghu Sharma": {
+            "wickets": 1,
+            "runs_conceded": 36,
+            "role": "BOWL"
+          },
+          "Ryan Rickelton": {
+            "runs": 83,
+            "balls": 32,
+            "role": "BAT"
+          },
+          "Rohit Sharma": {
+            "runs": 84,
+            "balls": 44,
+            "role": "BAT"
+          },
+          "Tilak Varma": {
+            "runs": 11,
+            "balls": 13,
+            "role": "BAT"
+          },
+          "Suryakumar Yadav": {
+            "runs": 12,
+            "balls": 7,
+            "role": "BAT"
+          },
+          "Naman Dhir": {
+            "runs": 23,
+            "balls": 12,
+            "role": "BAT"
+          },
+          "Mohammed Shami": {
+            "wickets": 1,
+            "runs_conceded": 53,
+            "role": "BOWL"
+          },
+          "Mohsin Khan": {
+            "wickets": 1,
+            "runs_conceded": 47,
+            "role": "BOWL"
+          },
+          "Prince Yadav": {
+            "wickets": 0,
+            "runs_conceded": 24,
+            "role": "BOWL"
+          },
+          "Avesh Khan": {
+            "wickets": 0,
+            "runs_conceded": 56,
+            "role": "BOWL"
+          },
+          "Manimaran Siddharth": {
+            "wickets": 2,
+            "runs_conceded": 47,
+            "role": "BOWL"
+          }
+        },
+        "score_order": "team"
+      }
     },
     {
       "match": 48,
@@ -5410,8 +6302,127 @@
       "away": "CSK",
       "venue": "Arun Jaitley Stadium",
       "cricapi_id": "4804409b-28ee-4f3e-ab55-a4a4cb090198",
-      "status": "upcoming",
-      "result": null
+      "status": "completed",
+      "result": {
+        "winner": "CSK",
+        "margin": "8 wkts",
+        "home_score": "155/7 (20)",
+        "away_score": "159/2 (17.3)",
+        "summary": "Chennai Super Kings won by 8 wkts",
+        "player_scores": {
+          "Pathum Nissanka": {
+            "runs": 19,
+            "balls": 15,
+            "role": "BAT"
+          },
+          "KL Rahul": {
+            "runs": 12,
+            "balls": 13,
+            "role": "BAT"
+          },
+          "Nitish Rana": {
+            "runs": 15,
+            "balls": 13,
+            "role": "BAT"
+          },
+          "Karun Nair": {
+            "runs": 13,
+            "balls": 13,
+            "role": "BAT"
+          },
+          "Axar Patel": {
+            "wickets": 1,
+            "runs_conceded": 25,
+            "role": "BOWL"
+          },
+          "Tristan Stubbs": {
+            "runs": 38,
+            "balls": 31,
+            "role": "BAT"
+          },
+          "Sameer Rizvi": {
+            "runs": 40,
+            "balls": 24,
+            "role": "BAT"
+          },
+          "Ashutosh Sharma": {
+            "runs": 14,
+            "balls": 5,
+            "role": "BAT"
+          },
+          "Mitchell Starc": {
+            "wickets": 0,
+            "runs_conceded": 30,
+            "role": "BOWL"
+          },
+          "Akeal Hosein": {
+            "wickets": 1,
+            "runs_conceded": 19,
+            "role": "BOWL"
+          },
+          "Mukesh Choudhary": {
+            "wickets": 1,
+            "runs_conceded": 31,
+            "role": "BOWL"
+          },
+          "Anshul Kamboj": {
+            "wickets": 0,
+            "runs_conceded": 49,
+            "role": "BOWL"
+          },
+          "Noor Ahmad": {
+            "wickets": 2,
+            "runs_conceded": 22,
+            "role": "BOWL"
+          },
+          "Gurjapneet Singh": {
+            "wickets": 1,
+            "runs_conceded": 29,
+            "role": "BOWL"
+          },
+          "Jamie Overton": {
+            "wickets": 1,
+            "runs_conceded": 5,
+            "role": "BOWL"
+          },
+          "Sanju Samson": {
+            "runs": 87,
+            "balls": 52,
+            "role": "BAT"
+          },
+          "Ruturaj Gaikwad": {
+            "runs": 6,
+            "balls": 13,
+            "role": "BAT"
+          },
+          "Urvil Patel": {
+            "runs": 17,
+            "balls": 9,
+            "role": "BAT"
+          },
+          "Kartik Sharma": {
+            "runs": 41,
+            "balls": 31,
+            "role": "BAT"
+          },
+          "Lungi Ngidi": {
+            "wickets": 1,
+            "runs_conceded": 30,
+            "role": "BOWL"
+          },
+          "Kuldeep Yadav": {
+            "wickets": 0,
+            "runs_conceded": 34,
+            "role": "BOWL"
+          },
+          "T Natarajan": {
+            "wickets": 0,
+            "runs_conceded": 39,
+            "role": "BOWL"
+          }
+        },
+        "score_order": "team"
+      }
     },
     {
       "match": 49,
@@ -5421,8 +6432,127 @@
       "away": "PBKS",
       "venue": "Rajiv Gandhi International Stadium",
       "cricapi_id": "312ba6aa-5e93-4673-bb0c-cb207fdc9e2d",
-      "status": "upcoming",
-      "result": null
+      "status": "completed",
+      "result": {
+        "winner": "SRH",
+        "margin": "33 runs",
+        "home_score": "235/4 (20)",
+        "away_score": "202/7 (20)",
+        "summary": "Sunrisers Hyderabad won by 33 runs",
+        "player_scores": {
+          "Abhishek Sharma": {
+            "runs": 35,
+            "balls": 13,
+            "role": "BAT"
+          },
+          "Travis Head": {
+            "runs": 38,
+            "balls": 19,
+            "role": "BAT"
+          },
+          "Ishan Kishan": {
+            "runs": 55,
+            "balls": 32,
+            "role": "BAT"
+          },
+          "Heinrich Klaasen": {
+            "runs": 69,
+            "balls": 43,
+            "role": "BAT"
+          },
+          "Nitish Kumar Reddy": {
+            "wickets": 1,
+            "runs_conceded": 11,
+            "role": "BOWL"
+          },
+          "Arshdeep Singh": {
+            "wickets": 1,
+            "runs_conceded": 43,
+            "role": "BOWL"
+          },
+          "Marco Jansen": {
+            "runs": 19,
+            "balls": 16,
+            "role": "BAT"
+          },
+          "Lockie Ferguson": {
+            "wickets": 1,
+            "runs_conceded": 41,
+            "role": "BOWL"
+          },
+          "Yuzvendra Chahal": {
+            "wickets": 1,
+            "runs_conceded": 32,
+            "role": "BOWL"
+          },
+          "Vijaykumar Vyshak": {
+            "runs": 1,
+            "balls": 1,
+            "role": "BAT"
+          },
+          "Priyansh Arya": {
+            "runs": 1,
+            "balls": 3,
+            "role": "BAT"
+          },
+          "Prabhsimran Singh": {
+            "runs": 3,
+            "balls": 4,
+            "role": "BAT"
+          },
+          "Cooper Connolly": {
+            "runs": 107,
+            "balls": 59,
+            "role": "BAT"
+          },
+          "Shreyas Iyer": {
+            "runs": 5,
+            "balls": 5,
+            "role": "BAT"
+          },
+          "Marcus Stoinis": {
+            "runs": 28,
+            "balls": 14,
+            "role": "BAT"
+          },
+          "Suryansh Shedge": {
+            "runs": 25,
+            "balls": 17,
+            "role": "BAT"
+          },
+          "Shashank Singh": {
+            "runs": 4,
+            "balls": 3,
+            "role": "BAT"
+          },
+          "Pat Cummins": {
+            "wickets": 2,
+            "runs_conceded": 34,
+            "role": "BOWL"
+          },
+          "Eshan Malinga": {
+            "wickets": 1,
+            "runs_conceded": 36,
+            "role": "BOWL"
+          },
+          "Sakib Hussain": {
+            "wickets": 1,
+            "runs_conceded": 40,
+            "role": "BOWL"
+          },
+          "Shivang Kumar": {
+            "wickets": 2,
+            "runs_conceded": 45,
+            "role": "BOWL"
+          },
+          "Harsh Dubey": {
+            "wickets": 0,
+            "runs_conceded": 36,
+            "role": "BOWL"
+          }
+        },
+        "score_order": "team"
+      }
     },
     {
       "match": 50,
@@ -5432,8 +6562,127 @@
       "away": "RCB",
       "venue": "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium, Lucknow",
       "cricapi_id": "8b326da3-8ff6-4e64-abe4-cb430d7a6c53",
-      "status": "upcoming",
-      "result": null
+      "status": "completed",
+      "result": {
+        "winner": "",
+        "margin": "9 runs",
+        "home_score": "209/3 (19)",
+        "away_score": "203/6 (19)",
+        "summary": "LSG won by 9 runs (19 Overs game due to rain, DLS Target 213)",
+        "player_scores": {
+          "Mitchell Marsh": {
+            "runs": 111,
+            "balls": 56,
+            "role": "BAT"
+          },
+          "Arshin Kulkarni": {
+            "runs": 17,
+            "balls": 24,
+            "role": "BAT"
+          },
+          "Nicholas Pooran": {
+            "runs": 38,
+            "balls": 23,
+            "role": "BAT"
+          },
+          "Rishabh Pant": {
+            "runs": 32,
+            "balls": 10,
+            "role": "BAT"
+          },
+          "Aiden Markram": {
+            "runs": 1,
+            "balls": 1,
+            "role": "BAT"
+          },
+          "Bhuvneshwar Kumar": {
+            "wickets": 0,
+            "runs_conceded": 34,
+            "role": "BOWL"
+          },
+          "Josh Hazlewood": {
+            "wickets": 1,
+            "runs_conceded": 49,
+            "role": "BOWL"
+          },
+          "Krunal Pandya": {
+            "runs": 28,
+            "balls": 16,
+            "role": "BAT"
+          },
+          "Rasikh Salam Dar": {
+            "wickets": 1,
+            "runs_conceded": 53,
+            "role": "BOWL"
+          },
+          "Suyash Sharma": {
+            "wickets": 0,
+            "runs_conceded": 21,
+            "role": "BOWL"
+          },
+          "Romario Shepherd": {
+            "runs": 23,
+            "balls": 15,
+            "role": "BAT"
+          },
+          "Jacob Bethell": {
+            "runs": 4,
+            "balls": 5,
+            "role": "BAT"
+          },
+          "Virat Kohli": {
+            "runs": 0,
+            "balls": 2,
+            "role": "BAT"
+          },
+          "Devdutt Padikkal": {
+            "runs": 34,
+            "balls": 25,
+            "role": "BAT"
+          },
+          "Rajat Patidar": {
+            "runs": 61,
+            "balls": 31,
+            "role": "BAT"
+          },
+          "Jitesh Sharma": {
+            "runs": 1,
+            "balls": 3,
+            "role": "BAT"
+          },
+          "Tim David": {
+            "runs": 40,
+            "balls": 17,
+            "role": "BAT"
+          },
+          "Mohammed Shami": {
+            "wickets": 1,
+            "runs_conceded": 33,
+            "role": "BOWL"
+          },
+          "Prince Yadav": {
+            "wickets": 3,
+            "runs_conceded": 33,
+            "role": "BOWL"
+          },
+          "Mayank Yadav": {
+            "wickets": 0,
+            "runs_conceded": 50,
+            "role": "BOWL"
+          },
+          "Digvesh Singh Rathi": {
+            "wickets": 0,
+            "runs_conceded": 50,
+            "role": "BOWL"
+          },
+          "Shahbaz Ahmed": {
+            "wickets": 2,
+            "runs_conceded": 33,
+            "role": "BOWL"
+          }
+        },
+        "score_order": "team"
+      }
     },
     {
       "match": 51,
@@ -5443,8 +6692,122 @@
       "away": "KKR",
       "venue": "Arun Jaitley Stadium",
       "cricapi_id": "90d5c075-3c9a-40b7-ab45-80a36a3a2351",
-      "status": "upcoming",
-      "result": null
+      "status": "completed",
+      "result": {
+        "winner": "KKR",
+        "margin": "8 wkts",
+        "home_score": "142/8 (20)",
+        "away_score": "147/2 (14.2)",
+        "summary": "Kolkata Knight Riders won by 8 wkts",
+        "player_scores": {
+          "Pathum Nissanka": {
+            "runs": 50,
+            "balls": 29,
+            "role": "BAT"
+          },
+          "KL Rahul": {
+            "runs": 23,
+            "balls": 14,
+            "role": "BAT"
+          },
+          "Nitish Rana": {
+            "runs": 8,
+            "balls": 10,
+            "role": "BAT"
+          },
+          "Sameer Rizvi": {
+            "runs": 3,
+            "balls": 7,
+            "role": "BAT"
+          },
+          "Tristan Stubbs": {
+            "runs": 2,
+            "balls": 4,
+            "role": "BAT"
+          },
+          "Axar Patel": {
+            "wickets": 1,
+            "runs_conceded": 27,
+            "role": "BOWL"
+          },
+          "Ashutosh Sharma": {
+            "runs": 39,
+            "balls": 28,
+            "role": "BAT"
+          },
+          "Vipraj Nigam": {
+            "wickets": 0,
+            "runs_conceded": 34,
+            "role": "BOWL"
+          },
+          "Mitchell Starc": {
+            "wickets": 0,
+            "runs_conceded": 31,
+            "role": "BOWL"
+          },
+          "Lungi Ngidi": {
+            "wickets": 0,
+            "runs_conceded": 7,
+            "role": "BOWL"
+          },
+          "Anukul Roy": {
+            "wickets": 2,
+            "runs_conceded": 31,
+            "role": "BOWL"
+          },
+          "Vaibhav Arora": {
+            "wickets": 1,
+            "runs_conceded": 29,
+            "role": "BOWL"
+          },
+          "Sunil Narine": {
+            "wickets": 1,
+            "runs_conceded": 17,
+            "role": "BOWL"
+          },
+          "Kartik Tyagi": {
+            "wickets": 2,
+            "runs_conceded": 25,
+            "role": "BOWL"
+          },
+          "Varun Chakaravarthy": {
+            "wickets": 0,
+            "runs_conceded": 28,
+            "role": "BOWL"
+          },
+          "Cameron Green": {
+            "runs": 33,
+            "balls": 27,
+            "role": "BAT"
+          },
+          "Ajinkya Rahane": {
+            "runs": 13,
+            "balls": 9,
+            "role": "BAT"
+          },
+          "Finn Allen": {
+            "runs": 100,
+            "balls": 47,
+            "role": "BAT"
+          },
+          "Angkrish Raghuvanshi": {
+            "runs": 1,
+            "balls": 3,
+            "role": "BAT"
+          },
+          "Kuldeep Yadav": {
+            "wickets": 0,
+            "runs_conceded": 41,
+            "role": "BOWL"
+          },
+          "Mukesh Kumar": {
+            "wickets": 0,
+            "runs_conceded": 7,
+            "role": "BOWL"
+          }
+        },
+        "score_order": "team"
+      }
     },
     {
       "match": 52,
@@ -5454,8 +6817,127 @@
       "away": "GT",
       "venue": "Sawai Mansingh Stadium",
       "cricapi_id": "6ffec712-6562-490c-a4fa-ae4b6ae59188",
-      "status": "upcoming",
-      "result": null
+      "status": "completed",
+      "result": {
+        "winner": "GT",
+        "margin": "77 runs",
+        "home_score": "152/10 (16.3)",
+        "away_score": "229/4 (20)",
+        "summary": "Gujarat Titans won by 77 runs",
+        "player_scores": {
+          "Sai Sudharsan": {
+            "runs": 55,
+            "balls": 36,
+            "role": "BAT"
+          },
+          "Shubman Gill": {
+            "runs": 84,
+            "balls": 44,
+            "role": "BAT"
+          },
+          "Jos Buttler": {
+            "runs": 13,
+            "balls": 10,
+            "role": "BAT"
+          },
+          "Washington Sundar": {
+            "wickets": 0,
+            "runs_conceded": 10,
+            "role": "BOWL"
+          },
+          "Jason Holder": {
+            "wickets": 3,
+            "runs_conceded": 12,
+            "role": "BOWL"
+          },
+          "Rahul Tewatia": {
+            "runs": 14,
+            "balls": 4,
+            "role": "BAT"
+          },
+          "Jofra Archer": {
+            "runs": 5,
+            "balls": 6,
+            "role": "BAT"
+          },
+          "Tushar Deshpande": {
+            "runs": 1,
+            "balls": 3,
+            "role": "BAT"
+          },
+          "Brijesh Sharma": {
+            "runs": 1,
+            "balls": 1,
+            "role": "BAT"
+          },
+          "Yash Raj Punja": {
+            "wickets": 1,
+            "runs_conceded": 37,
+            "role": "BOWL"
+          },
+          "Ravindra Jadeja": {
+            "runs": 38,
+            "balls": 25,
+            "role": "BAT"
+          },
+          "Donovan Ferreira": {
+            "runs": 4,
+            "balls": 2,
+            "role": "BAT"
+          },
+          "Yashasvi Jaiswal": {
+            "runs": 3,
+            "balls": 4,
+            "role": "BAT"
+          },
+          "Vaibhav Sooryavanshi": {
+            "runs": 36,
+            "balls": 16,
+            "role": "BAT"
+          },
+          "Dhruv Jurel": {
+            "runs": 24,
+            "balls": 10,
+            "role": "BAT"
+          },
+          "Shimron Hetmyer": {
+            "runs": 6,
+            "balls": 7,
+            "role": "BAT"
+          },
+          "Shubham Dubey": {
+            "runs": 15,
+            "balls": 14,
+            "role": "BAT"
+          },
+          "Dasun Shanaka": {
+            "runs": 16,
+            "balls": 11,
+            "role": "BAT"
+          },
+          "Mohammed Siraj": {
+            "wickets": 1,
+            "runs_conceded": 55,
+            "role": "BOWL"
+          },
+          "Kagiso Rabada": {
+            "wickets": 2,
+            "runs_conceded": 33,
+            "role": "BOWL"
+          },
+          "Ravisrinivasan Sai Kishore": {
+            "wickets": 0,
+            "runs_conceded": 8,
+            "role": "BOWL"
+          },
+          "Rashid Khan": {
+            "wickets": 4,
+            "runs_conceded": 33,
+            "role": "BOWL"
+          }
+        },
+        "score_order": "team"
+      }
     },
     {
       "match": 53,
@@ -5465,8 +6947,132 @@
       "away": "MI",
       "venue": "Shaheed Veer Narayan Singh International Stadium, Raipur",
       "cricapi_id": "02d3614d-9727-43c5-a80c-0bf46c7499c6",
-      "status": "upcoming",
-      "result": null
+      "status": "completed",
+      "result": {
+        "winner": "RCB",
+        "margin": "2 wkts",
+        "home_score": "167/8 (20)",
+        "away_score": "166/7 (20)",
+        "summary": "Royal Challengers Bengaluru won by 2 wkts",
+        "player_scores": {
+          "Ryan Rickelton": {
+            "runs": 2,
+            "balls": 4,
+            "role": "BAT"
+          },
+          "Rohit Sharma": {
+            "runs": 22,
+            "balls": 10,
+            "role": "BAT"
+          },
+          "Naman Dhir": {
+            "runs": 47,
+            "balls": 32,
+            "role": "BAT"
+          },
+          "Suryakumar Yadav": {
+            "runs": 0,
+            "balls": 1,
+            "role": "BAT"
+          },
+          "Tilak Varma": {
+            "runs": 57,
+            "balls": 42,
+            "role": "BAT"
+          },
+          "Will Jacks": {
+            "wickets": 0,
+            "runs_conceded": 13,
+            "role": "BOWL"
+          },
+          "Raj Bawa": {
+            "wickets": 1,
+            "runs_conceded": 39,
+            "role": "BOWL"
+          },
+          "Corbin Bosch": {
+            "wickets": 4,
+            "runs_conceded": 26,
+            "role": "BOWL"
+          },
+          "Deepak Chahar": {
+            "wickets": 2,
+            "runs_conceded": 33,
+            "role": "BOWL"
+          },
+          "Bhuvneshwar Kumar": {
+            "runs": 7,
+            "balls": 2,
+            "role": "BAT"
+          },
+          "Josh Hazlewood": {
+            "wickets": 1,
+            "runs_conceded": 33,
+            "role": "BOWL"
+          },
+          "Rasikh Salam Dar": {
+            "runs": 3,
+            "balls": 2,
+            "role": "BAT"
+          },
+          "Romario Shepherd": {
+            "runs": 4,
+            "balls": 11,
+            "role": "BAT"
+          },
+          "Krunal Pandya": {
+            "runs": 73,
+            "balls": 46,
+            "role": "BAT"
+          },
+          "Suyash Sharma": {
+            "wickets": 0,
+            "runs_conceded": 21,
+            "role": "BOWL"
+          },
+          "Jacob Bethell": {
+            "runs": 27,
+            "balls": 27,
+            "role": "BAT"
+          },
+          "Virat Kohli": {
+            "runs": 0,
+            "balls": 1,
+            "role": "BAT"
+          },
+          "Devdutt Padikkal": {
+            "runs": 12,
+            "balls": 11,
+            "role": "BAT"
+          },
+          "Rajat Patidar": {
+            "runs": 8,
+            "balls": 8,
+            "role": "BAT"
+          },
+          "Jitesh Sharma": {
+            "runs": 18,
+            "balls": 12,
+            "role": "BAT"
+          },
+          "Tim David": {
+            "runs": 0,
+            "balls": 1,
+            "role": "BAT"
+          },
+          "Jasprit Bumrah": {
+            "wickets": 0,
+            "runs_conceded": 20,
+            "role": "BOWL"
+          },
+          "AM Ghazanfar": {
+            "wickets": 1,
+            "runs_conceded": 33,
+            "role": "BOWL"
+          }
+        },
+        "score_order": "team"
+      }
     },
     {
       "match": 54,
@@ -5476,8 +7082,137 @@
       "away": "LSG",
       "venue": "MA Chidambaram Stadium",
       "cricapi_id": "6aced947-319c-4e4a-9214-6f94f14c043e",
-      "status": "upcoming",
-      "result": null
+      "status": "completed",
+      "result": {
+        "winner": "CSK",
+        "margin": "5 wkts",
+        "home_score": "208/5 (19.2)",
+        "away_score": "203/8 (20)",
+        "summary": "Chennai Super Kings won by 5 wkts",
+        "player_scores": {
+          "Josh Inglis": {
+            "runs": 85,
+            "balls": 33,
+            "role": "BAT"
+          },
+          "Mitchell Marsh": {
+            "runs": 10,
+            "balls": 10,
+            "role": "BAT"
+          },
+          "Nicholas Pooran": {
+            "runs": 1,
+            "balls": 3,
+            "role": "BAT"
+          },
+          "Rishabh Pant": {
+            "runs": 15,
+            "balls": 12,
+            "role": "BAT"
+          },
+          "Aiden Markram": {
+            "wickets": 0,
+            "runs_conceded": 14,
+            "role": "BOWL"
+          },
+          "Akshat Raghuwanshi": {
+            "runs": 18,
+            "balls": 18,
+            "role": "BAT"
+          },
+          "Shahbaz Ahmed": {
+            "wickets": 2,
+            "runs_conceded": 30,
+            "role": "BOWL"
+          },
+          "Himmat Singh": {
+            "runs": 17,
+            "balls": 12,
+            "role": "BAT"
+          },
+          "Mohammed Shami": {
+            "wickets": 0,
+            "runs_conceded": 37,
+            "role": "BOWL"
+          },
+          "Avesh Khan": {
+            "wickets": 1,
+            "runs_conceded": 45,
+            "role": "BOWL"
+          },
+          "Akeal Hosein": {
+            "wickets": 0,
+            "runs_conceded": 49,
+            "role": "BOWL"
+          },
+          "Mukesh Choudhary": {
+            "wickets": 0,
+            "runs_conceded": 45,
+            "role": "BOWL"
+          },
+          "Anshul Kamboj": {
+            "wickets": 2,
+            "runs_conceded": 47,
+            "role": "BOWL"
+          },
+          "Noor Ahmad": {
+            "wickets": 1,
+            "runs_conceded": 24,
+            "role": "BOWL"
+          },
+          "Jamie Overton": {
+            "wickets": 3,
+            "runs_conceded": 36,
+            "role": "BOWL"
+          },
+          "Sanju Samson": {
+            "runs": 28,
+            "balls": 14,
+            "role": "BAT"
+          },
+          "Ruturaj Gaikwad": {
+            "runs": 42,
+            "balls": 28,
+            "role": "BAT"
+          },
+          "Urvil Patel": {
+            "runs": 65,
+            "balls": 23,
+            "role": "BAT"
+          },
+          "Kartik Sharma": {
+            "runs": 20,
+            "balls": 20,
+            "role": "BAT"
+          },
+          "Dewald Brevis": {
+            "runs": 10,
+            "balls": 12,
+            "role": "BAT"
+          },
+          "Shivam Dube": {
+            "runs": 15,
+            "balls": 7,
+            "role": "BAT"
+          },
+          "Prashant Veer": {
+            "runs": 18,
+            "balls": 12,
+            "role": "BAT"
+          },
+          "Prince Yadav": {
+            "wickets": 0,
+            "runs_conceded": 36,
+            "role": "BOWL"
+          },
+          "Digvesh Singh Rathi": {
+            "wickets": 2,
+            "runs_conceded": 45,
+            "role": "BOWL"
+          }
+        },
+        "score_order": "team"
+      }
     },
     {
       "match": 55,

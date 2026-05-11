@@ -1,0 +1,115 @@
+{
+  "winner": "KKR",
+  "margin": "8 wkts",
+  "home_score": "142/8 (20)",
+  "away_score": "147/2 (14.2)",
+  "summary": "Kolkata Knight Riders won by 8 wkts",
+  "player_scores": {
+    "Pathum Nissanka": {
+      "runs": 50,
+      "balls": 29,
+      "role": "BAT"
+    },
+    "KL Rahul": {
+      "runs": 23,
+      "balls": 14,
+      "role": "BAT"
+    },
+    "Nitish Rana": {
+      "runs": 8,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Sameer Rizvi": {
+      "runs": 3,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "Tristan Stubbs": {
+      "runs": 2,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Axar Patel": {
+      "wickets": 1,
+      "runs_conceded": 27,
+      "role": "BOWL"
+    },
+    "Ashutosh Sharma": {
+      "runs": 39,
+      "balls": 28,
+      "role": "BAT"
+    },
+    "Vipraj Nigam": {
+      "wickets": 0,
+      "runs_conceded": 34,
+      "role": "BOWL"
+    },
+    "Mitchell Starc": {
+      "wickets": 0,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "Lungi Ngidi": {
+      "wickets": 0,
+      "runs_conceded": 7,
+      "role": "BOWL"
+    },
+    "Anukul Roy": {
+      "wickets": 2,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "Vaibhav Arora": {
+      "wickets": 1,
+      "runs_conceded": 29,
+      "role": "BOWL"
+    },
+    "Sunil Narine": {
+      "wickets": 1,
+      "runs_conceded": 17,
+      "role": "BOWL"
+    },
+    "Kartik Tyagi": {
+      "wickets": 2,
+      "runs_conceded": 25,
+      "role": "BOWL"
+    },
+    "Varun Chakaravarthy": {
+      "wickets": 0,
+      "runs_conceded": 28,
+      "role": "BOWL"
+    },
+    "Cameron Green": {
+      "runs": 33,
+      "balls": 27,
+      "role": "BAT"
+    },
+    "Ajinkya Rahane": {
+      "runs": 13,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Finn Allen": {
+      "runs": 100,
+      "balls": 47,
+      "role": "BAT"
+    },
+    "Angkrish Raghuvanshi": {
+      "runs": 1,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Kuldeep Yadav": {
+      "wickets": 0,
+      "runs_conceded": 41,
+      "role": "BOWL"
+    },
+    "Mukesh Kumar": {
+      "wickets": 0,
+      "runs_conceded": 7,
+      "role": "BOWL"
+    }
+  },
+  "score_order": "team"
+}

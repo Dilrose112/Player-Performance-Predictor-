@@ -426,8 +426,9 @@ def api_sync():
     POST /api/sync
     Optional body:  { "enrich": true, "clear_cache": true }
       enrich      – fetch scorecards for completed matches (default true)
-      clear_cache – delete meta_cache.json + schedule.json before syncing
-                    (default true — always start clean to fix stale data)
+      clear_cache – delete meta_cache.json before syncing
+                    (default false; schedule.json is preserved so completed
+                     results are not wiped by bare fixture responses)
 
     Returns immediately with { "status": "started" }.
     The sync runs in a background thread; /api/sync/status will reflect
@@ -441,7 +442,7 @@ def api_sync():
 
     body        = request.get_json(silent=True) or {}
     enrich      = body.get('enrich', True)
-    clear_cache = body.get('clear_cache', True)   # default ON to fix stale caches
+    clear_cache = body.get('clear_cache', False)
 
     def _run():
         import logging
@@ -450,7 +451,7 @@ def api_sync():
             if clear_cache:
                 from pathlib import Path
                 base = Path(__file__).parent / 'output'
-                for fname in ('meta_cache.json', 'schedule.json'):
+                for fname in ('meta_cache.json',):
                     p = base / fname
                     if p.exists():
                         p.unlink()

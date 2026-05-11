@@ -1,8 +1,8 @@
 {
   "winner": "RCB",
   "margin": "6 wkts",
-  "home_score": "201/9 (20)",
-  "away_score": "203/4 (15.4)",
+  "home_score": "203/4 (15.4)",
+  "away_score": "201/9 (20)",
   "summary": "Royal Challengers Bengaluru won by 6 wkts",
   "player_scores": {
     "Travis Head": {
@@ -125,5 +125,6 @@
       "runs_conceded": 35,
       "role": "BOWL"
     }
-  }
+  },
+  "score_order": "team"
 }

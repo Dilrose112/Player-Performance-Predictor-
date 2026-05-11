@@ -1,8 +1,8 @@
 {
   "winner": "GT",
   "margin": "1 run",
-  "home_score": "210/4 (20)",
-  "away_score": "209/8 (20)",
+  "home_score": "209/8 (20)",
+  "away_score": "210/4 (20)",
   "summary": "Gujarat Titans won by 1 run",
   "player_scores": {
     "Sai Sudharsan": {
@@ -120,5 +120,6 @@
       "runs_conceded": 52,
       "role": "BOWL"
     }
-  }
+  },
+  "score_order": "team"
 }

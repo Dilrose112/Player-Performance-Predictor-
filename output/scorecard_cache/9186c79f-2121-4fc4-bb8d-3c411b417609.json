@@ -125,5 +125,6 @@
       "runs_conceded": 30,
       "role": "BOWL"
     }
-  }
+  },
+  "score_order": "team"
 }

@@ -1,0 +1,120 @@
+{
+  "winner": "",
+  "margin": "9 runs",
+  "home_score": "209/3 (19)",
+  "away_score": "203/6 (19)",
+  "summary": "LSG won by 9 runs (19 Overs game due to rain, DLS Target 213)",
+  "player_scores": {
+    "Mitchell Marsh": {
+      "runs": 111,
+      "balls": 56,
+      "role": "BAT"
+    },
+    "Arshin Kulkarni": {
+      "runs": 17,
+      "balls": 24,
+      "role": "BAT"
+    },
+    "Nicholas Pooran": {
+      "runs": 38,
+      "balls": 23,
+      "role": "BAT"
+    },
+    "Rishabh Pant": {
+      "runs": 32,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Aiden Markram": {
+      "runs": 1,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Bhuvneshwar Kumar": {
+      "wickets": 0,
+      "runs_conceded": 34,
+      "role": "BOWL"
+    },
+    "Josh Hazlewood": {
+      "wickets": 1,
+      "runs_conceded": 49,
+      "role": "BOWL"
+    },
+    "Krunal Pandya": {
+      "runs": 28,
+      "balls": 16,
+      "role": "BAT"
+    },
+    "Rasikh Salam Dar": {
+      "wickets": 1,
+      "runs_conceded": 53,
+      "role": "BOWL"
+    },
+    "Suyash Sharma": {
+      "wickets": 0,
+      "runs_conceded": 21,
+      "role": "BOWL"
+    },
+    "Romario Shepherd": {
+      "runs": 23,
+      "balls": 15,
+      "role": "BAT"
+    },
+    "Jacob Bethell": {
+      "runs": 4,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Virat Kohli": {
+      "runs": 0,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Devdutt Padikkal": {
+      "runs": 34,
+      "balls": 25,
+      "role": "BAT"
+    },
+    "Rajat Patidar": {
+      "runs": 61,
+      "balls": 31,
+      "role": "BAT"
+    },
+    "Jitesh Sharma": {
+      "runs": 1,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Tim David": {
+      "runs": 40,
+      "balls": 17,
+      "role": "BAT"
+    },
+    "Mohammed Shami": {
+      "wickets": 1,
+      "runs_conceded": 33,
+      "role": "BOWL"
+    },
+    "Prince Yadav": {
+      "wickets": 3,
+      "runs_conceded": 33,
+      "role": "BOWL"
+    },
+    "Mayank Yadav": {
+      "wickets": 0,
+      "runs_conceded": 50,
+      "role": "BOWL"
+    },
+    "Digvesh Singh Rathi": {
+      "wickets": 0,
+      "runs_conceded": 50,
+      "role": "BOWL"
+    },
+    "Shahbaz Ahmed": {
+      "wickets": 2,
+      "runs_conceded": 33,
+      "role": "BOWL"
+    }
+  },
+  "score_order": "team"
+}
