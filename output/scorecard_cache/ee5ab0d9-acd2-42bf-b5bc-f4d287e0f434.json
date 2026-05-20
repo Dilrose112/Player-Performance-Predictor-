@@ -1,0 +1,125 @@
+{
+  "winner": "DC",
+  "margin": "3 wkts",
+  "home_score": "210/5 (20)",
+  "away_score": "216/7 (19)",
+  "summary": "Delhi Capitals won by 3 wkts",
+  "player_scores": {
+    "Priyansh Arya": {
+      "runs": 56,
+      "balls": 33,
+      "role": "BAT"
+    },
+    "Prabhsimran Singh": {
+      "runs": 18,
+      "balls": 15,
+      "role": "BAT"
+    },
+    "Shreyas Iyer": {
+      "runs": 59,
+      "balls": 36,
+      "role": "BAT"
+    },
+    "Cooper Connolly": {
+      "runs": 38,
+      "balls": 27,
+      "role": "BAT"
+    },
+    "Marcus Stoinis": {
+      "wickets": 1,
+      "runs_conceded": 44,
+      "role": "BOWL"
+    },
+    "Shashank Singh": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Suryansh Shedge": {
+      "runs": 21,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Mitchell Starc": {
+      "wickets": 2,
+      "runs_conceded": 57,
+      "role": "BOWL"
+    },
+    "Auqib Nabi Dar": {
+      "runs": 10,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Lungi Ngidi": {
+      "wickets": 0,
+      "runs_conceded": 46,
+      "role": "BOWL"
+    },
+    "Mukesh Kumar": {
+      "wickets": 1,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "Madhav Tiwari": {
+      "runs": 18,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "KL Rahul": {
+      "runs": 9,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Abishek Porel": {
+      "runs": 5,
+      "balls": 6,
+      "role": "BAT"
+    },
+    "Sahil Parakh": {
+      "runs": 13,
+      "balls": 6,
+      "role": "BAT"
+    },
+    "Tristan Stubbs": {
+      "runs": 12,
+      "balls": 17,
+      "role": "BAT"
+    },
+    "Axar Patel": {
+      "runs": 56,
+      "balls": 30,
+      "role": "BAT"
+    },
+    "David Miller": {
+      "runs": 51,
+      "balls": 28,
+      "role": "BAT"
+    },
+    "Ashutosh Sharma": {
+      "runs": 24,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Arshdeep Singh": {
+      "wickets": 2,
+      "runs_conceded": 21,
+      "role": "BOWL"
+    },
+    "Yash Thakur": {
+      "wickets": 2,
+      "runs_conceded": 55,
+      "role": "BOWL"
+    },
+    "Marco Jansen": {
+      "wickets": 0,
+      "runs_conceded": 45,
+      "role": "BOWL"
+    },
+    "Ben Dwarshuis": {
+      "wickets": 1,
+      "runs_conceded": 51,
+      "role": "BOWL"
+    }
+  },
+  "score_order": "team"
+}

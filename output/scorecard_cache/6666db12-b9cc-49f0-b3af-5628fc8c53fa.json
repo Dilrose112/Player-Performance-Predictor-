@@ -1,0 +1,130 @@
+{
+  "winner": "MI",
+  "margin": "6 wkts",
+  "home_score": "200/8 (20)",
+  "away_score": "205/4 (19.5)",
+  "summary": "Mumbai Indians won by 6 wkts",
+  "player_scores": {
+    "Priyansh Arya": {
+      "runs": 22,
+      "balls": 17,
+      "role": "BAT"
+    },
+    "Prabhsimran Singh": {
+      "runs": 57,
+      "balls": 32,
+      "role": "BAT"
+    },
+    "Cooper Connolly": {
+      "runs": 21,
+      "balls": 22,
+      "role": "BAT"
+    },
+    "Shreyas Iyer": {
+      "runs": 4,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Suryansh Shedge": {
+      "runs": 8,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Shashank Singh": {
+      "runs": 2,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Azmatullah Omarzai": {
+      "wickets": 2,
+      "runs_conceded": 36,
+      "role": "BOWL"
+    },
+    "Marco Jansen": {
+      "wickets": 1,
+      "runs_conceded": 55,
+      "role": "BOWL"
+    },
+    "Vishnu Vinod": {
+      "runs": 15,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Xavier Bartlett": {
+      "wickets": 0,
+      "runs_conceded": 53,
+      "role": "BOWL"
+    },
+    "Deepak Chahar": {
+      "wickets": 2,
+      "runs_conceded": 36,
+      "role": "BOWL"
+    },
+    "Jasprit Bumrah": {
+      "wickets": 0,
+      "runs_conceded": 35,
+      "role": "BOWL"
+    },
+    "Shardul Thakur": {
+      "wickets": 4,
+      "runs_conceded": 39,
+      "role": "BOWL"
+    },
+    "Corbin Bosch": {
+      "wickets": 1,
+      "runs_conceded": 42,
+      "role": "BOWL"
+    },
+    "Raghu Sharma": {
+      "wickets": 0,
+      "runs_conceded": 22,
+      "role": "BOWL"
+    },
+    "Will Jacks": {
+      "runs": 25,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Raj Bawa": {
+      "wickets": 1,
+      "runs_conceded": 11,
+      "role": "BOWL"
+    },
+    "Rohit Sharma": {
+      "runs": 25,
+      "balls": 26,
+      "role": "BAT"
+    },
+    "Ryan Rickelton": {
+      "runs": 48,
+      "balls": 23,
+      "role": "BAT"
+    },
+    "Naman Dhir": {
+      "runs": 9,
+      "balls": 6,
+      "role": "BAT"
+    },
+    "Tilak Varma": {
+      "runs": 75,
+      "balls": 33,
+      "role": "BAT"
+    },
+    "Sherfane Rutherford": {
+      "runs": 20,
+      "balls": 21,
+      "role": "BAT"
+    },
+    "Arshdeep Singh": {
+      "wickets": 0,
+      "runs_conceded": 29,
+      "role": "BOWL"
+    },
+    "Yuzvendra Chahal": {
+      "wickets": 1,
+      "runs_conceded": 32,
+      "role": "BOWL"
+    }
+  },
+  "score_order": "team"
+}

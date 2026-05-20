@@ -1,0 +1,115 @@
+{
+  "winner": "KKR",
+  "margin": "29 runs",
+  "home_score": "247/2 (20)",
+  "away_score": "218/4 (20)",
+  "summary": "Kolkata Knight Riders won by 29 runs",
+  "player_scores": {
+    "Ajinkya Rahane": {
+      "runs": 14,
+      "balls": 14,
+      "role": "BAT"
+    },
+    "Finn Allen": {
+      "runs": 93,
+      "balls": 35,
+      "role": "BAT"
+    },
+    "Angkrish Raghuvanshi": {
+      "runs": 82,
+      "balls": 44,
+      "role": "BAT"
+    },
+    "Cameron Green": {
+      "wickets": 1,
+      "runs_conceded": 25,
+      "role": "BOWL"
+    },
+    "Mohammed Siraj": {
+      "wickets": 1,
+      "runs_conceded": 50,
+      "role": "BOWL"
+    },
+    "Kagiso Rabada": {
+      "wickets": 0,
+      "runs_conceded": 40,
+      "role": "BOWL"
+    },
+    "Jason Holder": {
+      "wickets": 0,
+      "runs_conceded": 39,
+      "role": "BOWL"
+    },
+    "Rashid Khan": {
+      "wickets": 0,
+      "runs_conceded": 57,
+      "role": "BOWL"
+    },
+    "Ravisrinivasan Sai Kishore": {
+      "wickets": 1,
+      "runs_conceded": 38,
+      "role": "BOWL"
+    },
+    "Arshad Khan": {
+      "wickets": 0,
+      "runs_conceded": 22,
+      "role": "BOWL"
+    },
+    "Sai Sudharsan": {
+      "runs": 53,
+      "balls": 28,
+      "role": "BAT"
+    },
+    "Shubman Gill": {
+      "runs": 85,
+      "balls": 49,
+      "role": "BAT"
+    },
+    "Nishant Sindhu": {
+      "runs": 1,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Jos Buttler": {
+      "runs": 57,
+      "balls": 35,
+      "role": "BAT"
+    },
+    "Rahul Tewatia": {
+      "runs": 2,
+      "balls": 4,
+      "role": "BAT"
+    },
+    "Saurabh Dubey": {
+      "wickets": 1,
+      "runs_conceded": 23,
+      "role": "BOWL"
+    },
+    "Kartik Tyagi": {
+      "wickets": 0,
+      "runs_conceded": 59,
+      "role": "BOWL"
+    },
+    "Matheesha Pathirana": {
+      "wickets": 0,
+      "runs_conceded": 9,
+      "role": "BOWL"
+    },
+    "Sunil Narine": {
+      "wickets": 2,
+      "runs_conceded": 29,
+      "role": "BOWL"
+    },
+    "Varun Chakaravarthy": {
+      "wickets": 0,
+      "runs_conceded": 47,
+      "role": "BOWL"
+    },
+    "Anukul Roy": {
+      "wickets": 0,
+      "runs_conceded": 17,
+      "role": "BOWL"
+    }
+  },
+  "score_order": "team"
+}
