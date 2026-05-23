@@ -31,6 +31,20 @@ def parse_match(path, source):
     batting_first_team = batting_order[0] if batting_order else None
     chasing_team = batting_order[1] if len(batting_order) > 1 else None
     chasing_win = int(winner == chasing_team) if winner and chasing_team else None
+    # Normalise team names (e.g. Bangalore -> Bengaluru)
+    def norm_team(t):
+        if not t: return t
+        if t == 'Royal Challengers Bangalore': return 'Royal Challengers Bengaluru'
+        if t == 'Rising Pune Supergiant': return 'Rising Pune Supergiants'
+        if t == 'Delhi Daredevils': return 'Delhi Capitals'
+        if t == 'Kings XI Punjab': return 'Punjab Kings'
+        return t
+
+    toss_winner = norm_team(toss_winner)
+    winner = norm_team(winner)
+    batting_first_team = norm_team(batting_first_team)
+    chasing_team = norm_team(chasing_team)
+    teams = [norm_team(t) for t in teams]
 
     player_stats = defaultdict(lambda: {
         'runs': 0, 'balls_faced': 0,
@@ -38,7 +52,7 @@ def parse_match(path, source):
     })
 
     for inning_index, inning in enumerate(innings, start=1):
-        batting_team = inning['team']
+        batting_team = norm_team(inning['team'])
         bowling_team = [t for t in teams if t != batting_team]
         bowling_team = bowling_team[0] if bowling_team else ''
 

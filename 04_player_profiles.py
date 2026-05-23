@@ -13,13 +13,16 @@ import pandas as pd
 RETIRED_CUTOFF = '2026-01-01'
 EXTRA_RETIRED_T20 = {'V Kohli', 'RG Sharma'}
 MIN_VENUE_MATCHES = 5
+VENUE_ROLLING_WINDOW = 20   # matches used for rolling venue average
+RECENT_SEASONS       = 3    # seasons used for recent_venue_avg_runs
 PITCH_TYPE_MAP = {'bowling': 0, 'balanced': 1, 'batting': 2}
 
 
 def classify_pitch_type(avg_runs):
-    if avg_runs > 170:
+    # Updated thresholds for modern T20 scoring
+    if avg_runs > 175:
         return 'batting'
-    if avg_runs < 150:
+    if avg_runs < 155:
         return 'bowling'
     return 'balanced'
 
@@ -28,6 +31,7 @@ def build_venue_context(df):
     innings_level = (
         df.groupby(['venue', 'match_id', 'team'], as_index=False)
         .agg(
+            date=('date', 'first'),
             innings_runs=('runs', 'sum'),
             innings_wkts=('wickets', 'sum'),
             chasing_win=('chasing_win', 'first'),
@@ -36,45 +40,60 @@ def build_venue_context(df):
     match_level = (
         innings_level.groupby(['venue', 'match_id'], as_index=False)
         .agg(
+            date=('date', 'first'),
             venue_match_avg_runs=('innings_runs', 'mean'),
             venue_match_avg_wkts=('innings_wkts', 'mean'),
             chasing_win=('chasing_win', 'first'),
         )
+        .sort_values(['venue', 'date', 'match_id'])
     )
-    by_venue = (
-        match_level.groupby('venue')
-        .agg(
-            venue_avg_runs=('venue_match_avg_runs', 'mean'),
-            venue_avg_wkts=('venue_match_avg_wkts', 'mean'),
-            dew_factor=('chasing_win', 'mean'),
-            venue_matches=('match_id', 'nunique'),
-        )
-        .reset_index()
-    )
-    venues = {
-        row['venue']: {
-            'venue_avg_runs': round(row['venue_avg_runs'], 3),
-            'venue_avg_wkts': round(row['venue_avg_wkts'], 3),
-            'pitch_type': classify_pitch_type(row['venue_avg_runs']),
-            'pitch_type_encoded': PITCH_TYPE_MAP[classify_pitch_type(row['venue_avg_runs'])],
-            'dew_factor': round(0.5 if pd.isna(row['dew_factor']) else row['dew_factor'], 3),
-            'chasing_advantage': int((0.5 if pd.isna(row['dew_factor']) else row['dew_factor']) > 0.6),
-            'venue_matches': int(row['venue_matches']),
-        }
-        for _, row in by_venue.iterrows()
-    }
+    
+    # Calculate venue-level stats
+    venues = {}
+    
+    # Global fallbacks
+    global_avg_runs = match_level['venue_match_avg_runs'].mean()
+    global_avg_wkts = match_level['venue_match_avg_wkts'].mean()
     global_dew_factor = match_level['chasing_win'].dropna().mean()
     if pd.isna(global_dew_factor):
         global_dew_factor = 0.5
-    global_avg_runs = match_level['venue_match_avg_runs'].mean()
+
+    for venue, grp in match_level.groupby('venue'):
+        # Full averages
+        avg_runs = grp['venue_match_avg_runs'].mean()
+        avg_wkts = grp['venue_match_avg_wkts'].mean()
+        dew      = grp['chasing_win'].mean()
+        
+        # Rolling average (last 20 matches)
+        rolling_avg = grp['venue_match_avg_runs'].tail(VENUE_ROLLING_WINDOW).mean()
+        
+        # Recent season average (last 3 years)
+        cutoff = grp['date'].max() - pd.DateOffset(years=RECENT_SEASONS)
+        recent_grp = grp[grp['date'] >= cutoff]
+        recent_avg = recent_grp['venue_match_avg_runs'].mean() if not recent_grp.empty else avg_runs
+
+        venues[venue] = {
+            'venue_avg_runs': round(avg_runs, 3),
+            'venue_avg_wkts': round(avg_wkts, 3),
+            'venue_rolling_avg': round(rolling_avg, 3),
+            'recent_venue_avg_runs': round(recent_avg, 3),
+            'pitch_type': classify_pitch_type(avg_runs),
+            'pitch_type_encoded': PITCH_TYPE_MAP[classify_pitch_type(avg_runs)],
+            'dew_factor': round(0.5 if pd.isna(dew) else dew, 3),
+            'chasing_advantage': int((0.5 if pd.isna(dew) else dew) > 0.6),
+            'venue_matches': len(grp),
+        }
+
     venues['_global'] = {
         'venue_avg_runs': round(global_avg_runs, 3),
-        'venue_avg_wkts': round(match_level['venue_match_avg_wkts'].mean(), 3),
+        'venue_avg_wkts': round(global_avg_wkts, 3),
+        'venue_rolling_avg': round(global_avg_runs, 3),
+        'recent_venue_avg_runs': round(global_avg_runs, 3),
         'pitch_type': classify_pitch_type(global_avg_runs),
         'pitch_type_encoded': PITCH_TYPE_MAP[classify_pitch_type(global_avg_runs)],
         'dew_factor': round(global_dew_factor, 3),
         'chasing_advantage': int(global_dew_factor > 0.6),
-        'venue_matches': int(match_level['match_id'].nunique()),
+        'venue_matches': len(match_level),
     }
     return venues
 

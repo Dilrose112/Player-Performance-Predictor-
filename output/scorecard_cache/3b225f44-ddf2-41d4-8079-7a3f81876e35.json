@@ -1,0 +1,125 @@
+{
+  "winner": "RR",
+  "margin": "7 wkts",
+  "home_score": "225/3 (19.1)",
+  "away_score": "220/5 (20)",
+  "summary": "Rajasthan Royals won by 7 wkts",
+  "player_scores": {
+    "Mitchell Marsh": {
+      "runs": 96,
+      "balls": 57,
+      "role": "BAT"
+    },
+    "Josh Inglis": {
+      "runs": 60,
+      "balls": 29,
+      "role": "BAT"
+    },
+    "Nicholas Pooran": {
+      "runs": 16,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Rishabh Pant": {
+      "runs": 35,
+      "balls": 23,
+      "role": "BAT"
+    },
+    "Abdul Samad": {
+      "runs": 0,
+      "balls": 0,
+      "role": "BAT"
+    },
+    "Ayush Badoni": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Jofra Archer": {
+      "wickets": 1,
+      "runs_conceded": 39,
+      "role": "BOWL"
+    },
+    "Sushant Mishra": {
+      "wickets": 0,
+      "runs_conceded": 46,
+      "role": "BOWL"
+    },
+    "Sandeep Sharma": {
+      "wickets": 0,
+      "runs_conceded": 43,
+      "role": "BOWL"
+    },
+    "Brijesh Sharma": {
+      "wickets": 0,
+      "runs_conceded": 44,
+      "role": "BOWL"
+    },
+    "Yash Raj Punja": {
+      "wickets": 2,
+      "runs_conceded": 35,
+      "role": "BOWL"
+    },
+    "Dasun Shanaka": {
+      "wickets": 0,
+      "runs_conceded": 10,
+      "role": "BOWL"
+    },
+    "Yashasvi Jaiswal": {
+      "runs": 43,
+      "balls": 23,
+      "role": "BAT"
+    },
+    "Vaibhav Sooryavanshi": {
+      "runs": 93,
+      "balls": 38,
+      "role": "BAT"
+    },
+    "Dhruv Jurel": {
+      "runs": 53,
+      "balls": 38,
+      "role": "BAT"
+    },
+    "Lhuan-dre Pretorius": {
+      "runs": 7,
+      "balls": 6,
+      "role": "BAT"
+    },
+    "Donovan Ferreira": {
+      "runs": 16,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Akash Maharaj Singh": {
+      "wickets": 1,
+      "runs_conceded": 54,
+      "role": "BOWL"
+    },
+    "Mohsin Khan": {
+      "wickets": 1,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "Mayank Yadav": {
+      "wickets": 0,
+      "runs_conceded": 50,
+      "role": "BOWL"
+    },
+    "Prince Yadav": {
+      "wickets": 0,
+      "runs_conceded": 43,
+      "role": "BOWL"
+    },
+    "Digvesh Singh Rathi": {
+      "wickets": 0,
+      "runs_conceded": 38,
+      "role": "BOWL"
+    },
+    "Shahbaz Ahmed": {
+      "wickets": 0,
+      "runs_conceded": 6,
+      "role": "BOWL"
+    }
+  },
+  "score_order": "team"
+}
