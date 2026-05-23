@@ -1,0 +1,115 @@
+{
+  "winner": "SRH",
+  "margin": "55 runs",
+  "home_score": "255/4 (20)",
+  "away_score": "200/4 (20)",
+  "summary": "Sunrisers Hyderabad won by 55 runs",
+  "player_scores": {
+    "Abhishek Sharma": {
+      "runs": 56,
+      "balls": 22,
+      "role": "BAT"
+    },
+    "Travis Head": {
+      "wickets": 1,
+      "runs_conceded": 7,
+      "role": "BOWL"
+    },
+    "Ishan Kishan": {
+      "runs": 79,
+      "balls": 46,
+      "role": "BAT"
+    },
+    "Heinrich Klaasen": {
+      "runs": 51,
+      "balls": 24,
+      "role": "BAT"
+    },
+    "Nitish Kumar Reddy": {
+      "wickets": 0,
+      "runs_conceded": 10,
+      "role": "BOWL"
+    },
+    "Bhuvneshwar Kumar": {
+      "wickets": 0,
+      "runs_conceded": 51,
+      "role": "BOWL"
+    },
+    "Josh Hazlewood": {
+      "wickets": 0,
+      "runs_conceded": 55,
+      "role": "BOWL"
+    },
+    "Rasikh Salam Dar": {
+      "wickets": 2,
+      "runs_conceded": 52,
+      "role": "BOWL"
+    },
+    "Suyash Sharma": {
+      "wickets": 1,
+      "runs_conceded": 36,
+      "role": "BOWL"
+    },
+    "Romario Shepherd": {
+      "wickets": 0,
+      "runs_conceded": 37,
+      "role": "BOWL"
+    },
+    "Krunal Pandya": {
+      "runs": 41,
+      "balls": 31,
+      "role": "BAT"
+    },
+    "Venkatesh Iyer": {
+      "runs": 44,
+      "balls": 19,
+      "role": "BAT"
+    },
+    "Virat Kohli": {
+      "runs": 15,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Devdutt Padikkal": {
+      "runs": 21,
+      "balls": 14,
+      "role": "BAT"
+    },
+    "Rajat Patidar": {
+      "runs": 56,
+      "balls": 39,
+      "role": "BAT"
+    },
+    "Tim David": {
+      "runs": 15,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "Pat Cummins": {
+      "wickets": 0,
+      "runs_conceded": 48,
+      "role": "BOWL"
+    },
+    "Eshan Malinga": {
+      "wickets": 2,
+      "runs_conceded": 33,
+      "role": "BOWL"
+    },
+    "Shivang Kumar": {
+      "wickets": 0,
+      "runs_conceded": 32,
+      "role": "BOWL"
+    },
+    "Sakib Hussain": {
+      "wickets": 1,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "Harshal Patel": {
+      "wickets": 0,
+      "runs_conceded": 37,
+      "role": "BOWL"
+    }
+  },
+  "score_order": "innings"
+}
