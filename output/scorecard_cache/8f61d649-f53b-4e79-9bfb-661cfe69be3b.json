@@ -1,0 +1,130 @@
+{
+  "winner": "DC",
+  "margin": "40 runs",
+  "home_score": "163/10 (18.4)",
+  "away_score": "203/5 (20)",
+  "summary": "Delhi Capitals won by 40 runs",
+  "player_scores": {
+    "Abishek Porel": {
+      "runs": 22,
+      "balls": 18,
+      "role": "BAT"
+    },
+    "KL Rahul": {
+      "runs": 60,
+      "balls": 30,
+      "role": "BAT"
+    },
+    "Sahil Parakh": {
+      "runs": 24,
+      "balls": 17,
+      "role": "BAT"
+    },
+    "Axar Patel": {
+      "wickets": 1,
+      "runs_conceded": 38,
+      "role": "BOWL"
+    },
+    "David Miller": {
+      "runs": 28,
+      "balls": 19,
+      "role": "BAT"
+    },
+    "Ashutosh Sharma": {
+      "runs": 18,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Tristan Stubbs": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Anukul Roy": {
+      "runs": 9,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Saurabh Dubey": {
+      "runs": 4,
+      "balls": 2,
+      "role": "BAT"
+    },
+    "Cameron Green": {
+      "runs": 2,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Kartik Tyagi": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Sunil Narine": {
+      "wickets": 1,
+      "runs_conceded": 38,
+      "role": "BOWL"
+    },
+    "Varun Chakaravarthy": {
+      "runs": 5,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Ajinkya Rahane": {
+      "runs": 63,
+      "balls": 39,
+      "role": "BAT"
+    },
+    "Finn Allen": {
+      "runs": 20,
+      "balls": 13,
+      "role": "BAT"
+    },
+    "Manish Pandey": {
+      "runs": 25,
+      "balls": 16,
+      "role": "BAT"
+    },
+    "Rovman Powell": {
+      "runs": 29,
+      "balls": 21,
+      "role": "BAT"
+    },
+    "Rinku Singh": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Tejasvi Dahiya": {
+      "runs": 1,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Mitchell Starc": {
+      "wickets": 2,
+      "runs_conceded": 26,
+      "role": "BOWL"
+    },
+    "Auqib Nabi Dar": {
+      "wickets": 0,
+      "runs_conceded": 23,
+      "role": "BOWL"
+    },
+    "Lungi Ngidi": {
+      "wickets": 3,
+      "runs_conceded": 27,
+      "role": "BOWL"
+    },
+    "Madhav Tiwari": {
+      "wickets": 0,
+      "runs_conceded": 20,
+      "role": "BOWL"
+    },
+    "Kuldeep Yadav": {
+      "wickets": 3,
+      "runs_conceded": 29,
+      "role": "BOWL"
+    }
+  },
+  "score_order": "team"
+}

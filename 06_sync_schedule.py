@@ -58,7 +58,9 @@ MIN_DELAY       = 1.5    # seconds between every API call
 META_CACHE_TTL  = 24     # hours before re-fetching series id / T20I list
 SCHED_CACHE_TTL = 6      # hours before load_schedule() considers schedule.json stale
 DEFAULT_SC_LIMIT = 5     # max new scorecard calls per run (CLI: --scorecard-limit)
-IPL_MATCHES_CACHE_VERSION = "2026-known-teams-v2"
+IPL_MATCHES_CACHE_VERSION = "2026-known-teams-v3"
+SERIES_SEARCH_OFFSETS = range(0, 201, 25)
+MATCH_SEARCH_OFFSETS = range(0, 126, 25)
 
 # Known fallback series IDs for IPL 2026
 # Primary: cricapi.com series ID (try to discover dynamically)
@@ -222,6 +224,8 @@ _PLACEHOLDER_TEAMS = {
     "winner of eliminator",
 }
 
+_PLAYOFF_WORDS = ("qualifier", "eliminator", "final")
+
 _VENUE_MAP = {
     "chinnaswamy":    "M Chinnaswamy Stadium",
     "wankhede":       "Wankhede Stadium",
@@ -238,6 +242,8 @@ _VENUE_MAP = {
 }
 
 def _norm_team(raw: str) -> str:
+    if _is_placeholder_team(raw):
+        return "TBC"
     return _TEAM_MAP.get(raw.strip().lower(), raw.strip())
 
 def _is_placeholder_team(raw: str) -> bool:
@@ -337,7 +343,7 @@ def fetch_ipl_series() -> list[dict]:
     Returns IPL 2026 match list using a 3-strategy waterfall:
       1. /v1/series  paginated search for 'IPL 2026' → get series id → /v1/series_info
       2. /v1/currentMatches → look for live IPL match → extract series_id → /v1/series_info
-      3. /v1/matches (offset 0,25,50) → filter by name containing 'IPL' and date >= 2026
+      3. /v1/matches fallback → filter by name containing 'IPL' and date >= 2026
     Uses meta cache (24h) so this costs 0 calls on warm runs.
     """
     meta = _load_meta_cache()
@@ -352,7 +358,7 @@ def fetch_ipl_series() -> list[dict]:
 
     # ── Strategy 1: search /v1/series ────────────────────────────────────────
     log.info("Strategy 1: searching /v1/series for IPL 2026…")
-    for offset in (0, 25, 50):
+    for offset in SERIES_SEARCH_OFFSETS:
         data = _api("series", {"offset": offset})
         if not data:
             break
@@ -396,7 +402,7 @@ def fetch_ipl_series() -> list[dict]:
     # ── Strategy 3: scan /v1/matches for IPL 2026 entries ────────────────────
     if not matches_raw:
         log.info("Strategy 3: scanning /v1/matches for IPL 2026 entries…")
-        for offset in (0, 25, 50):
+        for offset in MATCH_SEARCH_OFFSETS:
             data = _api("matches", {"offset": offset})
             if not data:
                 break
@@ -420,11 +426,15 @@ def fetch_ipl_series() -> list[dict]:
         teams = m.get("teams", [])
         if len(teams) < 2:
             continue
+        mname = m.get("name", "").lower()
+        has_placeholder = _is_placeholder_team(teams[0]) or _is_placeholder_team(teams[1])
+        is_playoff_row = any(word in mname for word in _PLAYOFF_WORDS)
         if (
-            _is_placeholder_team(teams[0])
-            or _is_placeholder_team(teams[1])
-            or not _is_known_ipl_team(teams[0])
-            or not _is_known_ipl_team(teams[1])
+            (has_placeholder and not is_playoff_row)
+            or (not has_placeholder and (
+                not _is_known_ipl_team(teams[0])
+                or not _is_known_ipl_team(teams[1])
+            ))
         ):
             log.info("Skipping unresolved/non-IPL fixture: %s vs %s", teams[0], teams[1])
             continue
@@ -713,7 +723,8 @@ def merge(seed: list[dict], fetched: list[dict]) -> list[dict]:
 
     for fm in fetched:
         h, a = fm.get("home", ""), fm.get("away", "")
-        if _is_placeholder_team(h) or _is_placeholder_team(a):
+        has_placeholder = _is_placeholder_team(h) or _is_placeholder_team(a)
+        if has_placeholder and fm.get("format") != "ipl":
             continue
 
         k = _key(fm)
@@ -723,6 +734,11 @@ def merge(seed: list[dict], fetched: list[dict]) -> list[dict]:
             i = id_idx.get(cid)
 
         if i is not None:
+            for field in ("date", "home", "away", "venue"):
+                incoming = fm.get(field)
+                current = merged[i].get(field, "")
+                if incoming and (not current or _is_placeholder_team(current)):
+                    merged[i][field] = incoming
             if fm.get("cricapi_id") and not merged[i].get("cricapi_id"):
                 merged[i]["cricapi_id"] = fm["cricapi_id"]
             merged[i]["status"] = _best_status(

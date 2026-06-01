@@ -1,0 +1,125 @@
+{
+  "winner": "PBKS",
+  "margin": "7 wkts",
+  "home_score": "196/6 (20)",
+  "away_score": "200/3 (18)",
+  "summary": "Punjab Kings won by 7 wkts",
+  "player_scores": {
+    "Josh Inglis": {
+      "runs": 72,
+      "balls": 44,
+      "role": "BAT"
+    },
+    "Arshin Kulkarni": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Nicholas Pooran": {
+      "runs": 2,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "Ayush Badoni": {
+      "runs": 43,
+      "balls": 18,
+      "role": "BAT"
+    },
+    "Rishabh Pant": {
+      "runs": 26,
+      "balls": 22,
+      "role": "BAT"
+    },
+    "Abdul Samad": {
+      "runs": 37,
+      "balls": 20,
+      "role": "BAT"
+    },
+    "Mukul Choudhary": {
+      "runs": 1,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Arjun Tendulkar": {
+      "wickets": 1,
+      "runs_conceded": 36,
+      "role": "BOWL"
+    },
+    "Arshdeep Singh": {
+      "wickets": 0,
+      "runs_conceded": 52,
+      "role": "BOWL"
+    },
+    "Azmatullah Omarzai": {
+      "wickets": 1,
+      "runs_conceded": 29,
+      "role": "BOWL"
+    },
+    "Marco Jansen": {
+      "wickets": 2,
+      "runs_conceded": 33,
+      "role": "BOWL"
+    },
+    "Yuzvendra Chahal": {
+      "wickets": 2,
+      "runs_conceded": 25,
+      "role": "BOWL"
+    },
+    "Vijaykumar Vyshak": {
+      "wickets": 0,
+      "runs_conceded": 26,
+      "role": "BOWL"
+    },
+    "Shashank Singh": {
+      "wickets": 1,
+      "runs_conceded": 29,
+      "role": "BOWL"
+    },
+    "Priyansh Arya": {
+      "runs": 0,
+      "balls": 1,
+      "role": "BAT"
+    },
+    "Prabhsimran Singh": {
+      "runs": 69,
+      "balls": 39,
+      "role": "BAT"
+    },
+    "Cooper Connolly": {
+      "runs": 18,
+      "balls": 10,
+      "role": "BAT"
+    },
+    "Shreyas Iyer": {
+      "runs": 101,
+      "balls": 51,
+      "role": "BAT"
+    },
+    "Suryansh Shedge": {
+      "runs": 9,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "Mohammed Shami": {
+      "wickets": 2,
+      "runs_conceded": 45,
+      "role": "BOWL"
+    },
+    "Prince Yadav": {
+      "wickets": 0,
+      "runs_conceded": 32,
+      "role": "BOWL"
+    },
+    "Mohsin Khan": {
+      "wickets": 0,
+      "runs_conceded": 48,
+      "role": "BOWL"
+    },
+    "Digvesh Singh Rathi": {
+      "wickets": 0,
+      "runs_conceded": 39,
+      "role": "BOWL"
+    }
+  },
+  "score_order": "team"
+}

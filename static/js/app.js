@@ -359,17 +359,38 @@ async function loadComparison(match) {
     const sumEl = document.getElementById('cmp-summary');
     if (sumEl && data.hit_rate !== null) {
       const hitClass = data.hit_rate >= 60 ? 'good' : data.hit_rate >= 40 ? 'ok' : 'low';
+      const metrics = data.metrics || {};
+      const batMae = metrics.bat_mae != null ? metrics.bat_mae : '—';
+      const bowlMae = metrics.bowl_mae != null ? metrics.bowl_mae : '—';
+      const actualOnly = metrics.actual_only_count || 0;
       sumEl.innerHTML = `
         <div class="cmp-accuracy-badge ${hitClass}">
           <span class="cab-pct">${data.hit_rate}%</span>
-          <span class="cab-label">prediction accuracy</span>
-          <span class="cab-sub">${data.n_actual} of ${data.n_total} players had actual data</span>
+          <span class="cab-label">range hit rate</span>
+          <span class="cab-sub">${data.n_actual} of ${data.n_total} predicted players had actual data</span>
+        </div>
+        <div class="cmp-accuracy-badge">
+          <span class="cab-pct">${batMae}</span>
+          <span class="cab-label">bat MAE</span>
+          <span class="cab-sub">${metrics.bat_count || 0} batting actuals</span>
+        </div>
+        <div class="cmp-accuracy-badge">
+          <span class="cab-pct">${bowlMae}</span>
+          <span class="cab-label">bowl MAE</span>
+          <span class="cab-sub">${metrics.bowl_count || 0} bowling actuals</span>
+        </div>
+        <div class="cmp-accuracy-badge">
+          <span class="cab-pct">${actualOnly}</span>
+          <span class="cab-label">actual-only</span>
+          <span class="cab-sub">scorecard players without model profiles</span>
         </div>`;
     }
 
     // Render per-player rows
     for (const [team, rows] of Object.entries(data.teams || {})) {
+      ensureComparisonTeamSection(match, team);
       for (const row of rows) {
+        ensureComparisonPlayerRow(row, match, team);
         renderComparisonRow(row, match);
       }
     }
@@ -386,7 +407,8 @@ async function loadComparison(match) {
 }
 
 function renderComparisonRow(row, match) {
-  const pid    = playerDomId(row.name, match);
+  const rowName = row.profile_name || row.name;
+  const pid    = playerDomId(rowName, match);
   const isBat  = row.role === 'BAT';
   const unit   = isBat ? 'runs' : 'wkts';
   const maxV   = isBat ? 80 : 4;
@@ -396,16 +418,21 @@ function renderComparisonRow(row, match) {
   const hi   = row.pred_high;
   const actual = row.actual;
 
-  const loFr = Math.min(lo / maxV * 100, 100).toFixed(1);
-  const hiFr = Math.min(hi / maxV * 100, 100).toFixed(1);
-  const wFr  = Math.max(0, hiFr - loFr).toFixed(1);
+  const hasPrediction = row.pred_mid !== null && row.pred_mid !== undefined;
+  const loFr = hasPrediction ? Math.min(lo / maxV * 100, 100).toFixed(1) : 0;
+  const hiFr = hasPrediction ? Math.min(hi / maxV * 100, 100).toFixed(1) : 0;
+  const wFr  = hasPrediction ? Math.max(0, hiFr - loFr).toFixed(1) : 0;
 
   // Confidence
-  const conf   = computeConfidence(lo, hi, md, row.career_avg, isBat ? 'bat' : 'bowl');
   const subEl  = document.getElementById(`sub-${pid}`);
   if (subEl) {
-    const avgLabel = isBat ? `avg ${row.career_avg}` : `avg ${row.career_avg} wkt`;
-    subEl.innerHTML = `${avgLabel} · ${row.innings} inn &nbsp;<span class="conf-badge ${conf}">${conf}</span>`;
+    if (hasPrediction) {
+      const conf = computeConfidence(lo, hi, md, row.career_avg, isBat ? 'bat' : 'bowl');
+      const avgLabel = isBat ? `avg ${row.career_avg}` : `avg ${row.career_avg} wkt`;
+      subEl.innerHTML = `${avgLabel} · ${row.innings} inn &nbsp;<span class="conf-badge ${conf}">${conf}</span>`;
+    } else {
+      subEl.innerHTML = `<span style="color:var(--ink3)">scorecard actual · no prediction profile</span>`;
+    }
   }
 
   // Accumulate bat totals for upcoming (no-op for completed but harmless)
@@ -415,6 +442,26 @@ function renderComparisonRow(row, match) {
 
   const predEl = document.getElementById(`pred-${pid}`);
   if (!predEl) return;
+
+  if (!hasPrediction) {
+    predEl.innerHTML = `
+      <div class="cmp-row-widget">
+        <div class="cmp-numbers">
+          <div class="cmp-pred-block">
+            <div class="cmp-block-label">PREDICTED</div>
+            <div class="cmp-range-text">No model profile</div>
+          </div>
+          <div class="cmp-actual-block">
+            <div class="cmp-block-label">ACTUAL</div>
+            <div class="cmp-actual-val hit-no">
+              ${actual ?? '—'}${isBat && row.actual_balls ? `<span class="cmp-balls">(${row.actual_balls}b)</span>` : ''}
+              ${!isBat && row.actual_rc != null ? `<span class="cmp-balls">/${row.actual_rc}</span>` : ''}
+            </div>
+          </div>
+        </div>
+      </div>`;
+    return;
+  }
 
   if (actual !== null && actual !== undefined) {
     // ── COMPARISON VIEW ──
@@ -466,6 +513,29 @@ function renderComparisonRow(row, match) {
              style="left:${loFr}%;width:${wFr}%"></div>
       </div>
       <div class="pred-range-text">${lo} – ${hi}</div>`;
+  }
+}
+
+function ensureComparisonTeamSection(match, team) {
+  const container = document.getElementById('teams-container');
+  if (!container || document.getElementById(`team-${safeId(team)}`)) return;
+  container.insertAdjacentHTML('beforeend', teamSectionHTML(match, team, { bat: [], bowl: [] }));
+}
+
+function ensureComparisonPlayerRow(row, match, team) {
+  const rowName = row.profile_name || row.name;
+  if (document.getElementById(`pred-${playerDomId(rowName, match)}`)) return;
+
+  const section = document.getElementById(`team-${safeId(team)}`);
+  if (!section) return;
+
+  const role = row.role === 'BOWL' ? 'bowl' : 'bat';
+  section.insertAdjacentHTML('beforeend', playerRowHTML(rowName, role, match));
+  const el = document.getElementById(`row-${playerDomId(rowName, match)}`);
+  if (el) {
+    el.classList.add('visible');
+    const nameEl = el.querySelector('.p-name');
+    if (nameEl && row.name !== rowName) nameEl.textContent = row.name;
   }
 }
 
@@ -609,7 +679,7 @@ function teamSectionHTML(match, team, squad) {
   ].join('');
 
   return `
-  <div class="team-section">
+  <div class="team-section" id="team-${safeId(team)}" data-team="${team}">
     <div class="team-section-header">
       <span class="team-section-name">${team}</span>
       <span class="team-section-sub">${bats.length} bat · ${bowls.length} bowl</span>
@@ -1493,6 +1563,18 @@ function renderModelSummary(ms) {
       <div class="feat-exp-text">${text}</div>
     </div>`).join('');
 
+  const accuracyCards = [
+    ['IPL Batting', `${ms.ipl.bat.mae}`, 'MAE runs', `${ms.ipl.bat.coverage_50}% range hit`],
+    ['IPL Bowling', `${ms.ipl.bowl.mae}`, 'MAE wickets', `${ms.ipl.bowl.coverage_50}% range hit`],
+    ['T20I Batting', `${ms.t20i.bat.mae}`, 'MAE runs', `${ms.t20i.bat.coverage_50}% range hit`],
+    ['T20I Bowling', `${ms.t20i.bowl.mae}`, 'MAE wickets', `${ms.t20i.bowl.coverage_50}% range hit`],
+  ].map(([label, value, sub, coverage], idx) => `
+    <div class="model-metric ${idx === 1 ? 'red' : idx === 2 ? 'green' : idx === 3 ? 'amber' : ''}">
+      <div class="mm-label">${label}</div>
+      <div class="mm-value">${value}</div>
+      <div class="mm-sub">${sub} · ${coverage}</div>
+    </div>`).join('');
+
   out.innerHTML = `
     <!-- Overview -->
     <div class="model-section">
@@ -1516,6 +1598,18 @@ function renderModelSummary(ms) {
           Three quantile models (Q25, Q50, Q75) are trained independently per format.
           The Q50 model provides the median prediction; Q25 and Q75 form the 50% confidence interval.
           Interval coverage target is 50% — a well-calibrated model has half of actuals fall within the range.
+        </div>
+      </div>
+    </div>
+
+    <!-- Accuracy snapshot -->
+    <div class="model-section">
+      <div class="model-section-title"><div class="dot" style="background:var(--green)"></div>Model Accuracy Snapshot</div>
+      <div class="model-section-body">
+        <div class="model-metrics-row">${accuracyCards}</div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--ink3);margin-top:12px;line-height:1.7">
+          MAE is the average absolute error of the median prediction on the held-out test split.
+          Range hit is the share of actuals landing between Q25 and Q75.
         </div>
       </div>
     </div>

@@ -647,6 +647,100 @@ button { cursor: pointer; }
 
 .pred-error { font-family: var(--mono); font-size: 9px; color: var(--ink3); }
 
+/* Completed match accuracy + actual comparison */
+.cmp-summary-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 8px;
+  margin: 0 18px 12px;
+}
+.cmp-accuracy-badge {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blue);
+  border-radius: var(--radius);
+  padding: 9px 11px;
+}
+.cmp-accuracy-badge.good { border-left-color: var(--green); }
+.cmp-accuracy-badge.ok   { border-left-color: var(--amber); }
+.cmp-accuracy-badge.low  { border-left-color: var(--red); }
+.cab-pct {
+  display: block;
+  font-family: var(--mono);
+  font-size: 18px;
+  color: var(--ink);
+  line-height: 1;
+}
+.cab-label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-top: 4px;
+}
+.cab-sub {
+  display: block;
+  font-family: var(--mono);
+  font-size: 8px;
+  color: var(--ink3);
+  margin-top: 3px;
+  line-height: 1.35;
+}
+.cmp-row-widget { min-width: 220px; }
+.cmp-numbers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  align-items: end;
+}
+.cmp-block-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: var(--ink3);
+}
+.cmp-pred-mid,
+.cmp-actual-val {
+  font-family: var(--mono);
+  font-size: 16px;
+  color: var(--ink);
+  margin-top: 2px;
+}
+.cmp-unit,
+.cmp-balls,
+.cmp-delta {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--ink3);
+}
+.cmp-delta { margin-top: 2px; }
+.hit-yes, .delta-hit { color: var(--green); }
+.hit-no, .delta-over, .delta-under { color: var(--red); }
+.cmp-bar-wrap { margin-top: 6px; }
+.cmp-bar-track {
+  height: 4px;
+  background: var(--surface3);
+  border-radius: 3px;
+  position: relative;
+}
+.cmp-bar-fill {
+  position: absolute;
+  top: 0; bottom: 0;
+  border-radius: 3px;
+}
+.cmp-bar-fill.bat  { background: linear-gradient(90deg, rgba(56,139,253,.35), var(--blue)); }
+.cmp-bar-fill.bowl { background: linear-gradient(90deg, rgba(248,81,73,.35), var(--red)); }
+.cmp-actual-marker {
+  position: absolute;
+  top: -3px;
+  width: 2px;
+  height: 10px;
+  background: var(--ink);
+  border-radius: 2px;
+}
+
 /* ── EXPORT TOAST ───────────────────────────────────── */
 .toast {
   position: fixed;

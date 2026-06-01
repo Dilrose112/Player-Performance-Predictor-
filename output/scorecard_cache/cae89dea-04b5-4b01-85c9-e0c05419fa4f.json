@@ -1,0 +1,130 @@
+{
+  "winner": "RCB",
+  "margin": "92 runs",
+  "home_score": "254/5 (20)",
+  "away_score": "162/10 (19.3)",
+  "summary": "Royal Challengers Bengaluru won by 92 runs",
+  "player_scores": {
+    "Venkatesh Iyer": {
+      "runs": 19,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "Virat Kohli": {
+      "runs": 43,
+      "balls": 25,
+      "role": "BAT"
+    },
+    "Devdutt Padikkal": {
+      "runs": 30,
+      "balls": 19,
+      "role": "BAT"
+    },
+    "Rajat Patidar": {
+      "runs": 93,
+      "balls": 33,
+      "role": "BAT"
+    },
+    "Krunal Pandya": {
+      "wickets": 2,
+      "runs_conceded": 16,
+      "role": "BOWL"
+    },
+    "Tim David": {
+      "runs": 4,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Jitesh Sharma": {
+      "runs": 15,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Mohammed Siraj": {
+      "runs": 5,
+      "balls": 13,
+      "role": "BAT"
+    },
+    "Kagiso Rabada": {
+      "runs": 9,
+      "balls": 5,
+      "role": "BAT"
+    },
+    "Jason Holder": {
+      "runs": 0,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Rashid Khan": {
+      "runs": 8,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Prasidh Krishna": {
+      "runs": 6,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "Kulwant Khejroliya": {
+      "wickets": 0,
+      "runs_conceded": 31,
+      "role": "BOWL"
+    },
+    "Sai Sudharsan": {
+      "runs": 14,
+      "balls": 9,
+      "role": "BAT"
+    },
+    "Shubman Gill": {
+      "runs": 2,
+      "balls": 7,
+      "role": "BAT"
+    },
+    "Jos Buttler": {
+      "runs": 29,
+      "balls": 11,
+      "role": "BAT"
+    },
+    "Nishant Sindhu": {
+      "runs": 5,
+      "balls": 3,
+      "role": "BAT"
+    },
+    "Washington Sundar": {
+      "runs": 8,
+      "balls": 8,
+      "role": "BAT"
+    },
+    "Rahul Tewatia": {
+      "runs": 68,
+      "balls": 43,
+      "role": "BAT"
+    },
+    "Jacob Duffy": {
+      "wickets": 3,
+      "runs_conceded": 39,
+      "role": "BOWL"
+    },
+    "Bhuvneshwar Kumar": {
+      "wickets": 2,
+      "runs_conceded": 28,
+      "role": "BOWL"
+    },
+    "Josh Hazlewood": {
+      "wickets": 1,
+      "runs_conceded": 39,
+      "role": "BOWL"
+    },
+    "Rasikh Salam Dar": {
+      "wickets": 2,
+      "runs_conceded": 24,
+      "role": "BOWL"
+    },
+    "Romario Shepherd": {
+      "wickets": 0,
+      "runs_conceded": 15,
+      "role": "BOWL"
+    }
+  },
+  "score_order": "team"
+}

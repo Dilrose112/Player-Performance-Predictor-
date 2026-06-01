@@ -294,6 +294,51 @@ def _to_df(fm, cols):
     return pd.DataFrame([{c: fm.get(c, 0.0) for c in cols}])
 
 
+def _name_parts(name: str) -> list:
+    return [
+        ''.join(ch for ch in part.lower() if ch.isalnum())
+        for part in str(name).replace('-', ' ').split()
+        if ''.join(ch for ch in part.lower() if ch.isalnum())
+    ]
+
+
+def _name_signature(name: str) -> tuple:
+    parts = _name_parts(name)
+    if not parts:
+        return ('', '', '')
+    return (parts[0][0], ''.join(part[0] for part in parts[:-1]), parts[-1])
+
+
+def _best_actual_key(profile_name: str, actual_map: dict, actual_keys: list) -> str | None:
+    """
+    Scorecards often use full names while our historical profiles use cricsheet
+    initials (for example, Virat Kohli vs V Kohli). Match exact names first,
+    then initial+surname, then unique surname within the given candidate list.
+    """
+    if profile_name in actual_map:
+        return profile_name
+
+    first_i, initials, last = _name_signature(profile_name)
+    if not last:
+        return None
+
+    initial_matches = []
+    surname_matches = []
+    for key in actual_keys:
+        k_first_i, k_initials, k_last = _name_signature(key)
+        if k_last != last:
+            continue
+        surname_matches.append(key)
+        if k_first_i == first_i or (initials and k_initials.startswith(initials[0])):
+            initial_matches.append(key)
+
+    if len(initial_matches) == 1:
+        return initial_matches[0]
+    if len(surname_matches) == 1:
+        return surname_matches[0]
+    return None
+
+
 # ─── SQUAD LOADER ─────────────────────────────────────────────────────────────
 # Loads squads/ipl_2026_squads.json so you can fix team rosters without
 # editing the hardcoded IPL_SCHEDULE lists above.
@@ -597,6 +642,33 @@ def api_match_comparison():
     bat_pool  = ipl_bat_p  if fmt == 'ipl' else t20_bat_p
     bowl_pool = ipl_bowl_p if fmt == 'ipl' else t20_bowl_p
 
+    actual_keys_by_role = {
+        'BAT':  [name for name, data in ps_map.items() if (data or {}).get('role') == 'BAT'],
+        'BOWL': [name for name, data in ps_map.items() if (data or {}).get('role') == 'BOWL'],
+        'ALL':  list(ps_map.keys()),
+    }
+    used_actual_keys = set()
+
+    def _actual_only_row(actual_key):
+        actual_data = ps_map.get(actual_key, {}) or {}
+        role = actual_data.get('role') or ('BOWL' if 'wickets' in actual_data else 'BAT')
+        row = {
+            'name': actual_key,
+            'role': role,
+            'pred_low': None,
+            'pred_mid': None,
+            'pred_high': None,
+            'actual': actual_data.get('runs') if role == 'BAT' else actual_data.get('wickets'),
+            'actual_balls': actual_data.get('balls'),
+            'actual_rc': actual_data.get('runs_conceded'),
+            'hit': None,
+            'delta': None,
+            'career_avg': None,
+            'innings': None,
+            'prediction_available': False,
+        }
+        return row
+
     def _run_bat(player, team):
         ps = bat_pool.get(player)
         if not ps:
@@ -640,13 +712,17 @@ def api_match_comparison():
             if not r:
                 continue
             lo, md, hi, ps = r
-            actual_data = ps_map.get(name, {})
+            actual_key  = _best_actual_key(name, ps_map, actual_keys_by_role['BAT'])
+            actual_data = ps_map.get(actual_key, {}) if actual_key else {}
             actual      = actual_data.get('runs')
             actual_b    = actual_data.get('balls')
             hit         = (actual is not None) and (lo <= actual <= hi)
             delta       = round(actual - md, 1) if actual is not None else None
+            if actual_key:
+                used_actual_keys.add(actual_key)
             rows.append({
-                'name':        name,
+                'name':        actual_key or name,
+                'profile_name': name,
                 'role':        'BAT',
                 'pred_low':    lo,
                 'pred_mid':    md,
@@ -657,6 +733,7 @@ def api_match_comparison():
                 'delta':       delta,
                 'career_avg':  round(float(ps['career_avg']), 1),
                 'innings':     ps['innings'],
+                'prediction_available': True,
             })
 
         for name in bowlers:
@@ -664,13 +741,17 @@ def api_match_comparison():
             if not r:
                 continue
             lo, md, hi, ps = r
-            actual_data   = ps_map.get(name, {})
+            actual_key    = _best_actual_key(name, ps_map, actual_keys_by_role['BOWL'])
+            actual_data   = ps_map.get(actual_key, {}) if actual_key else {}
             actual        = actual_data.get('wickets')
             actual_rc     = actual_data.get('runs_conceded')
             hit           = (actual is not None) and (lo <= actual <= hi)
             delta         = round(actual - md, 1) if actual is not None else None
+            if actual_key:
+                used_actual_keys.add(actual_key)
             rows.append({
-                'name':           name,
+                'name':           actual_key or name,
+                'profile_name':   name,
                 'role':           'BOWL',
                 'pred_low':       lo,
                 'pred_mid':       md,
@@ -681,22 +762,64 @@ def api_match_comparison():
                 'delta':          delta,
                 'career_avg':     round(float(ps['career_wkt_avg']), 2),
                 'innings':        ps['innings'],
+                'prediction_available': True,
             })
+
+        # Include scorecard players from this squad even when the model has no
+        # usable profile for them, so completed matches show the full actuals.
+        squad_names = []
+        for group in ('bat', 'bowl'):
+            for item in sq.get(group, []):
+                pname = item.get('name') if isinstance(item, dict) else item
+                if pname:
+                    squad_names.append(pname)
+        for name in squad_names:
+            actual_key = _best_actual_key(name, ps_map, actual_keys_by_role['ALL'])
+            if actual_key and actual_key not in used_actual_keys:
+                used_actual_keys.add(actual_key)
+                rows.append(_actual_only_row(actual_key))
 
         result_out[team] = rows
 
+    unassigned = []
+    for actual_key in ps_map:
+        if actual_key not in used_actual_keys:
+            unassigned.append(_actual_only_row(actual_key))
+    if unassigned:
+        result_out['Scorecard'] = unassigned
+
     # Summary stats
     all_rows  = [r for rows in result_out.values() for r in rows]
-    with_data = [r for r in all_rows if r['actual'] is not None]
+    predicted_rows = [r for r in all_rows if r.get('prediction_available', True)]
+    with_data = [
+        r for r in predicted_rows
+        if r['actual'] is not None
+    ]
     hit_rate  = round(sum(1 for r in with_data if r['hit']) / len(with_data) * 100, 1) \
                 if with_data else None
+    bat_data = [r for r in with_data if r['role'] == 'BAT']
+    bowl_data = [r for r in with_data if r['role'] == 'BOWL']
+
+    def _mae(rows):
+        if not rows:
+            return None
+        return round(sum(abs(float(r['delta'])) for r in rows) / len(rows), 2)
 
     return jsonify({
         'teams':    result_out,
         'team_actuals': team_actuals,
         'hit_rate': hit_rate,
         'n_actual': len(with_data),
-        'n_total':  len(all_rows),
+        'n_total':  len(predicted_rows),
+        'n_scorecard': len(all_rows),
+        'metrics': {
+            'overall_hit_rate': hit_rate,
+            'bat_mae': _mae(bat_data),
+            'bat_count': len(bat_data),
+            'bowl_mae': _mae(bowl_data),
+            'bowl_count': len(bowl_data),
+            'actual_only_count': len([r for r in all_rows if not r.get('prediction_available', True)]),
+        },
     })
 
 
